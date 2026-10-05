@@ -203,7 +203,23 @@ printplaten bureau, agentic commerce).
 - **Relevant files (teacher-data/):** `Week 4 Trendcanvas DEF incl tips.pdf` (presentatie vandaag) ·
   `StudiewijzerOnderneemdeOntdekkingsreis_2627sem1.pdf` (eisen) · `Week 2 Dag 1 ORDENEN en trendkaart DEF (1).pdf`.
 
-**Nog open (round 3):**
-1. **Ch.5 kern (5 ideeën)** — hij kijkt ernaar; dan definitief maken.
-2. **Proces-bijlage** — invullen: welke AI-tools + prompts (nu `[?]`-placeholders in ch.7).
-3. **Ch.6 & 7** — hij reviewt die later.
+**Round 4 (git + bijlage, 2026-10-04):**
+- **Git + public repo** = **done**: `https://github.com/marloVGulik/trendreis` (PUBLIC, branch `main`).
+  `.gitignore` slaat `teacher-data/`, `extracted-pdfs/`, `tiles/` en OS/Python-artefacten over.
+- **AI-chat bijlage** = **done**: `AI-chat/` (leesbaar `transcript.md` + ruwe `sessie-*.jsonl`) per HAN-regel.
+- **Qwen-note** = **done**: ch.7 colofon (Proces) noemt nu **Qwen 3.8 27B, lokaal via Ollama**,
+  precies waarvoor, en wat níet door AI gedaan is.
+- **A/B/C-D supportnet** = **verwijderd uit content + raw-data + transcript** (privacy); blijft wél op de
+  notebook-foto's. Namen in transcript geredacteerd tot `[·]`.
+- **Robot-huisdier** = zijn **favoriete idee** (combineert motoren + AI, en is leuk) — nu uitgelicht in
+  ch.5 kern.
+
+**Nog open:**
+1. **APA-bronnen** — hij stuurt de links; dan `07-colofon.md` § Bronnen + eventueel per-hoofdstuk
+   APA-referenties invullen.
+2. **Ch.5 kern (5 ideeën)** — hij kijkt ernaar; dan definitief maken (mooi om robot-huisdier hoog te
+   houden; eis is 1–3 ideeën → misschien kern inkorten).
+3. **Style** — eerste website-draft op basis van zijn **Memoires**-project
+   (`/home/marlo/Documents/Projects/mcp/memories/`), daarna de 3D-anaglyph erbij.
+4. **Intro-video + ikigai-achterkant** — als hij die heeft: erin zetten.
+5. **Ch.6 & 7** — hij reviewt die later.

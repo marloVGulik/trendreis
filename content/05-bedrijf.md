@@ -25,6 +25,10 @@ met die letter als noorderster.
 5. **Agentic commerce** — LLM's die producten aan mensen verkopen. De platform switch
    Playstore → AI, gepakt voor de kleinhandelaar.
 
+> **Mijn favoriet uit de lijst: het robot-huisdier.** Daarin combineer ik precies
+> waar ik sterk in ben — **motoren én AI** — en het is ook gewoon leuk om te maken.
+> *(uit m'n lijst van 12 ideeën, nr. 11)*
+
 **Zijideeën die ik al noteerde**: *memoires* — data over hoe mensen AI gebruiken en
 wat ze op willen slaan *(dat wil ik uitbrengen)* · tools die mensen helpen —
 denk aan **leraren met veel administratie** *(uit de podcast)*.

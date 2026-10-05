@@ -21,11 +21,18 @@ prompts zien, en laat zien dat je het snapt.)*
 
 - **Mijn eigen materiaal**: deze site staat op **mijn eigen notebook, eigen foto's en
   eigen signalen** (hoofdstukken 2–4). De foto's van mijn schrift staan in de bijlage.
-- **Hoe ik AI gebruikte**: als hulpmiddel voor brainstormen, structureren en spelling —
-  **niet** als primaire bron. Alles wat er staat kan ik zelf uitleggen en verdedigen.
-  *`[?]` — welke tools, precies waarvoor?`*`
-- **Prompts**: de prompts die ik met AI gebruikte staan in de bijlage *(volledige chat,
-  per HAN-regel)*. *`[?]` — nog toevoegen.`*`
+- **Hoe ik AI gebruikte**: als hulpmiddel voor brainstormen, structureren en de teksten
+  opzetten — **niet** als primaire bron. Alles wat er staat kan ik zelf uitleggen en
+  verdedigen.
+  - **Welke AI:** **Qwen 3.8 (27B)**, uitgevoerd **lokaal op mijn eigen computer** via
+    Ollama — geen cloud, geen externe server.
+  - **Precies waarvoor:** mijn handschrift-notities structureren, de koppeling tussen
+    notities en vakken opzetten, de website-teksten opstellen en herzien, en het geheel
+    in een logische opbouw zetten.
+  - **Niet door de AI gedaan:** het oorspronkelijk verwerken van mijn notebook-foto's
+    naar tekst (dat is een aparte stap), en alle oordeelvellingen en eigen ideeën.
+- **Prompts**: de volledige AI-chat (prompts én output) staat in de bijlage in de map
+  `AI-chat/` *(per de HAN-regel: volledige chat als bijlage)*.
 - **Verbinding**: de lijn signaal → trend → waardeverschuiving → idee is zichtbaar door
   de hele site — dat is precies het doel (hoofdstuk 3 en 5).
 - **Begrip**: dit is mijn eigen werk. Ik sta achter elke regel en kan het toelichten.
