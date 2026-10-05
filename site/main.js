@@ -80,12 +80,54 @@
   }
   if (document.body.getAttribute("data-page") === "materiaal") {
     handleHlParam();
-    // legend + any .hlbox click → pulse
+    // legend-klik → scroll + pulse (box zelf opent de lightbox via .nb-img)
     document.addEventListener("click", function (e) {
       var leg = e.target.closest("[data-hl]");
-      if (leg) { e.preventDefault(); pulse(leg.getAttribute("data-hl")); return; }
-      var box = e.target.closest(".hlbox");
-      if (box) pulse(box.getAttribute("data-id"));
+      if (leg) { e.preventDefault(); pulse(leg.getAttribute("data-hl")); }
+    });
+  }
+
+  /* ---------------------------------------------------------- lightbox (foto's groter) */
+  var lightbox = document.getElementById("lightbox");
+  var lbWrap = lightbox ? lightbox.querySelector(".lb-imgwrap") : null;
+  var lbTitle = lightbox ? lightbox.querySelector(".lb-title") : null;
+  function openLightbox(src, name, boxesHtml) {
+    if (!lightbox || !lbWrap) return;
+    lbWrap.innerHTML = '<img src="' + src + '" alt="' + name + '">' + (boxesHtml || "");
+    if (lbTitle) lbTitle.textContent = name;
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.hidden = true;
+    if (lbWrap) lbWrap.innerHTML = "";
+    document.body.style.overflow = "";
+  }
+  if (lightbox) {
+    var lbClose = lightbox.querySelector(".lb-close");
+    if (lbClose) lbClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox || e.target.classList.contains("lb-stage")) closeLightbox();
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !lightbox.hidden) closeLightbox(); });
+    // notebook-foto's (eventuele bron-quote-boxen komen mee)
+    Array.prototype.slice.call(document.querySelectorAll(".nb-img")).forEach(function (wrap) {
+      wrap.style.cursor = "zoom-in";
+      wrap.addEventListener("click", function () {
+        var img = wrap.querySelector("img");
+        if (!img) return;
+        var boxes = Array.prototype.map.call(wrap.querySelectorAll(".hlbox"), function (b) { return b.outerHTML; }).join("");
+        var name = (img.getAttribute("alt") || "foto").replace(/^Notebook\s*/i, "");
+        openLightbox(img.getAttribute("src"), name, boxes);
+      });
+    });
+    // hunter-foto's
+    Array.prototype.slice.call(document.querySelectorAll(".phcard img")).forEach(function (img) {
+      img.style.cursor = "zoom-in";
+      img.addEventListener("click", function () {
+        openLightbox(img.getAttribute("src"), img.getAttribute("alt") || "foto", "");
+      });
     });
   }
 
