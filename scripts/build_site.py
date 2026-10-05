@@ -500,42 +500,65 @@ def fig_pyramide_c():
 
 
 def anaglyph_svg():
-    VP = (400, 120)
-    W, H = 800, 320
-    def layer(name, inner):
-        return f'<g class="layer-{name}">{inner}</g>'
-    far = [f'<line x1="0" y1="120" x2="800" y2="120" class="ln strong"/>']
-    for y in (140, 165, 200, 250, 320):
-        far.append(f'<line x1="0" y1="{y}" x2="800" y2="{y}" class="ln"/>')
-    for xb in (0, 100, 200, 300, 400, 500, 600, 700, 800):
-        far.append(f'<line x1="400" y1="120" x2="{xb}" y2="320" class="ln dim"/>')
-    far.append('<g class="star"><circle cx="400" cy="120" r="10" class="ln strong"/>'
-               '<path d="M400 108 L412 120 L400 132 L388 120 Z" class="ln strong"/>'
-               '<line x1="392" y1="120" x2="408" y2="120" class="ln"/><line x1="400" y1="112" x2="400" y2="128" class="ln"/></g>')
-    far.append('<rect x="372" y="138" width="56" height="24" rx="2" class="gate"/><line x1="400" y1="138" x2="400" y2="162" class="ln"/>')
-    far_html = layer("far", "".join(far))
-    mid = ['<rect x="350" y="168" width="100" height="44" rx="3" class="gate"/><line x1="400" y1="168" x2="400" y2="212" class="ln"/><circle cx="400" cy="212" r="3" class="node"/>']
-    mid_html = layer("mid", "".join(mid))
-    near = ['<line x1="200" y1="320" x2="400" y2="120" class="road"/><line x1="600" y1="320" x2="400" y2="120" class="road"/>'
-            '<line x1="400" y1="320" x2="400" y2="150" class="center"/>'
-            '<rect x="326" y="202" width="148" height="80" rx="4" class="gate"/><line x1="400" y1="202" x2="400" y2="282" class="ln"/>'
-            '<circle cx="400" cy="282" r="4" class="node"/>']
-    near_html = layer("near", "".join(near))
-    scene = f'{far_html}{mid_html}{near_html}'
+    # ---- Echte twee-camera-anaglyph (standaard bril: links=rood, rechts=cyaan) ----
+    # De 3D-scene wordt tweemaal in perspectief geprojecteerd (links- en rechts-oog).
+    # Links-oog -> ROOD kanaal, rechts-oog -> CYAAN kanaal; de beelden overlappen en
+    # de hersenen smelten ze tot 3D. Geen "offset-truc" maar echte paralaxe via wiskunde.
+    camL = (-0.06, 1.0, 0.0)   # links oog  -> rood   (IPD klein => offset ~8-10px, smeltbaar)
+    camR = ( 0.06, 1.0, 0.0)   # rechts oog -> cyaan
+    F = 1.4                    # brandpuntsafstand (wereldeenheden)
+    S = 300.0                  # wereld-projectie -> svg px
+    CX, CY = 400, 155          # svg-midden (horizon / vluchtpunt)
+    def P(pt, cam):
+        px, py, pz = pt; cx, cy, cz = cam
+        rz = pz - cz
+        if rz <= 0.02: return None
+        return (CX + F * (px - cx) / rz * S, CY - F * (py - cy) / rz * S)
+    # ---- 3D-scene (wereldcoordinaten: x=links/rechts, y=omhoog, z=verder) ----
+    # Vast uitgangspunt uit werkende anaglyph-voorbeelden: GROTE INGEVULDE Vlakken
+    # (geen dunne lijntjes) zodat rood + cyaan overlappen en de hersenen het tot 3D smelten.
+    RW, GH = 1.3, 1.8          # pad-halfte-breedte, poort-hoogte (groot => vult het kader)
+    ZN, ZF = 3.0, 28.0         # pad: nabij -> horizon
+    road = [(-RW,0,ZN),(RW,0,ZN),(RW,0,ZF),(-RW,0,ZF)]
+    cross = [((-RW,0,z),(RW,0,z)) for z in (4.5,6.5,9.5,14,20,26)]
+    edges = [((-RW,0,ZN),(-RW,0,ZF)), ((RW,0,ZN),(RW,0,ZF)), ((0,0,ZN),(0,0,ZF))]
+    gates = [[(-1.1,0,z),(1.1,0,z),(1.1,GH,z),(-1.1,GH,z)] for z in (6.0,12.0,20.0)]
+    star = (0, 1.7, 28)
+    def render(cam):
+        o = []
+        r = [P(p, cam) for p in road]
+        if all(r):
+            o.append('<polygon points="%s" class="roadfill"/>' % " ".join(f"{x:.1f},{y:.1f}" for x, y in r))
+        for (a, b) in cross:
+            pa, pb = P(a, cam), P(b, cam)
+            if pa and pb: o.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" class="ln"/>' % (pa[0], pa[1], pb[0], pb[1]))
+        for (a, b) in edges:
+            pa, pb = P(a, cam), P(b, cam)
+            if pa and pb: o.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" class="ln strong"/>' % (pa[0], pa[1], pb[0], pb[1]))
+        for g in gates:
+            r = [P(p, cam) for p in g]
+            if all(r):
+                o.append('<polygon points="%s" class="gatefill"/>' % " ".join(f"{x:.1f},{y:.1f}" for x, y in r))
+        ps = P(star, cam)
+        if ps:
+            sx, sy = ps
+            o.append('<circle cx="%.1f" cy="%.1f" r="7" class="starf"/>' % (sx, sy))
+            o.append('<path d="M%.1f %.1f L%.1f %.1f M%.1f %.1f L%.1f %.1f" class="ln strong"/>' % (sx-12, sy, sx+12, sy, sx, sy-12, sx, sy+12))
+        return "".join(o)
+    red = render(camL)
+    cyan = render(camR)
     return f'''
-<svg class="anaglyph" viewBox="0 92 800 236" preserveAspectRatio="xMidYMid meet"
-     role="img" aria-label="Een pad van drie poorten naar een ster op de horizon — van signaal tot bedrijf">
+<svg class="anaglyph" viewBox="0 80 800 240" preserveAspectRatio="xMidYMid meet"
+     role="img" aria-label="Een pad met drie poorten naar een noorderster op de horizon — van signaal tot bedrijf, in 3D">
   <defs><style>
-      .ln {{ stroke: currentColor; stroke-width: 1; fill: none; }}
-      .ln.strong {{ stroke-width: 1.6; }} .ln.dim {{ opacity: .4; }}
-      .road {{ stroke: currentColor; stroke-width: 2; fill: none; }}
-      .center {{ stroke: currentColor; stroke-width: 1; stroke-dasharray: 4 6; fill: none; }}
-      .gate {{ stroke: currentColor; stroke-width: 1.4; fill: none; opacity: .95; }}
-      .node {{ fill: currentColor; stroke: none; }}
-      .star {{ stroke: currentColor; fill: none; }}
-    </style></defs>
-  <g id="chR" class="chR">{scene}</g>
-  <g id="chC" class="chC">{scene}</g>
+    .roadfill {{ fill: currentColor; fill-opacity: .3; stroke: none; }}
+    .gatefill {{ fill: currentColor; fill-opacity: .65; stroke: currentColor; stroke-width: 1.8; }}
+    .ln {{ stroke: currentColor; stroke-width: 1.5; fill: none; }}
+    .ln.strong {{ stroke-width: 2; }}
+    .starf {{ fill: currentColor; }}
+  </style></defs>
+  <g id="chR" class="chR">{red}</g>
+  <g id="chC" class="chC">{cyan}</g>
 </svg>'''
 
 
@@ -725,9 +748,6 @@ def build_home():
   </div>
   {anaglyph_svg()}
   <div class="hero-controls">
-    <span class="depth" id="depthWrap"><span>DIEPTE</span>
-      <input type="range" id="depthRange" min="0" max="24" step="1" value="8" aria-label="3D diepte">
-      <span class="dnum" id="depthNum">8px</span></span>
     <span class="hint">rood-cyan brilletjes voor de 3D · zonder bril ook leesbaar</span>
     <span class="spacer"></span>
     <a class="btn primary" href="wie-ben-ik.html">START →</a>
