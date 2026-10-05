@@ -10,3 +10,6 @@ extracted-pdfs/
 Thumbs.db
 __pycache__/
 *.pyc
+
+# website-preview screenshots (temp)
+site/preview-*.png

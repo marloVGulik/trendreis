@@ -17,13 +17,37 @@ als creatieve handtekening.
 | `MAPPING.md` | hoe ik mijn notities aan het lesmateriaal heb gekoppeld |
 | `PLAN.md` | het plan voor de website |
 | `les-2026-10-05.txt` | notities van de les (o.a. de trendcanvas) |
-| `scripts/` | het OCR-crop script (notebook → tekst) |
+| `scripts/` | het OCR-crop script + de website-builder |
+| `site/` | de gebouwde website (HTML/CSS/JS) — de leverbare site |
 | `AI-chat/` | de AI-chat (prompts + output), per HAN-richtlijn als bijlage |
+| `TODO.md` | de takenlijst (voor mij + voor de AI) |
+
+## De website
+
+Statische site (HTML/CSS/JS, geen backend), in de "orange console"-stijl —
+donker + oranje, mono-typografie, hoek-markeringen. De bron is de tekst in
+`content/`; de build zet die om naar `site/index.html`.
+
+**Bouwen** (na het aanpassen van de tekst in `content/`):
+```bash
+python3 scripts/build_site.py
+```
+
+**Lokaal bekijken:**
+```bash
+cd site && python3 -m http.server 8199
+# → http://localhost:8199
+```
+
+Interactie: **3D** aan/uit, **diepte-schuif**, en **LIGHT/DARK**-thema (al
+lokaal onthouden, geen server nodig).
 
 ## 3D
 
-Deze site is ontworpen voor **rood-cyan 3D-brillen**: de teksten blijven plat
-leesbaar, de scènes komen naar je toe. *(Zonder bril is alles ook in 2D te lezen.)*
+De site is ontworpen voor **rood-cyan 3D-brillen**: de teksten blijven plat
+leesbaar, de scènes komen naar je toe. De 3D is een anaglyph (rood + cyan
+kanaal met diepte-afhankelijke verschuiving) — de diepte is instelbaar via de
+schuif. *(Zonder bril is alles ook in 2D te lezen: zet 3D op UIT.)*
 
 ## AI-gebruik
 

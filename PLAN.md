@@ -214,12 +214,22 @@ printplaten bureau, agentic commerce).
 - **Robot-huisdier** = zijn **favoriete idee** (combineert motoren + AI, en is leuk) — nu uitgelicht in
   ch.5 kern.
 
+**Round 5 (website-draft, 2026-10-05):**
+- **Eerste website-draft = done**: `site/` (orange console-stijl uit Memoires) + `scripts/build_site.py`
+  (leest `content/*.md` → `site/index.html`). Dark default + light, 8 hoofdstukken, tabellen,
+  geneste lijsten, quotes, vet/koersief.
+- **3D-anaglyph = done**: wireframe-scène (perspectief-pad + 3 poorten + ster op de horizon),
+  rood+cyan kanaal met **diepte-afhankelijke parallax** (per laag), diepte-schuif, 3D aan/uit,
+  2D-fallback. Tekst blijft plat (alleen de scène krijgt diepte) — per zijn eis.
+- **Style-bron**: `/home/marlo/Documents/Projects/mcp/memories/docs/ui-style-guide.md` +
+  `web/src/theme.css` ("orange console"). Tokens overgenomen, regels gevolgd
+  (geen glass/gradients/emoji, harde schaduwen, 1 CTA, mono-typografie).
+
 **Nog open:**
 1. **APA-bronnen** — hij stuurt de links; dan `07-colofon.md` § Bronnen + eventueel per-hoofdstuk
    APA-referenties invullen.
 2. **Ch.5 kern (5 ideeën)** — hij kijkt ernaar; dan definitief maken (mooi om robot-huisdier hoog te
    houden; eis is 1–3 ideeën → misschien kern inkorten).
-3. **Style** — eerste website-draft op basis van zijn **Memoires**-project
-   (`/home/marlo/Documents/Projects/mcp/memories/`), daarna de 3D-anaglyph erbij.
+3. **Site-review door Marlo** — hij kijkt de eerste draft na; dan aanpassen op feedback.
 4. **Intro-video + ikigai-achterkant** — als hij die heeft: erin zetten.
-5. **Ch.6 & 7** — hij reviewt die later.
+5. **Inleveren** — `.zip` maken + online hosten (GitHub Pages) vóór TK1 (zo 11-10).
