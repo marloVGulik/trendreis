@@ -225,11 +225,28 @@ printplaten bureau, agentic commerce).
   `web/src/theme.css` ("orange console"). Tokens overgenomen, regels gevolgd
   (geen glass/gradients/emoji, harde schaduwen, 1 CTA, mono-typografie).
 
+**Round 6 (multi-page herstructurering, 2026-10-05):**
+- **Van 1 lange pagina → 10 pagina's** (per zijn feedback: multi-page, gekruist, full-width):
+  `index` · `wie-ben-ik` · `signalen` · `analyseren` · `waardeverschuivingen` · `bedrijf` · `reis` ·
+  `colofon` · `ai-chat` · `materiaal`.
+- **Lay-out**: vaste **linker-sidebar** (niet topbar) + **full-width** content; content = **speels
+  blokken/vakken** (2-koloms grid, brede + halve blokken, naast elkaar). Per pagina:
+  **OP DEZE PAGINA** (TOC, scroll-spy) + **vorige/volgende** + crosslinks.
+- **Figures (SVG, orange console)**: ikigai, levenswiel, **assenstelsel**, **trendcanvas**,
+  **alles-automaten**, en **alleen Pyramide-C** — als **leeg raamwerk** "concept — nog te vullen"
+  (A+B nog niet).
+- **Bron-quotes → notebook**: inline `↳ schrift`-markeringen (5: robot-huisdier, food 70→10,
+  saladomaat, automatisering-regels, ikigai) → klik → **materiaal.html?hl=…** → **oranje rechthoek**
+  om de exacte zin op de foto (+ pulsen). Foto's staan op de **aparte materiaal-pagina**.
+- **AI-chat als pagina**: `ai-chat.html` in een **nep-console-venster** (dots, title, "ruwe sessie ↓"),
+  13 prompts inklapbaar, 61 reacties — leesbaar + download raw JSONL.
+- **APA-bronnen** (Tegenlicht, POM) in colofon § Bronnen.
+- **Hunter-foto's** in een 2-koloms grid op signalen.
+
 **Nog open:**
-1. **APA-bronnen** — hij stuurt de links; dan `07-colofon.md` § Bronnen + eventueel per-hoofdstuk
-   APA-referenties invullen.
-2. **Ch.5 kern (5 ideeën)** — hij kijkt ernaar; dan definitief maken (mooi om robot-huisdier hoog te
-   houden; eis is 1–3 ideeën → misschien kern inkorten).
-3. **Site-review door Marlo** — hij kijkt de eerste draft na; dan aanpassen op feedback.
+1. **Ch.5 kern (ideeën)** — hij kijkt ernaar; definitief 1–3 maken (robot-huisdier hoog houden).
+2. **Pyramide A/B** invullen + **Pyramide-C** invullen (nu leeg raamwerk) — als hij ze wil.
+3. **Bron-quote rechthoeken** — posities zijn schattingen; hij kan ze preciezer zetten (box-coords in
+   `build_site.py` `HIGHLIGHTS`).
 4. **Intro-video + ikigai-achterkant** — als hij die heeft: erin zetten.
 5. **Inleveren** — `.zip` maken + online hosten (GitHub Pages) vóór TK1 (zo 11-10).

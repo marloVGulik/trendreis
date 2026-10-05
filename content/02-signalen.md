@@ -14,7 +14,7 @@ Alles wat ik zag, heb ik neergezet **vóórdat** ik er iets van dacht.
 - De aflevering legde dezelfde tech uit vanuit verschillende kanten:
   **vanaf een soldaat, vanaf de techsector, vanaf politiek en vanaf startups**.
 - Wat mij verwonderde: *deze sector kan veel automatisering niet aan vanwege regels —
-  en dat is cool zo.*
+  en dat is cool zo.* `{#bron:automatisering-regels}`
 - Ik heb geleerd dat er ook **kleine startups** in deze sector zitten — inzicht:
   *kleine techbedrijven met een goed idee zijn populair.*
 - Het was **uitzoemen**, omdat ik vaak focus op de tech en niet op het plaatje.
@@ -26,7 +26,7 @@ een slimme, schone, sociale wereld:
 
 - **Spacemakers**: geo-engineering, space factories, dark factories, wonen op water,
   cloud-economie, AI, health-tech, cybernetics
-- **Schoonmakers**: climate, food, de Salatomaat (automatische salade / mini-kas),
+- **Schoonmakers**: climate, food, de Salatomaat (automatische salade / mini-kas) `{#bron:salatomaat}`,
   biobased bouwen, solar democracy, CO2 zuigen, micro-fabriek
 - **Gelijkmakers**: onderwijs & gelijkheid, elite health, aandachtseconomie, moreel kompas
 

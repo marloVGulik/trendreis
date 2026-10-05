@@ -1,47 +1,124 @@
 #!/usr/bin/env python3
-"""Bouwt de TRENDREIS-website (orange console) uit content/*.md.
+"""TRENDREIS — bouwt de MULTI-PAGE site (orange console) uit content/*.md.
 
 Gebruik:  python3 scripts/build_site.py
-Leest:    content/00-cover.md .. content/07-colofon.md
-Schrijft: site/index.html  (+ linkt naar site/theme.css en site/main.js)
+Leest:    content/00-cover.md .. content/07-colofon.md  (+ AI-chat/transcript.md)
+Schrijft: site/index.html + site/<hoofdstuk>.html + site/ai-chat.html + site/materiaal.html
+          (+ kopieert foto's naar site/media/)
 
-De markdown is opzettelijk klein gehouden (koppen, alinea's, quotes, lijsten,
-tabellen, vet/koersief, inline code) — precies wat de content bestanden gebruiken.
+Layout: linksidebar · inhoud over volle breedte · speelse vakken (grid) ·
+figuren (SVG) · bron-quotes die linken naar de notebook-foto (rechthoek) ·
+AI-chat in een nep-console-venster · light/dark + 3D (anaglyph op de home).
 """
 import html
 import re
+import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / "content"
 SITE = ROOT / "site"
-OUT = SITE / "index.html"
+MEDIA = SITE / "media"
+NB_DIR = MEDIA / "notebook"
+RAW = ROOT / "raw-data"
+HUNTER = ROOT / "hunter-pics"
+TRANSCRIPT = ROOT / "AI-chat" / "transcript.md"
+RAW_JSONL = ROOT / "AI-chat" / "sessie-01a10830.jsonl"
 
-ORDER = [
-    ("00-cover", "Cover"),
-    ("01-wie-ben-ik", "Wie ben ik?"),
-    ("02-signalen", "Signalen"),
-    ("03-analyseren", "Analyseren"),
-    ("04-waardeverschuivingen", "Waardeverschuivingen"),
-    ("05-bedrijf", "Het bedrijf"),
-    ("06-reis", "De reis"),
-    ("07-colofon", "Colofon"),
+# ---------------------------------------------------------------------- pages
+PAGES = [
+    {"file": "00-cover", "page": "index.html", "id": "home", "num": "00",
+     "title": "Cover", "short": "van signaal tot stip op de horizon"},
+    {"file": "01-wie-ben-ik", "page": "wie-ben-ik.html", "id": "wie-ben-ik", "num": "01",
+     "title": "Wie ben ik?", "short": "ikigai, levenswiel, gewoonten, doelen en mijn eerste €5"},
+    {"file": "02-signalen", "page": "signalen.html", "id": "signalen", "num": "02",
+     "title": "Signalen", "short": "zes vensters: Tegenlicht, FutureFit, de Hunt en mijn eigen radar"},
+    {"file": "03-analyseren", "page": "analyseren.html", "id": "analyseren", "num": "03",
+     "title": "Analyseren", "short": "trends, de trendpyramide, DESTEP, scenario’s en de trendcanvas"},
+    {"file": "04-waardeverschuivingen", "page": "waardeverschuivingen.html", "id": "waardeverschuivingen", "num": "04",
+     "title": "Waardeverschuivingen", "short": "van bezit naar bereik, consumer naar prosumer, en de food future"},
+    {"file": "05-bedrijf", "page": "bedrijf.html", "id": "bedrijf", "num": "05",
+     "title": "Het bedrijf", "short": "de kern: 5 ideeën, de noorderster en hoe ik valideer"},
+    {"file": "06-reis", "page": "reis.html", "id": "reis", "num": "06",
+     "title": "De reis", "short": "het pad dat ik liep, wat er nu komt, en de volgende stappen"},
+    {"file": "07-colofon", "page": "colofon.html", "id": "colofon", "num": "07",
+     "title": "Bronnen & colofon", "short": "methode, proces, AI-gebruik en APA-bronnen"},
+]
+EXTRA_PAGES = [
+    {"page": "ai-chat.html", "id": "ai-chat", "num": "AI", "title": "AI-chat",
+     "short": "de volledige chat (prompt → reactie) in een console-venster"},
+    {"page": "materiaal.html", "id": "materiaal", "num": "M", "title": "Materiaal",
+     "short": "mijn notebook: de originele foto’s met de bron-quotes gemarkeerd"},
+]
+ALL_PAGES = PAGES + EXTRA_PAGES
+
+# figuren: (naam, insert_voor_section_title | "intro")
+FIGURES = {
+    "wie-ben-ik": [
+        ("ikigai", "Ikigai"),
+        ("levenswiel", "Levenswiel (2026-09-04)"),
+    ],
+    "analyseren": [
+        ("assenstelsel", "Trendwoorden & het assenstelsel"),
+        ("trendcanvas", "Trendcanvas — van trend naar innovatie"),
+        ("automaten", "Trendcanvas — van trend naar innovatie"),
+    ],
+    "waardeverschuivingen": [
+        ("pyramide_c", "intro"),
+    ],
+}
+
+# hunter-foto’s (ch.2 “Mijn foto’s”)
+HUNTER_PHOTOS = [
+    ("electrische-bakfietsen", "Elektrische bakfietsen", "meer kinderen naar school + boodschappen"),
+    ("grote-suv-autos", "Grote SUV-autos", "een oude Volvo 240 was toen “groot”, nu is dat gemiddeld-klein"),
+    ("nostalgie-voor-automodellen", "Nostalgie voor automodellen", "merken brengen modellen terug (o.a. e-Mustang)"),
+    ("slimme-parkeerplaats-kentekenherkenning", "Slimme parkeerplaatsen", "kentekenherkenning wordt standaard in parkeergarages"),
+]
+
+# bron-quotes → rechthoek op de notebook-foto (x%, y%, w%, h%)
+HIGHLIGHTS = {
+    "robot-huisdier": {"photo": "P04-05", "box": [3, 89, 20, 7],
+                       "label": "P04-05 · 12 ideeën, nr. 11", "quote": "Robot huisdier!"},
+    "food-70-10": {"photo": "P18-19", "box": [55, 42.5, 31, 6],
+                   "label": "P18-19 · the future / food", "quote": "van 70% uitgaven aan voedsel naar 10%"},
+    "salatomaat": {"photo": "P12-13", "box": [5, 69.5, 26, 9],
+                   "label": "P12-13 · ideeën, nr. 2", "quote": "Saladomat — automatische salade"},
+    "automatisering-regels": {"photo": "P10-11", "box": [5, 76.5, 46, 8],
+                              "label": "P10-11 · Tegenlicht, game of drones",
+                              "quote": "deze sector kan veel automatisering niet aan vanwege regels"},
+    "ikigai-open-source": {"photo": "Opdr-ikigai-voorkant", "box": [59, 56, 38, 21],
+                           "label": "Ikigai · open-source-annotatie",
+                           "quote": "bedrijven begeleiden naar … open-source … automatisering software voor bedrijven"},
+}
+
+# APA-bronnen (colofon § Bronnen)
+BRONNEN = [
+    {"label": "Tegenlicht — “Game of drones”",
+     "apa": 'Tegenlicht. (2025, 5 april). <em>Game of drones</em> [Webartikel]. VPRO. <a href="https://tegenlicht.vpro.nl/artikelen/game-of-drones" target="_blank" rel="noopener">tegenlicht.vpro.nl/artikelen/game-of-drones</a>',
+     "used": "venster 1 (signalen) + assenstelsel (analyseren)"},
+    {"label": "POM — “Iedereen rijk door vibecoding”",
+     "apa": 'POM. (2026). <em>Iedereen rijk door vibecoding</em> [Podcast-episode]. Spotify. <a href="https://open.spotify.com/episode/12ufJLmLnb4jIljfzwve0X" target="_blank" rel="noopener">open.spotify.com/episode/12ufJLmLnb4jIljfzwve0X</a>',
+     "used": "scanplan + disposable/vibecoding-software (signalen)"},
 ]
 
 
-# ---------------------------------------------------------------- inline
+# =================================================================== inline
 def inline(t: str) -> str:
     t = html.escape(t, quote=False)
+    # bron-quote marker → chip die naar de notebook-foto linkt
+    t = re.sub(r"\{#bron:([A-Za-z0-9_-]+)\}",
+               r'<a class="bron-chip" href="materiaal.html?hl=\1" title="Bekijk deze zin in mijn schrift (rechthoek op de foto)">↳ schrift</a>',
+               t)
     t = re.sub(r"`([^`]+)`", r"<code>\1</code>", t)
     t = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", t)
-    t = re.sub(r"__([^_]+)__", r"<strong>\1</strong>", t)
     t = re.sub(r"(?<!\*)\*([^*\n]+)\*(?!\*)", r"<em>\1</em>", t)
+    t = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', t)
     return t
 
 
-# ---------------------------------------------------------------- blocks
+# =================================================================== blocks
 def render_table(rows):
-    """rows: list of raw '| a | b |' lines (header, separator, data...)."""
     def cells(line):
         line = line.strip()
         if line.startswith("|"):
@@ -49,21 +126,15 @@ def render_table(rows):
         if line.endswith("|"):
             line = line[:-1]
         return [c.strip() for c in line.split("|")]
-
     parsed = [cells(r) for r in rows]
-    # drop separator row (---)
     parsed = [r for r in parsed if not all(re.fullmatch(r":?-{2,}:?", c) for c in r)]
     if not parsed:
         return ""
     head, *body = parsed
     th = "".join(f"<th>{inline(c)}</th>" for c in head)
-    trs = "".join(
-        "<tr>" + "".join(f"<td>{inline(c)}</td>" for c in r) + "</tr>" for r in body
-    )
-    return (
-        '<div class="tblwrap"><table class="tbl">'
-        f"<thead><tr>{th}</tr></thead><tbody>{trs}</tbody></table></div>"
-    )
+    trs = "".join("<tr>" + "".join(f"<td>{inline(c)}</td>" for c in r) + "</tr>" for r in body)
+    return ('<div class="tblwrap"><table class="tbl">'
+            f"<thead><tr>{th}</tr></thead><tbody>{trs}</tbody></table></div>")
 
 
 LIST_RE = re.compile(r"^(\s*)([-*]|\d+\.)\s+(.*)$")
@@ -84,7 +155,6 @@ def render_nodes(nodes):
 
 
 def render_list_items(items):
-    """items: list of dicts {level, ordered, text} → genestde <ul>/<ol>."""
     root = []
     stack = []
     for it in items:
@@ -98,7 +168,6 @@ def render_list_items(items):
 
 
 def consume_list(lines, i):
-    """Verteert een lijstblok (incl. meervoudige-regel items). Retourneert (html, new_i)."""
     items = []
     n = len(lines)
     while i < n:
@@ -113,10 +182,8 @@ def consume_list(lines, i):
             ordered = not lm.group(2).startswith(("-", "*"))
             items.append({"level": level, "ordered": ordered, "text": lm.group(3)})
             i += 1
-        elif ln[:1] in (" ", "\t"):
-            # continuation line (ingedeukt) van het vorige item
-            if items:
-                items[-1]["text"] += " " + stripped
+        elif ln[:1] in (" ", "\t") and items:
+            items[-1]["text"] += " " + stripped
             i += 1
         else:
             break
@@ -139,30 +206,22 @@ def md_to_html(md: str) -> str:
     while i < n:
         line = lines[i]
         stripped = line.strip()
-
         if not stripped:
             flush_para()
             i += 1
             continue
-
-        # horizontal rule
         if re.fullmatch(r"-{3,}|\*{3,}", stripped):
             flush_para()
             out.append("<hr>")
             i += 1
             continue
-
-        # headings
         m = re.match(r"^(#{1,3})\s+(.*)$", stripped)
         if m:
             flush_para()
             level = len(m.group(1))
-            # cover uses '# TITLE' inside a quote; here plain headings only
             out.append(f"<h{level}>{inline(m.group(2))}</h{level}>")
             i += 1
             continue
-
-        # blockquote (group consecutive '> ' lines)
         if stripped.startswith(">"):
             flush_para()
             quote = []
@@ -174,9 +233,7 @@ def md_to_html(md: str) -> str:
                     q = ""
                 quote.append(q)
                 i += 1
-            # collapse into paragraphs
-            body = []
-            cur = []
+            body, cur = [], []
             for q in quote:
                 if q == "":
                     if cur:
@@ -188,8 +245,6 @@ def md_to_html(md: str) -> str:
                 body.append("<p>" + inline(" ".join(cur)) + "</p>")
             out.append("<blockquote>" + "".join(body) + "</blockquote>")
             continue
-
-        # table (line starts with '|')
         if stripped.startswith("|"):
             flush_para()
             rows = []
@@ -198,247 +253,661 @@ def md_to_html(md: str) -> str:
                 i += 1
             out.append(render_table(rows))
             continue
-
-        # list (group consecutive list lines + continuation lines)
         if LIST_RE.match(line):
             flush_para()
             html_list, i = consume_list(lines, i)
             out.append(html_list)
             continue
-
-        # default: paragraph text
         para.append(stripped)
         i += 1
-
     flush_para()
     return "\n".join(out)
 
 
-# ---------------------------------------------------------------- anaglyph
+def split_sections(md: str):
+    """Scheidt (intro, [(title, html), ...]) op basis van H2-koppen."""
+    lines = md.splitlines()
+    intro = []
+    sections = []
+    cur_title = None
+    cur_body = []
+    for ln in lines:
+        m = re.match(r"^##\s+(.*)$", ln.strip())
+        if m:
+            if cur_title is None:
+                intro.append(ln)
+            else:
+                sections.append((cur_title, "\n".join(cur_body)))
+            cur_title = m.group(1)
+            cur_body = []
+        elif cur_title is None:
+            intro.append(ln)
+        else:
+            cur_body.append(ln)
+    if cur_title is not None:
+        sections.append((cur_title, "\n".join(cur_body)))
+    intro_html = md_to_html("\n".join(intro)).strip()
+    return intro_html, [(t, md_to_html(b).strip()) for t, b in sections]
+
+
+def strip_tags(s):
+    return re.sub(r"<[^>]+>", "", s)
+
+
+def span_for(html_body):
+    """kort → half vak, lang → volledig vak."""
+    return 2 if len(strip_tags(html_body)) > 520 else 1
+
+
+# =================================================================== figuren
+def _svg_open(label, w, h):
+    return (f'<svg class="fig" viewBox="0 0 {w} {h}" role="img" '
+            f'aria-label="{html.escape(label)}" preserveAspectRatio="xMidYMid meet">')
+
+
+def fig_ikigai():
+    D = "var(--fg-dim)"; A = "var(--accent)"
+    def circ(cx, cy, o):
+        return (f'<circle cx="{cx}" cy="{cy}" r="84" fill="{A}" fill-opacity="{o}" '
+                f'stroke="{D}" stroke-width="1.2"/>')
+    cx, cy = 280, 195
+    s = _svg_open("Ikigai: vier overlappende cirkels met IKIGAI in het midden", 560, 400)
+    s += circ(cx, 122, 0.16)   # waar je van houdt (top)
+    s += circ(cx - 72, 195, 0.12)   # waar je goed in bent (links)
+    s += circ(cx + 72, 195, 0.14)   # wat de wereld nodig heeft (rechts)
+    s += circ(cx, 268, 0.10)   # waar je voor betaald kunt worden (onder)
+    # labels rond (ruimte genoeg in viewBox)
+    s += f'<text x="{cx}" y="30" class="fig-lbl" text-anchor="middle">waar je van houdt</text>'
+    s += f'<text x="92" y="190" class="fig-lbl" text-anchor="end">waar je</text>'
+    s += f'<text x="92" y="206" class="fig-lbl" text-anchor="end">goed in bent</text>'
+    s += f'<text x="468" y="190" class="fig-lbl" text-anchor="start">wat de wereld</text>'
+    s += f'<text x="468" y="206" class="fig-lbl" text-anchor="start">nodig heeft</text>'
+    s += f'<text x="{cx}" y="392" class="fig-lbl" text-anchor="middle">waar je voor betaald kunt worden</text>'
+    # snijpunten
+    s += f'<text x="{cx-34}" y="158" class="fig-tag">PASSIE</text>'
+    s += f'<text x="{cx+34}" y="158" class="fig-tag">MISSIE</text>'
+    s += f'<text x="{cx-34}" y="238" class="fig-tag">BEROEP</text>'
+    s += f'<text x="{cx+34}" y="238" class="fig-tag">ROEPING</text>'
+    # center
+    s += f'<circle cx="{cx}" cy="{cy}" r="33" fill="{A}"/>'
+    s += f'<text x="{cx}" y="{cy+5}" class="fig-center" text-anchor="middle">IKIGAI</text>'
+    s += "</svg>"
+    return s
+
+
+def fig_levenswiel():
+    import math
+    D = "var(--fg-dim)"; A = "var(--accent)"
+    cx, cy, r = 280, 150, 104
+    labels = ["vrienden", "romantiek", "gezondheid", "ontwikkeling",
+              "werk & school", "ontspanning & plezier", "maatschappelijke bijdrage", "liefde & familie"]
+    s = _svg_open("Levenswiel: acht segmenten rond eigenaarschap", 560, 320)
+    s += f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{D}" stroke-width="1.2"/>'
+    n = len(labels)
+    def wrap(w):
+        if len(w) <= 14:
+            return [w]
+        words = w.split()
+        best, bestlen = None, 999
+        for i in range(1, len(words)):
+            a, b = " ".join(words[:i]), " ".join(words[i:])
+            m = max(len(a), len(b))
+            if m < bestlen:
+                bestlen, best = m, (a, b)
+        return [best[0], best[1]]
+    for i in range(n):
+        a0 = -90 + i * (360 / n)
+        a1 = -90 + (i + 1) * (360 / n)
+        x0 = cx + r * math.cos(math.radians(a0)); y0 = cy + r * math.sin(math.radians(a0))
+        x1 = cx + r * math.cos(math.radians(a1)); y1 = cy + r * math.sin(math.radians(a1))
+        fill = A if i == 4 else "none"
+        fop = "0.16" if i == 4 else "0.05"
+        s += (f'<path d="M{cx} {cy} L{x0:.1f} {y0:.1f} '
+              f'A{r} {r} 0 0 1 {x1:.1f} {y1:.1f} Z" fill="{fill}" fill-opacity="{fop}" stroke="{D}" stroke-width="1"/>')
+        am = math.radians(-90 + (i + 0.5) * (360 / n))
+        lx = cx + (r * 1.2) * math.cos(am); ly = cy + (r * 1.2) * math.sin(am)
+        c = math.cos(am)
+        anchor = "start" if c > 0.35 else ("end" if c < -0.35 else "middle")
+        lines = wrap(labels[i])
+        dy = -((len(lines) - 1) * 13) / 2
+        for j, ln in enumerate(lines):
+            s += f'<text x="{lx:.1f}" y="{ly + dy + j * 13:.1f}" class="fig-seg" text-anchor="{anchor}">{ln}</text>'
+    s += f'<circle cx="{cx}" cy="{cy}" r="6" fill="{A}"/>'
+    s += f'<text x="{cx}" y="{cy - 16}" class="fig-tag" text-anchor="middle">eigenaarschap</text>'
+    s += "</svg>"
+    return s
+
+
+def fig_assenstelsel():
+    L = "var(--fg)"; D = "var(--fg-dim)"; A = "var(--accent)"
+    s = _svg_open("Assenstelsel: signalen geplooid op twee assen (concept)", 480, 340)
+    ox, oy = 70, 270
+    # grid
+    for gx in range(1, 5):
+        x = ox + gx * 95
+        s += f'<line x1="{x}" y1="{oy}" x2="{x}" y2="60" stroke="{D}" stroke-width=".6" stroke-dasharray="2 5" opacity=".5"/>'
+    for gy in range(1, 4):
+        y = oy - gy * 70
+        s += f'<line x1="{ox}" y1="{y}" x2="440" y2="{y}" stroke="{D}" stroke-width=".6" stroke-dasharray="2 5" opacity=".5"/>'
+    # axes
+    s += f'<line x1="{ox}" y1="{oy}" x2="452" y2="{oy}" stroke="{L}" stroke-width="1.4"/>'
+    s += f'<path d="M452 {oy} l-9 -4 l0 8 z" fill="{L}"/>'
+    s += f'<line x1="{ox}" y1="{oy}" x2="{ox}" y2="46" stroke="{L}" stroke-width="1.4"/>'
+    s += f'<path d="M{ox} 46 l-4 9 l8 0 z" fill="{L}"/>'
+    # axis labels
+    s += f'<text x="452" y="{oy + 20}" class="fig-lbl" text-anchor="end">huidig → toekomst</text>'
+    s += f'<text x="24" y="158" class="fig-lbl" text-anchor="middle" transform="rotate(-90 24 158)">persoonlijk → maatschappelijk</text>'
+    # points
+    pts = [(150, 190, "open source", True), (240, 130, "lokale AI", False),
+           (330, 160, "automatisering", False), (378, 96, "robot huisdier", True)]
+    for x, y, lab, hot in pts:
+        c = A if hot else D
+        s += f'<circle cx="{x}" cy="{y}" r="6" fill="{c}"/>'
+        s += f'<circle cx="{x}" cy="{y}" r="11" fill="none" stroke="{c}" stroke-width="1" opacity=".5"/>'
+        s += f'<text x="{x}" y="{y - 18}" class="fig-lbl" text-anchor="middle">{lab}</text>'
+    s += f'<text x="{ox}" y="{oy + 20}" class="fig-tag" text-anchor="start">0</text>'
+    s += "</svg>"
+    return s
+
+
+def fig_trendcanvas():
+    D = "var(--fg-dim)"; A = "var(--accent)"
+    blocks = [
+        ("Trend", False), ("Basisbehoeften", False), ("Inspiratie", False), ("Drivers of change", False),
+        ("Opkomende verwachtingen", False), ("Type innovatie", False), ("Voor wie", False), ("Mijn innovatie", True),
+    ]
+    s = _svg_open("Trendcanvas: acht blokken, van trend tot mijn innovatie", 640, 300)
+    cw, chh, gap = 140, 110, 13
+    x0, y0 = 12, 12
+    for i, (lab, hot) in enumerate(blocks):
+        r, c = divmod(i, 4)
+        x = x0 + c * (cw + gap)
+        y = y0 + r * (chh + gap)
+        stroke = A if hot else D
+        fill = A if hot else "none"
+        fop = "0.16" if hot else "0.05"
+        s += (f'<rect x="{x}" y="{y}" width="{cw}" height="{chh}" rx="4" '
+              f'fill="{fill}" fill-opacity="{fop}" stroke="{stroke}" stroke-width="{1.6 if hot else 1.2}"/>')
+        # wrap label into up to 3 lines
+        words = lab.split()
+        lines, cur = [], ""
+        for w in words:
+            if len(cur) + len(w) > 16 and cur:
+                lines.append(cur); cur = w
+            else:
+                cur = (cur + " " + w).strip()
+        if cur:
+            lines.append(cur)
+        ty = y + chh / 2 - (len(lines) - 1) * 9 + 4
+        for ln in lines:
+            s += f'<text x="{x + cw/2}" y="{ty:.0f}" class="fig-cell" text-anchor="middle">{html.escape(ln)}</text>'
+            ty += 18
+    s += "</svg>"
+    return s
+
+
+def fig_automaten():
+    D = "var(--fg-dim)"; A = "var(--accent)"
+    s = _svg_open("Alles-automaten: een kaart met automaten en hun status", 480, 340)
+    # map: roads
+    roads = [
+        (40, 90, 440, 90), (40, 190, 440, 190), (40, 270, 440, 270),
+        (120, 40, 120, 300), (250, 40, 250, 300), (370, 40, 370, 300),
+    ]
+    for x1, y1, x2, y2 in roads:
+        s += f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{D}" stroke-width="1" opacity=".55"/>'
+    # automaten (pins)
+    autos = [(120, 90, True), (250, 190, True), (370, 90, False), (250, 270, True)]
+    for x, y, on in autos:
+        s += f'<rect x="{x-16}" y="{y-20}" width="32" height="40" rx="4" fill="none" stroke="{A}" stroke-width="1.6"/>'
+        s += f'<rect x="{x-10}" y="{y-12}" width="20" height="12" rx="2" fill="{A}" fill-opacity=".25" stroke="{A}" stroke-width="1"/>'
+        s += f'<circle cx="{x}" cy="{y+12}" r="4" fill="{A if on else D}"/>'
+    # callout
+    s += f'<rect x="40" y="300" width="240" height="26" rx="4" fill="none" stroke="{D}" stroke-width="1"/>'
+    s += f'<text x="52" y="317" class="fig-tag">status · inhoud · locatie</text>'
+    s += f'<circle cx="330" cy="313" r="5" fill="{A}"/><text x="342" y="317" class="fig-tag">actief</text>'
+    s += f'<circle cx="400" cy="313" r="5" fill="{D}"/><text x="412" y="317" class="fig-tag">leeg</text>'
+    s += "</svg>"
+    return s
+
+
+def fig_pyramide_c():
+    D = "var(--fg-dim)"; A = "var(--accent)"
+    s = _svg_open("Waardepiramide C: leeg frame, nog te vullen (3 lagen)", 420, 320)
+    apex = (210, 40)
+    bl = (70, 270)
+    br = (350, 270)
+    # pyramid outline
+    s += f'<path d="M{apex[0]} {apex[1]} L{br[0]} {br[1]} L{bl[0]} {bl[1]} Z" fill="none" stroke="{A}" stroke-width="1.6" stroke-dasharray="6 5"/>'
+    # two dividers (3 tiers)
+    for f in (0.34, 0.67):
+        lx = apex[0] + (bl[0] - apex[0]) * f
+        ly = apex[1] + (bl[1] - apex[1]) * f
+        rx = apex[0] + (br[0] - apex[0]) * f
+        ry = apex[1] + (br[1] - apex[1]) * f
+        s += f'<line x1="{lx:.0f}" y1="{ly:.0f}" x2="{rx:.0f}" y2="{ry:.0f}" stroke="{D}" stroke-width="1" stroke-dasharray="4 5"/>'
+    # tier labels (empty slots)
+    s += f'<text x="210" y="92" class="fig-empty" text-anchor="middle">—</text>'
+    s += f'<text x="210" y="160" class="fig-empty" text-anchor="middle">—</text>'
+    s += f'<text x="210" y="228" class="fig-empty" text-anchor="middle">—</text>'
+    # side labels
+    s += f'<text x="356" y="96" class="fig-lbl" text-anchor="start">top</text>'
+    s += f'<text x="356" y="164" class="fig-lbl" text-anchor="start">laag 2</text>'
+    s += f'<text x="356" y="232" class="fig-lbl" text-anchor="start">laag 1</text>'
+    s += f'<text x="210" y="300" class="fig-note" text-anchor="middle">concept — nog te vullen</text>'
+    s += "</svg>"
+    return s
+
+
 def anaglyph_svg():
-    """Een wireframe 'reis' scene (grid + poorten + ster) zonder tekst.
-    Tekst blijft plat in de HTML; alleen deze scène wordt rood-cyan gesplitst."""
     VP = (400, 120)
     W, H = 800, 320
-    parts = []
-
     def layer(name, inner):
         return f'<g class="layer-{name}">{inner}</g>'
-
-    # --- FAR: horizon, floor grid, target star, far gate
-    far = []
-    far.append(f'<line x1="0" y1="120" x2="800" y2="120" class="ln strong"/>')
-    # horizontal floor lines (spacing grows toward viewer)
+    far = [f'<line x1="0" y1="120" x2="800" y2="120" class="ln strong"/>']
     for y in (140, 165, 200, 250, 320):
         far.append(f'<line x1="0" y1="{y}" x2="800" y2="{y}" class="ln"/>')
-    # converging vertical lines from VP to bottom
     for xb in (0, 100, 200, 300, 400, 500, 600, 700, 800):
         far.append(f'<line x1="400" y1="120" x2="{xb}" y2="320" class="ln dim"/>')
-    # target star at the horizon (stip op de horizon)
-    far.append(
-        '<g class="star">'
-        '<circle cx="400" cy="120" r="10" class="ln strong"/>'
-        '<path d="M400 108 L412 120 L400 132 L388 120 Z" class="ln strong"/>'
-        '<line x1="392" y1="120" x2="408" y2="120" class="ln"/>'
-        '<line x1="400" y1="112" x2="400" y2="128" class="ln"/>'
-        "</g>"
-    )
-    # far gate (smallest, nearest the horizon)
-    far.append('<rect x="372" y="138" width="56" height="24" rx="2" class="gate"/>')
-    far.append('<line x1="400" y1="138" x2="400" y2="162" class="ln"/>')
+    far.append('<g class="star"><circle cx="400" cy="120" r="10" class="ln strong"/>'
+               '<path d="M400 108 L412 120 L400 132 L388 120 Z" class="ln strong"/>'
+               '<line x1="392" y1="120" x2="408" y2="120" class="ln"/><line x1="400" y1="112" x2="400" y2="128" class="ln"/></g>')
+    far.append('<rect x="372" y="138" width="56" height="24" rx="2" class="gate"/><line x1="400" y1="138" x2="400" y2="162" class="ln"/>')
     far_html = layer("far", "".join(far))
-
-    # --- MID: mid gate
-    mid = []
-    mid.append('<rect x="350" y="168" width="100" height="44" rx="3" class="gate"/>')
-    mid.append('<line x1="400" y1="168" x2="400" y2="212" class="ln"/>')
-    mid.append('<circle cx="400" cy="212" r="3" class="node"/>')
+    mid = ['<rect x="350" y="168" width="100" height="44" rx="3" class="gate"/><line x1="400" y1="168" x2="400" y2="212" class="ln"/><circle cx="400" cy="212" r="3" class="node"/>']
     mid_html = layer("mid", "".join(mid))
-
-    # --- NEAR: road edges, center line, near gate
-    near = []
-    near.append('<line x1="200" y1="320" x2="400" y2="120" class="road"/>')
-    near.append('<line x1="600" y1="320" x2="400" y2="120" class="road"/>')
-    near.append('<line x1="400" y1="320" x2="400" y2="150" class="center"/>')
-    near.append('<rect x="326" y="202" width="148" height="80" rx="4" class="gate"/>')
-    near.append('<line x1="400" y1="202" x2="400" y2="282" class="ln"/>')
-    near.append('<circle cx="400" cy="282" r="4" class="node"/>')
+    near = ['<line x1="200" y1="320" x2="400" y2="120" class="road"/><line x1="600" y1="320" x2="400" y2="120" class="road"/>'
+            '<line x1="400" y1="320" x2="400" y2="150" class="center"/>'
+            '<rect x="326" y="202" width="148" height="80" rx="4" class="gate"/><line x1="400" y1="202" x2="400" y2="282" class="ln"/>'
+            '<circle cx="400" cy="282" r="4" class="node"/>']
     near_html = layer("near", "".join(near))
-
     scene = f'{far_html}{mid_html}{near_html}'
-    # two channels: red (base) + cyan (offset per layer for true parallax)
     return f'''
 <svg class="anaglyph" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet"
      role="img" aria-label="Een pad van drie poorten naar een ster op de horizon — van signaal tot bedrijf">
-  <defs>
-    <style>
+  <defs><style>
       .ln {{ stroke: currentColor; stroke-width: 1; fill: none; }}
-      .ln.strong {{ stroke-width: 1.6; }}
-      .ln.dim {{ opacity: .4; }}
+      .ln.strong {{ stroke-width: 1.6; }} .ln.dim {{ opacity: .4; }}
       .road {{ stroke: currentColor; stroke-width: 2; fill: none; }}
       .center {{ stroke: currentColor; stroke-width: 1; stroke-dasharray: 4 6; fill: none; }}
       .gate {{ stroke: currentColor; stroke-width: 1.4; fill: none; opacity: .95; }}
       .node {{ fill: currentColor; stroke: none; }}
       .star {{ stroke: currentColor; fill: none; }}
-    </style>
-  </defs>
+    </style></defs>
   <g id="chR" class="chR">{scene}</g>
   <g id="chC" class="chC">{scene}</g>
 </svg>'''
 
 
-def strip_first_h1(md: str) -> str:
-    """Haalt de eerste '# ...' (H1) — de ch-head toont de titel al."""
-    lines = md.splitlines()
-    for i, ln in enumerate(lines):
-        if not ln.strip():
-            continue
-        if ln.strip().startswith("# "):
-            return "\n".join(lines[i + 1:])
-        break
-    return md
+FIGURE_BUILDERS = {
+    "ikigai": fig_ikigai,
+    "levenswiel": fig_levenswiel,
+    "assenstelsel": fig_assenstelsel,
+    "trendcanvas": fig_trendcanvas,
+    "automaten": fig_automaten,
+    "pyramide_c": fig_pyramide_c,
+}
+FIGURE_CAPTIONS = {
+    "ikigai": "Ikigai — waar de vier kringjes overlappen, staat het werk dat ik wil.",
+    "levenswiel": "Levenswiel (2026-09-04) — eigenaarschap in het midden, acht leefgebieden eromheen.",
+    "assenstelsel": "Assenstelsel — mijn signalen op twee assen (concept; assen nog te bevestigen).",
+    "trendcanvas": "Trendcanvas — de 8 stappen van trend naar mijn innovatie.",
+    "automaten": "Alles-automaten — een kaart met de status van automaten in de buurt.",
+    "pyramide_c": "Waardepiramide C — leeg frame, nog te vullen.",
+}
+
+# =================================================================== shell
+def sidebar(active_id):
+    items = []
+    for p in ALL_PAGES:
+        cls = "active" if p["id"] == active_id else ""
+        items.append(
+            f'<a class="snav {cls}" href="{p["page"]}">'
+            f'<span class="snum">{p["num"]}</span>{html.escape(p["title"])}</a>'
+        )
+    return f'''
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="index.html">TREND<span class="accent">REIS</span>
+    <span class="brand-sub">/ ontdekkingsreis</span></a>
+  <nav class="snavs" aria-label="Hoofdnavigatie">{''.join(items)}</nav>
+  <div class="sfoot">
+    <div class="sfoot-row">
+      <button class="btn" id="d3Btn" aria-pressed="true" title="Rood-cyan 3D (alleen de home-scène)"><span class="dot"></span>3D</button>
+      <button class="btn" id="themeBtn" title="Thema wisselen">LIGHT</button>
+    </div>
+    <p class="sfoot-note">rood-cyan brilletjes voor de 3D · zonder bril ook leesbaar</p>
+    <p class="sfoot-sig">qwen 3.8 27b · lokaal</p>
+  </div>
+</aside>
+<div class="scrim" id="scrim"></div>
+<button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>'''
 
 
-def strip_first_blockquote(md: str) -> str:
-    """Haalt de eerste blockquote (titelblok) uit de cover — die staat al in de hero."""
-    lines = md.splitlines()
-    out = []
-    seen_quote = False
-    in_quote = False
-    for ln in lines:
-        s = ln.strip()
-        if s.startswith(">"):
-            if seen_quote:
-                out.append(ln)  # latere quotes blijven (bijv. de letter)
-            else:
-                in_quote = True  # eerste quote overslaan
-            continue
-        if in_quote:
-            in_quote = False
-            seen_quote = True
-            out.append(ln)
-            continue
-        out.append(ln)
-    return "\n".join(out)
+def toc(items):
+    if len(items) < 2:
+        return ""
+    links = "".join(f'<a href="#{h}">{t}</a>' for h, t in items)
+    return f'<nav class="toc" aria-label="Op deze pagina"><span class="toc-h">Op deze pagina</span>{links}</nav>'
 
 
-# ---------------------------------------------------------------- shell
-def build():
-    chapters = []
-    for idx, (fname, title) in enumerate(ORDER):
-        f = CONTENT / f"{fname}.md"
-        if not f.exists():
-            continue
-        md = f.read_text(encoding="utf-8")
-        md = strip_first_h1(md)
-        if idx == 0:
-            # de hero toont de titel al; haal de titel-blockquote uit de cover
-            md = strip_first_blockquote(md)
-        body = md_to_html(md)
-        chap_id = f"{fname}"
-        if idx == 0:
-            chapters.append(
-                f'<section class="chapter" id="{chap_id}">\n'
-                f'  <div class="ch-head">\n'
-                f'    <span class="ch-id">TR-00</span>\n'
-                f'    <h1 class="ch-title">{html.escape(title)}</h1>\n'
-                f"  </div>\n"
-                f"  <div class=\"ch-body\">\n    {body}\n  </div>\n"
-                f"</section>"
-            )
+def anchor_of(title):
+    a = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+    return a
+
+
+def prev_next(active_id):
+    ids = [p["id"] for p in ALL_PAGES]
+    i = ids.index(active_id)
+    out = '<nav class="pn" aria-label="Vorige en volgende">'
+    if i > 0:
+        p = ALL_PAGES[i - 1]
+        out += f'<a class="pn-a" href="{p["page"]}"><span class="pn-l">← vorige</span><span class="pn-t">{p["num"]} · {html.escape(p["title"])}</span></a>'
+    else:
+        out += '<span></span>'
+    if i < len(ids) - 1:
+        p = ALL_PAGES[i + 1]
+        out += f'<a class="pn-a next" href="{p["page"]}"><span class="pn-l">volgende →</span><span class="pn-t">{p["num"]} · {html.escape(p["title"])}</span></a>'
+    else:
+        out += '<span></span>'
+    out += "</nav>"
+    return out
+
+
+def render_figure_block(name):
+    return (f'<div class="block full figblock">'
+            f'<figure class="figwrap">{FIGURE_BUILDERS[name]()}'
+            f'<figcaption>{html.escape(FIGURE_CAPTIONS[name])}</figcaption>'
+            f'</figure></div>')
+
+
+def render_hunter_block():
+    cards = "".join(
+        f'<figure class="phcard"><img src="media/{h[0]}.jpg" alt="{html.escape(h[1])}" loading="lazy">'
+        f'<figcaption><strong>{html.escape(h[1])}</strong><span>{html.escape(h[2])}</span></figcaption></figure>'
+        for h in HUNTER_PHOTOS
+    )
+    return (f'<div class="block full photoblock"><div class="phgrid">{cards}</div></div>')
+
+
+def content_blocks(page_id, md):
+    """Bouw de 'blocks' grid voor een content-pagina."""
+    md = re.sub(r"^#\s+.*$", "", md, count=1, flags=re.M)  # strip H1
+    intro_html, sections = split_sections(md)
+    items = []
+    if intro_html:
+        items.append(("intro", intro_html))
+    for (f, b) in FIGURES.get(page_id, []):
+        if b == "intro":
+            items.append(("fig", f))
+    for title, body in sections:
+        # figuren vóór deze sectie
+        for (f, b) in FIGURES.get(page_id, []):
+            if b == title:
+                items.append(("fig", f))
+        items.append(("sec", title, body))
+        # hunter-foto's na de Hunt-sectie (signalen)
+        if page_id == "signalen" and title.startswith("Venster 5"):
+            items.append(("photos", ""))
+    blocks = []
+    toc_items = []
+    for it in items:
+        if it[0] == "intro":
+            blocks.append(f'<div class="block full intro">{it[1]}</div>')
+        elif it[0] == "fig":
+            blocks.append(render_figure_block(it[1]))
+        elif it[0] == "photos":
+            blocks.append(render_hunter_block())
         else:
-            tag = f"L{idx-1}"
-            chapters.append(
-                f'<section class="chapter" id="{chap_id}">\n'
-                f'  <div class="ch-head">\n'
-                f'    <span class="ch-id">TR-{idx:02d}</span>\n'
-                f'    <h1 class="ch-title">{html.escape(title)}</h1>\n'
-                f'    <span class="ch-tag">{tag}</span>\n'
-                f"  </div>\n"
-                f'  <div class="ch-body">\n    {body}\n  </div>\n'
-                f"</section>"
-            )
+            title, body = it[1], it[2]
+            a = anchor_of(title)
+            toc_items.append((a, title))
+            span = span_for(body)
+            cls = "sec"
+            if re.match(r"Wat dit hoofdstuk toont", title):
+                cls += " callout"
+            blocks.append(f'<div class="block {cls} {span}" id="{a}"><h2>{inline(title)}</h2>{body}</div>')
+    return "".join(blocks), toc_items
 
-    nav = ['<a href="#00-cover" data-sec="00-cover">Start</a>']
-    for idx, (fname, title) in enumerate(ORDER):
-        if idx == 0:
-            continue
-        nav.append(f'<a href="#{fname}" data-sec="{fname}">{html.escape(title)}</a>')
 
-    page = f"""<!doctype html>
+# =================================================================== pages
+def page_head(title, desc, active_id):
+    return f'''<!doctype html>
 <html lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TRENDREIS — van signaal tot stip op de horizon</title>
-<meta name="description" content="Wat ik de trendweken leerde, en hoe ik die verbind met het bedrijf dat ik wil bouwen.">
+<title>{html.escape(title)} — TRENDREIS</title>
+<meta name="description" content="{html.escape(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="theme.css">
 </head>
-<body>
-<div class="shell" data-3d="on">
-  <header class="topbar">
-    <span class="wordmark">TRENDREIS<span class="dim"> / ontdekkingsreis</span></span>
-    <span class="spacer"></span>
-    <nav class="nav" aria-label="Hoofdstukken">{''.join(nav)}</nav>
-    <span class="tb-sep"></span>
-    <button class="btn" id="d3Btn" aria-pressed="true" title="Rood-cyan 3D aan/uit"><span class="dot"></span>3D</button>
-    <button class="btn" id="themeBtn" title="Thema wisselen">LIGHT</button>
-  </header>
+<body data-page="{active_id}">
+{sidebar(active_id)}
+<div class="frame">
+<main class="main">
+<div class="page">
+'''
 
-  <main class="main">
-    <div class="readcol">
 
-      <section class="chapter hero" id="scene" style="scroll-margin-top:70px">
-        <div class="hero-stage">
-          <div class="hero-head">
-            <h1 class="hero-title">TREND<span class="accent">REIS</span></h1>
-            <p class="hero-sub">van signaal tot stip op de horizon</p>
-            <p class="hero-meta">Marlo van Gulik · ONDEON18 · Onderneem! De Ontdekkingsreis</p>
-            <p class="hero-meta">HAN University of Applied Sciences — oktober 2026</p>
-          </div>
-          {anaglyph_svg()}
-          <div class="hero-controls">
-            <span class="depth" id="depthWrap">
-              <span>DIEPTE</span>
-              <input type="range" id="depthRange" min="0" max="30" step="1" value="10" aria-label="3D diepte">
-              <span class="dnum" id="depthNum">10px</span>
-            </span>
-            <span class="hint">rood-cyan brilletjes voor de 3D · zonder bril ook leesbaar</span>
-            <span class="spacer"></span>
-            <a class="btn" href="#00-cover">LEES →</a>
-          </div>
-        </div>
-      </section>
-
-      {''.join(chapters)}
-
-    </div>
-  </main>
-
-  <footer class="foot">
-    <p class="quote">"Je verkoopt niet de wafel — je verkoopt het gevoel dat iemand jou uit de brand helpt."</p>
-  </footer>
-
-  <div class="statusbar">
-    <span class="dot"></span>
-    <span>TRENDREIS · TK1</span>
-    <span class="sig">qwen 3.8 27b · lokaal</span>
-    <span class="grow"></span>
-    <span>3D: <span id="sb3d">AAN</span></span>
-    <span>© 2026 M. van Gulik</span>
-  </div>
+def page_foot():
+    return '''</div>
+</main>
+<footer class="foot"><p class="quote">“Je verkoopt niet de wafel — je verkoopt het gevoel dat iemand jou uit de brand helpt.”</p></footer>
+<div class="statusbar">
+  <span class="dot"></span><span>TRENDREIS · TK1</span><span class="sig">qwen 3.8 27b · lokaal</span>
+  <span class="grow"></span><span>3D: <span id="sb3d">AAN</span></span><span>© 2026 M. van Gulik</span>
+</div>
 </div>
 <script src="main.js"></script>
 </body>
-</html>
-"""
+</html>'''
 
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(page, encoding="utf-8")
-    print(f"OK: {OUT} ({len(page)} bytes, {len(ORDER)} hoofdstukken)")
+
+def build_home():
+    p = PAGES[0]
+    head = page_head("TRENDREIS — van signaal tot stip op de horizon",
+                     "Wat ik de trendweken leerde, en hoe ik die verbind met het bedrijf dat ik wil bouwen.", "home")
+    # hero
+    hero = f'''
+<section class="hero" id="scene">
+  <div class="hero-head">
+    <h1 class="hero-title">TREND<span class="accent">REIS</span></h1>
+    <p class="hero-sub">van signaal tot stip op de horizon</p>
+    <p class="hero-meta">Marlo van Gulik · ONDEON18 · Onderneem! De Ontdekkingsreis</p>
+    <p class="hero-meta">HAN University of Applied Sciences — oktober 2026</p>
+  </div>
+  {anaglyph_svg()}
+  <div class="hero-controls">
+    <span class="depth" id="depthWrap"><span>DIEPTE</span>
+      <input type="range" id="depthRange" min="0" max="30" step="1" value="10" aria-label="3D diepte">
+      <span class="dnum" id="depthNum">10px</span></span>
+    <span class="hint">rood-cyan brilletjes voor de 3D · zonder bril ook leesbaar</span>
+    <span class="spacer"></span>
+    <a class="btn primary" href="wie-ben-ik.html">START →</a>
+  </div>
+</section>
+<section class="home-intro">
+  <p>Dit is mijn creatieve aflevering van trendopdracht TK1: wat ik heb geleerd, en hoe ik
+  de verbinding leg tussen <strong>trends</strong> en <strong>het bedrijf dat ik wil bouwen</strong>.
+  Acht stappen, zes vensters, één noorderster — in de stijl van een console, met 3D als handtekening.</p>
+</section>
+<div class="cards">'''
+    for pg in PAGES[1:] + EXTRA_PAGES:
+        hero += f'''
+  <a class="card" href="{pg["page"]}">
+    <span class="card-num">{pg["num"]}</span>
+    <span class="card-title">{html.escape(pg["title"])}</span>
+    <span class="card-short">{html.escape(pg["short"])}</span>
+    <span class="card-go">open →</span>
+  </a>'''
+    hero += "</div>"
+    return head + hero + page_foot()
+
+
+def build_content_page(p):
+    md = (CONTENT / f'{p["file"]}.md').read_text(encoding="utf-8")
+    head = page_head(p["title"], p["short"], p["id"])
+    ch_head = (f'<div class="ch-head"><span class="ch-id">TR-{p["num"]}</span>'
+               f'<h1 class="ch-title">{html.escape(p["title"])}</h1>'
+               f'<span class="ch-kicker">{html.escape(p["short"])}</span></div>')
+    blocks, toc_items = content_blocks(p["id"], md)
+    # colofon: vul de bronnen in
+    if p["id"] == "colofon":
+        bron = "".join(
+            f'<div class="bron"><div class="bron-label">{html.escape(b["label"])}</div>'
+            f'<div class="bron-apa">{b["apa"]}</div>'
+            f'<div class="bron-used">gebruikt bij: {html.escape(b["used"])}</div></div>'
+            for b in BRONNEN
+        )
+        blocks = blocks.replace("__BRONNEN__", bron)
+    right = toc(toc_items)
+    return head + ch_head + f'<div class="cols"><div class="blocks">{blocks}</div><aside class="toccol">{right}{prev_next(p["id"])}</aside></div>' + page_foot()
+
+
+# ---------------------------------------------------------------- ai-chat
+def parse_transcript(md):
+    lines = md.splitlines()
+    exchanges = []
+    cur = None
+    for ln in lines:
+        if ln.startswith("## "):  # prompt
+            if cur:
+                exchanges.append(cur)
+            cur = {"prompt": [], "responses": []}
+        elif cur is not None:
+            if ln.startswith("### "):
+                cur["responses"].append([])
+            elif cur["responses"]:
+                cur["responses"][-1].append(ln)
+            else:
+                cur["prompt"].append(ln)
+    if cur:
+        exchanges.append(cur)
+    # drop the top H1 + intro (they land in the first 'prompt' before any ##)
+    return exchanges
+
+
+def build_ai_chat():
+    p = [x for x in EXTRA_PAGES if x["id"] == "ai-chat"][0]
+    head = page_head(p["title"], "De volledige AI-chat (prompt → reactie), in een console-venster.", "ai-chat")
+    ch_head = (f'<div class="ch-head"><span class="ch-id">AI</span>'
+               f'<h1 class="ch-title">{html.escape(p["title"])}</h1>'
+               f'<span class="ch-kicker">de volledige sessie — lokaal, Qwen 3.8 27B (Ollama)</span></div>')
+    md = TRANSCRIPT.read_text(encoding="utf-8")
+    exchanges = parse_transcript(md)
+    # count
+    n_prompts = len(exchanges)
+    n_resp = sum(len(e["responses"]) for e in exchanges)
+    # drop a stray first exchange that is just the intro (no prompt body & no responses)
+    body = []
+    for i, e in enumerate(exchanges):
+        prompt_md = md_to_html("\n".join(e["prompt"])).strip()
+        if not prompt_md and not e["responses"]:
+            continue
+        first_line = next((l.strip().lstrip("#").strip() for l in e["prompt"] if l.strip()), "prompt")
+        first_line = inline(re.sub(r"^#+\s*", "", first_line))[:90]
+        resps = ""
+        for r in e["responses"]:
+            r_html = md_to_html("\n".join(r)).strip()
+            if not r_html:
+                continue
+            resps += f'<details class="chat-r"><summary>🤖 reactie</summary><div class="chat-r-body">{r_html}</div></details>'
+        body.append(
+            f'<details class="chat-x" {"open" if i == 0 else ""}>'
+            f'<summary><span class="px-p">❯</span><span class="px-q">{first_line}{"…" if len(first_line) >= 90 else ""}</span>'
+            f'<span class="px-meta">{len(e["responses"])} reacties</span></summary>'
+            f'<div class="chat-x-body">{prompt_md}{resps}</div></details>'
+        )
+    console = f'''
+<section class="console">
+  <div class="console-bar">
+    <span class="console-dots"><i></i><i></i><i></i></span>
+    <span class="console-title">trendreis — ai-chat · qwen 3.8 27b · lokaal</span>
+    <span class="console-r"><a href="{ROOT.name}/AI-chat/sessie-01a10830.jsonl" target="_blank" rel="noopener">ruwe sessie ↓</a></span>
+  </div>
+  <div class="console-meta">
+    <span>{n_prompts} prompts</span><span>·</span><span>{n_resp} reacties</span><span>·</span>
+    <span>elke wisselwerking is inklapbaar — klik op een prompt</span>
+  </div>
+  <div class="console-body">{''.join(body)}</div>
+</section>'''
+    right = f'<div class="toc-note"><p>Per de HAN-regels: AI is geen primaire bron. Dit is de volledige, onbewerkte wisselwerking (prompts én reacties) — de bijlage die bij het werk hoort.</p></div>'
+    return head + ch_head + f'<div class="cols"><div class="aiwrap">{console}</div><aside class="toccol">{right}{prev_next("ai-chat")}</aside></div>' + page_foot()
+
+
+# ---------------------------------------------------------------- materiaal
+def build_materiaal():
+    p = [x for x in EXTRA_PAGES if x["id"] == "materiaal"][0]
+    head = page_head(p["title"], "Mijn notebook: de originele foto’s, met de bron-quotes gemarkeerd.", "materiaal")
+    ch_head = (f'<div class="ch-head"><span class="ch-id">M</span>'
+               f'<h1 class="ch-title">{html.escape(p["title"])}</h1>'
+               f'<span class="ch-kicker">de originele foto’s — klik een “↳ schrift”-markering elders op de site</span></div>')
+    photos = sorted(RAW.glob("*.jpg"))
+    by_photo = {}
+    for hid, h in HIGHLIGHTS.items():
+        by_photo.setdefault(h["photo"], []).append((hid, h))
+    figs = []
+    for ph in photos:
+        name = ph.stem
+        hls = by_photo.get(name, [])
+        boxes = "".join(
+            f'<div class="hlbox" id="hl-{hid}" data-id="{hid}" title="{html.escape(h["quote"])}" '
+            f'style="left:{h["box"][0]}%;top:{h["box"][1]}%;width:{h["box"][2]}%;height:{h["box"][3]}%"></div>'
+            for hid, h in hls
+        )
+        badge = f'<span class="nbbadge">{len(hls)} bron-quote{"s" if len(hls) != 1 else ""}</span>' if hls else ""
+        figs.append(
+            f'<figure class="nb" id="nb-{name}">'
+            f'<div class="nb-img"><img src="media/notebook/{ph.name}" alt="Notebook {html.escape(name)}" loading="lazy">{boxes}</div>'
+            f'<figcaption><span class="nb-name">{html.escape(name)}</span>{badge}</figcaption>'
+            f'</figure>'
+        )
+    legend = "".join(
+        f'<a class="leg" href="#hl-{hid}" data-hl="{hid}"><span class="leg-dot"></span>'
+        f'{html.escape(HIGHLIGHTS[hid]["label"])}<span class="leg-q">“{html.escape(HIGHLIGHTS[hid]["quote"])}”</span></a>'
+        for hid in HIGHLIGHTS
+    )
+    main = f'''
+<section class="mat-intro">
+  <p>Op de site staat mijn eigen tekst — maar dit is waar het vandaan komt: <strong>mijn notebook</strong>.
+  Waar je elders op de site een <a class="bron-chip" href="#legend">↳ schrift</a>-markering ziet, staat hier een
+  <strong>oranje rechthoek</strong> rond de exacte zin. Klik een quote onderaan, of een markering elders, dan scroll ik
+  naar de foto en licht de rechthoek aan.</p>
+</section>
+<div class="legend" id="legend"><span class="legend-h">Bron-quotes (klik om naar de foto te gaan)</span>{legend}</div>
+<div class="nbs">{''.join(figs)}</div>'''
+    right = prev_next("materiaal")
+    return head + ch_head + f'<div class="cols"><div class="matwrap">{main}</div><aside class="toccol">{right}</aside></div>' + page_foot()
+
+
+# =================================================================== build
+def copy_media():
+    MEDIA.mkdir(parents=True, exist_ok=True)
+    NB_DIR.mkdir(parents=True, exist_ok=True)
+    n = 0
+    for src in sorted(HUNTER.glob("*.jpg")):
+        shutil.copy2(src, MEDIA / src.name); n += 1
+    for src in sorted(RAW.glob("*.jpg")):
+        shutil.copy2(src, NB_DIR / src.name); n += 1
+    return n
+
+
+def build():
+    nmedia = copy_media()
+    for p in PAGES:
+        if p["id"] == "home":
+            html_out = build_home()
+        else:
+            html_out = build_content_page(p)
+        (SITE / p["page"]).write_text(html_out, encoding="utf-8")
+        print(f"  {p['page']:28} {len(html_out):>7} bytes")
+    html_out = build_ai_chat(); (SITE / "ai-chat.html").write_text(html_out, encoding="utf-8")
+    print(f"  {'ai-chat.html':28} {len(html_out):>7} bytes")
+    html_out = build_materiaal(); (SITE / "materiaal.html").write_text(html_out, encoding="utf-8")
+    print(f"  {'materiaal.html':28} {len(html_out):>7} bytes")
+    print(f"OK: {len(PAGES)+2} pagina's + {nmedia} foto's → {SITE}")
 
 
 if __name__ == "__main__":

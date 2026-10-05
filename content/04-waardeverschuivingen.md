@@ -65,7 +65,7 @@ Uit m'n notebook, als kompas voor dit hoofdstuk:
 
 ## 5 · Food future
 *(uit een presentatie van Eva, die ze niet deelde — de woorden die ik eruit onthield)*
-- **van 70% naar 10% — nu al realiteit**: het aandeel van je inkomen dat naar voedsel
+- **van 70% naar 10% — nu al realiteit** `{#bron:food-70-10}`: het aandeel van je inkomen dat naar voedsel
   gaat, is fors gedaald. Gemiddeld gaat nu **10% van je salaris richting voedsel**.
 - voedselporno vs. voedselwoestijn · airfarm · space farm
 - mijn vragen die er bleven hangen: **was het vrijwillig — en is het nog wel gezond

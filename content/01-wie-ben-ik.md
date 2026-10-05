@@ -23,7 +23,7 @@ Deze minor is een keuzevak dat ik koos — omdat ik wil weten wat ik zelf wil bo
 
 > **Ikigai-zin:**
 > *"Ik help bedrijven en particulieren met open source, lokale AI en automatisering,
-> zodat zij de controle over hun eigen data en systemen terugkrijgen."*
+> zodat zij de controle over hun eigen data en systemen terugkrijgen."* `{#bron:ikigai-open-source}`
 > *(deze zin loopt door de hele site)*
 
 ## Levenswiel (2026-09-04)

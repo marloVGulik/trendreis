@@ -13,3 +13,6 @@ __pycache__/
 
 # website-preview screenshots (temp)
 site/preview-*.png
+
+# tijdelijke screenshots (dev/QA)
+site/shot-*.png

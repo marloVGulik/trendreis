@@ -3,363 +3,131 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TRENDREIS — van signaal tot stip op de horizon</title>
+<title>TRENDREIS — van signaal tot stip op de horizon — TRENDREIS</title>
 <meta name="description" content="Wat ik de trendweken leerde, en hoe ik die verbind met het bedrijf dat ik wil bouwen.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="theme.css">
 </head>
-<body>
-<div class="shell" data-3d="on">
-  <header class="topbar">
-    <span class="wordmark">TRENDREIS<span class="dim"> / ontdekkingsreis</span></span>
-    <span class="spacer"></span>
-    <nav class="nav" aria-label="Hoofdstukken"><a href="#00-cover" data-sec="00-cover">Start</a><a href="#01-wie-ben-ik" data-sec="01-wie-ben-ik">Wie ben ik?</a><a href="#02-signalen" data-sec="02-signalen">Signalen</a><a href="#03-analyseren" data-sec="03-analyseren">Analyseren</a><a href="#04-waardeverschuivingen" data-sec="04-waardeverschuivingen">Waardeverschuivingen</a><a href="#05-bedrijf" data-sec="05-bedrijf">Het bedrijf</a><a href="#06-reis" data-sec="06-reis">De reis</a><a href="#07-colofon" data-sec="07-colofon">Colofon</a></nav>
-    <span class="tb-sep"></span>
-    <button class="btn" id="d3Btn" aria-pressed="true" title="Rood-cyan 3D aan/uit"><span class="dot"></span>3D</button>
-    <button class="btn" id="themeBtn" title="Thema wisselen">LIGHT</button>
-  </header>
+<body data-page="home">
 
-  <main class="main">
-    <div class="readcol">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="index.html">TREND<span class="accent">REIS</span>
+    <span class="brand-sub">/ ontdekkingsreis</span></a>
+  <nav class="snavs" aria-label="Hoofdnavigatie"><a class="snav active" href="index.html"><span class="snum">00</span>Cover</a><a class="snav " href="wie-ben-ik.html"><span class="snum">01</span>Wie ben ik?</a><a class="snav " href="signalen.html"><span class="snum">02</span>Signalen</a><a class="snav " href="analyseren.html"><span class="snum">03</span>Analyseren</a><a class="snav " href="waardeverschuivingen.html"><span class="snum">04</span>Waardeverschuivingen</a><a class="snav " href="bedrijf.html"><span class="snum">05</span>Het bedrijf</a><a class="snav " href="reis.html"><span class="snum">06</span>De reis</a><a class="snav " href="colofon.html"><span class="snum">07</span>Bronnen &amp; colofon</a><a class="snav " href="ai-chat.html"><span class="snum">AI</span>AI-chat</a><a class="snav " href="materiaal.html"><span class="snum">M</span>Materiaal</a></nav>
+  <div class="sfoot">
+    <div class="sfoot-row">
+      <button class="btn" id="d3Btn" aria-pressed="true" title="Rood-cyan 3D (alleen de home-scène)"><span class="dot"></span>3D</button>
+      <button class="btn" id="themeBtn" title="Thema wisselen">LIGHT</button>
+    </div>
+    <p class="sfoot-note">rood-cyan brilletjes voor de 3D · zonder bril ook leesbaar</p>
+    <p class="sfoot-sig">qwen 3.8 27b · lokaal</p>
+  </div>
+</aside>
+<div class="scrim" id="scrim"></div>
+<button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+<div class="frame">
+<main class="main">
+<div class="page">
 
-      <section class="chapter hero" id="scene" style="scroll-margin-top:70px">
-        <div class="hero-stage">
-          <div class="hero-head">
-            <h1 class="hero-title">TREND<span class="accent">REIS</span></h1>
-            <p class="hero-sub">van signaal tot stip op de horizon</p>
-            <p class="hero-meta">Marlo van Gulik · ONDEON18 · Onderneem! De Ontdekkingsreis</p>
-            <p class="hero-meta">HAN University of Applied Sciences — oktober 2026</p>
-          </div>
-          
+<section class="hero" id="scene">
+  <div class="hero-head">
+    <h1 class="hero-title">TREND<span class="accent">REIS</span></h1>
+    <p class="hero-sub">van signaal tot stip op de horizon</p>
+    <p class="hero-meta">Marlo van Gulik · ONDEON18 · Onderneem! De Ontdekkingsreis</p>
+    <p class="hero-meta">HAN University of Applied Sciences — oktober 2026</p>
+  </div>
+  
 <svg class="anaglyph" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet"
      role="img" aria-label="Een pad van drie poorten naar een ster op de horizon — van signaal tot bedrijf">
-  <defs>
-    <style>
+  <defs><style>
       .ln { stroke: currentColor; stroke-width: 1; fill: none; }
-      .ln.strong { stroke-width: 1.6; }
-      .ln.dim { opacity: .4; }
+      .ln.strong { stroke-width: 1.6; } .ln.dim { opacity: .4; }
       .road { stroke: currentColor; stroke-width: 2; fill: none; }
       .center { stroke: currentColor; stroke-width: 1; stroke-dasharray: 4 6; fill: none; }
       .gate { stroke: currentColor; stroke-width: 1.4; fill: none; opacity: .95; }
       .node { fill: currentColor; stroke: none; }
       .star { stroke: currentColor; fill: none; }
-    </style>
-  </defs>
+    </style></defs>
   <g id="chR" class="chR"><g class="layer-far"><line x1="0" y1="120" x2="800" y2="120" class="ln strong"/><line x1="0" y1="140" x2="800" y2="140" class="ln"/><line x1="0" y1="165" x2="800" y2="165" class="ln"/><line x1="0" y1="200" x2="800" y2="200" class="ln"/><line x1="0" y1="250" x2="800" y2="250" class="ln"/><line x1="0" y1="320" x2="800" y2="320" class="ln"/><line x1="400" y1="120" x2="0" y2="320" class="ln dim"/><line x1="400" y1="120" x2="100" y2="320" class="ln dim"/><line x1="400" y1="120" x2="200" y2="320" class="ln dim"/><line x1="400" y1="120" x2="300" y2="320" class="ln dim"/><line x1="400" y1="120" x2="400" y2="320" class="ln dim"/><line x1="400" y1="120" x2="500" y2="320" class="ln dim"/><line x1="400" y1="120" x2="600" y2="320" class="ln dim"/><line x1="400" y1="120" x2="700" y2="320" class="ln dim"/><line x1="400" y1="120" x2="800" y2="320" class="ln dim"/><g class="star"><circle cx="400" cy="120" r="10" class="ln strong"/><path d="M400 108 L412 120 L400 132 L388 120 Z" class="ln strong"/><line x1="392" y1="120" x2="408" y2="120" class="ln"/><line x1="400" y1="112" x2="400" y2="128" class="ln"/></g><rect x="372" y="138" width="56" height="24" rx="2" class="gate"/><line x1="400" y1="138" x2="400" y2="162" class="ln"/></g><g class="layer-mid"><rect x="350" y="168" width="100" height="44" rx="3" class="gate"/><line x1="400" y1="168" x2="400" y2="212" class="ln"/><circle cx="400" cy="212" r="3" class="node"/></g><g class="layer-near"><line x1="200" y1="320" x2="400" y2="120" class="road"/><line x1="600" y1="320" x2="400" y2="120" class="road"/><line x1="400" y1="320" x2="400" y2="150" class="center"/><rect x="326" y="202" width="148" height="80" rx="4" class="gate"/><line x1="400" y1="202" x2="400" y2="282" class="ln"/><circle cx="400" cy="282" r="4" class="node"/></g></g>
   <g id="chC" class="chC"><g class="layer-far"><line x1="0" y1="120" x2="800" y2="120" class="ln strong"/><line x1="0" y1="140" x2="800" y2="140" class="ln"/><line x1="0" y1="165" x2="800" y2="165" class="ln"/><line x1="0" y1="200" x2="800" y2="200" class="ln"/><line x1="0" y1="250" x2="800" y2="250" class="ln"/><line x1="0" y1="320" x2="800" y2="320" class="ln"/><line x1="400" y1="120" x2="0" y2="320" class="ln dim"/><line x1="400" y1="120" x2="100" y2="320" class="ln dim"/><line x1="400" y1="120" x2="200" y2="320" class="ln dim"/><line x1="400" y1="120" x2="300" y2="320" class="ln dim"/><line x1="400" y1="120" x2="400" y2="320" class="ln dim"/><line x1="400" y1="120" x2="500" y2="320" class="ln dim"/><line x1="400" y1="120" x2="600" y2="320" class="ln dim"/><line x1="400" y1="120" x2="700" y2="320" class="ln dim"/><line x1="400" y1="120" x2="800" y2="320" class="ln dim"/><g class="star"><circle cx="400" cy="120" r="10" class="ln strong"/><path d="M400 108 L412 120 L400 132 L388 120 Z" class="ln strong"/><line x1="392" y1="120" x2="408" y2="120" class="ln"/><line x1="400" y1="112" x2="400" y2="128" class="ln"/></g><rect x="372" y="138" width="56" height="24" rx="2" class="gate"/><line x1="400" y1="138" x2="400" y2="162" class="ln"/></g><g class="layer-mid"><rect x="350" y="168" width="100" height="44" rx="3" class="gate"/><line x1="400" y1="168" x2="400" y2="212" class="ln"/><circle cx="400" cy="212" r="3" class="node"/></g><g class="layer-near"><line x1="200" y1="320" x2="400" y2="120" class="road"/><line x1="600" y1="320" x2="400" y2="120" class="road"/><line x1="400" y1="320" x2="400" y2="150" class="center"/><rect x="326" y="202" width="148" height="80" rx="4" class="gate"/><line x1="400" y1="202" x2="400" y2="282" class="ln"/><circle cx="400" cy="282" r="4" class="node"/></g></g>
 </svg>
-          <div class="hero-controls">
-            <span class="depth" id="depthWrap">
-              <span>DIEPTE</span>
-              <input type="range" id="depthRange" min="0" max="30" step="1" value="10" aria-label="3D diepte">
-              <span class="dnum" id="depthNum">10px</span>
-            </span>
-            <span class="hint">rood-cyan brilletjes voor de 3D · zonder bril ook leesbaar</span>
-            <span class="spacer"></span>
-            <a class="btn" href="#00-cover">LEES →</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="chapter" id="00-cover">
-  <div class="ch-head">
-    <span class="ch-id">TR-00</span>
-    <h1 class="ch-title">Cover</h1>
-  </div>
-  <div class="ch-body">
-    <h2>Intro video</h2>
-<p><em>(nog in productie — hier inbedden)</em></p>
-<ol><li>Loop naar de auto, stap in, start motor — zwart beeld: <strong>UNLOCK</strong></li><li>Auto rijdt voorbij de camera — <strong>YOUR DRIVE</strong></li><li>Snelle flits van innovatie-beelden — langzaam fade-in <strong>YOUR INNOVATION</strong> in verschillende letters</li></ol>
-<h2>Teaser — het eindbeeld</h2>
-<blockquote><p>"13 Januari 2027: Na een leuke en spannende minor heb ik vorige week mijn bedrijf ingeschreven bij de K.v.K. Na een set succesvolle tests voor de kerstvakantie, en een volledig doordacht plan in deze vakantie te maken, vond ik dat een goed plan. Ik heb zelf al een eerste set inkomen kunnen genereren met mijn idee tijdens de tests. Er zijn nog een paar dingen die moeten gebeuren. Mijn product heeft nog enkele verbeteringen nodig in de UI, en ook wil ik enkele processen automatiseren om het minder handwerk te maken. Afgelopen week ben ik ook goed bezig geweest met klanten zoeken, en heb met 4 klanten een traject gestart." — <em>eindbeeld, als doel geschreven vóór de start van de minor</em></p></blockquote>
-<p><strong>Deze site is de reis ernaartoe:</strong> wie ik ben, wat ik zag, wat ik leerde, wat verschuift — en waar ik alles mee ga bouwen.</p>
-<hr>
-<p><strong>3D</strong>: deze site is ontworpen voor <strong>rood-cyan 3D-brillen</strong>. [bril op] · [diepte aan/uit] · [diepte-schuif]</p>
-  </div>
-</section><section class="chapter" id="01-wie-ben-ik">
-  <div class="ch-head">
-    <span class="ch-id">TR-01</span>
-    <h1 class="ch-title">Wie ben ik?</h1>
-    <span class="ch-tag">L0</span>
-  </div>
-  <div class="ch-body">
-    <p><em>Voordat ik de wereld bekijk, kijk ik eerst naar mezelf. Dat was het startpunt van de minor: "Wie ben ik — en hoe kijk ik naar de wereld?"</em></p>
-<h2>Wie ik ben</h2>
-<p>Ik studeer <strong>Embedded Systems Engineering</strong> aan de HAN: elektrotechniek en programmeren. Deze minor is een keuzevak dat ik koos — omdat ik wil weten wat ik zelf wil bouwen.</p>
-<p><strong>Eerste indrukken</strong> — mijn klasgenoten schreven over mij in mijn notebook:</p>
-<ul><li>"Invented systems engineering" <em>[bijna de goede studie, haha]</em></li><li>"Kledingstijl valt mij op"</li><li>"Rustig maar wel gezellig"</li><li>"Iets in de ICT"</li></ul>
-<h2>Ikigai</h2>
-<p><em>(3D-scene: ikigai als 3D-venn)</em></p>
-<ul><li><strong>Waar ik van hou</strong>: programmeren &amp; automatiseren · projecten uitwerken én bedenken · informatie en data begrijpen · leutelen · lopen</li><li><strong>Waar ik goed in ben</strong>: leergierig · interesse tonen · snel problemen oplossen · nieuwe skills leren</li><li><strong>Wat de wereld nodig heeft</strong>: transparantie · onafhankelijkheid · verantwoordelijkheid · vertrouwen · vooruitgang</li><li><strong>Waar ik voor betaald kan worden</strong>: bedrijven begeleiden · automatisering voor bedrijven</li></ul>
-<blockquote><p><strong>Ikigai-zin:</strong> <em>"Ik help bedrijven en particulieren met open source, lokale AI en automatisering, zodat zij de controle over hun eigen data en systemen terugkrijgen."</em> <em>(deze zin loopt door de hele site)</em></p></blockquote>
-<h2>Levenswiel (2026-09-04)</h2>
-<p><em>(3D-scene: radar met scores 0–10)</em></p>
-<ul><li>werk en school · ontspanning en plezier · vrienden en familie · financiën · liefde en romantiek · gezondheid (mentaal en fysiek) · ontwikkeling en groei</li></ul>
-<p>Mijn vraag aan mezelf: <strong>"Mengpaneel: welke richting wil ik op?"</strong></p>
-<h2>Gewoonten — houden / stoppen / ontwikkelen</h2>
-<p><strong>Houden</strong></p>
-<ul><li>project-obsessie <em>(→ risico: project burnout)</em> <code>[?]</code></li><li>altijd iets willen doen</li><li>tv kijken / doorvragen</li><li>kritisch zijn</li><li>eigenwijs zijn (geen advies opvolgen dat ik niet geloof)</li><li>"gierig": geen geld naar onzinnige of dure dingen (boterham met hagelslag is genoeg)</li></ul>
-<p><strong>Stoppen</strong></p>
-<ul><li>reels / YT Shorts scrollen</li><li>te laat naar bed gaan</li><li>quick-dopamine activiteiten <em>(beloning als ik stopte: zak chips)</em></li></ul>
-<p><strong>Ontwikkelen</strong></p>
-<ul><li>contact onderhouden</li><li>contacten leggen en leren communiceren</li><li>"gewoon doen, gezellig praten" <em>(beloon: zak snoep, banantjes)</em></li></ul>
-<h2>Doelen</h2>
-<p><strong>Persoonlijk</strong>: 3× per week een half uur sporten. <em>(eerst "elke dag", bijgestuurd naar wat realistisch is)</em></p>
-<p><strong>Professioneel</strong>:</p>
-<ul><li><em>Eerste doel</em>: "een doelgroep vinden" — bleek te vaag en onduidelijk.</li><li><strong>Nieuw doel: ik ga verder de technische onderdelen van het starten van een bedrijf uitwerken:</strong><ul><li>wat moet er op een website?</li><li>hoe zit het met KvK en andere regels?</li><li>hoe houd ik financiën bij / doe ik boekhouding? <em>(o.a. e-boekhouden.nl)</em></li><li>moet ik kijken naar belastingvoordelen, sponsoren, subsidies en groepen waar ik bij aan kan sluiten?</li><li>hoe doe ik marketing? <em>(logo's, huisstijl)</em></li></ul></li></ul>
-<p><strong>Valideren</strong> (mijn omdraai): niet eerst de doelgroep zoeken, maar <em>mijn idee eerst uitbreiden en bij een klant testen</em> → o.a. bedrijven helpen met Linux.</p>
-<h2>Overtuigingen &amp; directheid</h2>
-<ul><li>Positief: "F*ck iedereen, ik ken niemand hier."</li><li>Negatief: "mensen vinden mij niet leuk" · "niet aantrekkelijk" · "awkward"</li></ul>
-<p><strong>Marco Brieissen</strong> (BASE Lifestyle — gyms, voormalig personal trainer) — gedrag dat het omgekeerde van mij is: ik ben terughoudend, de-escalatie, houd het makkelijk. Hij is direct en zegt wat hij denkt. Les voor mij: <em>ik krijg schrik als ik geld vraag voor mijn diensten — dat is het ongemakkelijke deel wat ik moet doorwerken.</em></p>
-<h2>Mijn eerste ondernemingservaring: €5</h2>
-<p>Opdracht: met €5 spullen kopen bij een winkel en ze met winst doorverkopen.</p>
-<ul><li>Feedback: "Wel goed dat je gewoon op mensen af stapt."</li><li>Een quote van een klasgenoot die bleef hangen: &gt; "Het product is niet de wafel — je verkoopt het gevoel dat iemand jou uit de brand helpt."</li></ul>
-<h2>Klasgenoten — wie is goed in wat</h2>
-<p>Julian (helpt me testen van sociaal gedrag) · Tom &amp; Thijs (business strategie, accounting) · Veronique &amp; co (businessidee) · Suze (doelgroepenanalyse) · IPO — Industrieel Product Ontwerp (centers en fysieke modellen)</p>
-<h2>Het eindbeeld</h2>
-<p><em>(zie cover — als doel geschreven vóór de minor; hier is de stip op de horizon)</em></p>
-  </div>
-</section><section class="chapter" id="02-signalen">
-  <div class="ch-head">
-    <span class="ch-id">TR-02</span>
-    <h1 class="ch-title">Signalen</h1>
-    <span class="ch-tag">L1</span>
-  </div>
-  <div class="ch-body">
-    <p><em>"De eerste stap van een trend is niet begrijpen. Het is zien."</em></p>
-<p>Dit hoofdstuk is L1: <strong>signaleren</strong>. Niet oordelen, niet verkopen — gewoon kijken, luisteren, ruiken, lezen. Ik heb een paar vensters opengezet: een documentaire, een klas vol woorden, een oude reiziger, een wandeling met camera, een dagelijkse scan. Alles wat ik zag, heb ik neergezet <strong>vóórdat</strong> ik er iets van dacht.</p>
-<h2>Venster 1 — Tegenlicht: <em>Game of drones</em></h2>
-<blockquote><p>Waarom deze aflevering? <em>De tech achter oorlog — omdat ik het kan zien gebeuren.</em></p></blockquote>
-<ul><li>De aflevering legde dezelfde tech uit vanuit verschillende kanten: <strong>vanaf een soldaat, vanaf de techsector, vanaf politiek en vanaf startups</strong>.</li><li>Wat mij verwonderde: <em>deze sector kan veel automatisering niet aan vanwege regels — en dat is cool zo.</em></li><li>Ik heb geleerd dat er ook <strong>kleine startups</strong> in deze sector zitten — inzicht: <em>kleine techbedrijven met een goed idee zijn populair.</em></li><li>Het was <strong>uitzoemen</strong>, omdat ik vaak focus op de tech en niet op het plaatje.</li></ul>
-<h2>Venster 2 — Eva's wereld (FutureFit)</h2>
-<p>Eva (trendwatcher) bracht haar wereld binnen: <strong>"Ruimtemakers voor hoofd, hart en handen"</strong> — een slimme, schone, sociale wereld:</p>
-<ul><li><strong>Spacemakers</strong>: geo-engineering, space factories, dark factories, wonen op water, cloud-economie, AI, health-tech, cybernetics</li><li><strong>Schoonmakers</strong>: climate, food, de Salatomaat (automatische salade / mini-kas), biobased bouwen, solar democracy, CO2 zuigen, micro-fabriek</li><li><strong>Gelijkmakers</strong>: onderwijs &amp; gelijkheid, elite health, aandachtseconomie, moreel kompas</li></ul>
-<p>En haar lijst met <strong>maatschappelijke (mega)trends</strong> die ik overnam: opwarming · hittestress · indoorgeneratie · rijken vermogen verdubbeld · angstgeneratie · <strong>eenzaamheid</strong> · woningtekort · dementie · <strong>tekorteconomie</strong> · slaaptekort · grondstoftekort · trust · systeemmoe</p>
-<p>Uit de klasbrainstorm (Planet / People / Prof) kwamen thema's die bleven hangen: <em>controle door rijken · big tech die misbruik maakt · eenzaamheid (parasociale relaties, ouderen op datingsites, relaties met robots) · gemak &amp; efficiëntie overal</em> — woorden als AI war, tech power, new money, robot love, digital id, greenwashing, AI eats doctor, cobot, hubot, cloud worker, robot supermarkt, smart living. <code>[?]</code></p>
-<p>Uit de klas, in m'n eigen woorden: <strong>"gemak is fijn en belangrijk — doe maar makkelijk."</strong></p>
-<h2>Venster 3 — Boris (oud-reiziger)</h2>
-<blockquote><p><strong>"Bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen."</strong></p></blockquote>
-<p>Die zin is meteen blijven hangen. Want dat is precies de plek waar ik later wil bouwen <em>(hoofdstuk 5)</em>. Maar hier is het nog gewoon een signaal: het vertrouwen in de grote platforms wankelt.</p>
-<h2>Venster 4 — Floris &amp; Isa (oud-reizigers)</h2>
-<p>Floris &amp; Isa deelden hun eigen reis toen we onze stoepwatch presenteerden. <em>[? — ik heb hun verhaal niet opgeschreven: wil je er een zin over in de site?]</em></p>
-<h2>Venster 5 — Hunt, stoepwatch &amp; scan</h2>
-<p>De Hunt (30 min rondlopen, foto's van opvallende zaken, daarna "out of the box" denken) en de stoepwatch (bewust observeren: signalen én wat erachter schuilt) leverden deze lijst op:</p>
-<p><strong>Mijn bril als eerste</strong> — wat mij opvalt is niet het onderwerp, maar de techniek erachter: dingen die <strong>techniek combineren met een ander probleem</strong>. Niet de suikerspin zelf, maar dat een <em>machine</em> hem maakt; niet de Salatomaat als gerecht, maar dat een <em>kas</em> een bord oplost. Dat is wat mij als ESE-student aanvalt.</p>
-<p><strong>Wat ik zag</strong> <em>(uit m'n notebook, scan en les — ik verzint er niets bij)</em>:</p>
-<ul><li><strong>automaten &amp; machines</strong>: suikerspin-machines · blikautomaten · snackmuren · 3D-printer op de markt · op-afstand-bestuurde grasmaaier van de gemeente · kleine electrische cellen/borden</li><li><strong>AI overal</strong>: AI-gegenereerde posters &amp; "kunst" voor bedrijven · electrische reclameborden · "iedereen wil een site en denkt dat het met Claude kan" · "dat kan ik thuis ook"</li><li><strong>ouderen &amp; eenzaamheid</strong>: ouderen die alleen eten · toegankelijke fietsen &amp; driewielers voor ouderen · dure lunchtent in de natuur waar geen jongeren zitten · eenzaamheid</li><li><strong>kind &amp; aandacht</strong>: kleurloze kinderspeelhoek (zonder kinderen) · gemaskerd gokken met "rare" producten (labubu, squishies) — gefocust op kinderen</li><li><strong>consumptie &amp; afval</strong>: plastic rietjes (mensen willen geen vieze papieren rietjes) · zonnepaneel-schoonmaakborstels · verloren pakketjes kopen per gewicht</li><li><strong>gedrag</strong>: oortjes in tijdens gesprekken · asociaal fatbike-rijden (mensen natspuiten) · een enkeling die een mondkapje draagt</li><li><strong>data &amp; toekomst</strong>: data = nieuw goed / nieuwe olie · zorgvelden die gehackt worden · CRISPR-baby · angst voor de toekomst · "waarom wordt mijn klant blij?"</li><li><strong>overig</strong>: popup stores · "vreemde" fashion / fashion als statement · pakketjes door het winkelcentrum · stoomster <code>[?]</code></li></ul>
-<p><strong>Wat erachter schuilt (mijn eerste gedachtes, nog geen conclusies):</strong> toegankelijk &amp; makkelijk · geen werknemer nodig, goedkoop · laagdrempelig voor een marktondernemer · <strong>eenzaamheid</strong> · erbij willen horen / bij een groep · gemak én ongemakkelijke toegankelijkheid · makkelijk kinderen meenemen · categoriseren naar soort bezoeker · goedkoop én relatief mooi · veel marge · gemak en luiheid · angst · op maat gemaakte spullen</p>
-<h3>Mijn foto's</h3>
-<p><em>(artifacts uit de hunt/stoepwatch — <code>hunter-pics/</code>)</em></p>
-<div class="tblwrap"><table class="tbl"><thead><tr><th>foto</th><th>wat ik er zag</th></tr></thead><tbody><tr><td><strong>electrische-bakfietsen</strong></td><td>bakfietsen worden populairder: makkelijk meerdere kinderen naar school + boodschappen</td></tr><tr><td><strong>grote-suv-autos</strong></td><td>ik ben gewend aan kleine auto's — een oude Volvo 240 was toen "groot", nu is dat gemiddeld-klein in vergelijking</td></tr><tr><td><strong>nostalgie-voor-automodellen</strong></td><td>bedrijven brengen modellen terug (o.a. e-Mustang — dat model zelf vind ik niet leuk)</td></tr><tr><td><strong>slimme-parkeerplaats-kentekenherkenning</strong></td><td>slimme apparatuur wordt standaard: kentekenherkenning in parkeergarages</td></tr></tbody></table></div>
-<h3>Mijn scanplan</h3>
-<ul><li><strong>Elke dag</strong>: nu.nl voorpagina + één interessant artikel uitdiepen</li><li><strong>ma</strong>: podcast over ondernemen · <strong>di</strong>: aflevering Tegenlicht · <strong>wo</strong>: Tegenlicht of artikel over een onbekend onderwerp · <strong>do</strong>: trendplatform (Tweakers) · <strong>vr</strong>: trend/entertainment/tech</li></ul>
-<p>Uit de maandag-podcast, de <strong>disposable software</strong>:</p>
-<ul><li>software-bedrijven schrijven kleine tools waar je in 30 seconden iets mee kunt doen — een deel van software die wordt verkocht</li><li>in een weekend software bouwen, 1% omzet van 50.000 klanten, volgende weekend iets nieuws</li><li>freeware/shareware · converter-tools en calculators · mini-reclame apps voor politieke partijen · virale apps (screen time battle)</li><li>verwachting: <em>de lat gaat omhoog, omdat het aanbod groter wordt</em></li><li>en het mooiste voor mij: <strong>tools die mensen helpen — denk aan leraren met veel administratie</strong></li></ul>
-<h2>Venster 6 — mijn eigen radar</h2>
-<p><em>(dingen die ik zelf op de radar had, los van de klas)</em></p>
-<ul><li><strong>Platform switch</strong>: "let op: Playstore en telefoons — nu AI. Slaat op <strong>agentic commerce</strong>."</li><li>Waarom wilde OpenAI Medal kopen? Mijn gok: <strong>trainingsdata</strong> → real-world keuzes → AI getraind voor automatisering</li><li><strong>memoires</strong>: data over hoe mensen AI gebruiken en wat ze op willen slaan — <em>dat wil ik uitbrengen</em></li><li>14 okt: <strong>Ondernemersmarkt Nijmegen</strong> — daar ben ik</li></ul>
-<p><em>(Een grappig concept dat ik tegenkwam, maar dat níet op m'n radar staat: een club waar telefoons worden ingenomen. Leuk idee, maar niet waar ik op bouw.)</em></p>
-<h2>Wat dit hoofdstuk toont <em>(L1)</em></h2>
-<p>Ik heb <strong>meerdere zintuigen en vensters</strong> gebruikt: documentaire, klas, oud-reizigers, wandeling met camera, dagelijkse scan, eigen radar. En de belangrijkste regel hanteer ik: <strong>signaal eerst, interpretatie later</strong> — wat ik zag, staat naast wat erachter schuilt, niet erin gemengd.</p>
-<blockquote><p><em>Een lijst met signalen is nog geen trend. Dat komt in hoofdstuk 3: ordenen.</em></p></blockquote>
-  </div>
-</section><section class="chapter" id="03-analyseren">
-  <div class="ch-head">
-    <span class="ch-id">TR-03</span>
-    <h1 class="ch-title">Analyseren</h1>
-    <span class="ch-tag">L2</span>
-  </div>
-  <div class="ch-body">
-    <p><em>"Een lijst met signalen is nog geen trend. Nu begint het ordenen."</em></p>
-<p>Dit hoofdstuk is L2: <strong>analyseren</strong>. Ik neem de signalen uit hoofdstuk 2 en geef ze structuur: met pyramides, woorden, assen, krachten en scenario's. En met één rode draad die ik zelf heb ontdekt: <strong>platform switches</strong>.</p>
-<h2>Wat is een trend?</h2>
-<p>Uit m'n notities (letterlijk):</p>
-<blockquote><p><em>"Een trend is een richting waarin waarden en behoeften veranderen, opgestuwd door externe krachten, waardoor we andere diensten en producten kopen."</em></p></blockquote>
-<p>Twee dingen die erin zitten: een trend is een <strong>richting</strong> (geen moment) en hij wordt <strong>opgestuwd</strong> (niet zomaar). Dat laatste zijn de krachten uit DESTEP (hieronder).</p>
-<h2>De trendpyramide</h2>
-<p><em>(3D-scene: pyramide met 4 lagen die uit elkaar kan vallen)</em></p>
-<div class="tblwrap"><table class="tbl"><thead><tr><th>laag</th><th>vraag (zoals ik het neerzette)</th></tr></thead><tbody><tr><td><strong>1 · Product</strong></td><td>welke producten zijn populair?</td></tr><tr><td><strong>2 · Markt</strong></td><td>wat gebeurt er in de markt?</td></tr><tr><td><strong>3 · Consumenten</strong></td><td>hoe gedragen consumenten zich?</td></tr><tr><td><strong>4 · Maatschappelijk</strong></td><td>in wat voor wereld leven wij?</td></tr></tbody></table></div>
-<p>Hoe dieper ik graaf, hoe stabieler het wordt — en hoe dichter ik bij een waardeverschuiving zit (hoofdstuk 4).</p>
-<h3>De pyramide werkt twee kanten op</h3>
-<ul><li><strong>Van boven naar beneden</strong>: ik begin bij <em>mijn bedrijfsidee</em> en vraag: welke trends en waardeverschuivingen beantwoord die? Dan weet ik waarom het kan werken.</li><li><strong>Van onder naar boven</strong>: ik begin bij waargenomen trends en bouw omhoog tot <em>nieuwe of bestaande bedrijfsideeën</em> (mijn 12 ideeën uit 9/11, plus nieuwe).</li></ul>
-<h3>Mijn pyramides</h3>
-<p>Ik heb ze getekend rond onderwerpen die bij wat ik wil bouwen horen. <em>(Vet = uit mijn notities; cursief = suggestie die ik nog even wil checken.)</em></p>
-<p><strong>A · Gemak</strong> <em>(uit mijn notebook)</em></p>
-<ol><li>Lamborghini Urus · slimme thermostaat / oven / wasmachine · fatbike · Tinder</li><li>grote luxe auto's · IoT · elektrische fietsen · dating apps</li><li>weinig moeite, toegankelijkheid, de korte weg nemen, comfort, eten online bestellen, daten op apps</li><li><strong>gemaksmaatschappij</strong></li></ol>
-<p><strong>B · Slim / data</strong> <em>(uit mijn notebook)</em></p>
-<ol><li><em>[? — invullen? denk aan: slimme thermostaat, kentekenherkenning, AI-reclameborden]</em></li><li>infobubbel · onderzoek wat consumenten kopen</li><li>alles meten · algoritmes · dataverzameling · geïnformeerde keuzes</li><li><strong>"slimme" maatschappij</strong></li></ol>
-<p><strong>C · Vertrouwen &amp; soevereiniteit</strong> <em>(uit mijn notities, samengesteld)</em></p>
-<ol><li><strong>DAWO met NixOS</strong> — een Linux-distributie, samen ontwikkeld met DAWO <em>(Digitaal Autonome Werkomgeving Overheid)</em>; DAWO helpt de overheid over te schakelen naar open source</li><li>bedrijven die om lokale AI en open source vragen — <em>"AI en LLM voor bedrijven met kritieke informatie"</em> · <em>"data inzage en verwerking met lokale LLM"</em> <em>(mijn ideeën 7 &amp; 8)</em></li><li><em>"bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen"</em> (Boris) · <em>"let op platform switch: Playstore en telefoons, nu AI"</em></li><li><strong>data = nieuw goed / nieuwe olie</strong> · controle door rijken, big tech die misbruik maakt · <em>"zorgvelden die gehackt worden"</em> · trust · angstgeneratie</li></ol>
-<p><strong>D · Duurzaam = efficiënt</strong> <em>(uit mijn notities, samengesteld)</em></p>
-<ol><li>zonnepaneel-schoonmaakborstels · <em>[? — bijv. e-bike / bakfiets?]</em></li><li>2e-handswagens · meer zonnepanelen · biobased bouwen · solar democracy</li><li><strong>"wat betekent duurzaam voor mij: duurzaam = efficiënt (andere mensen hebben andere ideeën)"</strong> · <em>"AI → tools = efficiëntiebron"</em></li><li><strong>tekorteconomie</strong> · grondstoftekort · hitterecord · woningtekort</li></ol>
-<p>Mijn eigen methode erachter <em>(uit m'n notebook)</em>: <strong>1</strong> actualiteiten en objecten fotograferen → <strong>2</strong> hieruit een trendwiel maken → <strong>3</strong> <em>(ontwikkelen:)</em> dataverwerken met AI.</p>
-<h2>Trendwoorden &amp; het assenstelsel</h2>
-<p>Uit de <strong>word-of-the-year</strong>-opdracht pikte ik twee woorden die bij mij bleven hangen: <strong>aibaarheidsfactor</strong> en <strong>leefloon</strong>.</p>
-<p>Daarna plaatste ik woorden in het assenstelsel van de les:</p>
-<ul><li><strong>narratief-duidelijk ↔ abstract-verdieping</strong></li><li><strong>cliché-niet vernieuwend ↔ out of the box</strong></li></ul>
-<p>En ik breidde het zelf uit <em>(zo staat het in m'n notebook)</em>:</p>
-<blockquote><p><strong>van elke trend een assenstelsel maken → voor elk scenario's maken → voor elk scenario oplossingen</strong></p></blockquote>
-<p><em>(3D-scene: twee assen als vloer, woorden als stippen die in de diepte zweven)</em></p>
-<h2>DESTEP — de krachten erachter</h2>
-<blockquote><p><em>"Maak inzichtelijk welke drivers van toepassing zijn op de trends die je in de gaten houdt. Maak een link met locatie en context."</em></p></blockquote>
-<div class="tblwrap"><table class="tbl"><thead><tr><th></th><th>driver</th><th>wat ik erbij noteerde</th></tr></thead><tbody><tr><td><strong>D</strong></td><td>demografie</td><td>eenpersoonshuishoudens, ouderen die alleen eten</td></tr><tr><td><strong>E</strong></td><td>economie</td><td>tekorteconomie, veel marge, goedkoop én relatief mooi</td></tr><tr><td><strong>S</strong></td><td>sociologie</td><td>eenzaamheid, angst, erbij horen, gemak &amp; luiheid</td></tr><tr><td><strong>T</strong></td><td>techniek</td><td>AI, IoT, chips = nieuwe olie</td></tr><tr><td><strong>E</strong></td><td>ecologie</td><td>hitterecord, grondstoftekort, woningtekort</td></tr><tr><td><strong>P</strong></td><td>politiek</td><td>controle door rijken, wapens</td></tr></tbody></table></div>
-<h2>Scenariotechniek</h2>
-<p>De les-methode: <strong>2 trends nemen → ze naar de extremen duwen → 4 scenario's → kansen ernaar kijken → een propositie kiezen → volgen of sturen.</strong> Daarnaast: ChatGPT als brainstormpartner — maar mét bias-bewustzijn (temperature, prompt chaining, en het feit dat het <em>zijn</em> beelden van de wereld hergebruikt).</p>
-<p>En de gastles <em>(Bart &amp; Isa)</em> gaf de rest van de analyse-regels: <strong>gebruik anderen als inspiratie · maak combinaties van trends · verkoop niet het product, maar de ervaring.</strong></p>
-<h2>Trendcanvas — van trend naar innovatie</h2>
-<p><em>(de tool uit week 4 — het pad van een signaal naar "mijn innovatie")</em></p>
-<p>De canvas loopt in 8 stappen, van het waargenomen signaal tot mijn eigen idee:</p>
-<blockquote><p><strong>1. Trend → 2. Basic needs → 3. Inspiration → 4. Drivers of change</strong> <em>(4.1 long-term shifts · 4.2 short-term triggers)</em> <strong>→ 5. Emerging expectations → 6. Innovation type → 7. Voor wie → 8. Mijn innovatie</strong></p></blockquote>
-<h3>Een canvas die ik heb ingevuld: <em>Alles-automaten</em></h3>
-<p><em>(van het signaal "automaten" in hoofdstuk 2, naar een concreet idee — precies die "techniek + ander probleem"-bril)</em></p>
-<div class="tblwrap"><table class="tbl"><thead><tr><th>stap</th><th>wat ik erin zette</th></tr></thead><tbody><tr><td><strong>1. Trend</strong></td><td>alles-automaten</td></tr><tr><td><strong>2. Basic needs</strong></td><td>je kunt nu gemakkelijk dingen kopen · goedkoop <em>(geen personeelskosten)</em> · overal neer te zetten, dus toegankelijk</td></tr><tr><td><strong>3. Inspiration</strong></td><td>suikerspinmachines · blikautomaten · snackmuren</td></tr><tr><td><strong>4. Drivers</strong></td><td><em>long-term</em>: automatisering · minder arbeidskosten · gemakkelijk, simpel, toegankelijk — <em>short-term</em>: hip · ziet er leuk uit als iets automatisch in het zicht gemaakt wordt · leuke videos erover online</td></tr><tr><td><strong>5. Expectations</strong></td><td>"ik kan niet met mensen praten" — een automaat voelt onpersoonlijk · machines hebben onderhoud nodig</td></tr><tr><td><strong>6. Innovation type</strong></td><td>een apparaat dat automatisch aangeeft of producten op / bijna op zijn · software die de status van al die apparaten bijhoudt <em>(verscheidene automaten combineren?)</em> · een kaart met alle automaten in de buurt?</td></tr><tr><td><strong>7. Voor wie</strong></td><td>bedrijven die automaten beheren en moeite hebben met inzicht · klanten die op zoek zijn naar een bepaalde automaat</td></tr><tr><td><strong>8. Mijn innovatie</strong></td><td><strong>een kaart die voor zowel klanten als bedrijven de status, de inhoud én de locatie van een automaat toont</strong></td></tr></tbody></table></div>
-<h2>Platform switches — de rode draad</h2>
-<p><em>(dit is het onderwerp waar ik zelf het meest op heb aangeduid)</em></p>
-<blockquote><p><em>"Paper → computers. CDs → Spotify. Playstore &amp; telefoons → AI (agentic commerce). Deze momenten zijn awesome en profitable, als je ze succesvol pakt."</em></p></blockquote>
-<p>Een platform switch is het moment dat <strong>de plek waar waarde ontstaat van hand verandert</strong>. Elke keer verschijnt even een wild west van tools, en wie dan de juiste tools bouwt <em>(hoofdstuk 5)</em>, rijdt mee met de golf in plaats van te vissen in de oude.</p>
-<h2>Wat dit hoofdstuk toont <em>(L2)</em></h2>
-<p>Ik heb signalen <strong>geordend</strong> (pyramides), <strong>vertaald</strong> (woorden, assenstelsel), <strong>verklaard</strong> (DESTEP) en <strong>uitgewerkt</strong> (scenario's) — en ik zie de rode draad (platform switches) door het hele veld lopen.</p>
-  </div>
-</section><section class="chapter" id="04-waardeverschuivingen">
-  <div class="ch-head">
-    <span class="ch-id">TR-04</span>
-    <h1 class="ch-title">Waardeverschuivingen</h1>
-    <span class="ch-tag">L3</span>
-  </div>
-  <div class="ch-body">
-    <p><em>"De diepste vraag is niet wat er nieuw is, maar wat er niet meer telt."</em></p>
-<p>Dit hoofdstuk is L3a — de <strong>cesuur</strong>: de waardeverschuivingen achter de trends. Voor elke verschuiving: <em>was het → is het nu → welke behoefte verandert → waarom → wat zie ik er van → wat betekent het voor mijn bedrijf.</em></p>
-<p>Uit m'n notebook, als kompas voor dit hoofdstuk:</p>
-<blockquote><p><em>"di 6 okt: waardeverschuiving uitwerken — oude fixatie. Waar is mijn bedrijf een antwoord op? Wat draagt het bij?"</em></p></blockquote>
-<h2>1 · Hoofdlijn: auto → gedeelde auto → e-bike → intelligente outsourcing</h2>
-<p><em>(3D-scene: "was/is" als 3D-brug, stap voor stap over)</em></p>
-<ul><li><strong>Was het</strong>: een auto bezitten = vrijheid en status. Je kocht, je parkeerde, je onderhield.</li><li><strong>Is het nu</strong>: delen, huren, de e-bike — en steeds vaker <strong>de verplaatsing zelf uitbesteden aan een slim systeem</strong> (app, shared, abonnement).</li><li><strong>Welke behoefte verandert</strong>: van <em>bezit en controle</em> naar <em>gemak en bereik</em> — "doe maar makkelijk", zonder de last van eigenaar te zijn.</li><li><strong>Waarom</strong>: kosten, parkeren, duurzaamheid, en een cultuur van abonnementen die alles overvalt (ook sport en entertainment).</li><li><strong>Wat zie ik er van</strong> — mijn foto's uit de hunt/stoepwatch:<ul><li><strong>electrische-bakfietsen</strong> — bakfietsen worden populairder: makkelijk meerdere kinderen naar school én boodschappen. De bakfiets wordt de familieleverancier.</li><li><strong>grote-suv-autos</strong> — SUV-ification: ik ben gewend aan kleine auto's — een oude Volvo 240 was toen "groot", nu is dat gemiddeld-klein in vergelijking.</li><li><strong>nostalgie-voor-automodellen</strong> — bedrijven brengen oude modellen terug (o.a. e-Mustang — dat model zelf vind ik niet leuk). Nostalgie wordt verkoopargument.</li><li><strong>slimme-parkeerplaats-kentekenherkenning</strong> — slimme infrastructuur wordt standaard: kentekenherkenning in parkeergarages, zonder pas, zonder app.</li></ul></li><li><strong>Wat het voor mij betekent</strong>: de laatste stap van de lijn — <em>intelligente outsourcing</em> — is <strong>software</strong>. En software bouw ik.</li></ul>
-<h2>2 · Consumer → prosumer</h2>
-<ul><li><strong>Was het</strong>: je kocht een product en deed er je voordeel mee.</li><li><strong>Is het nu</strong>: je bouwt, codeer en past zelf aan — <em>"dat kan ik thuis ook"</em> was een van de eerste signalen die ik opschreef.</li><li><strong>Wat ik er van zie</strong>: <em>"iedereen wil een site en denkt dat het met Claude kan"</em>; de 3D-printer op de markt; de disposable-software golf uit de podcast.</li><li><strong>Wat het voor mij betekent</strong>: de klant van morgen is een maker. Die heeft geen kant-en-klare doos nodig, maar <strong>tools, advies en iemand die de rommel opruimt</strong> — dat is mijn terrein.</li></ul>
-<h2>3 · Bezit → bereik</h2>
-<p><em>(van Eva: Playsumer; uit de klas: "globalisation van bezit naar bereik (abonnementen)"</em>)</p>
-<ul><li><strong>Was het</strong>: je kocht iets om het te hebben.</li><li><strong>Is het nu</strong>: je <em>bereikt</em> iets: abonnement, stream, service.</li><li><strong>Wat het voor mij betekent</strong>: ook in software verschuift de waarde van <em>het product</em> naar <em>de toegang</em> — SaaS-denken voor kleine bedrijven, in plaats van een keer een doos verkopen.</li></ul>
-<h2>4 · Duurzaam = efficiënt</h2>
-<ul><li><strong>Mijn interpretatie</strong> <em>(letterlijk uit m'n notebook)</em>: &gt; <em>"Wat betekent duurzaam voor mij: duurzaam = efficiënt (andere mensen hebben andere ideeën)."</em></li><li><strong>Was het</strong>: duurzaam als apart, duur, apart-label.</li><li><strong>Is het nu</strong>: efficiency als basiswaarde — minder verbruiken, minder verspillen, sneller, minder energie. Zelfs AI verkoopt zich als <em>efficiëntiebron</em>.</li><li><strong>Drivers die ik erbij noteerde</strong>: wapens · 2e-handswagens · hitterecord · consumeren en dikke kinderen · stoornissen · woningtekort · <strong>chips = nieuwe olie</strong> · branding · armoede · 1/8 early adapter.</li><li><strong>Wat het voor mij betekent</strong>: open source en lokale oplossingen zijn niet alleen "ethisch" — ze zijn <strong>minder afhankelijk, minder duur, minder verspillend</strong>. Efficiëntie is een verkoopargument dat ik eerlijk kan maken.</li></ul>
-<h2>5 · Food future</h2>
-<p><em>(uit een presentatie van Eva, die ze niet deelde — de woorden die ik eruit onthield)</em></p>
-<ul><li><strong>van 70% naar 10% — nu al realiteit</strong>: het aandeel van je inkomen dat naar voedsel gaat, is fors gedaald. Gemiddeld gaat nu <strong>10% van je salaris richting voedsel</strong>.</li><li>voedselporno vs. voedselwoestijn · airfarm · space farm</li><li>mijn vragen die er bleven hangen: <strong>was het vrijwillig — en is het nog wel gezond (hyper-geprocèsseerd voedsel)?</strong></li><li><strong>Wat het voor mij betekent</strong>: nog geen bedrijf — maar het toont het patroon: <em>toelevering wordt infrastructuur, en infrastructuur is software.</em></li></ul>
-<h2>6 · De AI-lijn</h2>
-<p><em>(zoals ik hem opschreef)</em></p>
-<blockquote><p>Movement → zonnepanelen → green → tech → AI → posters en reclame → elektro-reclameborden</p></blockquote>
-<p>En korter: <strong>AI → "kunst" / tools = efficiëntiebron.</strong> De AI-lijn is voor mij de snelste verschuiving die ik zie: van <em>mensen die AI gebruiken</em> naar <em>systemen die voor mensen werken</em> — en daar tussenin zit een hele laag van klussen, vertrouwen en lokale controle. <em>(→ hoofdstuk 5.)</em></p>
-<h2>Wat dit hoofdstuk toont <em>(L3a)</em></h2>
-<p>Ik heb niet alleen trends benoemd, maar de <strong>waardeverschuivingen erachter</strong> achterhaald — en voor elke verschuiving kan ik uitleggen <strong>waarom mijn bedrijf daarop een antwoord kan zijn.</strong> Dat is de cesuur.</p>
-  </div>
-</section><section class="chapter" id="05-bedrijf">
-  <div class="ch-head">
-    <span class="ch-id">TR-05</span>
-    <h1 class="ch-title">Het bedrijf</h1>
-    <span class="ch-tag">L4</span>
-  </div>
-  <div class="ch-body">
-    <blockquote><p><em>"Dit hoofdstuk is geen statusrapport. Het is een richting."</em></p></blockquote>
-<p>Het bedrijf bestaat nog niet — de letter van 13 januari 2027 (zie de cover) is het <strong>doel dat ik vóór de minor schreef</strong>. Dit hoofdstuk is L3b: <strong>1–3 kansrijke ideeën</strong>, met die letter als noorderster.</p>
-<h2>De zin</h2>
-<blockquote><p><em>"Ik help bedrijven en particulieren met open source, lokale AI en automatisering, zodat zij de controle over hun eigen data en systemen terugkrijgen."</em></p></blockquote>
-<p><em>(de ikigai-zin — de rode draad van de hele site)</em></p>
-<h2>De kern — 5 ideeën</h2>
-<ol><li><strong>Open source / soevereiniteit</strong> — laptops met Linux verkopen aan particulieren, óf bedrijven helpen productieomgevingen op te zetten met open-source software. <em>(is a lot of fun — letterlijk uit m'n notities)</em></li><li><strong>Tools bouwen voor bedrijven die automatiseren</strong> — freelance. Vooral nu AI groter wordt: wie automatiseert, heeft iemand nodig die de brug legt.</li><li><strong>AI lokaal draaien</strong> — voor bedrijven met kritieke data. Wordt interessant zodra de regels meelopen <em>(denk: data protection)</em>.</li><li><strong>Advies én maakbureau voor printplaten</strong> — advies geven én bouwen. Embedded systems is precies mijn ESE-achtergrond; daar heb ik een voorsprong.</li><li><strong>Agentic commerce</strong> — LLM's die producten aan mensen verkopen. De platform switch Playstore → AI, gepakt voor de kleinhandelaar.</li></ol>
-<blockquote><p><strong>Mijn favoriet uit de lijst: het robot-huisdier.</strong> Daarin combineer ik precies waar ik sterk in ben — <strong>motoren én AI</strong> — en het is ook gewoon leuk om te maken. <em>(uit m'n lijst van 12 ideeën, nr. 11)</em></p></blockquote>
-<p><strong>Zijideeën die ik al noteerde</strong>: <em>memoires</em> — data over hoe mensen AI gebruiken en wat ze op willen slaan <em>(dat wil ik uitbrengen)</em> · tools die mensen helpen — denk aan <strong>leraren met veel administratie</strong> <em>(uit de podcast)</em>.</p>
-<h2>Waar vandaan</h2>
-<p>Op 9/11 schreef ik <strong>12 goede ideeën</strong> op — dit zijn de wortels van de kern:</p>
-<ol><li>ondernemers helpen overschakelen naar open-source alternatieven</li><li>particulieren met oudere/trage hardware schakelen naar Linux</li><li>advies leveren aan startende ondernemers over embedded en IT</li><li>embedded oplossingen bouwen voor bedrijven met een idee of probleem</li><li>softwareoplossingen en web development voor startende ondernemers</li><li>automatisering voor bedrijven (software, <em>(nog)</em> niet robot)</li><li>AI en LLM voor bedrijven met kritieke informatie/dataverwerking</li><li>data inzage en verwerking met lokale LLM</li><li>oldtimers ombouwen naar elektrisch</li><li>boten ombouwen naar elektrisch</li><li>robot huisdier</li><li>software voor solopreneurs <em>(ondernemers maar dan in hun eentje)</em></li></ol>
-<p>En de <strong>slechte-ideeën-piramide</strong> <em>(ook uit m'n notebook — "maak slechte ideeën piramide")</em>: alcohol met nicotine verkopen · nieuwe OS maken en verkopen · elektrische auto's ombouwen naar benzine · nieuw schaapskuddenbedrijf beginnen · studentenkamer verkopen · vieze stadslucht in potjes verkopen · slechte boten verkopen met een lening · gestolen auto's verkopen · <strong>data verzamelen en verkopen</strong>. De laatste is het grappigste: precies het tegenovergestelde van wat ik wil bouwen.</p>
-<h2>Waarom nu</h2>
-<ul><li><strong>Boris</strong>: <em>"bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen"</em> — er is een gat van vertrouwen, en ik kan er een antwoord in bouwen.</li><li><strong>Disposable software</strong> (podcast): de lat gaat omhoog, het aanbod groeit — wie dan goede, kleine tools bouwt, wint.</li><li><strong>Prosumer</strong>: <em>"dat kan ik thuis ook"</em> — de klant wil kunnen, en heeft iemand nodig die het recht doet.</li><li><strong>Soevereiniteit</strong>: data = nieuwe olie, zorgvelden die gehackt worden, chips = nieuwe olie — wie de controle teruggeeft, verkoopt iets waar mensen écht om vragen.</li></ul>
-<h2>Waarom ik</h2>
-<p><em>(letterlijk uit m'n notebook — "Welke ingrediënten heeft mijn bedrijf?")</em></p>
-<blockquote><p>tech · programmeren · hardware · AI · groei · snelheid · tools · kwaliteit · smart living · <em>"waar ga ik mee bouwen: kennis, AI"</em></p></blockquote>
-<p>Plus de achtergrond: <strong>Embedded Systems Engineering</strong> — ik ken hardware én software en de ruimte ertussen. Die combinatie is zeldzaam, en precies waar ideeën 3, 4 en 5 op draaien.</p>
-<h2>Mijn houding</h2>
-<p><em>(van Marco Brieissen — BASE Lifestyle — heb ik het andere deel meegekregen)</em></p>
-<ul><li><strong>hard zijn, maar wel aanvoelen</strong> — niet werknemer, maar baas</li><li><strong>niet wachten op eigen geld</strong> — <em>"wachten duurt lang"</em></li><li>en het ongemakkelijke stuk: <strong>minder schrik krijgen als ik geld vraag</strong> voor wat ik doe</li></ul>
-<h2>Hoe ik valideer</h2>
-<p>Mijn methode is de <strong>trendcanvas</strong> <em>(uitgezet in hoofdstuk 3)</em>. Ik kom niet bij een idee door te raden, maar door het <strong>af te leiden uit de trend</strong>:</p>
-<blockquote><p><strong>trend → basic needs → inspiration → drivers of change → emerging expectations → innovation type → voor wie → mijn innovatie</strong></p></blockquote>
-<p>Concreet: het signaal <em>automaten</em> uit hoofdstuk 2 heb ik zo uitgewerkt tot <em>een kaart met de status, de inhoud én de locatie van alle automaten in de buurt</em> — handig voor zowel de beheerders als de klanten.</p>
-<p>Pas daarna test ik het idee af bij een echte klant <em>(mijn omdraai, zie hoofdstuk 1)</em>: o.a. bedrijven helpen met Linux.</p>
-<h2>De lens van de gastles</h2>
-<p><strong>"Wat kan een product nog meer zijn?"</strong> <em>(Bart &amp; Isa)</em></p>
-<ul><li><strong>meervoudige waardecreatie</strong>: meerdere problemen in één oplossen</li><li><strong>trends combineren</strong> in plaats van één trend te volgen</li><li><strong>2/3/x ideeën</strong> houden — de eerste is zelden het eindbedrijf</li><li><strong>massa = kassa</strong>: hoe meer mensen je bereikt, hoe meer er geïnteresseerd kan zijn</li><li><strong>branding &amp; marketing belangrijker dan smaak</strong> — denk aan <strong>ervaring</strong> <em>(maxxing)</em></li><li>en de quote die bij alles past: &gt; <em>"Het product is niet de wafel — je verkoopt het gevoel dat iemand jou uit de brand helpt."</em></li></ul>
-<h2>De noorderster</h2>
-<p><em>(letter, 13 januari 2027 — geschreven vóór de minor)</em></p>
-<blockquote><p>"…mijn bedrijf ingeschreven bij de K.v.K. … een eerste set inkomen kunnen genereren met mijn idee tijdens de tests … mijn product heeft nog enkele verbeteringen nodig in de UI, en ook wil ik enkele processen automatiseren … met 4 klanten een traject gestart."</p></blockquote>
-<p>Daar wil ik zijn. Dit bedrijf is het pad ernaartoe.</p>
-<h2>Wat dit hoofdstuk toont <em>(L3b)</em></h2>
-<p>Ik heb <strong>kansrijke, haalbare opties</strong> — ingeworteld in waargenomen trends, waardeverschuivingen én mijn eigen vaardigheden — en ik weet <strong>hoe ik ze ga testen</strong> in plaats van er alleen maar over te denken. Dat is de tweede cesuur.</p>
-  </div>
-</section><section class="chapter" id="06-reis">
-  <div class="ch-head">
-    <span class="ch-id">TR-06</span>
-    <h1 class="ch-title">De reis</h1>
-    <span class="ch-tag">L5</span>
-  </div>
-  <div class="ch-body">
-    <p><em>(3D-scene: de stippen-constellatie — elke mijlpaal is een stip, de lijnen ertussen zijn wat ik daarvan leerde; de centrale ster is het bedrijf uit hoofdstuk 5)</em></p>
-<h2>Het pad dat ik liep</h2>
-<div class="tblwrap"><table class="tbl"><thead><tr><th>wanneer</th><th>wat</th></tr></thead><tbody><tr><td><strong>vóór de minor</strong></td><td>het <strong>eindbeeld</strong> — de letter van 13-1-2027, als doel geschreven ("begin met het einde voor ogen")</td></tr><tr><td><strong>di 4 sep</strong></td><td>eigenaarschap + levenswiel — <em>"mengpaneel: welke richting wil ik op?"</em></td></tr><tr><td><strong>vr 11 sep</strong></td><td>12 goede + 9 "slechte" bedrijfsideeën</td></tr><tr><td><strong>ma 14 sep</strong></td><td>trendweken beginnen — Open Up new Horizons, Boris</td></tr><tr><td><strong>di 15 sep</strong></td><td>de Hunt, trendbrillen, trendpyramide</td></tr><tr><td><strong>ma 21 sep</strong></td><td>Tegenlicht ingeleverd (<em>Game of drones</em>)</td></tr><tr><td><strong>di 22 sep</strong></td><td>scanplan &amp; nieuwsgierigheid</td></tr><tr><td><strong>vr 25 sep</strong></td><td>stoepwatch — de foto's uit hoofdstuk 2</td></tr><tr><td><strong>ma–di 28/29 sep</strong></td><td>assenstelsel, scenario's, DESTEP, gastles Bart &amp; Isa, Floris &amp; Isa</td></tr><tr><td><strong>di 6 okt</strong></td><td><strong>waardeverschuiving</strong> uitgewerkt <em>(cesuur)</em></td></tr><tr><td><strong>zo 11 okt</strong></td><td><strong>TK1</strong> — deze site</td></tr></tbody></table></div>
-<h2>Wat er nu komt</h2>
-<p><strong>Het nieuwe doel</strong> <em>(uit m'n notebook, 9/15)</em>:</p>
-<blockquote><p><em>"Ik ga verder de technische onderdelen van het starten van een bedrijf uitwerken."</em></p></blockquote>
-<ul><li>wat moet er op een website? <em>(← dit was de eerste: je bekijk 'm)</em></li><li>hoe zit het met <strong>KvK</strong> en andere regels?</li><li>hoe houd ik financiën bij / doe ik boekhouding? <em>(e-boekhouden.nl staat al in m'n notes)</em></li><li>belastingvoordelen, sponsoren, subsidies, groepen waar ik bij kan aansluiten</li><li>hoe doe ik marketing? logo's, huisstijl</li></ul>
-<p><strong>En in de praktijk:</strong></p>
-<ul><li><strong>14 okt — Ondernemersmarkt Nijmegen</strong>: mijn eerste echte test van "op mensen af stappen"</li><li>ideeën <strong>testen bij een klant</strong> → o.a. bedrijven helpen met Linux</li><li><em>(voorbijgelopen: de "telefoonclub" — grappig concept, maar niet op m'n radar; ik kijk eerder naar de techniek erachter)</em></li></ul>
-<h2>De reis in één zin</h2>
-<p>Wie ik ben → wat ik zag → wat het betekent → wat verschuift → <strong>waar ik het voor gebruik.</strong> Deze site is het vierde leerdoel: <strong>L4 — delen</strong>, origineel, creatief, waardevol.</p>
-  </div>
-</section><section class="chapter" id="07-colofon">
-  <div class="ch-head">
-    <span class="ch-id">TR-07</span>
-    <h1 class="ch-title">Colofon</h1>
-    <span class="ch-tag">L6</span>
-  </div>
-  <div class="ch-body">
-    <p><strong>Trendreis</strong> — Marlo van Gulik · ONDEON18 · <em>Onderneem! De Ontdekkingsreis</em> HAN University of Applied Sciences · oktober 2026</p>
-<h2>Wat dit is</h2>
-<p>De creatieve leverantie van trendopdracht <strong>TK1</strong> (30% van de minor): wat ik de laatste weken leerde, en hoe ik de stippen verband tussen <strong>trends</strong> en <strong>het bedrijf dat ik wil bouwen</strong>.</p>
-<h2>Methode — van venster naar vertaling</h2>
-<ol><li><strong>Signaleren</strong> (L1) — vensters open: Tegenlicht, klas, oud-reizigers, hunt, scan, eigen radar</li><li><strong>Analyseren</strong> (L2) — pyramides, trendwoorden, assenstelsel, DESTEP, scenario's, platform switches</li><li><strong>Waardeverschuiving</strong> (L3a) — wat verschuift, en waarom</li><li><strong>Ideeën + delen</strong> (L3b + L4) — het bedrijf dat ik wil bouwen, en deze site als bewijs dat ik het kan vertellen</li></ol>
-<h2>Proces — hoe ik werkte</h2>
-<p><em>(per de HAN-regels voor verantwoord AI-gebruik én het verzoek van Yvette: laat zien hoe je AI hebt gebruikt, deel je schrift, laat zien hoe je het hebt verbonden, laat je prompts zien, en laat zien dat je het snapt.)</em></p>
-<ul><li><strong>Mijn eigen materiaal</strong>: deze site staat op <strong>mijn eigen notebook, eigen foto's en eigen signalen</strong> (hoofdstukken 2–4). De foto's van mijn schrift staan in de bijlage.</li><li><strong>Hoe ik AI gebruikte</strong>: als hulpmiddel voor brainstormen, structureren en de teksten opzetten — <strong>niet</strong> als primaire bron. Alles wat er staat kan ik zelf uitleggen en verdedigen.<ul><li><strong>Welke AI:</strong> <strong>Qwen 3.8 (27B)</strong>, uitgevoerd <strong>lokaal op mijn eigen computer</strong> via Ollama — geen cloud, geen externe server.</li><li><strong>Precies waarvoor:</strong> mijn handschrift-notities structureren, de koppeling tussen notities en vakken opzetten, de website-teksten opstellen en herzien, en het geheel in een logische opbouw zetten.</li><li><strong>Niet door de AI gedaan:</strong> het oorspronkelijk verwerken van mijn notebook-foto's naar tekst (dat is een aparte stap), en alle oordeelvellingen en eigen ideeën.</li></ul></li><li><strong>Prompts</strong>: de volledige AI-chat (prompts én output) staat in de bijlage in de map <code>AI-chat/</code> <em>(per de HAN-regel: volledige chat als bijlage)</em>.</li><li><strong>Verbinding</strong>: de lijn signaal → trend → waardeverschuiving → idee is zichtbaar door de hele site — dat is precies het doel (hoofdstuk 3 en 5).</li><li><strong>Begrip</strong>: dit is mijn eigen werk. Ik sta achter elke regel en kan het toelichten.</li></ul>
-<p><em>(Bijlage: foto's van mijn schrift + volledige AI-chat (prompts én output). Gebruikte AI-tools worden volgens de APA-richtlijnen als bron vermeld.)</em></p>
-<h2>Met dank aan</h2>
-<ul><li><strong>Simone</strong> — wie-ben-ik (ikigai, levenswiel, eigenaarschap)</li><li><strong>Yvette &amp; Ferdi</strong> — trendweken, trendbrillen, de Hunt</li><li><strong>Eva Beltman</strong> — trendwatcher, FutureFit, waardeverschuivingen</li><li><strong>Ewan</strong> — proces &amp; scanplan</li><li><strong>Bart Krinner</strong> &amp; <strong>Isa</strong> — gastles "Wat kan een product nog meer zijn?"</li><li><strong>Boris</strong> · <strong>Floris &amp; Isa</strong> — oud-reizigers</li><li><strong>Marco Brieissen</strong> (BASE Lifestyle) — de directe man</li><li><strong>mijn klasgenoten</strong>: Veronique, Suze, Julian, Tom &amp; Thijs — en iedereen die in m'n notebook schreef</li><li><strong>CvO</strong> — HAN Centrum voor Ondernemerschap</li></ul>
-<h2>Bronnen</h2>
-<p>Tegenlicht (<em>Game of drones</em>) · de maandag-podcast (<em>disposable software</em>) · nu.nl (dagelijks) · trendplatformen (Tweakers, trendrede.nl, sitra.fi, trendwatching.com) · de presentaties van Eva (FutureFit, waardeverschuivingen) · m'n eigen notebook en foto's.</p>
-<h2>3D</h2>
-<p>Deze site is ontworpen voor <strong>rood-cyan 3D-brillen</strong>: de teksten blijven plat leesbaar, de scenes komen naar je toe. Schuif de diepte maar op. <em>(zonder bril: alles is ook in 2D te lezen)</em></p>
-<h2>Techniek</h2>
-<p>Statische site, geen backend. De 3D-scènes worden client-side gerenderd (twee camera's, rood/cyan, samengesteld). Ingeleverd als <code>.zip</code> én online te bezoeken.</p>
-<hr>
-<p><em>Marlo van Gulik — HAN · Embedded Systems Engineering · ONDEON18</em> <em>"Je verkoopt niet de wafel — je verkoopt het gevoel dat iemand jou uit de brand helpt."</em></p>
+  <div class="hero-controls">
+    <span class="depth" id="depthWrap"><span>DIEPTE</span>
+      <input type="range" id="depthRange" min="0" max="30" step="1" value="10" aria-label="3D diepte">
+      <span class="dnum" id="depthNum">10px</span></span>
+    <span class="hint">rood-cyan brilletjes voor de 3D · zonder bril ook leesbaar</span>
+    <span class="spacer"></span>
+    <a class="btn primary" href="wie-ben-ik.html">START →</a>
   </div>
 </section>
-
-    </div>
-  </main>
-
-  <footer class="foot">
-    <p class="quote">"Je verkoopt niet de wafel — je verkoopt het gevoel dat iemand jou uit de brand helpt."</p>
-  </footer>
-
-  <div class="statusbar">
-    <span class="dot"></span>
-    <span>TRENDREIS · TK1</span>
-    <span class="sig">qwen 3.8 27b · lokaal</span>
-    <span class="grow"></span>
-    <span>3D: <span id="sb3d">AAN</span></span>
-    <span>© 2026 M. van Gulik</span>
-  </div>
+<section class="home-intro">
+  <p>Dit is mijn creatieve aflevering van trendopdracht TK1: wat ik heb geleerd, en hoe ik
+  de verbinding leg tussen <strong>trends</strong> en <strong>het bedrijf dat ik wil bouwen</strong>.
+  Acht stappen, zes vensters, één noorderster — in de stijl van een console, met 3D als handtekening.</p>
+</section>
+<div class="cards">
+  <a class="card" href="wie-ben-ik.html">
+    <span class="card-num">01</span>
+    <span class="card-title">Wie ben ik?</span>
+    <span class="card-short">ikigai, levenswiel, gewoonten, doelen en mijn eerste €5</span>
+    <span class="card-go">open →</span>
+  </a>
+  <a class="card" href="signalen.html">
+    <span class="card-num">02</span>
+    <span class="card-title">Signalen</span>
+    <span class="card-short">zes vensters: Tegenlicht, FutureFit, de Hunt en mijn eigen radar</span>
+    <span class="card-go">open →</span>
+  </a>
+  <a class="card" href="analyseren.html">
+    <span class="card-num">03</span>
+    <span class="card-title">Analyseren</span>
+    <span class="card-short">trends, de trendpyramide, DESTEP, scenario’s en de trendcanvas</span>
+    <span class="card-go">open →</span>
+  </a>
+  <a class="card" href="waardeverschuivingen.html">
+    <span class="card-num">04</span>
+    <span class="card-title">Waardeverschuivingen</span>
+    <span class="card-short">van bezit naar bereik, consumer naar prosumer, en de food future</span>
+    <span class="card-go">open →</span>
+  </a>
+  <a class="card" href="bedrijf.html">
+    <span class="card-num">05</span>
+    <span class="card-title">Het bedrijf</span>
+    <span class="card-short">de kern: 5 ideeën, de noorderster en hoe ik valideer</span>
+    <span class="card-go">open →</span>
+  </a>
+  <a class="card" href="reis.html">
+    <span class="card-num">06</span>
+    <span class="card-title">De reis</span>
+    <span class="card-short">het pad dat ik liep, wat er nu komt, en de volgende stappen</span>
+    <span class="card-go">open →</span>
+  </a>
+  <a class="card" href="colofon.html">
+    <span class="card-num">07</span>
+    <span class="card-title">Bronnen &amp; colofon</span>
+    <span class="card-short">methode, proces, AI-gebruik en APA-bronnen</span>
+    <span class="card-go">open →</span>
+  </a>
+  <a class="card" href="ai-chat.html">
+    <span class="card-num">AI</span>
+    <span class="card-title">AI-chat</span>
+    <span class="card-short">de volledige chat (prompt → reactie) in een console-venster</span>
+    <span class="card-go">open →</span>
+  </a>
+  <a class="card" href="materiaal.html">
+    <span class="card-num">M</span>
+    <span class="card-title">Materiaal</span>
+    <span class="card-short">mijn notebook: de originele foto’s met de bron-quotes gemarkeerd</span>
+    <span class="card-go">open →</span>
+  </a></div></div>
+</main>
+<footer class="foot"><p class="quote">“Je verkoopt niet de wafel — je verkoopt het gevoel dat iemand jou uit de brand helpt.”</p></footer>
+<div class="statusbar">
+  <span class="dot"></span><span>TRENDREIS · TK1</span><span class="sig">qwen 3.8 27b · lokaal</span>
+  <span class="grow"></span><span>3D: <span id="sb3d">AAN</span></span><span>© 2026 M. van Gulik</span>
+</div>
 </div>
 <script src="main.js"></script>
 </body>

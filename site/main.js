@@ -1,133 +1,115 @@
-/* TRENDREIS — interactiviteit (orange console)
-   - theme toggle (dark default / light)
-   - 3D-anaglyph toggle + depth-slider
-   - nav scroll-spy
-   Alles respectueert prefers-reduced-motion en staat lokaal (geen backend). */
+/* TRENDREIS — main.js (multi-page) */
 (function () {
   "use strict";
-  const root = document.documentElement;
-  const $ = (s) => document.querySelector(s);
-  const $$ = (s) => Array.from(document.querySelectorAll(s));
+  var root = document.documentElement;
 
-  // ---------- theme ----------
-  const THEME_KEY = "trendreis.theme";
+  /* ---------------------------------------------------------- theme */
+  var themeBtn = document.getElementById("themeBtn");
   function setTheme(t) {
-    if (t === "light") root.setAttribute("data-theme", "light");
-    else root.removeAttribute("data-theme");
-    try { localStorage.setItem(THEME_KEY, t); } catch (e) {}
-    syncThemeBtn();
+    root.setAttribute("data-theme", t);
+    try { localStorage.setItem("trendreis.theme", t); } catch (e) {}
+    if (themeBtn) themeBtn.textContent = (t === "light" ? "DARK" : "LIGHT");
   }
-  function syncThemeBtn() {
-    const btn = $("#themeBtn");
-    if (!btn) return;
-    const light = root.getAttribute("data-theme") === "light";
-    btn.textContent = light ? "DARK" : "LIGHT";
-    btn.setAttribute("aria-pressed", String(light === false));
-  }
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem("trendreis.theme"); } catch (e) {}
+  if (savedTheme) setTheme(savedTheme);
+  if (themeBtn) themeBtn.addEventListener("click", function () {
+    setTheme(root.getAttribute("data-theme") === "light" ? "dark" : "light");
+  });
 
-  // ---------- 3D / depth ----------
-  const D3_KEY = "trendreis.3d";
-  const DP_KEY = "trendreis.depth";
-  const DEF_DEPTH = 10; // px
-  let depth = DEF_DEPTH;
-  function set3d(on) {
-    root.setAttribute("data-3d", on ? "on" : "off");
-    try { localStorage.setItem(D3_KEY, on ? "on" : "off"); } catch (e) {}
-    sync3dBtn();
-    if (typeof applyParallax === "function") applyParallax(on ? depth : 0);
-  }
-  // parallax-factoren per dieptelaag (near = 1.0, mid, far)
-  const LAYER = { far: 0.25, mid: 0.6, near: 1.0 };
-
-  function sync3dBtn() {
-    const btn = $("#d3Btn");
-    if (!btn) return;
-    const on = root.getAttribute("data-3d") === "on";
-    btn.classList.toggle("on", on);
-    btn.setAttribute("aria-pressed", String(on));
-    const wrap = $("#depthWrap");
-    if (wrap) wrap.style.opacity = on ? "1" : "0.4";
-    const sb = $("#sb3d");
-    if (sb) sb.textContent = on ? "AAN" : "UIT";
-  }
+  /* ---------------------------------------------------------- 3D + depth */
+  var d3Btn = document.getElementById("d3Btn");
+  var depthRange = document.getElementById("depthRange");
+  var depthNum = document.getElementById("depthNum");
+  var sb3d = document.getElementById("sb3d");
+  var FACTORS = { far: 0.25, mid: 0.6, near: 1.0 };
 
   function applyParallax(depth) {
-    const chC = document.getElementById("chC");
+    var chC = document.getElementById("chC");
     if (!chC) return;
-    for (const name of Object.keys(LAYER)) {
-      const g = chC.querySelector(".layer-" + name);
-      if (!g) continue;
-      const off = (depth * LAYER[name]).toFixed(2);
-      g.setAttribute("transform", `translate(${off},0)`);
-    }
-  }
-
-  function setDepth(px) {
-    px = Math.max(0, Math.min(30, Number(px) || 0));
-    depth = px;
-    applyParallax(px);
-    const n = $("#depthNum");
-    if (n) n.textContent = px + "px";
-    try { localStorage.setItem(DP_KEY, String(px)); } catch (e) {}
-  }
-
-  // ---------- nav scroll-spy ----------
-  function spy() {
-    const links = $$(".nav a[data-sec]");
-    if (!links.length) return;
-    const y = window.scrollY + 120;
-    let cur = links[0].getAttribute("data-sec");
-    for (const a of links) {
-      const el = document.getElementById(a.getAttribute("data-sec"));
-      if (el && el.offsetTop <= y) cur = a.getAttribute("data-sec");
-    }
-    links.forEach((a) => a.classList.toggle("cur", a.getAttribute("data-sec") === cur));
-  }
-
-  // ---------- init ----------
-  function init() {
-    // theme
-    let savedTheme = null;
-    try { savedTheme = localStorage.getItem(THEME_KEY); } catch (e) {}
-    setTheme(savedTheme === "light" ? "light" : "dark");
-    const tb = $("#themeBtn");
-    if (tb) tb.addEventListener("click", () => {
-      const light = root.getAttribute("data-theme") === "light";
-      setTheme(light ? "dark" : "light");
+    ["far", "mid", "near"].forEach(function (layer) {
+      var el = chC.querySelector(".layer-" + layer);
+      if (el) el.style.transform = "translate(" + (depth * FACTORS[layer]) + "px,0)";
     });
-
-    // 3d
-    let saved3d = null;
-    try { saved3d = localStorage.getItem(D3_KEY); } catch (e) {}
-    set3d(saved3d === "off" ? false : true); // default aan (het is de signatuur)
-    const d3 = $("#d3Btn");
-    if (d3) d3.addEventListener("click", () => {
-      set3d(root.getAttribute("data-3d") !== "on");
+  }
+  function set3D(on) {
+    document.body.setAttribute("data-3d", on ? "on" : "off");
+    if (d3Btn) d3Btn.setAttribute("aria-pressed", on ? "true" : "false");
+    if (sb3d) sb3d.textContent = on ? "AAN" : "UIT";
+    try { localStorage.setItem("trendreis.3d", on ? "on" : "off"); } catch (e) {}
+    if (on && depthRange) applyParallax(parseInt(depthRange.value, 10) || 0);
+  }
+  var saved3d = null;
+  try { saved3d = localStorage.getItem("trendreis.3d"); } catch (e) {}
+  if (d3Btn) d3Btn.addEventListener("click", function () {
+    set3D(document.body.getAttribute("data-3d") === "on" ? false : true);
+  });
+  if (depthRange) {
+    depthRange.addEventListener("input", function () {
+      if (depthNum) depthNum.textContent = depthRange.value + "px";
+      if (document.body.getAttribute("data-3d") === "on") applyParallax(parseInt(depthRange.value, 10) || 0);
     });
+  }
+  // init
+  if (depthNum && depthRange) depthNum.textContent = depthRange.value + "px";
+  set3D(saved3d !== "off");
 
-    // depth
-    let savedDepth = null;
-    try { savedDepth = localStorage.getItem(DP_KEY); } catch (e) {}
-    const d = savedDepth !== null ? Number(savedDepth) : DEF_DEPTH;
-    setDepth(d);
-    const range = $("#depthRange");
-    if (range) {
-      range.value = d;
-      range.addEventListener("input", () => setDepth(range.value));
-    }
+  /* ---------------------------------------------------------- mobile menu */
+  var burger = document.getElementById("burger");
+  if (burger) burger.addEventListener("click", function () {
+    document.body.classList.toggle("nav-open");
+  });
+  var scrim = document.getElementById("scrim");
+  if (scrim) scrim.addEventListener("click", function () {
+    document.body.classList.remove("nav-open");
+  });
 
-    // nav spy
-    let t = null;
-    window.addEventListener("scroll", () => {
-      if (t) return;
-      t = requestAnimationFrame(() => { spy(); t = null; });
-    }, { passive: true });
-    spy();
+  /* ---------------------------------------------------------- materiaal highlights */
+  function pulse(id) {
+    var el = document.getElementById("hl-" + id);
+    if (!el) return;
+    el.classList.remove("pulse");
+    // force reflow to restart animation
+    void el.offsetWidth;
+    el.classList.add("pulse");
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  function handleHlParam() {
+    var m = location.search.match(/[?&]hl=([A-Za-z0-9_-]+)/);
+    if (m) setTimeout(function () { pulse(m[1]); }, 260);
+  }
+  if (document.body.getAttribute("data-page") === "materiaal") {
+    handleHlParam();
+    // legend + any .hlbox click → pulse
+    document.addEventListener("click", function (e) {
+      var leg = e.target.closest("[data-hl]");
+      if (leg) { e.preventDefault(); pulse(leg.getAttribute("data-hl")); return; }
+      var box = e.target.closest(".hlbox");
+      if (box) pulse(box.getAttribute("data-id"));
+    });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
+  /* ---------------------------------------------------------- TOC scroll-spy */
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+  if (tocLinks.length > 1 && "IntersectionObserver" in window) {
+    var map = {};
+    tocLinks.forEach(function (a) {
+      var id = a.getAttribute("href").slice(1);
+      var el = document.getElementById(id);
+      if (el) map[id] = a;
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          tocLinks.forEach(function (a) { a.style.color = ""; });
+          var a = map[en.target.id];
+          if (a) a.style.color = "var(--accent)";
+        }
+      });
+    }, { rootMargin: "-20% 0px -70% 0px" });
+    Object.keys(map).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
   }
 })();

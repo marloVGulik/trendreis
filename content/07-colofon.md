@@ -52,9 +52,9 @@ AI-tools worden volgens de APA-richtlijnen als bron vermeld.)*
 - **CvO** — HAN Centrum voor Ondernemerschap
 
 ## Bronnen
-Tegenlicht (*Game of drones*) · de maandag-podcast (*disposable software*) ·
-nu.nl (dagelijks) · trendplatformen (Tweakers, trendrede.nl, sitra.fi, trendwatching.com) ·
-de presentaties van Eva (FutureFit, waardeverschuivingen) · m'n eigen notebook en foto's.
+*(APA — de links die ik daadwerkelijk heb gebruikt; het bredere beeld: nu.nl, Tweakers, trendrede.nl, sitra.fi, trendwatching.com, de FutureFit-presentaties van Eva, en mijn eigen notebook.)*
+
+__BRONNEN__
 
 ## 3D
 Deze site is ontworpen voor **rood-cyan 3D-brillen**: de teksten blijven plat leesbaar,
