@@ -1,0 +1,12 @@
+# Intermediaire OCR-tiles (groot, herhaalbaar via scripts/crop.py)
+tiles/
+
+# Origineel docentenmateriaal — copyright, dus alleen verwijzen, niet republishen
+teacher-data/
+extracted-pdfs/
+
+# OS / Python
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc

@@ -1,0 +1,299 @@
+P00-01.jpgw
+Gesprekken met mensen en ontmoeting:
+Invented systems engeneering
+Kledings stijl valt mij op
+rustig maar wel gezellig
+iets in de ict
+
+VOORSTELLEN VAN TOEKOMST
+13 Januari 2027: Na een leuke en spannende minor heb ik vorige week mijn bedrijf ingeschreven bij de K.v.K. Na een set succesvolle tests voor de kerstvakantie, en een volledig doordacht plan in deze vakantie te maken vond ik dat een goed plan. Ik heb zelf al een eerste set inkomen kunnen genereren met mijn idee tijdens de tests. Er zijn nog een paar dingen die moeten gebeuren. Mijn product heeft nog enkele verbeteringen nodig in de UI, en ook wil ik enkele processen automatiseren om het minder handwerk te maken. Afgelopen week ben ik ook goed bezig geweest met klanten zoeken, en heb met 4 klanten een traject gestart.
+[Text in drawing]: Email, TODO
+
+
+P02-03.jpg
+
+Gewoonten: Houden Stoppen Ontwikkelen
+S - reels / YT-shorts scrollen
+H - project obsessie -> project burnout
+S - te laat naar bed gaan
+H - altijd iets willen doen
+H - iets te lang tv luisteren / doorvragen
+H - kritisch zijn
+H - eigenwijs zijn / geen advies opvolgen die ik niet geloof
+H - "gierig" -> geen geld naar onzinnige dingen of dure dingen \ boterham hagelslag
+O - Contact onderhouden
+S quick dopamine activiteiten -> zak chips
+O contacten leggen en leren communiceren -> zak snoep banantjes
+
+Wat ging goed tijdens de ontmoetingsopdrachten
+technisch nadenken -> tijdens de puzzels goed kunnen gebruiken
+gezellig winnen -> gelukt, eerste en tweede ronde gewonnen
+ook mijn persoonlijke doel voor socialiseren met onbekenden heb ik progressie mee gemaakt. Ik heb inmiddels bijna iedereen even gesproken
+
+2026-09-04 het tonen van eigenaarschap
+1e jaar heb ik een project gehad met een andere erg gemotiveerde ondernemer. Hij liet mij vrij om technische zaken doen en motiveerde me. Ik heb toen een groep andere studenten begeleid
+
+Belopdracht:
+Thijs: Witte brommer - goed in voetbal en goede aanvoerder
+Thijs: tijd/aandacht goed inleven in anderen
+Thijs: spullen pakken van een hoge plek
+
+Marlo: Creativiteit
+Marlo: Oplossingen bedenken op een manier waar je een beetje autistisch voor moet zijn
+Marlo: communiceren, van veel dingen veel weten, veel interesse / nieuwsgierigheid, luisteren, behulpzaam, Sociaal / gezellig
+Hoe was het om deze opdracht te doen? Wel prima. Eerste indruk was spannend, na het eerste belletje was de spanning eraf
+Wat hielp over de drempel: motivatie om te leren, direct beginnen
+Wat hield me tegen: vind bellen niet leuk   Wat levert dit op: minder belangst, "gewoon doen" mindset
+
+P04-05.jpg
+Wat helpt? Waarvan afzien
+O contacten maken - Gewoon doen, gezellig praten
+S Quick-dopamine activiteiten - Gewoon iets "nuttigs" doen   (met app(rij))
+
+persoonlijk doel: Ik ga elke dag een half uur simpele sportoefeningen doen
+Motiverend: Ik ga op zoek naar een doelgroep, en als ik deze gevonden heb ga ik mijn technische kennis toepassen om een idee voor een onderneming te bedenken
+Hoe ga ik op zoek naar een doelgroep?
+als ik een doelgroep gevonden heb, wat vraag ik ze? waar lopen ze tegenaan?
+Sommige mensen weten niet dat ze ergens tegenaan lopen of weten niet wat ze zoeken
+Hoe valideer ik dat meer mensen / bedrijven dit probleem hebben   Omdraaien?
+ipv groep zoeken eerst, doe ik eerst mijn idee uitbreiden en "testen" bij een klant   -> bedrijven helpen met linux! Open source en soevereiniteit
+
+2026-09-11 - Goede bedrijfsideeën
+1 ondernemers helpen overschakelen naar open-source alternatieven
+2 particulieren met oudere / trage hardware schakelen naar linux
+3 advies leveren aan startende ondernemers over embedded en IT
+4 embedded oplossingen bouwen voor bedrijven met een idee of probleem
+5 software oplossingen en web development voor startende ondernemers
+6 automatisering voor bedrijven (software, (nog) niet robot)
+7 AI en LLM voor bedrijven met kritieke informatie / dataverwerking
+8 data inzaag en verwerking met lokale LLM
+9 oldtimers ombouwen naar electrisch
+10 boten ombouwen naar electrisch
+11 Robot huisdier!
+12 Software voor solopreneurs (entrepeneurs maar dan in hun eentje, solo)
+
+"slechte" bedrijfsideeen
+1 alcohol met nicotine verkopen
+2 nieuwe OS maken en verkopen
+3 electrische auto's ombouwen naar benzine
+4 Nieuwe schaapsbouwbedrijf beginnen
+5 studenten kamer verkopen
+6 vieze stadslucht in potjes verkopen
+7 Verkopen van slechte boten met lening (als we hem dan omzetten naar een goed bedrijfsidee: Mensen met een slechte boot helpen om er vanaf te komen)
+8 verkopen van gestolen auto's
+9 data verzamelen en verkopen
+
+P06-07.jpg Trendweek 1
+Presentatie Boris: bedrijven zijn angstig om grote AI bedrijven permanent te vertrouwen
+
+Presentatie Eva:
+Planet woorden: AI war, tech power, new money, klimaat/plastic, cityliving, ruimte toerisme
+People woorden: space living, robot love, digital id, arm rijk, cyber cyber, digital consumenten, klimaat tranieer   Prof. woorden: pers/abort, managers, greenwashing, AI eats doctor, cobot, hubot, cloud worker   Vleesproxy   thema's: controle door rijken, big tech die misbruik maakt
+
+love themas: oude mensen op datingsites, relaties met robots, eenzaamheid parasociale relaties   food: Groene revolutie, tech-experienced (robot supermarkt), no plastic cards, IoT cooking, gemak/economie/efficiëntie,   gemak is fijn en belangrijk. doe maar makkelijk
+living themas: eenpersoons-huishouden, green living, smart living, ongelijkheid, twee woordes: Ecotexia en orthorexia. Bang gemaakt door nieuws   sport: tech-fit, DIY-sport (eigen lichaamsgewicht), Globalisation van bezit naar bereik (abonnement   Work: beter slapen, Cobot, dark factories, indoor farming, indoor gemaak   ook hier weer efficiëntie
+
+inleveren/opdracht: Zondag 11 oktober - trendopdracht - ONDEO N18
+trends identificeren, anticiperen en delen
+Maatschappelijke trend - Consumententrend - Markttrend - Producttrend
+Foto's van zaken die opvallen -> out of the box idee
+
+Wat kunnen klasgenoten goed:
+Presentaties Julian: helpen met testen van social gedrag
+IPO: centers en fysieke modellen
+Businessidee bespreken met veronique & co
+Tom en Thijs: business strategie en accounting
+doelgroepenanalyse bij Suze
+
+P08-09.jpg & P10-11.jpg
+Aflevering: Game of drones. waarom? de tech achter oorlog omdat ik het kan zien gebeuren
+de aflevering ging over oorlog en tech. het legde verschillende connecties uit vanaf verschillende kanten. vanaf een soldaat, vanaf de tech sector, politiek en ook van startups werden dingen laten zien   Wat mij verwonderd is dat deze sector veel automatisering niet aan kan vanwege regels en dat dat cool zo is
+ik heb geleerd dat er ook kleine startups zijn in deze sector, en het inzicht is dat kleine techbedrijven met een goed idee populair zijn
+Het was uitzoomen omdat ik vaak focus op de tech en niet het plaatje
+
+1 Product trend -> Welke producten zijn populair
+2 Markttrend -> Wat gebeurt er in de markt
+3 Consumententrend -> Hoe gedragen consumenten zich
+4 maatschappelijke trend -> In wat voor wereld leven wij
+
+4 Gemaksmaatschappij
+3 Weinig moeite, toegankelijkheid, de korte weg nemen, comfort, etes online bestellen, daten op apps, toegang...
+2 Grote luxe auto's, IOT, elektrische fietsen, dating apps, toegang...
+1 Lamborghini urus, slimme thermostaat / oven/ wasmachine, fatbike, tinder, tb...
+
+4 "slimme" maatschappij
+3 alles meten, algoritmes, dataverzameling, geïnformeerde keuzes
+2 infobubbel, Onderzoek wat consumenten kopen
+
+trendkaart: beeld van macro trend piramides
+doel 1 actualiteiten en objecten vinden en foto maken
+2 hieruit trendxeel maken
+3 (ont.) dataverwerken met AI
+
+P12-13.jpg
+Presentatie Eva: Be part of the solution
+Opwarming, hittestress, indoorgeneratie, rijke mensen vermogen verdubbeld, angstgeneratie, eenzaamheid, woningtekort, dementie, tekorteconomie, slaaptekort, grondstoftekort, trust, systeemmoe
+
+Themas Slim:
+1 Spacemakers - 2 new makers - 3 money makers - 4 human makers
+
+waar wat hoe wie
+
+Spacemakers
+1 Geo-Engineering, space factory, fabrieken op zee?
+2 dark factories, wonen op water
+3 Cloud economie
+4 AI, Health-tech, Cybernetics, designers
+
+Schoonmakers
+1 Climate makers -
+2 food -
+3 living -
+
+makers
+2 Salatomaat - automatische salade, mini kas (tech cooking)
+3 biobased bouwen, solar democracy, CO2 zuigen
+4 Wat is afval, micro-fabriek   Sociaal
+
+gelijkmakers
+2 Health -
+3 contact -
+4 love
+1 onderwijs / gelijkheid polarisatie
+2 Elite Health
+3 Aandachtseconomie
+4 Moreel kompas
+
+elke dag nieuws Nieuws op nu.nl, lezen (uitgebreid) artikel
+elke dag info zoeken   Leerplan - Welke dag - Welke activiteit - Specifieke acties
+maandag podcast podcast over ondernemen
+dinsdag afl. tegenlicht Tegenlicht
+woensdag afl. tegenlicht of lez. art over onbekend onderwerp
+donderdag onderzoek trendplatform Tweakers art. of iets
+vrijdag onderzoek trend/ent/tech
+
+gedicht
+
+P14-15.jpg
+goed dat je mensen aan spreekt
+
+Goeie tip van klasgenoot:
+verkoop niet de wafel, maar het gevoel dat iemand je helpt
+Overtuigingen positieve gedachte: f*ck iedereen, ik ken niemand hier.
+Overtuigingen negatieve gedachte: mensen vinden mij niet leuk / over men mening, niet aantrekkelijk, awkward
+
+Micro event   zoek mensen op in studietijd -> CVQ
+1e eerste idee is niet jouwe eindbedrijf
+probleem van vakman naar ondernemer
+hard zijn -> wel aanvoelen, niet erg de werknemer maar baas
+zelfstandig ondernemer leider
+doe alles zelf wijs mensen aan -> mensen verbeteren
+opschalen = zelf niet zelf
+verschil tussen wat ik voel en wat anderen zien (niet voelen)
+niet wachten op eigen geld, eerst naar investeerders. Wachten duurt lang
+
+Mijn doel: een doelgroep vinden. lastig en onduidelijk.
+Nieuw doel:   Wat kan een product nog meer zijn?   Destep   Een trend is een richting waarin waarden en behoeften veranderen, opgestuwd door externe krachten waardoor we andere diensten en producten kopen
+D demografie
+E economie
+S sociologie
+T techniek
+E ecologie
+P politiek
+maak inzichtelijk welke drivers van toepassing zijn op welke je in de gaten houdt. maak een link met locatie en context
+
+Nieuw doel: Ik ga verder de technische onderdelen van het starten van een bedrijf uitwerken. hieronder valt een website, KvK inschrijven etc
+Basis site / over mij uitwerken
+KvK inschrijven uitzoeken
+Uitzoeken hoe ik financiën goed bij hou / boekhouding
+belastingvoordelen, sponsoren en subsidies droppen
+Hoe doe ik marketing? Logo's, huisstijl
+
+persoonlijk. doel 3x per week half uur sporten
+
+e-boekhouden.nl
+
+P16-17.jpg
+
+toepas/tech
+xxx-de stoomster-
+kleine electrische cellen/borden
+popup stores
+ouderen die alleen eten
+"vreemde" fashion
+"dat kan ik thuis ook"
+toegankelijke fiets voor ouderen
+gescandeerde bakfiets
+oortjes in tijdens gesprekken
+dure lunchtent op midden natuur
+kleurloze kinderspeelzaak
+AI posters en reclameborden
+AI "kunst" verkopen
+pakketjes door winkelcentrum
+plastic rietjes
+Zonnepaneel schoonmaak
+mondkapjes
+3D printer op markt
+toegankelijk & makkelijk
+geen werknemer nodig, goedkoop
+laagdrempelig voor 'marktondernemer'
+eenzaamheid
+er bij/groep willen horen
+gemak en ongemakkelijke toegankelijkheid
+toegankelijkheid
+makkelijk kinderen meenemen
+pacten naar soort bezoeker
+goedkoop en relatief mooi
+veel marge
+gemak en luiheid
+bijna dan papier
+meer zonnepanelen
+angst
+op maat gemaakte spullen
+
+Gastles: Wat kan een product nog meer zijn?
+gebruik anderen als inspiratie
+maak combinaties van trends
+20k bedrijfsideeën
+massa = kassa
+branding en marketing is belangrijker dan smaak. denk aan ervaring
+--- maxxing
+
+Wie ben ik
+Wat zijn kwaliteiten
+Wat vind ik leuk én belangrijk (signaleren)
+
+trends die ik zie
+trends waar ik iets van vind en verbinding (analyseren)
+bedrijfsideeën (waardeverschuiving)
+Conclusie
+Waarom gebeurde een waardeverschuiving
+Hoe was het -> Hoe is het nu (behoefte) prosumer
+auto -> gedeelde auto -> electrische fiets -> intelligente outsourcing
+Movement -> Zonnepanelen -> Green -> tech -> AI -> posters en reclame -> electro-reclameborden
+AI -> "Kunst" / tools   efficiëntiebron   maak slechte ideeën piramide
+
+P18-19.jpg
+[Graph axes]: Narratief - duidelijk, abstract - verdieping, Cliché - niet vernieuwend, out of the box
+
+di 6 okt: waardeverschuiving uitwerken - oude fixatie   waar is mijn bedrijf een antwoord op. Wat draagt t bij?
+
+Gastles   Bart Krinner
+
+Meervoudige Waarde creatie -> meerdere problemen in 1 oplossen,
+trends combineren
+
+Wat betekent duurzaam voor mij: duurzaam is efficiënt (andere mensen hebben andere ideeën)
+veel groen   driver of change   wapens, 2e tijwagens, hitterecord, consumeren en dikke kinderen, stoornissen, woningtekort, chips = nieuwe olie, branding   armoede 1/8 early adapter
+
+... the future
+food
+van 70% uitgaven aan voedsel naar 10%
+voedselporno of voedselwoestijn
+airfarm
+zijn deze alternatieven vrijwillig?
+space farm
+
+Welke ingrediënten heeft mijn bedrijf
+tech, programmeren, hardware, AI, groei, snelheid, trendshype   hardware, tools, kwaliteit,   living: efficiënt met ruimte omgaan   mac hout   smart living   power the future - ruimte energie
+Waar ga ik mee bouwen   kennis, AI
