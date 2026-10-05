@@ -42,12 +42,17 @@ Stand: 2026-10-05. Twee kolommen: wat **Marlo** moet doen, en wat **de AI (ik)**
 - [x] **Lightbox: foto-klik → groter (tag komt mee)** — **done** (materiaal + hunter-foto's,
       ESC/achtergrond sluiten, oranje bron-quote-box schaalde mee).
 - [x] **3D-plan** — **done**: `PLAN-3D.md` (5 fasen: motor → figuren → verhaal → verrassing,
-      + technische aanpak + open vragen).
+      + technische aanpak + keuzes).
+- [x] **Anaglyph-fix (voorpagina)** — **done**: kleurmix gefixt (`mix-blend-mode: screen` op donkere
+      viewport; rood+cyaan mixen i.p.v. cyaan-over-rood), richting volgens bril (links=cyaan/rechts=rood),
+      muis-parallax (diepte moduleert), 3D-fringe op actieve nav/toggle/START, diepte-default 8px.
+- [x] **3D-keuzes Marlo vastgelegd** in `PLAN-3D.md` — muis-parallax AAN, geen 3D-intro, pyramides A+B
+      leeg, mag uit het scherm, 3D standaard AAN.
 - [ ] **Kern ch.5** inkorten/afstemmen op 1–3 ideeën (nadat Marlo bevestigt).
 - [ ] **Pyramide A/B/C** invullen (als Marlo die wil — nu alleen C-leeg-raamwerk).
 - [ ] **Meer links naar de materiaal-pagina** — *(later, nadat Marlo de content heeft aangepast):*
       vind meer plekken in de teksten die naar notebook-tekst verwijzen → `↳ schrift`-markering toevoegen.
-- [ ] **3D uitvoeren** (PLAN-3D Fase 0 + 1 eerst) — *(na content-review + antwoorden op de open vragen).*
+- [ ] **3D uitvoeren op de figuren** (PLAN-3D Fase 0 motor + Fase 1 figuren) — *(na content-review).*
 - [ ] Site als `.zip` maken + online hosten (bijv. GitHub Pages) voor inlevering.
 
 ## Volgorde

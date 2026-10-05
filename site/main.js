@@ -24,12 +24,19 @@
   var sb3d = document.getElementById("sb3d");
   var FACTORS = { far: 0.25, mid: 0.6, near: 1.0 };
 
-  function applyParallax(depth) {
+  var mouseMX = 0; // -1..1, muis-parallax (subtiel, past in de stijl)
+  function effDepth() {
+    var on = document.body.getAttribute("data-3d") === "on";
+    var base = (on && depthRange) ? (parseInt(depthRange.value, 10) || 0) : 0;
+    return Math.max(0, base + mouseMX * 3); // muis moduleert de diepte
+  }
+  function applyParallax() {
     var chC = document.getElementById("chC");
     if (!chC) return;
+    var d = effDepth();
     ["far", "mid", "near"].forEach(function (layer) {
       var el = chC.querySelector(".layer-" + layer);
-      if (el) el.style.transform = "translate(" + (depth * FACTORS[layer]) + "px,0)";
+      if (el) el.style.transform = "translate(" + (d * FACTORS[layer]) + "px,0)";
     });
   }
   function set3D(on) {
@@ -37,7 +44,18 @@
     if (d3Btn) d3Btn.setAttribute("aria-pressed", on ? "true" : "false");
     if (sb3d) sb3d.textContent = on ? "AAN" : "UIT";
     try { localStorage.setItem("trendreis.3d", on ? "on" : "off"); } catch (e) {}
-    if (on && depthRange) applyParallax(parseInt(depthRange.value, 10) || 0);
+    applyParallax();
+  }
+  // muis-parallax: diepte moduleert met muispositie ("om je heen kijken")
+  var anaglyphEl = document.querySelector(".anaglyph");
+  if (anaglyphEl) {
+    anaglyphEl.addEventListener("mousemove", function (e) {
+      var r = anaglyphEl.getBoundingClientRect();
+      var mx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+      mouseMX = Math.max(-1, Math.min(1, mx));
+      applyParallax();
+    });
+    anaglyphEl.addEventListener("mouseleave", function () { mouseMX = 0; applyParallax(); });
   }
   var saved3d = null;
   try { saved3d = localStorage.getItem("trendreis.3d"); } catch (e) {}
@@ -47,7 +65,7 @@
   if (depthRange) {
     depthRange.addEventListener("input", function () {
       if (depthNum) depthNum.textContent = depthRange.value + "px";
-      if (document.body.getAttribute("data-3d") === "on") applyParallax(parseInt(depthRange.value, 10) || 0);
+      applyParallax();
     });
   }
   // init

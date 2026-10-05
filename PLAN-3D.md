@@ -95,20 +95,27 @@ Fase 2 na content-review, Fase 3 als bonus.
 
 ## Techniek (hoe)
 
-- **Anaglyph**: elke scène = 1 SVG. Motor duplicateert naar `<g id="chR">` (rood) + `<g id="chC">` (cyaan).
-  Per laag `data-depth="d"` → `#chC` laag shift = `diepte × d` px. Rood blijft staan.
-- **Kleuren**: rood-kanaal `#ff2d2d`, cyaan-kanaal `#19e6e6` (of theme-afhankelijk); overlap = wit/oranje.
-- **Diepte-schuif**: 0–30px (bestaand), schaal alle `data-depth`-offsets.
-- **3D off**: `#chC` verbergen + `#chR` naar theme-voorgrondkleur → nette 2D-wireframe.
-- **Muis-parallax (opt)**: `mousemove` → extra ±2px op `#chC`, genormaliseerd, met `transition` voor smooth.
-- **Prestatie**: alles SVG + CSS-transform (GPU), geen canvas/ WebGL nodig. Licht en snel.
-- **Toegankelijkheid**: `prefers-reduced-motion` → parallax uit; 3D is altijd optioneel (tekst blijft 2D).
+- **Brillen-mapping (belangrijk)**: Marlo's bril is **links = cyaan, rechts = rood** (omgekeerd van
+  de standaard). Dus het **cyaan-kanal naar rechts** = "uit het scherm" (pop-out). De offset-richting
+  in de code (cyaan +x) klopt hierop — niet omdraaien tenzij de bril anders is.
+- **Anaglyph**: elke scène = 1 SVG, twee groepen `#chR` (rood) + `#chC` (cyaan).
+  Per laag offset = `diepte × factor` (near grootste, far kleinste) → near komt voor, far zinkt weg.
+- **Kleurmix (de fix)**: `#chC { mix-blend-mode: screen; }` op een **donkere viewport** (`#050505`).
+  Additief: rood=rood, cyaan=cyaan, overlap= wit. Zonder dit (mix-blend normal) schilderde cyaan
+  over rood → "alleen cyaan". Rood `#ff1010`, cyaan `#00e5e5`.
+- **Diepte-schuif**: 0–24px (default 8px), schaalt alle laag-offsets.
+- **Muis-parallax**: `mousemove` moduleert de diepte met ~±3px ("om je heen kijken"), lineair + transition.
+- **3D off**: `#chC` verbergen + `#chR` naar lichtgrijs → nette 2D-wireframe.
+- **Prestatie**: alles SVG + CSS-transform (GPU), geen canvas/WebGL. Licht en snel.
+- **Toegankelijkheid**: 3D is altijd optioneel; tekst blijft 2D en leesbaar zónder bril.
 
 ---
 
-## Open vragen voor jou
-1. **Muis-parallax** aan of uit? (levendiger, maar beweegt mee met de muis)
-2. **Fase 3 intro-animatie**: wil je die impact, of liever rustig/static?
-3. **Pyramides A + B**: vul je die in, of blijft het op de site alleen C (leeg raamwerk)?
-4. **Hoe "druk" mag 3D zijn**: subtiele diepte, of mag het ook echt "uit het scherm" springen?
-5. Moet 3D **standaard aan** (zoals nu) of **standaard uit** (lezer schakelt zelf in)?
+## Keuzes (vastgelegd door Marlo, 2026-10-05)
+1. **Muis-parallax: AAN** (subtiel, past in de stijl) — *geïmplementeerd*.
+2. **Intro-animatie: geen 3D-intro** (niet 3D maken).
+3. **Pyramides A + B: leeg laten** (Marlo bedenkt nog content) — alleen C als leeg raamwerk.
+4. **Hoe "druk"**: mag **uit het scherm** springen — pagina mag druk zijn.
+5. **3D standaard: AAN** (lezer schakelt zelf uit).
+6. **Anaglyph-fix**: kleurmix (screen) + donkere viewport + richting volgens bril-mapping — *gedaan*.
+7. **Extra**: 3D-fringe op diepte-elementen (actieve nav, 3D-toggle, START-knop) — *gedaan*.

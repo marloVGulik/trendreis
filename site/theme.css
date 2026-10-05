@@ -216,7 +216,7 @@ body.nav-open .scrim { display: block; }
 .hero-title .accent { color: var(--accent); }
 .hero-sub { font-size: 15px; letter-spacing: .18em; text-transform: uppercase; color: var(--fg-dim); margin: 12px 0 0; }
 .hero-meta { font-size: 12.5px; color: var(--fg-dim); margin: 6px 0 0; letter-spacing: .03em; }
-.hero .anaglyph { display: block; width: 100%; height: auto; margin: 14px 0 0; }
+.hero .anaglyph { display: block; width: 100%; height: auto; margin: 14px 0 0; background: #050505; border: 1px solid var(--border); border-radius: var(--r); }
 .hero-controls { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 16px 34px 24px; border-top: 1px solid var(--border); margin-top: 6px; }
 .depth { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .1em; color: var(--fg-dim); }
 .depth input[type=range] { -webkit-appearance: none; appearance: none; width: 130px; height: 3px; background: var(--border-2); outline: none; }
@@ -260,16 +260,19 @@ body.nav-open .scrim { display: block; }
 .pn-l { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-dim); }
 .pn-t { font-family: var(--disp); font-size: 14px; letter-spacing: .02em; }
 
-/* ---------------------------------------------------------------- anaglyph colors */
-.anaglyph .chR { color: #ff2b2b; }
-.anaglyph .chC { color: #18e0e0; }
-[data-theme="light"] .anaglyph .chR { color: #e01414; }
-[data-theme="light"] .anaglyph .chC { color: #00a9c4; }
-.shell[data-3d="on"] .anaglyph .chR, .anaglyph .chR { opacity: 1; }
-body[data-3d="on"] .anaglyph #chC { mix-blend-mode: normal; }
+/* ---------------------------------------------------------------- anaglyph (3D) */
+/* rood-cyan anaglyph: additieve mix (screen) op zwart, zodat rood + cyaan niet
+   over elkaar schilderen maar mixen (rood=rood, cyaan=cyaan, overlap= wit).
+   Brillen: links=cyaan, rechts=rood -> cyaan-kanal naar rechts = "uit het scherm". */
+.anaglyph .chR { color: #ff1010; }
+.anaglyph .chC { color: #00e5e5; mix-blend-mode: screen; }
 body[data-3d="off"] .anaglyph #chC { display: none; }
-body[data-3d="off"] .anaglyph .chR { color: var(--fg-dim); }
-.anaglyph .layer-far, .anaglyph .layer-mid, .anaglyph .layer-near { transition: transform .08s linear; }
+body[data-3d="off"] .anaglyph .chR { color: #c9c9c2; }
+.anaglyph .layer-far, .anaglyph .layer-mid, .anaglyph .layer-near { transition: transform .09s linear; }
+/* 3D "pop" op diepte-elementen (actieve knoppen) — anaglyph-fringe, past in de stijl */
+body[data-3d="on"] .snav.active { text-shadow: -1px 0 rgba(255,16,16,.55), 1px 0 rgba(0,229,229,.55); }
+body[data-3d="on"] .btn[aria-pressed="true"] { text-shadow: -1px 0 rgba(255,16,16,.5), 1px 0 rgba(0,229,229,.5); }
+body[data-3d="on"] .btn.primary { text-shadow: -1px 0 rgba(255,16,16,.45), 1px 0 rgba(0,229,229,.45); }
 
 /* ---------------------------------------------------------------- console (AI-chat) */
 .aiwrap { min-width: 0; }

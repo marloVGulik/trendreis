@@ -523,7 +523,7 @@ def anaglyph_svg():
     near_html = layer("near", "".join(near))
     scene = f'{far_html}{mid_html}{near_html}'
     return f'''
-<svg class="anaglyph" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet"
+<svg class="anaglyph" viewBox="0 92 800 236" preserveAspectRatio="xMidYMid meet"
      role="img" aria-label="Een pad van drie poorten naar een ster op de horizon — van signaal tot bedrijf">
   <defs><style>
       .ln {{ stroke: currentColor; stroke-width: 1; fill: none; }}
@@ -726,8 +726,8 @@ def build_home():
   {anaglyph_svg()}
   <div class="hero-controls">
     <span class="depth" id="depthWrap"><span>DIEPTE</span>
-      <input type="range" id="depthRange" min="0" max="30" step="1" value="10" aria-label="3D diepte">
-      <span class="dnum" id="depthNum">10px</span></span>
+      <input type="range" id="depthRange" min="0" max="24" step="1" value="8" aria-label="3D diepte">
+      <span class="dnum" id="depthNum">8px</span></span>
     <span class="hint">rood-cyan brilletjes voor de 3D · zonder bril ook leesbaar</span>
     <span class="spacer"></span>
     <a class="btn primary" href="wie-ben-ik.html">START →</a>
