@@ -16,3 +16,6 @@ site/preview-*.png
 
 # tijdelijke screenshots (dev/QA)
 site/shot-*.png
+
+# lokale backups van originele foto's (niet publiceren)
+raw-data/.backup/
