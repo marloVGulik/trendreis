@@ -43,42 +43,53 @@
     if (channel === 'red') return 'rgb(' + Math.round(255*b) + ',' + Math.round(16*b) + ',' + Math.round(16*b) + ')';
     return 'rgb(0,' + Math.round(229*b) + ',' + Math.round(229*b) + ')';
   }
+  var ANA_LIGHT = (function () { var l = [0.25, 0.4, -1]; var m = Math.sqrt(l[0]*l[0]+l[1]*l[1]+l[2]*l[2]); return [l[0]/m, l[1]/m, l[2]/m]; })();
+  function anaBright(n) { var d = n[0]*ANA_LIGHT[0]+n[1]*ANA_LIGHT[1]+n[2]*ANA_LIGHT[2]; return 0.24 + 0.76 * Math.max(0, d); }
+  var ANA_CUBE_C = [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];
+  var ANA_CUBE_F = [[0,1,2,3],[4,5,6,7],[0,3,7,4],[1,2,6,5],[0,1,5,4],[3,2,6,7]];
   function renderOrbit(scene, angle) {
     var P = scene.params, C = scene.center;
     var cos = Math.cos(angle), sin = Math.sin(angle);
-    function rot(p) {
-      var x = p[0]-C[0], y = p[1]-C[1], z = p[2]-C[2];
-      return [x*cos + z*sin + C[0], y + C[1], -x*sin + z*cos + C[2]];
+    function rot(p) { var x=p[0]-C[0], y=p[1]-C[1], z=p[2]-C[2]; return [x*cos+z*sin+C[0], y+C[1], -x*sin+z*cos+C[2]]; }
+    function proj(p, cam) { var r=rot(p), rz=r[2]-cam[2]; if (rz<=0.02) return null; return [P.CX + P.F*(r[0]-cam[0])/rz*P.S, P.CY - P.F*(r[1]-cam[1])/rz*P.S]; }
+    function polyStr(pts) { return '<polygon points="' + pts.map(function(q){ return q[0].toFixed(1)+','+q[1].toFixed(1); }).join(' ') + '"'; }
+    function diskSVG(c, r, cam, fill, stroke, sw) { var n=44, pts=[]; for (var i=0;i<n;i++){ var a=i/n*2*Math.PI; var q=proj([c[0]+r*Math.cos(a), c[1]+r*Math.sin(a), c[2]], cam); if(!q) return ''; pts.push(q); } return polyStr(pts)+' fill="'+fill+'"'+(stroke?' stroke="'+stroke+'" stroke-width="'+(sw||1.4)+'"':'')+'/>'; }
+    function blockSVG(bl, cam, ch) {
+      var c=bl.c, w=bl.w||1, h=bl.h||1, d=bl.d||1, base=(bl.br!==undefined?bl.br:0.72);
+      var corners=ANA_CUBE_C.map(function(cc){ return [c[0]+cc[0]*w/2, c[1]+cc[1]*h/2, c[2]+cc[2]*d/2]; });
+      var rc=corners.map(rot), faces=[];
+      ANA_CUBE_F.forEach(function(f){
+        var o=f.map(function(idx){ return corners[idx]; });
+        var p2=f.map(function(idx){ var p=rc[idx], rz=p[2]-cam[2]; if(rz<=0.02) return null; return [P.CX+P.F*(p[0]-cam[0])/rz*P.S, P.CY-P.F*(p[1]-cam[1])/rz*P.S]; });
+        if (!p2.every(Boolean)) return;
+        var u=[o[1][0]-o[0][0],o[1][1]-o[0][1],o[1][2]-o[0][2]], v=[o[2][0]-o[0][0],o[2][1]-o[0][1],o[2][2]-o[0][2]];
+        var n=[u[1]*v[2]-u[2]*v[1], u[2]*v[0]-u[0]*v[2], u[0]*v[1]-u[1]*v[0]];
+        var nl=Math.sqrt(n[0]*n[0]+n[1]*n[1]+n[2]*n[2])||1; n=[n[0]/nl,n[1]/nl,n[2]/nl];
+        var fc=[(o[0][0]+o[3][0])/2,(o[0][1]+o[3][1])/2,(o[0][2]+o[3][2])/2];
+        if (n[0]*(fc[0]-c[0])+n[1]*(fc[1]-c[1])+n[2]*(fc[2]-c[2]) < 0) n=[-n[0],-n[1],-n[2]];
+        faces.push({ depth:(o[0][2]+o[1][2]+o[2][2]+o[3][2])/4, p2:p2, n:[n[0]*cos+n[2]*sin, n[1], -n[0]*sin+n[2]*cos] });
+      });
+      faces.sort(function(a,b){ return b.depth - a.depth; });
+      return faces.map(function(fa){ var br=anaBright(fa.n)*base; return polyStr(fa.p2)+' fill="'+orbitFill(ch,br)+'" stroke="'+orbitFill(ch,br*0.35)+'" stroke-width="1.1"/>'; }).join('');
     }
-    function proj(p, cam) {
-      var r = rot(p), rz = r[2]-cam[2];
-      if (rz <= 0.02) return null;
-      return [P.CX + P.F*(r[0]-cam[0])/rz*P.S, P.CY - P.F*(r[1]-cam[1])/rz*P.S];
-    }
-    function renderCam(cam, channel) {
-      var o = [], col = orbitFill(channel, 0.8);
-      var op = proj(scene.origin, cam);
-      if (op) o.push('<circle cx="'+op[0].toFixed(1)+'" cy="'+op[1].toFixed(1)+'" r="3" fill="'+orbitFill(channel,1)+'"/>');
-      for (var i=0;i<scene.axes.length;i++) {
-        var ax = scene.axes[i], a = proj(ax.a, cam), b = proj(ax.b, cam);
-        if (a && b) o.push('<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'" stroke="'+col+'" stroke-width="'+ax.w+'"'+(ax.dash?' stroke-dasharray="'+ax.dash+'"':'')+'/');
-      }
-      for (var j=0;j<scene.points.length;j++) {
-        var pt = scene.points[j], q = proj(pt.p, cam);
-        if (q) o.push('<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(pt.hot?7:4.5)+'" fill="'+orbitFill(channel, pt.hot?1:0.72)+'"/>');
-      }
+    function renderCam(cam, ch) {
+      var o=[];
+      (scene.disks||[]).forEach(function(dk){ o.push(diskSVG(dk.c, dk.r, cam, orbitFill(ch, dk.br!==undefined?dk.br:0.4), orbitFill(ch,0.95), 1.5)); });
+      (scene.lines || scene.axes || []).forEach(function(ax){ var a=proj(ax.a,cam), b=proj(ax.b,cam); if(a&&b) o.push('<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'" stroke="'+orbitFill(ch, ax.br!==undefined?ax.br:0.65)+'" stroke-width="'+(ax.w||1.5)+'"'+(ax.dash?' stroke-dasharray="'+ax.dash+'"':'')+'/>'); });
+      (scene.blocks||[]).forEach(function(bl){ o.push(blockSVG(bl, cam, ch)); });
+      (scene.points||[]).forEach(function(pt){ var q=proj(pt.p,cam); if(q) o.push('<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(pt.hot?7:4.5)+'" fill="'+orbitFill(ch, pt.hot?1:0.72)+'"/>'); });
+      if (scene.origin) { var op=proj(scene.origin,cam); if(op) o.push('<circle cx="'+op[0].toFixed(1)+'" cy="'+op[1].toFixed(1)+'" r="3" fill="'+orbitFill(ch,1)+'"/>'); }
       return o.join('');
     }
+    // vlakke 2D-labels: draait MEE met de scène, maar zonder rood/cyaan-offset (blijft leesbaar)
+    function projC(p) { var r=rot(p), rz=r[2]; if (rz<=0.02) return null; return [P.CX + P.F*(r[0])/rz*P.S, P.CY - P.F*(r[1]-P.camL[1])/rz*P.S]; }
+    var labels='';
+    function addLbl(p, t, dx, dy, anchor, cls, fs) { if (!t) return; var q=projC(p); if(!q) return; labels += '<text x="'+(q[0]+(dx||0)).toFixed(1)+'" y="'+(q[1]+(dy!==undefined?dy:-12)).toFixed(1)+'" class="'+(cls||'lbl-dim')+'" font-size="'+(fs||11)+'" text-anchor="'+(anchor||'middle')+'">'+t+'</text>'; }
+    (scene.points||[]).forEach(function(lp){ addLbl(lp.p, lp.label, lp.ldx, lp.ldy, lp.anchor, lp.hot?'lbl-accent':'lbl-dim'); });
+    (scene.blocks||[]).forEach(function(bl){ if (bl.label) addLbl([bl.c[0], bl.c[1]+(bl.h||1)/2+0.16, bl.c[2]], bl.label, bl.ldx||0, bl.ldy!==undefined?bl.ldy:4, 'middle', bl.hot?'lbl-accent':'lbl-dim'); });
+    (scene.endLabels||[]).forEach(function(el){ addLbl(el.p, el.t, el.dx, el.dy, el.anchor, 'lbl-dim', 12); });
+    (scene.labels||[]).forEach(function(l){ addLbl(l.p, l.t, l.dx, l.dy, l.anchor, l.cls, l.fs); });
     var red = renderCam(P.camL, 'red'), cyan = renderCam(P.camR, 'cyan');
-    var cCam = [0, P.camL[1], 0], labels = '';
-    for (var k=0;k<scene.points.length;k++) {
-      var lp = scene.points[k], c = proj(lp.p, cCam);
-      if (c) labels += '<text x="'+(c[0]+(lp.ldx||0)).toFixed(1)+'" y="'+(c[1]+(lp.ldy!==undefined?lp.ldy:-12)).toFixed(1)+'" class="'+(lp.hot?'lbl-accent':'lbl-dim')+'" font-size="11" text-anchor="'+(lp.anchor||'middle')+'">'+lp.label+'</text>';
-    }
-    for (var m=0;m<scene.endLabels.length;m++) {
-      var el = scene.endLabels[m], e = proj(el.p, cCam);
-      if (e) labels += '<text x="'+(e[0]+el.dx).toFixed(1)+'" y="'+(e[1]+el.dy).toFixed(1)+'" class="lbl-dim" font-size="12" text-anchor="'+el.anchor+'">'+el.t+'</text>';
-    }
     return '<svg class="anaglyph" viewBox="'+P.viewBox+'" preserveAspectRatio="xMidYMid meet" role="img">\n'
          + '<g id="chR" class="chR">'+red+'</g>\n'
          + '<g id="chC" class="chC">'+cyan+'</g>\n'

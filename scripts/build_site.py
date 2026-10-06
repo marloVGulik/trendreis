@@ -308,76 +308,72 @@ def _svg_open(label, w, h):
 
 
 def fig_ikigai():
-    D = "var(--fg-dim)"; A = "var(--accent)"
-    def circ(cx, cy, o):
-        return (f'<circle cx="{cx}" cy="{cy}" r="84" fill="{A}" fill-opacity="{o}" '
-                f'stroke="{D}" stroke-width="1.2"/>')
-    cx, cy = 280, 195
-    s = _svg_open("Ikigai: vier overlappende cirkels met IKIGAI in het midden", 560, 400)
-    s += circ(cx, 122, 0.16)   # waar je van houdt (top)
-    s += circ(cx - 72, 195, 0.12)   # waar je goed in bent (links)
-    s += circ(cx + 72, 195, 0.14)   # wat de wereld nodig heeft (rechts)
-    s += circ(cx, 268, 0.10)   # waar je voor betaald kunt worden (onder)
-    # labels rond (ruimte genoeg in viewBox)
-    s += f'<text x="{cx}" y="30" class="fig-lbl" text-anchor="middle">waar je van houdt</text>'
-    s += f'<text x="92" y="190" class="fig-lbl" text-anchor="end">waar je</text>'
-    s += f'<text x="92" y="206" class="fig-lbl" text-anchor="end">goed in bent</text>'
-    s += f'<text x="468" y="190" class="fig-lbl" text-anchor="start">wat de wereld</text>'
-    s += f'<text x="468" y="206" class="fig-lbl" text-anchor="start">nodig heeft</text>'
-    s += f'<text x="{cx}" y="392" class="fig-lbl" text-anchor="middle">waar je voor betaald kunt worden</text>'
-    # snijpunten
-    s += f'<text x="{cx-34}" y="158" class="fig-tag">PASSIE</text>'
-    s += f'<text x="{cx+34}" y="158" class="fig-tag">MISSIE</text>'
-    s += f'<text x="{cx-34}" y="238" class="fig-tag">BEROEP</text>'
-    s += f'<text x="{cx+34}" y="238" class="fig-tag">ROEPING</text>'
-    # center
-    s += f'<circle cx="{cx}" cy="{cy}" r="33" fill="{A}"/>'
-    s += f'<text x="{cx}" y="{cy+5}" class="fig-center" text-anchor="middle">IKIGAI</text>'
-    s += "</svg>"
-    return s
+    # ---- 3D-ikigai: vier overlappende schijven in één vlak + kern, interactief draaien ----
+    import json
+    scene = {
+        "center": [0, 0, 2],
+        "disks": [
+            {"c": [0, 0.44, 2], "r": 0.46, "br": 0.34},
+            {"c": [-0.44, 0, 2], "r": 0.46, "br": 0.30},
+            {"c": [0.44, 0, 2], "r": 0.46, "br": 0.30},
+            {"c": [0, -0.44, 2], "r": 0.46, "br": 0.30},
+            {"c": [0, 0, 2.02], "r": 0.17, "br": 0.95}
+        ],
+        "labels": [
+            {"p": [0, 0.92, 2], "t": "waar je van houdt", "dy": -4, "cls": "lbl-dim"},
+            {"p": [-0.92, 0, 2], "t": "waar je goed in bent", "dx": -6, "dy": 4, "anchor": "end"},
+            {"p": [0.92, 0, 2], "t": "wat de wereld nodig heeft", "dx": 6, "dy": 4, "anchor": "start"},
+            {"p": [0, -0.92, 2], "t": "waar je voor betaald kunt worden", "dy": 14, "cls": "lbl-dim"},
+            {"p": [-0.21, 0.21, 2.06], "t": "PASSIE", "cls": "lbl-dim", "fs": 10},
+            {"p": [0.21, 0.21, 2.06], "t": "MISSIE", "cls": "lbl-dim", "fs": 10},
+            {"p": [-0.21, -0.21, 2.06], "t": "BEROEP", "cls": "lbl-dim", "fs": 10},
+            {"p": [0.21, -0.21, 2.06], "t": "ROEPING", "cls": "lbl-dim", "fs": 10},
+            {"p": [0, 0, 2.1], "t": "IKIGAI", "dy": 4, "cls": "lbl-accent", "fs": 12}
+        ],
+        "params": {"F": 1.5, "S": 175, "CX": 300, "CY": 150,
+                    "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
+                    "viewBox": "0 0 600 300"}
+    }
+    aria = "Ikigai in 3D: vier overlappende schijven (waar je van houdt / goed in bent / wat de wereld nodig heeft / waar je voor betaald wordt) met de kern IKIGAI. Sleep om te draaien."
+    scene_json = json.dumps(scene, separators=(",", ":"))
+    return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
+            f'data-scene=\'{scene_json}\'>')
+    + '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>'
 
 
 def fig_levenswiel():
-    import math
-    D = "var(--fg-dim)"; A = "var(--accent)"
-    cx, cy, r = 280, 150, 104
+    # ---- 3D-levenswiel: vlakke schijf + 8 spaken, "werk & school" gemarkeerd, interactief draaien ----
+    import json, math
     labels = ["vrienden", "romantiek", "gezondheid", "ontwikkeling",
               "werk & school", "ontspanning & plezier", "maatschappelijke bijdrage", "liefde & familie"]
-    s = _svg_open("Levenswiel: acht segmenten rond eigenaarschap", 560, 320)
-    s += f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{D}" stroke-width="1.2"/>'
-    n = len(labels)
-    def wrap(w):
-        if len(w) <= 14:
-            return [w]
-        words = w.split()
-        best, bestlen = None, 999
-        for i in range(1, len(words)):
-            a, b = " ".join(words[:i]), " ".join(words[i:])
-            m = max(len(a), len(b))
-            if m < bestlen:
-                bestlen, best = m, (a, b)
-        return [best[0], best[1]]
+    n = len(labels); R = 0.78
+    spokes, lbls = [], []
     for i in range(n):
-        a0 = -90 + i * (360 / n)
-        a1 = -90 + (i + 1) * (360 / n)
-        x0 = cx + r * math.cos(math.radians(a0)); y0 = cy + r * math.sin(math.radians(a0))
-        x1 = cx + r * math.cos(math.radians(a1)); y1 = cy + r * math.sin(math.radians(a1))
-        fill = A if i == 4 else "none"
-        fop = "0.16" if i == 4 else "0.05"
-        s += (f'<path d="M{cx} {cy} L{x0:.1f} {y0:.1f} '
-              f'A{r} {r} 0 0 1 {x1:.1f} {y1:.1f} Z" fill="{fill}" fill-opacity="{fop}" stroke="{D}" stroke-width="1"/>')
-        am = math.radians(-90 + (i + 0.5) * (360 / n))
-        lx = cx + (r * 1.2) * math.cos(am); ly = cy + (r * 1.2) * math.sin(am)
-        c = math.cos(am)
+        a = math.radians(-90 + i * (360.0 / n))
+        hot = (i == 4)  # "werk & school"
+        ex, ey = R * math.cos(a), R * math.sin(a)
+        spokes.append({"a": [0, 0, 2], "b": [round(ex, 3), round(ey, 3), 2],
+                       "w": 2.6 if hot else 1.6, "br": 1.0 if hot else 0.78})
+        lx, ly = (R * 1.28) * math.cos(a), (R * 1.28) * math.sin(a)
+        c = math.cos(a)
         anchor = "start" if c > 0.35 else ("end" if c < -0.35 else "middle")
-        lines = wrap(labels[i])
-        dy = -((len(lines) - 1) * 13) / 2
-        for j, ln in enumerate(lines):
-            s += f'<text x="{lx:.1f}" y="{ly + dy + j * 13:.1f}" class="fig-seg" text-anchor="{anchor}">{ln}</text>'
-    s += f'<circle cx="{cx}" cy="{cy}" r="6" fill="{A}"/>'
-    s += f'<text x="{cx}" y="{cy - 16}" class="fig-tag" text-anchor="middle">eigenaarschap</text>'
-    s += "</svg>"
-    return s
+        lbls.append({"p": [round(lx, 3), round(ly, 3), 2.02], "t": labels[i],
+                     "anchor": anchor, "cls": "lbl-accent" if hot else "lbl-dim", "fs": 10})
+    scene = {
+        "center": [0, 0, 2],
+        "disks": [{"c": [0, 0, 2], "r": R, "br": 0.42}],
+        "lines": spokes,
+        "points": [{"p": [0, 0, 2.04], "hot": True}],
+        "labels": lbls + [{"p": [0, 0, 2.1], "t": "eigenaarschap", "dy": 3, "cls": "lbl-dim", "fs": 11}],
+        "params": {"F": 1.5, "S": 150, "CX": 300, "CY": 150,
+                    "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
+                    "viewBox": "0 0 600 300"}
+    }
+    aria = "Levenswiel in 3D: acht segmenten rond eigenaarschap, met werk & school gemarkeerd. Sleep om te draaien."
+    scene_json = json.dumps(scene, separators=(",", ":"))
+    return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
+            f'data-scene=\'{scene_json}\'>')
+    + '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>'
 
 
 def fig_assenstelsel():
@@ -418,64 +414,63 @@ def fig_assenstelsel():
 
 
 def fig_trendcanvas():
-    D = "var(--fg-dim)"; A = "var(--accent)"
-    blocks = [
-        ("Trend", False), ("Basisbehoeften", False), ("Inspiratie", False), ("Drivers of change", False),
-        ("Opkomende verwachtingen", False), ("Type innovatie", False), ("Voor wie", False), ("Mijn innovatie", True),
+    # ---- 3D-trendcanvas: acht blokken in een 2x4-rooster, interactief draaien ----
+    import json
+    steps = [
+        ("Trend", False), ("Basisbehoeften", False), ("Inspiratie", False), ("Drivers", False),
+        ("Verwachtingen", False), ("Innovatie-type", False), ("Voor wie", False), ("Mijn innovatie", True),
     ]
-    s = _svg_open("Trendcanvas: acht blokken, van trend tot mijn innovatie", 640, 300)
-    cw, chh, gap = 140, 110, 13
-    x0, y0 = 12, 12
-    for i, (lab, hot) in enumerate(blocks):
+    xs = [-1.55, -0.52, 0.52, 1.55]; ys = [0.6, -0.6]
+    blocks = []
+    for i, (lab, hot) in enumerate(steps):
         r, c = divmod(i, 4)
-        x = x0 + c * (cw + gap)
-        y = y0 + r * (chh + gap)
-        stroke = A if hot else D
-        fill = A if hot else "none"
-        fop = "0.16" if hot else "0.05"
-        s += (f'<rect x="{x}" y="{y}" width="{cw}" height="{chh}" rx="4" '
-              f'fill="{fill}" fill-opacity="{fop}" stroke="{stroke}" stroke-width="{1.6 if hot else 1.2}"/>')
-        # wrap label into up to 3 lines
-        words = lab.split()
-        lines, cur = [], ""
-        for w in words:
-            if len(cur) + len(w) > 16 and cur:
-                lines.append(cur); cur = w
-            else:
-                cur = (cur + " " + w).strip()
-        if cur:
-            lines.append(cur)
-        ty = y + chh / 2 - (len(lines) - 1) * 9 + 4
-        for ln in lines:
-            s += f'<text x="{x + cw/2}" y="{ty:.0f}" class="fig-cell" text-anchor="middle">{html.escape(ln)}</text>'
-            ty += 18
-    s += "</svg>"
-    return s
+        blocks.append({"c": [xs[c], ys[r], 2], "w": 0.44, "h": 0.44, "d": 0.3,
+                       "label": lab, "hot": hot, "br": 1.0 if hot else 0.6})
+    scene = {
+        "center": [0, 0, 2],
+        "blocks": blocks,
+        "params": {"F": 1.5, "S": 120, "CX": 300, "CY": 150,
+                    "camL": [-0.02, 0.12, 0], "camR": [0.02, 0.12, 0],
+                    "viewBox": "0 0 600 300"}
+    }
+    aria = "Trendcanvas in 3D: acht stappen van trend naar mijn innovatie, als 3D-blokjes in een rooster. Sleep om te draaien."
+    scene_json = json.dumps(scene, separators=(",", ":"))
+    return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
+            f'data-scene=\'{scene_json}\'>')
+    + '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>'
 
 
 def fig_automaten():
-    D = "var(--fg-dim)"; A = "var(--accent)"
-    s = _svg_open("Alles-automaten: een kaart met automaten en hun status", 480, 340)
-    # map: roads
+    # ---- 3D-alles-automaten: vlakke kaart (wegen) + 4 automaten als 3D-blokjes, interactief draaien ----
+    import json
     roads = [
-        (40, 90, 440, 90), (40, 190, 440, 190), (40, 270, 440, 270),
-        (120, 40, 120, 300), (250, 40, 250, 300), (370, 40, 370, 300),
+        {"a": [-1, 0.55, 2], "b": [1, 0.55, 2], "w": 1.2, "br": 0.45},
+        {"a": [-1, 0, 2], "b": [1, 0, 2], "w": 1.2, "br": 0.45},
+        {"a": [-1, -0.55, 2], "b": [1, -0.55, 2], "w": 1.2, "br": 0.45},
+        {"a": [-0.55, 0.55, 2], "b": [-0.55, -0.55, 2], "w": 1.2, "br": 0.45},
+        {"a": [0.1, 0.55, 2], "b": [0.1, -0.55, 2], "w": 1.2, "br": 0.45},
+        {"a": [0.75, 0.55, 2], "b": [0.75, -0.55, 2], "w": 1.2, "br": 0.45},
     ]
-    for x1, y1, x2, y2 in roads:
-        s += f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{D}" stroke-width="1" opacity=".55"/>'
-    # automaten (pins)
-    autos = [(120, 90, True), (250, 190, True), (370, 90, False), (250, 270, True)]
-    for x, y, on in autos:
-        s += f'<rect x="{x-16}" y="{y-20}" width="32" height="40" rx="4" fill="none" stroke="{A}" stroke-width="1.6"/>'
-        s += f'<rect x="{x-10}" y="{y-12}" width="20" height="12" rx="2" fill="{A}" fill-opacity=".25" stroke="{A}" stroke-width="1"/>'
-        s += f'<circle cx="{x}" cy="{y+12}" r="4" fill="{A if on else D}"/>'
-    # callout
-    s += f'<rect x="40" y="300" width="240" height="26" rx="4" fill="none" stroke="{D}" stroke-width="1"/>'
-    s += f'<text x="52" y="317" class="fig-tag">status · inhoud · locatie</text>'
-    s += f'<circle cx="330" cy="313" r="5" fill="{A}"/><text x="342" y="317" class="fig-tag">actief</text>'
-    s += f'<circle cx="400" cy="313" r="5" fill="{D}"/><text x="412" y="317" class="fig-tag">leeg</text>'
-    s += "</svg>"
-    return s
+    autos = [(-0.55, 0.55, True), (0.1, 0.0, True), (0.75, 0.55, False), (0.1, -0.55, True)]
+    blocks = [{"c": [x, y, 2.06], "w": 0.3, "h": 0.4, "d": 0.24, "br": 1.0 if on else 0.4} for (x, y, on) in autos]
+    scene = {
+        "center": [0, 0, 2],
+        "lines": roads,
+        "blocks": blocks,
+        "points": [{"p": [0.75, 0.55, 2.02], "hot": False}],
+        "labels": [
+            {"p": [0, 0.82, 2], "t": "status · inhoud · locatie", "cls": "lbl-dim", "fs": 10},
+            {"p": [0, -0.82, 2], "t": "helder = actief  ·  dof = leeg", "cls": "lbl-dim", "fs": 10}
+        ],
+        "params": {"F": 1.5, "S": 130, "CX": 300, "CY": 150,
+                    "camL": [-0.02, 0.12, 0], "camR": [0.02, 0.12, 0],
+                    "viewBox": "0 0 600 300"}
+    }
+    aria = "Alles-automaten in 3D: een kaart met wegen en vier automaten als 3D-blokjes (helder = actief, dof = leeg). Sleep om te draaien."
+    scene_json = json.dumps(scene, separators=(",", ":"))
+    return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
+            f'data-scene=\'{scene_json}\'>')
+    + '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>'
 
 
 def fig_pyramide_c():
@@ -831,7 +826,7 @@ def page_foot():
   <div class="lb-stage"><div class="lb-imgwrap"></div></div>
   <div class="lb-foot">klik buiten de foto, of druk ESC, om te sluiten</div>
 </div>
-<script src="main.js?v=4"></script>
+<script src="main.js?v=7"></script>
 </body>
 </html>'''
 
