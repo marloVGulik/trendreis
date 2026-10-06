@@ -35,6 +35,81 @@
   });
   set3D(saved3d !== "off");
 
+  /* ---------------------------------------------------------- orbit anaglyph (interactief 3D) */
+  // Scène-data uit data-scene (JSON). Projecteert vanuit twee camera's (links=rood, rechts=cyaan).
+  // Muis-sleep (of touch) draait de scène rond de y-as => camera draait eromheen.
+  function orbitFill(channel, b) {
+    b = Math.max(0, Math.min(1, b));
+    if (channel === 'red') return 'rgb(' + Math.round(255*b) + ',' + Math.round(16*b) + ',' + Math.round(16*b) + ')';
+    return 'rgb(0,' + Math.round(229*b) + ',' + Math.round(229*b) + ')';
+  }
+  function renderOrbit(scene, angle) {
+    var P = scene.params, C = scene.center;
+    var cos = Math.cos(angle), sin = Math.sin(angle);
+    function rot(p) {
+      var x = p[0]-C[0], y = p[1]-C[1], z = p[2]-C[2];
+      return [x*cos + z*sin + C[0], y + C[1], -x*sin + z*cos + C[2]];
+    }
+    function proj(p, cam) {
+      var r = rot(p), rz = r[2]-cam[2];
+      if (rz <= 0.02) return null;
+      return [P.CX + P.F*(r[0]-cam[0])/rz*P.S, P.CY - P.F*(r[1]-cam[1])/rz*P.S];
+    }
+    function renderCam(cam, channel) {
+      var o = [], col = orbitFill(channel, 0.8);
+      var op = proj(scene.origin, cam);
+      if (op) o.push('<circle cx="'+op[0].toFixed(1)+'" cy="'+op[1].toFixed(1)+'" r="3" fill="'+orbitFill(channel,1)+'"/>');
+      for (var i=0;i<scene.axes.length;i++) {
+        var ax = scene.axes[i], a = proj(ax.a, cam), b = proj(ax.b, cam);
+        if (a && b) o.push('<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'" stroke="'+col+'" stroke-width="'+ax.w+'"'+(ax.dash?' stroke-dasharray="'+ax.dash+'"':'')+'/');
+      }
+      for (var j=0;j<scene.points.length;j++) {
+        var pt = scene.points[j], q = proj(pt.p, cam);
+        if (q) o.push('<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(pt.hot?7:4.5)+'" fill="'+orbitFill(channel, pt.hot?1:0.72)+'"/>');
+      }
+      return o.join('');
+    }
+    var red = renderCam(P.camL, 'red'), cyan = renderCam(P.camR, 'cyan');
+    var cCam = [0, P.camL[1], 0], labels = '';
+    for (var k=0;k<scene.points.length;k++) {
+      var lp = scene.points[k], c = proj(lp.p, cCam);
+      if (c) labels += '<text x="'+(c[0]+(lp.ldx||0)).toFixed(1)+'" y="'+(c[1]+(lp.ldy!==undefined?lp.ldy:-12)).toFixed(1)+'" class="'+(lp.hot?'lbl-accent':'lbl-dim')+'" font-size="11" text-anchor="'+(lp.anchor||'middle')+'">'+lp.label+'</text>';
+    }
+    for (var m=0;m<scene.endLabels.length;m++) {
+      var el = scene.endLabels[m], e = proj(el.p, cCam);
+      if (e) labels += '<text x="'+(e[0]+el.dx).toFixed(1)+'" y="'+(e[1]+el.dy).toFixed(1)+'" class="lbl-dim" font-size="12" text-anchor="'+el.anchor+'">'+el.t+'</text>';
+    }
+    return '<svg class="anaglyph" viewBox="'+P.viewBox+'" preserveAspectRatio="xMidYMid meet" role="img">\n'
+         + '<g id="chR" class="chR">'+red+'</g>\n'
+         + '<g id="chC" class="chC">'+cyan+'</g>\n'
+         + '<g class="anaglyph-labels">'+labels+'</g>\n</svg>';
+  }
+  try {
+  document.querySelectorAll('.anaglyph-orbit').forEach(function (div) {
+    if (div.__orbitInit) return;
+    div.__orbitInit = true;
+    var scene = JSON.parse(div.getAttribute('data-scene'));
+    var hint = div.querySelector('.orbit-hint');
+    var host = document.createElement('div');
+    host.className = 'orbit-svg';
+    div.insertBefore(host, hint);
+    var angle = 0;
+    function paint() { host.innerHTML = renderOrbit(scene, angle); }
+    paint();
+    var dragging = false, lastX = 0;
+    function px(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+    function down(e) { dragging = true; lastX = px(e); if (hint) hint.style.opacity = '0'; e.preventDefault(); }
+    function move(e) { if (!dragging) return; var x = px(e); angle += (x - lastX) * 0.008; lastX = x; paint(); }
+    function up() { dragging = false; }
+    div.addEventListener('mousedown', down);
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+    div.addEventListener('touchstart', down, { passive: false });
+    div.addEventListener('touchmove', move, { passive: false });
+    window.addEventListener('touchend', up);
+  });
+  } catch (e) { window.__orbitErr = String(e) + ' | ' + (e.stack || '').split('\n').slice(0,3).join(' // '); }
+
   /* ---------------------------------------------------------- mobile menu */
   var burger = document.getElementById("burger");
   if (burger) burger.addEventListener("click", function () {

@@ -269,6 +269,16 @@ body.nav-open .scrim { display: block; }
 body[data-3d="off"] .anaglyph #chC { display: none; }
 body[data-3d="off"] .anaglyph .chR { color: #c9c9c2; }
 .anaglyph .layer-far, .anaglyph .layer-mid, .anaglyph .layer-near { transition: transform .09s linear; }
+/* flat 2D-labels over de anaglyph (blijven leesbaar, geen rood/cyaan) */
+.anaglyph-labels { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+.anaglyph-labels text { fill: var(--fg); }
+.anaglyph-labels .lbl-dim { fill: var(--fg-dim); }
+.anaglyph-labels .lbl-accent { fill: var(--accent); }
+/* interactieve orbit-anaglyph (camera draait bij muis-sleep) */
+.anaglyph-orbit { position: relative; cursor: grab; background: #050505; border: 1px solid var(--border); border-radius: var(--r); touch-action: none; }
+.anaglyph-orbit:active { cursor: grabbing; }
+.anaglyph-orbit .orbit-svg .anaglyph { display: block; width: 100%; height: auto; }
+.orbit-hint { position: absolute; bottom: 8px; left: 12px; font: 11px 'IBM Plex Mono', ui-monospace, monospace; color: var(--fg-dim); letter-spacing: .05em; transition: opacity .4s; pointer-events: none; }
 /* 3D "pop" op diepte-elementen (actieve knoppen) — anaglyph-fringe, past in de stijl */
 body[data-3d="on"] .snav.active { text-shadow: -1px 0 rgba(255,16,16,.55), 1px 0 rgba(0,229,229,.55); }
 body[data-3d="on"] .btn[aria-pressed="true"] { text-shadow: -1px 0 rgba(255,16,16,.5), 1px 0 rgba(0,229,229,.5); }

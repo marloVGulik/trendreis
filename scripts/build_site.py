@@ -381,35 +381,40 @@ def fig_levenswiel():
 
 
 def fig_assenstelsel():
-    L = "var(--fg)"; D = "var(--fg-dim)"; A = "var(--accent)"
-    s = _svg_open("Assenstelsel: signalen geplooid op twee assen (concept)", 480, 340)
-    ox, oy = 70, 270
-    # grid
-    for gx in range(1, 5):
-        x = ox + gx * 95
-        s += f'<line x1="{x}" y1="{oy}" x2="{x}" y2="60" stroke="{D}" stroke-width=".6" stroke-dasharray="2 5" opacity=".5"/>'
-    for gy in range(1, 4):
-        y = oy - gy * 70
-        s += f'<line x1="{ox}" y1="{y}" x2="440" y2="{y}" stroke="{D}" stroke-width=".6" stroke-dasharray="2 5" opacity=".5"/>'
-    # axes
-    s += f'<line x1="{ox}" y1="{oy}" x2="452" y2="{oy}" stroke="{L}" stroke-width="1.4"/>'
-    s += f'<path d="M452 {oy} l-9 -4 l0 8 z" fill="{L}"/>'
-    s += f'<line x1="{ox}" y1="{oy}" x2="{ox}" y2="46" stroke="{L}" stroke-width="1.4"/>'
-    s += f'<path d="M{ox} 46 l-4 9 l8 0 z" fill="{L}"/>'
-    # axis labels
-    s += f'<text x="452" y="{oy + 20}" class="fig-lbl" text-anchor="end">huidig → toekomst</text>'
-    s += f'<text x="24" y="158" class="fig-lbl" text-anchor="middle" transform="rotate(-90 24 158)">persoonlijk → maatschappelijk</text>'
-    # points
-    pts = [(150, 190, "open source", True), (240, 130, "lokale AI", False),
-           (330, 160, "automatisering", False), (378, 96, "robot huisdier", True)]
-    for x, y, lab, hot in pts:
-        c = A if hot else D
-        s += f'<circle cx="{x}" cy="{y}" r="6" fill="{c}"/>'
-        s += f'<circle cx="{x}" cy="{y}" r="11" fill="none" stroke="{c}" stroke-width="1" opacity=".5"/>'
-        s += f'<text x="{x}" y="{y - 18}" class="fig-lbl" text-anchor="middle">{lab}</text>'
-    s += f'<text x="{ox}" y="{oy + 20}" class="fig-tag" text-anchor="start">0</text>'
-    s += "</svg>"
-    return s
+    # ---- 3D-assenstelsel (bipolair, −1 tot +1) — INTERACTIEF: camera draait bij muis-sleep ----
+    # Scène-data als JSON; JavaScript projecteert (twee camera's) en rendert live.
+    import json
+    scene = {
+        "center": [0, 0, 2],
+        "axes": [
+            {"a": [-1, 0, 2], "b": [1, 0, 2], "w": 1.6},
+            {"a": [0, -1, 2], "b": [0, 1, 2], "w": 1.6},
+            {"a": [0, 0, 1], "b": [0, 0, 3], "w": 1.3, "dash": "4 4"}
+        ],
+        "points": [
+            {"p": [-0.3, 0.2, 2.2], "label": "open source", "hot": True, "ldx": -8, "ldy": -3, "anchor": "end"},
+            {"p": [0.2, 0.3, 2.4], "label": "lokale AI", "hot": False, "ldx": 2, "ldy": -15, "anchor": "middle"},
+            {"p": [0.3, -0.2, 2.6], "label": "automatisering", "hot": False, "ldx": 9, "ldy": 4, "anchor": "start"},
+            {"p": [-0.2, -0.3, 2.8], "label": "robot huisdier", "hot": True, "ldx": -4, "ldy": 22, "anchor": "middle"}
+        ],
+        "origin": [0, 0, 2],
+        "endLabels": [
+            {"p": [1, 0, 2], "t": "+", "dx": 8, "dy": 4, "anchor": "start"},
+            {"p": [-1, 0, 2], "t": "−", "dx": -8, "dy": 4, "anchor": "end"},
+            {"p": [0, 1, 2], "t": "+", "dx": 8, "dy": -6, "anchor": "start"},
+            {"p": [0, -1, 2], "t": "−", "dx": 8, "dy": 14, "anchor": "start"},
+            {"p": [0, 0, 3], "t": "+", "dx": 8, "dy": 4, "anchor": "start"},
+            {"p": [0, 0, 1], "t": "−", "dx": 8, "dy": 14, "anchor": "start"}
+        ],
+        "params": {"F": 1.5, "S": 180, "CX": 300, "CY": 150,
+                    "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
+                    "viewBox": "0 0 600 300"}
+    }
+    aria = "Assenstelsel in 3D: drie bipolaire assen (−1 tot +1), signalen in verschillende kwadranten (concept). Sleep met de muis om te draaien."
+    scene_json = json.dumps(scene, separators=(",", ":"))
+    return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
+            f'data-scene=\'{scene_json}\'>'
+            f'<div class="orbit-hint">&#8596; sleep om te draaien</div></div>')
 
 
 def fig_trendcanvas():
@@ -474,48 +479,109 @@ def fig_automaten():
 
 
 def fig_pyramide_c():
-    D = "var(--fg-dim)"; A = "var(--accent)"
-    s = _svg_open("Waardepiramide C: leeg frame, nog te vullen (3 lagen)", 420, 320)
-    apex = (210, 40)
-    bl = (70, 270)
-    br = (350, 270)
-    # pyramid outline
-    s += f'<path d="M{apex[0]} {apex[1]} L{br[0]} {br[1]} L{bl[0]} {bl[1]} Z" fill="none" stroke="{A}" stroke-width="1.6" stroke-dasharray="6 5"/>'
-    # two dividers (3 tiers)
-    for f in (0.34, 0.67):
-        lx = apex[0] + (bl[0] - apex[0]) * f
-        ly = apex[1] + (bl[1] - apex[1]) * f
-        rx = apex[0] + (br[0] - apex[0]) * f
-        ry = apex[1] + (br[1] - apex[1]) * f
-        s += f'<line x1="{lx:.0f}" y1="{ly:.0f}" x2="{rx:.0f}" y2="{ry:.0f}" stroke="{D}" stroke-width="1" stroke-dasharray="4 5"/>'
-    # tier labels (empty slots)
-    s += f'<text x="210" y="92" class="fig-empty" text-anchor="middle">—</text>'
-    s += f'<text x="210" y="160" class="fig-empty" text-anchor="middle">—</text>'
-    s += f'<text x="210" y="228" class="fig-empty" text-anchor="middle">—</text>'
-    # side labels
-    s += f'<text x="356" y="96" class="fig-lbl" text-anchor="start">top</text>'
-    s += f'<text x="356" y="164" class="fig-lbl" text-anchor="start">laag 2</text>'
-    s += f'<text x="356" y="232" class="fig-lbl" text-anchor="start">laag 1</text>'
-    s += f'<text x="210" y="300" class="fig-note" text-anchor="middle">concept — nog te vullen</text>'
-    s += "</svg>"
-    return s
+    # ---- 3D-piramide (via de Anaglyph-motor) ----
+    a = Anaglyph(viewBox="0 0 420 320", aria="Waardepiramide C: 3D-piramide, leeg frame nog te vullen (3 lagen)",
+                 CX=210, CY=190, F=1.4, S=92, camL=(-0.08, 1.0, 0.0), camR=(0.08, 1.0, 0.0))
+    H, B, ZC = 1.5, 1.0, 2.0              # apex-hoogte, basis-halfte, diepte-centrum
+    apex = (0, H, ZC)
+    base = [(-B, 0, ZC - B), (B, 0, ZC - B), (B, 0, ZC + B), (-B, 0, ZC + B)]   # nabij, nabij, ver, ver
+    faces = [                                                              # (punten, normale) => schaduw
+        ([apex, base[3], base[0]], (0, 0.5, -1)),   # voor (nabij)
+        ([apex, base[1], base[2]], (1, 0.5, 0)),    # rechts
+        ([apex, base[2], base[3]], (0, 0.5, 1)),    # achter (ver)
+        ([apex, base[0], base[1]], (-1, 0.5, 0)),   # links
+    ]
+    tiers = [0.34, 0.67]                                                   # 3 lagen (2 scheidingslijnen)
+    def tier_sq(frac):
+        y = H * frac; hw = B * (1 - frac)
+        return [(-hw, y, ZC - hw), (hw, y, ZC - hw), (hw, y, ZC + hw), (-hw, y, ZC + hw)]
+    def render(cam, channel):
+        fd = []
+        for (pts, n) in faces:
+            proj = [a.P(p, cam) for p in pts]
+            if all(proj): fd.append((sum(p[2] for p in pts) / len(pts), pts, a.brightness(n)))
+        fd.sort(key=lambda d: d[0], reverse=True)                          # ver -> nabij (solide)
+        o = [a.poly(pts, cam, a.facefill(b, channel), stroke=a.facefill(b * 0.35, channel), sw=1.6)
+             for _, pts, b in fd]
+        for frac in tiers:                                                # tier-scheidingslijnen
+            sq = tier_sq(frac)
+            o += [a.line(sq[i], sq[(i + 1) % 4], cam, a.facefill(0.55, channel), 1.2, dash="4 4") for i in range(4)]
+        return "".join(o)
+    labels = []                                                           # flat 2D-labels (blijven leesbaar)
+    for frac, txt in [(0.98, "top"), (0.5, "laag 2"), (0.02, "laag 1")]:
+        p = a.center_proj((B * (1 - frac) + 0.15, H * frac, ZC))
+        if p: labels.append(f'<text x="{p[0] + 12:.1f}" y="{p[1] + 4:.1f}" class="lbl-dim" font-size="12">{txt}</text>')
+    p0 = a.center_proj((0, -0.12, ZC))
+    if p0: labels.append(f'<text x="210" y="{min(p0[1] + 22, 312):.1f}" text-anchor="middle" class="lbl-dim" font-size="11">concept — nog te vullen</text>')
+    return a.render(render, labels="".join(labels))
 
 
-def anaglyph_svg():
-    # ---- Echte twee-camera-anaglyph (standaard bril: links=rood, rechts=cyaan) ----
-    # De 3D-scene wordt tweemaal in perspectief geprojecteerd (links- en rechts-oog).
-    # Links-oog -> ROOD kanaal, rechts-oog -> CYAAN kanaal; de beelden overlappen en
-    # de hersenen smelten ze tot 3D. Geen "offset-truc" maar echte paralaxe via wiskunde.
-    camL = (-0.06, 1.0, 0.0)   # links oog  -> rood   (IPD klein => offset ~8-10px, smeltbaar)
-    camR = ( 0.06, 1.0, 0.0)   # rechts oog -> cyaan
-    F = 1.4                    # brandpuntsafstand (wereldeenheden)
-    S = 300.0                  # wereld-projectie -> svg px
-    CX, CY = 400, 155          # svg-midden (horizon / vluchtpunt)
-    def P(pt, cam):
+# ---- 3D-anaglyph motor (herbruikbaar voor alle figuren) ---------------------------
+# Echte twee-camera-anaglyph (standaard bril: links=rood, rechts=cyaan). De 3D-scène
+# wordt tweemaal in perspectief geprojecteerd (links- en rechts-oog); de beelden
+# overlappen en de hersenen smelten ze tot 3D. Geen "offset-truc" maar echte paralaxe.
+class Anaglyph:
+    def __init__(self, camL=(-0.06, 1.0, 0.0), camR=(0.06, 1.0, 0.0),
+                 F=1.4, S=300.0, CX=400, CY=155, viewBox="0 80 800 240", aria=""):
+        self.camL, self.camR = camL, camR
+        self.F, self.S, self.CX, self.CY = F, S, CX, CY
+        self.viewBox, self.aria = viewBox, aria
+        _l = (0.0, 0.35, -1.0)                      # lichtbron van boven-vóór => 3D-vorm
+        _lm = math.sqrt(sum(c * c for c in _l))
+        self.LIGHT = tuple(c / _lm for c in _l)
+    def P(self, pt, cam):
         px, py, pz = pt; cx, cy, cz = cam
         rz = pz - cz
         if rz <= 0.02: return None
-        return (CX + F * (px - cx) / rz * S, CY - F * (py - cy) / rz * S)
+        return (self.CX + self.F * (px - cx) / rz * self.S, self.CY - self.F * (py - cy) / rz * self.S)
+    def brightness(self, n):
+        d = n[0] * self.LIGHT[0] + n[1] * self.LIGHT[1] + n[2] * self.LIGHT[2]
+        return 0.22 + 0.78 * max(0.0, d)
+    def facefill(self, b, channel):
+        if channel == 'red':
+            return 'rgb(%d,%d,%d)' % (int(255 * b), int(16 * b), int(16 * b))
+        return 'rgb(0,%d,%d)' % (int(229 * b), int(229 * b))
+    def poly(self, pts, cam, fill, stroke=None, sw=1.5, opacity=None):
+        r = [self.P(p, cam) for p in pts]
+        if all(r):
+            s = '<polygon points="%s" fill="%s"' % (" ".join(f"{x:.1f},{y:.1f}" for x, y in r), fill)
+            if opacity is not None: s += f' fill-opacity="{opacity}"'
+            if stroke: s += f' stroke="{stroke}" stroke-width="{sw}"'
+            return s + "/>"
+        return ""
+    def line(self, a, b, cam, stroke, sw=1.5, dash=None):
+        pa, pb = self.P(a, cam), self.P(b, cam)
+        if pa and pb:
+            s = f'<line x1="{pa[0]:.1f}" y1="{pa[1]:.1f}" x2="{pb[0]:.1f}" y2="{pb[1]:.1f}" stroke="{stroke}" stroke-width="{sw}"'
+            if dash: s += f' stroke-dasharray="{dash}"'
+            return s + "/>"
+        return ""
+    def circle(self, center, radius, cam, fill):
+        p = self.P(center, cam)
+        if not p: return ""
+        p2 = self.P((center[0] + radius, center[1], center[2]), cam)
+        r = abs(p2[0] - p[0]) if p2 else radius
+        return f'<circle cx="{p[0]:.1f}" cy="{p[1]:.1f}" r="{r:.1f}" fill="{fill}"/>'
+    def render(self, render_scene, labels=""):
+        """render_scene(cam, channel) -> SVG van de scène vanuit één camera.
+        labels: optionele FLAT 2D-tekst (niet in rood/cyaan) die over de scène heen ligt."""
+        red = render_scene(self.camL, 'red')
+        cyan = render_scene(self.camR, 'cyan')
+        lab = f'\n  <g id="anaglyphLabels" class="anaglyph-labels">{labels}</g>' if labels else ""
+        return (f'<svg class="anaglyph" viewBox="{self.viewBox}" preserveAspectRatio="xMidYMid meet" '
+                f'role="img" aria-label="{self.aria}">\n'
+                f'  <g id="chR" class="chR">{red}</g>\n'
+                f'  <g id="chC" class="chC">{cyan}</g>{lab}\n'
+                f'</svg>')
+    def center_proj(self, pt):
+        """projectie vanuit een midden-camera (geen offset) => voor 2D-labelposities."""
+        return self.P(pt, (0.0, self.camL[1], 0.0))
+
+
+def anaglyph_svg():
+    # ---- 3D-hero (via de herbruikbare Anaglyph-motor) ----
+    # Een WEG met DUNNE mijlpalen + VLIEGENDE blokken + noorderster. Richting A: "reis met stappen".
+    a = Anaglyph(aria="Een weg met mijlpalen die naar een noorderster op de horizon loopt — de trendreis, in 3D")
     # ---- 3D-scene (wereldcoordinaten: x=links/rechts, y=omhoog, z=verder) ----
     # Een WEG met DUNNE 3D-mijlpalen (slanke zuilen) + WILLEKEURIG VLIEGENDE 3D-blokjes
     # (elk met een vaste willekeurige rotatie) die rondom vliegen en uit het scherm springen,
@@ -548,15 +614,6 @@ def anaglyph_svg():
         c, s = math.cos(ry), math.sin(ry); x, z = x*c + z*s, -x*s + z*c
         c, s = math.cos(rz), math.sin(rz); x, y = x*c - y*s, x*s + y*c
         return (x, y, z)
-    # ---- shading: helderheid per vlak (vlaknormaal t.o.v. lichtbron van boven-vóór) => 3D-vorm ----
-    _l = (0.0, 0.35, -1.0); _lm = math.sqrt(_l[0]**2 + _l[1]**2 + _l[2]**2); LIGHT = tuple(c/_lm for c in _l)
-    def brightness(n):
-        d = n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2]
-        return 0.22 + 0.78 * max(0.0, d)
-    def facefill(b, channel):
-        if channel == 'red':
-            return 'rgb(%d,%d,%d)' % (int(255*b), int(16*b), int(16*b))
-        return 'rgb(0,%d,%d)' % (int(229*b), int(229*b))
     CUBE = [(-1,-1,-1),(1,-1,-1),(1,1,-1),(-1,1,-1),(-1,-1,1),(1,-1,1),(1,1,1),(-1,1,1)]
     CUBE_F = [[0,1,2,3,(0,0,-1)],[4,5,6,7,(0,0,1)],[0,3,7,4,(-1,0,0)],[1,2,6,5,(1,0,0)],[0,1,5,4,(0,-1,0)],[3,2,6,7,(0,1,0)]]
     def cube(center, size, rot, cam, channel):
@@ -565,11 +622,11 @@ def anaglyph_svg():
         data = []
         for f in CUBE_F:
             idx = f[:4]; n = rot3(f[4], *rot)
-            proj = [P(pts[i], cam) for i in idx]
-            if all(proj): data.append((sum(pts[i][2] for i in idx)/len(idx), proj, brightness(n)))
+            proj = [a.P(pts[i], cam) for i in idx]
+            if all(proj): data.append((sum(pts[i][2] for i in idx)/len(idx), proj, a.brightness(n)))
         data.sort(key=lambda d: d[0], reverse=True)   # ver -> nabij (painter's order => solide)
         return "".join('<polygon points="%s" fill="%s" stroke="%s" stroke-width="1.2"/>' % (
-            " ".join(f"{x:.1f},{y:.1f}" for x, y in proj), facefill(b, channel), facefill(b*0.4, channel))
+            " ".join(f"{x:.1f},{y:.1f}" for x, y in proj), a.facefill(b, channel), a.facefill(b*0.4, channel))
             for _, proj, b in data)
     def faces_of(cx, z, w, h, d):
         x0, x1 = cx - w/2, cx + w/2
@@ -579,57 +636,33 @@ def anaglyph_svg():
         left  = ([(x0,0,z0),(x0,0,z1),(x0,h,z1),(x0,h,z0)], (-1,0,0))
         right = ([(x1,0,z0),(x1,0,z1),(x1,h,z1),(x1,h,z0)], (1,0,0))
         return [front, top, (left if cx > 0 else right)]
-    def poly(pts, cam, cls):
-        r = [P(p, cam) for p in pts]
-        if all(r): return '<polygon points="%s" class="%s"/>' % (" ".join(f"{x:.1f},{y:.1f}" for x, y in r), cls)
-        return ""
-    def seg(a, b, cam, cls):
-        pa, pb = P(a, cam), P(b, cam)
-        if pa and pb: return '<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" class="%s"/>' % (pa[0], pa[1], pb[0], pb[1], cls)
-        return ""
     def render(cam, channel):
-        o = [poly(road, cam, "roadfill")]
-        o += [seg(a, b, cam, "ln") for (a, b) in cross]
-        o += [seg(a, b, cam, "ln strong") for (a, b) in edges]
-        # ALLE 3D-objecten (palen + blokken + ster) sorteer op diepte (ver -> nabij),
-        # zodat nabije objecten altijd op verre liggen (correcte overlap, geen verkeerde volgorde)
+        o = [a.poly(road, cam, "currentColor", opacity=0.3)]
+        o += [a.line(a_, b_, cam, "currentColor", 1.5) for (a_, b_) in cross]
+        o += [a.line(a_, b_, cam, "currentColor", 2.0) for (a_, b_) in edges]
+        # ALLE 3D-objecten (palen + blokken + ster) sorteer op diepte (ver -> nabij) => correcte overlap
         objs = [(z, ('milestone', cx, z, w, h, d)) for (cx, z, w, h, d) in milestones]
         objs += [(cz, ('cube', cx, cy, cz, size, rot)) for (cx, cy, cz, size, rot) in flying]
         objs.append((star[2], ('star',)))
-        objs.sort(key=lambda x: x[0], reverse=True)   # ver -> nabij
+        objs.sort(key=lambda x: x[0], reverse=True)
         for depth, spec in objs:
             kind = spec[0]
             if kind == 'milestone':
                 _, cx, z, w, h, d = spec
                 for pts, n in faces_of(cx, z, w, h, d):
-                    b = brightness(n)
-                    r = [P(p, cam) for p in pts]
-                    if all(r):
-                        o.append('<polygon points="%s" fill="%s" stroke="%s" stroke-width="1.5"/>' % (
-                            " ".join(f"{x:.1f},{y:.1f}" for x, y in r), facefill(b, channel), facefill(b*0.4, channel)))
+                    b = a.brightness(n)
+                    o.append(a.poly(pts, cam, a.facefill(b, channel), stroke=a.facefill(b*0.4, channel), sw=1.5))
             elif kind == 'cube':
                 _, cx, cy, cz, size, rot = spec
                 o.append(cube((cx, cy, cz), size, rot, cam, channel))
             elif kind == 'star':
-                ps = P(star, cam)
-                if ps:
-                    sx, sy = ps
-                    o.append('<circle cx="%.1f" cy="%.1f" r="7" fill="%s"/>' % (sx, sy, facefill(1.0, channel)))
-                    o.append('<path d="M%.1f %.1f L%.1f %.1f M%.1f %.1f L%.1f %.1f" class="ln strong"/>' % (sx-12, sy, sx+12, sy, sx, sy-12, sx, sy+12))
+                p = a.P(star, cam)
+                if p:
+                    o.append('<circle cx="%.1f" cy="%.1f" r="7" fill="%s"/>' % (p[0], p[1], a.facefill(1.0, channel)))
+                    o.append('<path d="M%.1f %.1f L%.1f %.1f M%.1f %.1f L%.1f %.1f" stroke="%s" stroke-width="2"/>' % (
+                        p[0]-12, p[1], p[0]+12, p[1], p[0], p[1]-12, p[0], p[1]+12, a.facefill(1.0, channel)))
         return "".join(o)
-    red = render(camL, 'red')
-    cyan = render(camR, 'cyan')
-    return f'''
-<svg class="anaglyph" viewBox="0 80 800 240" preserveAspectRatio="xMidYMid meet"
-     role="img" aria-label="Een weg met mijlpalen die naar een noorderster op de horizon loopt — de trendreis, in 3D">
-  <defs><style>
-    .roadfill {{ fill: currentColor; fill-opacity: .3; stroke: none; }}
-    .ln {{ stroke: currentColor; stroke-width: 1.5; fill: none; }}
-    .ln.strong {{ stroke-width: 2; }}
-  </style></defs>
-  <g id="chR" class="chR">{red}</g>
-  <g id="chC" class="chC">{cyan}</g>
-</svg>'''
+    return a.render(render)
 
 
 FIGURE_BUILDERS = {
@@ -798,7 +831,7 @@ def page_foot():
   <div class="lb-stage"><div class="lb-imgwrap"></div></div>
   <div class="lb-foot">klik buiten de foto, of druk ESC, om te sluiten</div>
 </div>
-<script src="main.js"></script>
+<script src="main.js?v=4"></script>
 </body>
 </html>'''
 
