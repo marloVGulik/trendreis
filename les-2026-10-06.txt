@@ -1,0 +1,19 @@
+Waardeverschuiving:
+
+1. Wat was de oude situatie
+2. Waar gaat het naartoe
+3. Welke waarde / behoefte veranderd er
+4. Waarom vind dit plaats
+5. Wat kan je zien
+6. Hoe noem je deze verschuiving?
+7. Waarom vind ik het interessant?
+
+1. Software is duur, automatiseren is duur en lastig. Mensen met jaren ervaring, kunnen niet automatiseren omdat het te complex is en mensen vaak geen kennis hebben.
+2. Software is goedkoop en altijd overal toegankelijk, en iedereen kan met weinig ervaring automatisering schrijven
+3. Behoefte van automatisering was er altijd al, en de waarde is ook niet veranderd. De drang om geld te besparen is er altijd al geweest
+4. AI is nu toegankelijk voor de gemiddelde persoon, en slim genoeg om ons hiermee te helpen
+5. Ik kan zien dat iedereen nu een website wilt, en elk bedrijf wilt bepaalde processen gemakkelijker maken.
+6. Van "dure software" naar beschikbare tooling
+7. Ik heb obsessie met automatiseren 
+
+Van exclusiviteit naar inclusiviteit, van langzaam naar snel

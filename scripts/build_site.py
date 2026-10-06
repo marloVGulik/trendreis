@@ -11,6 +11,8 @@ figuren (SVG) · bron-quotes die linken naar de notebook-foto (rechthoek) ·
 AI-chat in een nep-console-venster · light/dark + 3D (anaglyph op de home).
 """
 import html
+import math
+import random
 import re
 import shutil
 from pathlib import Path
@@ -515,47 +517,115 @@ def anaglyph_svg():
         if rz <= 0.02: return None
         return (CX + F * (px - cx) / rz * S, CY - F * (py - cy) / rz * S)
     # ---- 3D-scene (wereldcoordinaten: x=links/rechts, y=omhoog, z=verder) ----
-    # Vast uitgangspunt uit werkende anaglyph-voorbeelden: GROTE INGEVULDE Vlakken
-    # (geen dunne lijntjes) zodat rood + cyaan overlappen en de hersenen het tot 3D smelten.
-    RW, GH = 1.3, 1.8          # pad-halfte-breedte, poort-hoogte (groot => vult het kader)
+    # Een WEG met DUNNE 3D-mijlpalen (slanke zuilen) + WILLEKEURIG VLIEGENDE 3D-blokjes
+    # (elk met een vaste willekeurige rotatie) die rondom vliegen en uit het scherm springen,
+    # richting de noorderster. Grote ingevulde vlakken => rood+cyaan smelten tot 3D.
+    RW = 0.95                  # pad-halfte-breedte
     ZN, ZF = 3.0, 28.0         # pad: nabij -> horizon
     road = [(-RW,0,ZN),(RW,0,ZN),(RW,0,ZF),(-RW,0,ZF)]
     cross = [((-RW,0,z),(RW,0,z)) for z in (4.5,6.5,9.5,14,20,26)]
     edges = [((-RW,0,ZN),(-RW,0,ZF)), ((RW,0,ZN),(RW,0,ZF)), ((0,0,ZN),(0,0,ZF))]
-    gates = [[(-1.1,0,z),(1.1,0,z),(1.1,GH,z),(-1.1,GH,z)] for z in (6.0,12.0,20.0)]
-    star = (0, 1.7, 28)
-    def render(cam):
-        o = []
-        r = [P(p, cam) for p in road]
-        if all(r):
-            o.append('<polygon points="%s" class="roadfill"/>' % " ".join(f"{x:.1f},{y:.1f}" for x, y in r))
-        for (a, b) in cross:
-            pa, pb = P(a, cam), P(b, cam)
-            if pa and pb: o.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" class="ln"/>' % (pa[0], pa[1], pb[0], pb[1]))
-        for (a, b) in edges:
-            pa, pb = P(a, cam), P(b, cam)
-            if pa and pb: o.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" class="ln strong"/>' % (pa[0], pa[1], pb[0], pb[1]))
-        for g in gates:
-            r = [P(p, cam) for p in g]
-            if all(r):
-                o.append('<polygon points="%s" class="gatefill"/>' % " ".join(f"{x:.1f},{y:.1f}" for x, y in r))
-        ps = P(star, cam)
-        if ps:
-            sx, sy = ps
-            o.append('<circle cx="%.1f" cy="%.1f" r="7" class="starf"/>' % (sx, sy))
-            o.append('<path d="M%.1f %.1f L%.1f %.1f M%.1f %.1f L%.1f %.1f" class="ln strong"/>' % (sx-12, sy, sx+12, sy, sx, sy-12, sx, sy+12))
+    # mijlpalen = DUNNE, slanke zuilen (cx, z, breedte, hoogte, diepte), afwisselend + gespreid
+    milestones = [
+        ( 0.55,  5.0, 0.38, 1.65, 0.26),
+        (-0.55, 10.5, 0.38, 1.65, 0.26),
+        ( 0.50, 16.5, 0.32, 1.40, 0.24),
+        (-0.45, 23.0, 0.28, 1.15, 0.22),
+    ]
+    star = (0, 1.6, 28)
+    # vliegende blokken: goed gespreid rond de scène (losse bits, geen blob), elk met een
+    # willekeurige rotatie (seed => reproduceerbaar)
+    rng = random.Random(20261011)
+    flying_pos = [(-3.1, 1.8, 10.0), (-2.7, 0.9, 16.0), (3.2, 2.8, 14.0),
+                  (2.9, 1.4, 20.0), (-0.4, 3.2, 27.0)]
+    flying_sz = [0.28, 0.28, 0.28, 0.28, 0.28]   # alle blokken even groot => 3D-effect puur op diepte (geen grootte-correlatie)
+    flying = [(x, y, z, flying_sz[i],
+               (rng.uniform(0, 2*math.pi), rng.uniform(0, 2*math.pi), rng.uniform(0, 2*math.pi)))
+              for i, (x, y, z) in enumerate(flying_pos)]
+    def rot3(p, rx, ry, rz):
+        x, y, z = p
+        c, s = math.cos(rx), math.sin(rx); y, z = y*c - z*s, y*s + z*c
+        c, s = math.cos(ry), math.sin(ry); x, z = x*c + z*s, -x*s + z*c
+        c, s = math.cos(rz), math.sin(rz); x, y = x*c - y*s, x*s + y*c
+        return (x, y, z)
+    # ---- shading: helderheid per vlak (vlaknormaal t.o.v. lichtbron van boven-vóór) => 3D-vorm ----
+    _l = (0.0, 0.35, -1.0); _lm = math.sqrt(_l[0]**2 + _l[1]**2 + _l[2]**2); LIGHT = tuple(c/_lm for c in _l)
+    def brightness(n):
+        d = n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2]
+        return 0.22 + 0.78 * max(0.0, d)
+    def facefill(b, channel):
+        if channel == 'red':
+            return 'rgb(%d,%d,%d)' % (int(255*b), int(16*b), int(16*b))
+        return 'rgb(0,%d,%d)' % (int(229*b), int(229*b))
+    CUBE = [(-1,-1,-1),(1,-1,-1),(1,1,-1),(-1,1,-1),(-1,-1,1),(1,-1,1),(1,1,1),(-1,1,1)]
+    CUBE_F = [[0,1,2,3,(0,0,-1)],[4,5,6,7,(0,0,1)],[0,3,7,4,(-1,0,0)],[1,2,6,5,(1,0,0)],[0,1,5,4,(0,-1,0)],[3,2,6,7,(0,1,0)]]
+    def cube(center, size, rot, cam, channel):
+        cx, cy, cz = center; s = size/2
+        pts = [(rot3(p, *rot)[0]+cx, rot3(p, *rot)[1]+cy, rot3(p, *rot)[2]+cz) for p in CUBE]
+        data = []
+        for f in CUBE_F:
+            idx = f[:4]; n = rot3(f[4], *rot)
+            proj = [P(pts[i], cam) for i in idx]
+            if all(proj): data.append((sum(pts[i][2] for i in idx)/len(idx), proj, brightness(n)))
+        data.sort(key=lambda d: d[0], reverse=True)   # ver -> nabij (painter's order => solide)
+        return "".join('<polygon points="%s" fill="%s" stroke="%s" stroke-width="1.2"/>' % (
+            " ".join(f"{x:.1f},{y:.1f}" for x, y in proj), facefill(b, channel), facefill(b*0.4, channel))
+            for _, proj, b in data)
+    def faces_of(cx, z, w, h, d):
+        x0, x1 = cx - w/2, cx + w/2
+        z0, z1 = z - d/2, z + d/2
+        front = ([(x0,0,z0),(x1,0,z0),(x1,h,z0),(x0,h,z0)], (0,0,-1))
+        top   = ([(x0,h,z0),(x1,h,z0),(x1,h,z1),(x0,h,z1)], (0,1,0))
+        left  = ([(x0,0,z0),(x0,0,z1),(x0,h,z1),(x0,h,z0)], (-1,0,0))
+        right = ([(x1,0,z0),(x1,0,z1),(x1,h,z1),(x1,h,z0)], (1,0,0))
+        return [front, top, (left if cx > 0 else right)]
+    def poly(pts, cam, cls):
+        r = [P(p, cam) for p in pts]
+        if all(r): return '<polygon points="%s" class="%s"/>' % (" ".join(f"{x:.1f},{y:.1f}" for x, y in r), cls)
+        return ""
+    def seg(a, b, cam, cls):
+        pa, pb = P(a, cam), P(b, cam)
+        if pa and pb: return '<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" class="%s"/>' % (pa[0], pa[1], pb[0], pb[1], cls)
+        return ""
+    def render(cam, channel):
+        o = [poly(road, cam, "roadfill")]
+        o += [seg(a, b, cam, "ln") for (a, b) in cross]
+        o += [seg(a, b, cam, "ln strong") for (a, b) in edges]
+        # ALLE 3D-objecten (palen + blokken + ster) sorteer op diepte (ver -> nabij),
+        # zodat nabije objecten altijd op verre liggen (correcte overlap, geen verkeerde volgorde)
+        objs = [(z, ('milestone', cx, z, w, h, d)) for (cx, z, w, h, d) in milestones]
+        objs += [(cz, ('cube', cx, cy, cz, size, rot)) for (cx, cy, cz, size, rot) in flying]
+        objs.append((star[2], ('star',)))
+        objs.sort(key=lambda x: x[0], reverse=True)   # ver -> nabij
+        for depth, spec in objs:
+            kind = spec[0]
+            if kind == 'milestone':
+                _, cx, z, w, h, d = spec
+                for pts, n in faces_of(cx, z, w, h, d):
+                    b = brightness(n)
+                    r = [P(p, cam) for p in pts]
+                    if all(r):
+                        o.append('<polygon points="%s" fill="%s" stroke="%s" stroke-width="1.5"/>' % (
+                            " ".join(f"{x:.1f},{y:.1f}" for x, y in r), facefill(b, channel), facefill(b*0.4, channel)))
+            elif kind == 'cube':
+                _, cx, cy, cz, size, rot = spec
+                o.append(cube((cx, cy, cz), size, rot, cam, channel))
+            elif kind == 'star':
+                ps = P(star, cam)
+                if ps:
+                    sx, sy = ps
+                    o.append('<circle cx="%.1f" cy="%.1f" r="7" fill="%s"/>' % (sx, sy, facefill(1.0, channel)))
+                    o.append('<path d="M%.1f %.1f L%.1f %.1f M%.1f %.1f L%.1f %.1f" class="ln strong"/>' % (sx-12, sy, sx+12, sy, sx, sy-12, sx, sy+12))
         return "".join(o)
-    red = render(camL)
-    cyan = render(camR)
+    red = render(camL, 'red')
+    cyan = render(camR, 'cyan')
     return f'''
 <svg class="anaglyph" viewBox="0 80 800 240" preserveAspectRatio="xMidYMid meet"
-     role="img" aria-label="Een pad met drie poorten naar een noorderster op de horizon — van signaal tot bedrijf, in 3D">
+     role="img" aria-label="Een weg met mijlpalen die naar een noorderster op de horizon loopt — de trendreis, in 3D">
   <defs><style>
     .roadfill {{ fill: currentColor; fill-opacity: .3; stroke: none; }}
-    .gatefill {{ fill: currentColor; fill-opacity: .65; stroke: currentColor; stroke-width: 1.8; }}
     .ln {{ stroke: currentColor; stroke-width: 1.5; fill: none; }}
     .ln.strong {{ stroke-width: 2; }}
-    .starf {{ fill: currentColor; }}
   </style></defs>
   <g id="chR" class="chR">{red}</g>
   <g id="chC" class="chC">{cyan}</g>
