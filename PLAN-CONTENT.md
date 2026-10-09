@@ -132,6 +132,26 @@ Vijf dingen die ik uit de trendlijst heb gehaald, omdat het **geen signaleringen
 
 ## #2 · Trends — ingevuld
 
+### 2.0 Signaal → trend: de methode
+
+**Definitie uit de deck (Week 1 Dag 2B):** *"Een trend is een richting waarin waarden en behoeftes veranderen, opgestuwd door externe krachten en manifesteert zich door ons gedrag, producten en diensten."*
+
+**Het onderscheid:**
+- **Signaal** = een gebeurtenis. Je kunt zeggen: *"dit bestaat"* / *"dit zag ik"*.
+- **Trend** = een richting. Je kunt zeggen: *"van A naar B"*.
+- Een trend is het patroon dat meerdere signalen samen vormen. Daarom komen er minder trends uit dan signalen.
+
+**De 5 testen bij omvormen:**
+1. **Richting** — kun je het als "van … naar …" formuleren? Zo nee: blijft een signaal.
+2. **Externe kracht** — welke DESTEP-kracht duwt eronder? Zo geen: het is een mode of moment, geen trend.
+3. **Meerdere signalen** — één signaal is anekdote. Een trend heeft ≥2 signalen in dezelfde richting nodig.
+4. **Manifestatie** — verandert het gedrag, producten of diensten? Zo nee: alleen een waardeverschuiving, nog geen trend.
+5. **Niveau + horizon** — micro 0-1 · midi 1-5 · maxi 5-15 · mega 15-50. Een signaal is bijna altijd micro; de trend is het niveau erboven.
+
+**Hoe ik een trend noteert (de vorm):** naam = de richting, niet het product of merk · "van X naar Y" in één zin · niveau + horizon · DESTEP-kracht · welke signalen eronder vallen · behoefte · opkomende verwachting · A/B/C/D · ja/nee.
+
+**Resultaat:** 83 ja-signalen → **38 trends**. Elke signaal staat exact één keer in tabblad `Trends`. **29 trends** hebben ≥2 signalen (test 3 geslaagd), **9 trends** hebben nog maar 1 signaal — die zijn strikt genomen nog geen trend, maar ik behoud ze.
+
 ### 2.1 Wat is een trend
 Uit de les, letterlijk: *"Een trend is een richting waarin waarden en behoeften veranderen, opgestuwd door externe krachten, waardoor we andere diensten en producten kopen."*
 Twee dingen die erin zitten: een trend is een **richting** (geen moment) en hij wordt **opgestuwd** (niet zomaar) — dat laatste zijn de DESTEP-krachten.
@@ -159,7 +179,9 @@ Vier niveaus + tijdshorizon: product (micro 0-1) · markt (midi 1-5) · consumen
 | Samenleving & demografie | 9 | 8 |
 | Werk & leren | 0 | 3 → **valt volledig af** |
 
-### 2.3 DESTEP per thema (over de 83 ja-trends)
+### 2.3 DESTEP per thema — *verwijzing, de uitwerking staat in #3*
+
+DESTEP hoort bij het behoeften-hoofdstuk (#3), per jouw keuze. De kolom staat wél al in het tabblad `Trends`. Over de 83 ja-trends:
 
 | thema | drivers |
 |---|---|
@@ -188,8 +210,9 @@ Per trend staat mijn reden in de `Waarom doorgaan?`-kolom. De rode draad door di
 
 ---
 
-## #3 · Behoeften
+## #3 · Behoeften *(hier hoort DESTEP bij)*
 
+- **3.0 DESTEP per trend** — de externe krachten die de trend duwen; per trend in tabblad `Trends`
 - **3.1 Behoefte per trend** — wat mensen nodig hebben
 - **3.2 Waarom deze trend bestaat** — de drijfveer erachter
 - **3.3 Basisbehoeften vs opkomende verwachtingen**
@@ -202,7 +225,7 @@ Per trend staat mijn reden in de `Waarom doorgaan?`-kolom. De rode draad door di
 - **4.1 Ordenen: pyramides** — A Gemak, B Slim/data, C Vertrouwen & soevereiniteit, D Duurzaam = efficiënt
 - **4.2 Ordenen: trendkaart** — meerdere piramides × 4 niveaus tegelijk
 - **4.3 Ordenen: assenstelsel** — twee delen: (a) trendwoorden op narratief↔abstract / cliché↔out-of-the-box, (b) jouw eigen bipolar assen met je bedrijfsideeën
-- **4.4 Analyseren: DESTEP** *(of in #2 — kies)*
+- **4.4 Analyseren: DESTEP** *(verhuisd naar #3 per jouw keuze)*
 - **4.5 Analyseren: scenario's** — 2 trends → extremen → 4 scenario's → propositie
 - **4.6 Analyseren: trendcanvas** — Alles-automaten als uitgewerkt voorbeeld
 - **4.7 Mijn eigen methode** — 1 foto → 2 trendwiel → 3 dataverwerken met AI
