@@ -28,11 +28,11 @@ HEAD1 = ["Trend", "Waar ik de trend vandaan heb", "Trend thema", "Trend DESTEP t
 HEAD = ["Trend", "Van -> naar",
         "Producttrend (micro 0-1)", "Markttrend (midi 1-5)",
         "Consumententrend (maxi 5-15)", "Maatschappelijke trend (mega 15-50)",
-        "Signalen", "Welke signalen", "DESTEP",
-        "Behoefte", "Opkomende verwachting", "A/B/C/D", "Doorgaan? (ja/nee)", "Waarom?"]
+        "Signalen", "Welke signalen", "DESTEP", "Locatie/context",
+        "Behoefte", "Opkomende verwachting", "A/B/C/D", "Doorgaan? (auto)", "Waarom?"]
 
-WIDTHS = ["40mm", "40mm", "34mm", "34mm", "34mm", "34mm", "12mm", "55mm", "20mm",
-          "34mm", "34mm", "14mm", "16mm", "34mm"]
+WIDTHS = ["40mm", "40mm", "34mm", "34mm", "34mm", "34mm", "12mm", "55mm", "20mm", "30mm",
+          "34mm", "34mm", "14mm", "14mm", "45mm"]
 
 # correcties op tabblad 1: naam -> (nieuwe naam, nieuw thema)
 FIX = {
@@ -393,7 +393,10 @@ LEGEND = [
     "Vier niveaus per trend: producttrend micro 0-1 (welke producten zijn populair) · markttrend midi 1-5 (wat gebeurt er in de markt) · consumententrend maxi 5-15 (hoe gedraagt de consument zich, wat wilt/verwacht deze) · maatschappelijke trend mega 15-50 (in wat voor wereld leven we).",
     "Voorbeeld 'van gemaakt naar gegenereerd': product = Claude · markt = genereren i.p.v. met de hand maken · consument = wil gemakkelijk visuelen maken · maatschappelijk = een wereld waarin AI groeit.",
     "A/B/C/D/E uit de trechter = de reden om een trend verder te verkennen: A. nog totaal geen bedrijfsidee maar hier kansen in zien · B. sluiten aan bij je bedrijfsidee · C. sluiten aan bij je ikigai · D. je neemt ze mee om out of the box te kijken · E. eigen regel (leeg in de deck, invullen).",
-    "Behoefte en Opkomende verwachting zijn ingevuld als concept — dat is hoofdstuk #3 en moet je nog bevestigen. A/B/C/D, Doorgaan? en Waarom? vul jij in.",
+    "Behoefte en Opkomende verwachting zijn ingevuld en door Marlo bevestigd (2026-10-09) — dat is hoofdstuk #3.",
+    "Doorgaan? is nu automatisch: ja als er een letter in A/B/C/D staat, nee als die leeg is. De kolom 'Waarom?' bevat zowel de reden om mee te nemen als de reden om te laten vallen.",
+    "Locatie/context = dezelfde bron als in tabblad 1, per trend overgenomen.",
+    "Stand: 31 trends meegenomen (D 13 · B 11 · C 7 · A 0), 8 laten vallen. A wordt niet gebruikt omdat er al een bedrijfsidee is — dat is zelf een bevinding.",
     "Correcties: Wortelstoffen -> Grondstoffen (vertalingfout); Aibaarheidsfactor -> Aaibaarheidsfactor (hoe graag mensen iets willen aanraken, husky = hoog, naakte kat = laag); vleesproxy = persoon zonder kritisch denkvermogen die herhaalt wat AI zegt; kunsteileider = product dat vrouwen met een eileiderprobleem helpt; transhumanisatie = cybernetics; sustainable relations = software als LinkedIn/Instagram; slobalisation = vertraging van globalisering; Werk & leren is leeg en dus weg.",
     "Alles is in de bestaande groepen gezet; alleen 'Software als relatie' is een nieuwe groep omdat er geen bestaande groep paste.",
 ]
@@ -404,9 +407,10 @@ def esc(s):
              .replace('"', "&quot;").replace("'", "&apos;"))
 
 
-def cells_in(row):
-    return [html.unescape(m.group(1) or "") for m in
-            re.finditer(r"<table:table-cell[^>]*>(?:<text:p>(.*?)</text:p>)?", row)]
+def cells_in(row, n=15):
+    c = [html.unescape(m.group(1) or "") for m in
+         re.finditer(r"<table:table-cell[^>]*>(?:<text:p>(.*?)</text:p>)?", row)]
+    return (c + [""] * n)[:n]
 
 
 def table_xml(name, header, rows, widths=None):
@@ -436,8 +440,11 @@ def main():
     items = [(n, z.read(n)) for n in names]
     z.close()
 
-    content = re.sub(r'<table:table table:name="Trends">.*?</table:table>', "", content)
-    content = re.sub(r'<table:table table:name="Legend">.*?</table:table>', "", content)
+    existing_rows = [cells_in(r) for r in
+                     re.findall(r"<table:table-row[^>]*>.*?</table:table-row>",
+                                re.search(r'table:name="Trends"[^>]*>(.*?)</table:table>', content).group(1))][1:]
+    content = re.sub(r'<table:table table:name="Trends"[^>]*>.*?</table:table>', "", content)
+    content = re.sub(r'<table:table table:name="Legend"[^>]*>.*?</table:table>', "", content)
 
     # tabblad 1: correcties + vleesproxy als aparte rij
     tabs = re.findall(r'(<table:table table:name="[^"]+"[^>]*>)(.*?)</table:table>', content)
@@ -473,6 +480,8 @@ def main():
 
     new1 = table_xml(first_name, HEAD1, data, ["50mm", "48mm", "32mm", "24mm", "20mm", "60mm"])
 
+    source = {r[0]: r[1] for r in data}
+
     # controle dekking
     used = {}
     for t in TRENDS:
@@ -490,8 +499,21 @@ def main():
     if dup:
         print("DUBEL:", dup)
 
-    out_rows = [[t[0], t[1], t[2], t[3], t[4], t[5], str(len(t[7])), "; ".join(t[7]),
-                 t[6], BEHOEFTE[t[0]][0], BEHOEFTE[t[0]][1], "", "", ""] for t in TRENDS]
+    # behoud Marlo's invulling uit het bestaande Trends-tabblad
+    bestaand = {}
+    for r in existing_rows:
+        bestaand[r[0]] = r
+    out_rows = []
+    for t in TRENDS:
+        bronnen = sorted({source.get(s, "") for s in t[7] if source.get(s, "")})
+        old = bestaand.get(t[0], [""] * 14)
+        abcd = old[11]
+        # redenen stonden in Doorgaan? (col 12) bij de trends die hij niet meeneemt
+        waarom = old[13] or old[12]
+        doorgaan = "ja" if abcd else "nee"
+        out_rows.append([t[0], t[1], t[2], t[3], t[4], t[5], str(len(t[7])), "; ".join(t[7]),
+                         t[6], " · ".join(bronnen), BEHOEFTE[t[0]][0], BEHOEFTE[t[0]][1],
+                         abcd, doorgaan, waarom])
     new2 = table_xml("Trends", HEAD, out_rows, WIDTHS)
     new3 = table_xml("Legend", ["Toelichting"], [[l] for l in LEGEND])
 
