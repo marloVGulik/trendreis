@@ -475,39 +475,37 @@ def fig_automaten():
 
 
 def fig_prisma():
-    # ---- 3D-prisma's: 4 thema's, elk 4 lagen (product / markt / consument / maatschappelijk) ----
+    # ---- 3D-prisma: elk vlak = een thema. Je draait rond het prisma en leest de vier vlakken. ----
     import json
-    themes = ["AI & data", "Automatisering & robots", "Vertrouwen & soevereiniteit", "Geld & economie"]
-    levels = ["product", "markt", "consument", "maatschappelijk"]
-    xs = [-1.20, -0.40, 0.40, 1.20]
-    zs = [1.90, 2.05, 2.20, 2.35]
-    sizes = [0.34, 0.27, 0.20, 0.13]          # per laag, van onder (product) tot boven (maatschappelijk)
-    blocks, labels = [], []
-    for i, th in enumerate(themes):
-        for j, sz in enumerate(sizes):
-            y = 0.065 + j * 0.14
-            blocks.append({"c": [xs[i], y, zs[i]], "w": sz, "h": 0.13, "d": sz,
-                           "br": 0.42 + j * 0.14, "hot": (i == 0 and j == 0)})
-        labels.append({"p": [xs[i], 0.68, zs[i]], "t": th, "cls": "lbl-dim", "fs": 10, "anchor": "middle"})
-    for j, lv in enumerate(levels):
-        labels.append({"p": [-1.75, 0.065 + j * 0.14, 1.90], "t": lv, "cls": "lbl-accent" if j == 0 else "lbl-dim",
-                       "fs": 10, "anchor": "end"})
+    themes = [
+        {"n": [0, 0, -1], "u": [1, 0, 0], "v": [0, 1, 0], "pts": [[-1,0,-1],[1,0,-1],[1,1,-1],[-1,1,-1]],
+         "lines": [{"t": "AI &amp; data", "dy": -18, "fs": 16}, {"t": "T 14 · S 6", "dy": 4, "fs": 11},
+                   {"t": "14 signalen", "dy": 22, "fs": 12}]},
+        {"n": [1, 0, 0], "u": [0, 0, -1], "v": [0, 1, 0], "pts": [[1,0,-1],[1,0,1],[1,1,1],[1,1,-1]],
+         "lines": [{"t": "Automatisering", "dy": -18, "fs": 16}, {"t": "&amp; robots", "dy": 4, "fs": 16},
+                   {"t": "T 7 · P 2", "dy": 24, "fs": 12}]},
+        {"n": [0, 0, 1], "u": [-1, 0, 0], "v": [0, 1, 0], "pts": [[1,0,1],[-1,0,1],[-1,1,1],[1,1,1]],
+         "lines": [{"t": "Vertrouwen &amp;", "dy": -18, "fs": 16}, {"t": "soevereiniteit", "dy": 4, "fs": 16},
+                   {"t": "P 9 · S 4", "dy": 24, "fs": 12}]},
+        {"n": [-1, 0, 0], "u": [0, 0, 1], "v": [0, 1, 0], "pts": [[-1,0,1],[-1,0,-1],[-1,1,-1],[-1,1,1]],
+         "lines": [{"t": "Geld &amp;", "dy": -18, "fs": 16}, {"t": "economische", "dy": 4, "fs": 16},
+                   {"t": "E(econ) 10", "dy": 24, "fs": 12}]},
+        {"n": [0, 1, 0], "u": [1, 0, 0], "v": [0, 0, -1], "pts": [[-1,1,-1],[1,1,-1],[1,1,1],[-1,1,1]],
+         "lines": [{"t": "4 thema&#39;s", "dy": 0, "fs": 13}], "br": 0.85},
+    ]
     scene = {
-        "center": [0, 0.28, 2.12],
-        "blocks": blocks,
-        "labels": labels,
-        "params": {"F": 1.5, "S": 210, "CX": 300, "CY": 185,
+        "center": [0, 0.4, 2.1],
+        "prism": {"c": [0, 0.0, 2.1], "half": 0.5, "height": 0.8, "faces": themes},
+        "params": {"F": 1.5, "S": 210, "CX": 300, "CY": 170,
                    "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
                    "viewBox": "0 0 600 300"}
     }
-    aria = ("Vier 3D-prisma's, een per thema (AI & data, Automatisering & robots, Vertrouwen & "
-            "soevereiniteit, Geld & economie). Elke prisma heeft vier lagen: product, markt, "
-            "consument, maatschappelijk. Sleep om te draaien.")
+    aria = ("3D-prisma met vier vlakken, een vlak per gekozen thema: AI & data, Automatisering & robots, "
+            "Vertrouwen & soevereiniteit, Geld & economie. Sleep om rond het prisma te draaien.")
     scene_json = json.dumps(scene, separators=(",", ":"))
     return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
             f'data-scene=\'{scene_json}\'>') + (
             '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>')
-
 
 def fig_pyramide_c():
     # ---- 3D-piramide (via de Anaglyph-motor) ----
