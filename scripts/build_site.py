@@ -64,6 +64,7 @@ FIGURES = {
         ("assenstelsel", "Trendwoorden & het assenstelsel"),
         ("trendcanvas", "Trendcanvas — van trend naar innovatie"),
         ("automaten", "Trendcanvas — van trend naar innovatie"),
+        ("prisma", "De trendpyramide"),
     ],
     "waardeverschuivingen": [
         ("pyramide_c", "intro"),
@@ -473,6 +474,41 @@ def fig_automaten():
     + '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>'
 
 
+def fig_prisma():
+    # ---- 3D-prisma's: 4 thema's, elk 4 lagen (product / markt / consument / maatschappelijk) ----
+    import json
+    themes = ["AI & data", "Automatisering & robots", "Vertrouwen & soevereiniteit", "Geld & economie"]
+    levels = ["product", "markt", "consument", "maatschappelijk"]
+    xs = [-1.20, -0.40, 0.40, 1.20]
+    zs = [1.90, 2.05, 2.20, 2.35]
+    sizes = [0.34, 0.27, 0.20, 0.13]          # per laag, van onder (product) tot boven (maatschappelijk)
+    blocks, labels = [], []
+    for i, th in enumerate(themes):
+        for j, sz in enumerate(sizes):
+            y = 0.065 + j * 0.14
+            blocks.append({"c": [xs[i], y, zs[i]], "w": sz, "h": 0.13, "d": sz,
+                           "br": 0.42 + j * 0.14, "hot": (i == 0 and j == 0)})
+        labels.append({"p": [xs[i], 0.68, zs[i]], "t": th, "cls": "lbl-dim", "fs": 10, "anchor": "middle"})
+    for j, lv in enumerate(levels):
+        labels.append({"p": [-1.75, 0.065 + j * 0.14, 1.90], "t": lv, "cls": "lbl-accent" if j == 0 else "lbl-dim",
+                       "fs": 10, "anchor": "end"})
+    scene = {
+        "center": [0, 0.28, 2.12],
+        "blocks": blocks,
+        "labels": labels,
+        "params": {"F": 1.5, "S": 210, "CX": 300, "CY": 185,
+                   "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
+                   "viewBox": "0 0 600 300"}
+    }
+    aria = ("Vier 3D-prisma's, een per thema (AI & data, Automatisering & robots, Vertrouwen & "
+            "soevereiniteit, Geld & economie). Elke prisma heeft vier lagen: product, markt, "
+            "consument, maatschappelijk. Sleep om te draaien.")
+    scene_json = json.dumps(scene, separators=(",", ":"))
+    return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
+            f'data-scene=\'{scene_json}\'>') + (
+            '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>')
+
+
 def fig_pyramide_c():
     # ---- 3D-piramide (via de Anaglyph-motor) ----
     a = Anaglyph(viewBox="0 0 420 320", aria="Waardepiramide C: 3D-piramide, leeg frame nog te vullen (3 lagen)",
@@ -667,6 +703,7 @@ FIGURE_BUILDERS = {
     "trendcanvas": fig_trendcanvas,
     "automaten": fig_automaten,
     "pyramide_c": fig_pyramide_c,
+    "prisma": fig_prisma,
 }
 FIGURE_CAPTIONS = {
     "ikigai": "Ikigai — waar de vier kringjes overlappen, staat het werk dat ik wil.",
@@ -675,6 +712,7 @@ FIGURE_CAPTIONS = {
     "trendcanvas": "Trendcanvas — de 8 stappen van trend naar mijn innovatie.",
     "automaten": "Alles-automaten — een kaart met de status van automaten in de buurt.",
     "pyramide_c": "Waardepiramide C — leeg frame, nog te vullen.",
+    "prisma": "Vier prisma's — een per gekozen thema, met de vier niveaus als lagen. Sleep om te draaien.",
 }
 
 # =================================================================== shell
