@@ -404,13 +404,25 @@ def main():
     rows = [cells_in(r) for r in re.findall(r"<table:table-row[^>]*>.*?</table:table-row>", first_body)]
     header, data = rows[0], rows[1:]
     data = [r for r in data if len(r) >= 6 and r[0]]
+    seen, dedup = set(), []
+    for r in data:
+        if r[0] in seen:
+            continue
+        seen.add(r[0])
+        dedup.append(r)
+    if len(dedup) != len(data):
+        print(f"dubbele rijen verwijderd: {len(data) - len(dedup)}")
+    data = dedup
     changed = []
     for r in data:
         if r[0] in FIX:
             new_name, new_theme = FIX[r[0]]
             changed.append(f"{r[0]}  ->  {new_name}  [{new_theme}]")
             r[0], r[2] = new_name, new_theme
+    existing = {r[0] for r in data}
     for name, destep, theme, ja, why in EXTRA:
+        if name in existing:
+            continue
         data.append([name, "woordopdracht in de les", theme, destep, ja, why])
         changed.append(f"+ {name}  [{theme}]")
     print("correcties tabblad 1:")
