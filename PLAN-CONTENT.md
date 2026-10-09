@@ -146,9 +146,17 @@ Vijf dingen die ik uit de trendlijst heb gehaald, omdat het **geen signaleringen
 2. **Externe kracht** — welke DESTEP-kracht duwt eronder? Zo geen: het is een mode of moment, geen trend.
 3. **Meerdere signalen** — één signaal is anekdote. Een trend heeft ≥2 signalen in dezelfde richting nodig.
 4. **Manifestatie** — verandert het gedrag, producten of diensten? Zo nee: alleen een waardeverschuiving, nog geen trend.
-5. **Niveau + horizon** — micro 0-1 · midi 1-5 · maxi 5-15 · mega 15-50. Een signaal is bijna altijd micro; de trend is het niveau erboven.
+5. **Niveau + horizon** — niet één niveau kiezen, maar de trend op alle vier niveaus lezen (hieronder).
 
-**Hoe ik een trend noteert (de vorm):** naam = de richting, niet het product of merk · "van X naar Y" in één zin · niveau + horizon · DESTEP-kracht · welke signalen eronder vallen · behoefte · opkomende verwachting · A/B/C/D · ja/nee.
+**De 4 niveaus per trend** (dit is de trendpiramide, dus dit past ook in #4):
+- **producttrend** — micro 0-1 jaar — *welke producten zijn populair*
+- **markttrend** — midi 1-5 jaar — *wat gebeurt er in de markt*
+- **consumententrend** — maxi 5-15 jaar — *hoe gedragen consumenten zich, wat verwacht de consument*
+- **maatschappelijke trend** — mega 15-50 jaar — *in wat voor wereld leven we*
+
+Voorbeeld, "van gemaakt naar gegenereerd": product = **Claude** · markt = **genereren in plaats van met de hand maken** · consument = **wil gemakkelijk visuelen maken** · maatschappelijk = **een wereld waarin AI flink groeit**.
+
+**Hoe ik een trend noteert (de vorm):** naam = de richting, niet het product of merk · "van X naar Y" in één zin · de 4 niveaus apart · DESTEP-kracht · welke signalen eronder vallen · behoefte · opkomende verwachting · A/B/C/D · ja/nee.
 
 **Resultaat:** 83 ja-signalen → **38 trends**. Elke signaal staat exact één keer in tabblad `Trends`. **29 trends** hebben ≥2 signalen (test 3 geslaagd), **9 trends** hebben nog maar 1 signaal — die zijn strikt genomen nog geen trend, maar ik behoud ze.
 
