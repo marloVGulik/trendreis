@@ -213,8 +213,19 @@ Link met locatie en context (eis uit de les) staat per trend in de bronkolom.
 ### 2.4 Trendwoorden & -beelden
 Aibaarheidsfactor en leefloon uit de woordopdracht. En woorden die ik zelf bedacht — die moeten er nog komen.
 
-### 2.5 Waarom deze thema's (de A/B/C/D-filter uit de trechter)
+### 2.5 Waarom deze thema's (de A/B/C/D/E-filter uit de trechter)
+
+De filter is letterlijk uit Week 2 Dag 1 — de reden om een trend verder te verkennen:
+
+- **A.** nog totaal geen bedrijfsidee, maar hier kansen in zien
+- **B.** ze sluiten aan bij je bedrijfsidee
+- **C.** ze sluiten aan bij je ikigai
+- **D.** je neemt ze mee om out of the box te kijken
+- **E.** … (leeg in de deck — eigen regel invullen)
+
 Per trend staat mijn reden in de `Waarom doorgaan?`-kolom. De rode draad door die kolommen: **techniek + efficiëntie + soevereiniteit**. De thema's die overleven vallen samen met waar ik op bouw.
+
+*Dit is ook de brug naar #6: A is de trechter zelf, B en C zijn mijn bedrijfsidee en ikigai, D is de bril van #0.2.*
 
 **Keuze nog van jou:** welke 4-6 thema's worden de uitgewerkte pyramides in #4.1? Ik stel voor: AI & data · Automatisering & robots · Vertrouwen & soevereiniteit · Geld & economie · Duurzaamheid & klimaat.
 
