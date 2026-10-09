@@ -158,7 +158,7 @@ Voorbeeld, "van gemaakt naar gegenereerd": product = **Claude** · markt = **gen
 
 **Hoe ik een trend noteert (de vorm):** naam = de richting, niet het product of merk · "van X naar Y" in één zin · de 4 niveaus apart · DESTEP-kracht · welke signalen eronder vallen · behoefte · opkomende verwachting · A/B/C/D · ja/nee.
 
-**Resultaat:** 83 ja-signalen → **38 trends**. Elke signaal staat exact één keer in tabblad `Trends`. **29 trends** hebben ≥2 signalen (test 3 geslaagd), **9 trends** hebben nog maar 1 signaal — die zijn strikt genomen nog geen trend, maar ik behoud ze.
+**Resultaat:** 84 ja-signalen → **39 trends**. Elke signaal staat exact één keer in tabblad `Trends`. **28 trends** hebben ≥2 signalen (test 3 geslaagd), **11 trends** hebben nog maar 1 signaal — die zijn strikt genomen nog geen trend, maar ik behoud ze.
 
 ### 2.1 Wat is een trend
 Uit de les, letterlijk: *"Een trend is een richting waarin waarden en behoeften veranderen, opgestuwd door externe krachten, waardoor we andere diensten en producten kopen."*
@@ -174,18 +174,20 @@ Vier niveaus + tijdshorizon: product (micro 0-1) · markt (midi 1-5) · consumen
 | thema | ja | nee |
 |---|---|---|
 | AI & data | 14 | 1 |
-| Geld & economie | 11 | 3 |
+| Geld & economie | 10 | 3 |
 | Vertrouwen & soevereiniteit | 9 | 0 |
 | Duurzaamheid & klimaat | 8 | 3 |
+| Samenleving & demografie | 8 | 8 |
 | Automatisering & robots | 7 | 0 |
 | Gezondheid & food | 7 | 5 |
-| Consumptie & retail | 5 | 5 |
-| Eenzaamheid & aandacht | 4 | 6 |
+| Consumptie & retail | 6 | 5 |
+| Software & platforms | 5 | 4 |
 | Ruimte & living | 5 | 3 |
-| Software & platforms | 3 | 4 |
+| Eenzaamheid & aandacht | 4 | 6 |
 | Mobiliteit | 1 | 5 |
-| Samenleving & demografie | 9 | 8 |
-| Werk & leren | 0 | 3 → **valt volledig af** |
+| Werk & leren | 0 | 3 → **leeg, dus weg** |
+
+*(standen na de correcties van 2026-10-09: Vleesproxy → AI & data, Aaibaarheidsfactor → Consumptie & retail, Sustainable relations + Exclusief→inclusief → Software & platforms, Grondstoffen → Duurzaamheid, Body mining → Gezondheid)*
 
 ### 2.3 DESTEP per thema — *verwijzing, de uitwerking staat in #3*
 
@@ -193,17 +195,17 @@ DESTEP hoort bij het behoeften-hoofdstuk (#3), per jouw keuze. De kolom staat w�
 
 | thema | drivers |
 |---|---|
-| AI & data | **T 14** · S 7 · E(econ) 3 · P 1 |
-| Geld & economie | **E(econ) 11** · T 4 · S 3 · D 1 |
+| AI & data | **T 14** · S 6 · E(econ) 4 · P 1 |
+| Geld & economie | **E(econ) 10** · T 4 · S 3 · D 1 |
 | Vertrouwen & soevereiniteit | **P 9** · S 4 · T 4 · E(econ) 1 |
-| Duurzaamheid & klimaat | **E(ecol) 8** · E(econ) 2 · P 2 · S 2 · T 2 |
-| Samenleving & demografie | **S 8** · T 2 · D 2 · E(econ) 1 · P 1 |
+| Duurzaamheid & klimaat | **E(ecol) 7** · T 3 · E(econ) 2 · P 2 · S 2 |
+| Samenleving & demografie | **S 7** · T 2 · D 2 · E(econ) 1 · P 1 |
 | Gezondheid & food | **S 5** · T 4 · E(ecol) 3 · E(econ) 1 |
+| Consumptie & retail | **S 4** · E(econ) 4 · T 3 |
 | Automatisering & robots | **T 7** · P 2 · E(ecol) 1 |
-| Consumptie & retail | **S 4** · E(econ) 3 · T 3 |
+| Software & platforms | T 3 · S 3 · E(econ) 1 · P 1 · E(ecol) 1 |
 | Ruimte & living | T 3 · S 3 · E(econ) 2 · D 1 |
 | Eenzaamheid & aandacht | **S 4** · D 2 · T 1 |
-| Software & platforms | T 3 · S 1 · E(econ) 1 · P 1 |
 | Mobiliteit | S 1 · E(ecol) 1 |
 
 Link met locatie en context (eis uit de les) staat per trend in de bronkolom.
