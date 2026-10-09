@@ -73,17 +73,18 @@
       return faces.map(function(fa){ var br=anaBright(fa.n)*base; return polyStr(fa.p2)+' fill="'+orbitFill(ch,br)+'" stroke="'+orbitFill(ch,br*0.35)+'" stroke-width="1.1"/>'; }).join('');
     }
     function prismSVG(pr, cam, ch) {
-      var h = pr.half, H = pr.height, out = [];
+      var hx = pr.hx, hz = pr.hz, H = pr.height, out = [];
       var faces = [];
       (pr.faces || []).forEach(function(f){
-        var lp = f.pts.map(function(p){ return [pr.c[0]+p[0]*h, pr.c[1]+p[1]*H, pr.c[2]+p[2]*h]; });
+        var lp = f.pts.map(function(p){ return [pr.c[0]+p[0]*hx, pr.c[1]+p[1]*H, pr.c[2]+p[2]*hz]; });
         var rp = lp.map(rot);
         var p2 = rp.map(function(p){ var rz=p[2]-cam[2]; if(rz<=0.02) return null; return [P.CX+P.F*(p[0]-cam[0])/rz*P.S, P.CY-P.F*(p[1]-cam[1])/rz*P.S]; });
         if (!p2.every(Boolean)) return;
         var fc = [0,0,0]; rp.forEach(function(p){ fc[0]+=p[0]; fc[1]+=p[1]; fc[2]+=p[2]; });
         fc = [fc[0]/4, fc[1]/4, fc[2]/4];
         var nr = [f.n[0]*cos+f.n[2]*sin, f.n[1], -f.n[0]*sin+f.n[2]*cos];
-        if (nr[0]*(fc[0]-cam[0])+nr[1]*(fc[1]-cam[1])+nr[2]*(fc[2]-cam[2]) <= 0) return;   // backface culling
+        // zichtbaar als de camera aan de buitenkant van het vlak staat: dot(n, cam - fc) > 0
+        if (nr[0]*(cam[0]-fc[0])+nr[1]*(cam[1]-fc[1])+nr[2]*(cam[2]-fc[2]) <= 0) return;
         var br = anaBright(nr) * (f.br !== undefined ? f.br : 0.62);
         faces.push({ depth: fc[2], poly: polyStr(p2), fill: orbitFill(ch, br),
                      fc: fc, u: f.u, v: f.v, lines: f.lines || [], br: br });
@@ -92,8 +93,9 @@
       faces.forEach(function(fa){
         out.push(fa.poly + ' fill="' + fa.fill + '" stroke="' + orbitFill(ch, fa.br*0.35) + '" stroke-width="1.2"/>');
         var O = [P.CX + P.F*(fa.fc[0]-cam[0])/fa.fc[2]*P.S, P.CY - P.F*(fa.fc[1]-cam[1])/fa.fc[2]*P.S];
-        function basis(ax){ var p=[fa.fc[0]+ax[0], fa.fc[1]+ax[1], fa.fc[2]+ax[2]]; var q=[P.CX+P.F*(p[0]-cam[0])/p[2]*P.S, P.CY-P.F*(p[1]-cam[1])/p[2]*P.S]; var dx=q[0]-O[0], dy=q[1]-O[1]; var m=Math.sqrt(dx*dx+dy*dy)||1; return [dx/m, dy/m]; }
-        var U = basis(fa.u), V = basis(fa.v);
+        // basisvectoren in schermruimte: u = lees-richting (rechts), v = omlaag op het vlak
+        function basis(ax){ var r=[ax[0]*cos+ax[2]*sin, ax[1], -ax[0]*sin+ax[2]*cos]; var p=[fa.fc[0]+r[0], fa.fc[1]+r[1], fa.fc[2]+r[2]]; var q=[P.CX+P.F*(p[0]-cam[0])/p[2]*P.S, P.CY-P.F*(p[1]-cam[1])/p[2]*P.S]; var dx=q[0]-O[0], dy=q[1]-O[1]; var m=Math.sqrt(dx*dx+dy*dy)||1; return [dx/m, dy/m]; }
+        var U = basis(fa.u), V = basis([0, -1, 0]);   // SVG-text loopt omlaag => face-up is negatief
         var t = '<g transform="matrix(' + U[0].toFixed(4) + ',' + U[1].toFixed(4) + ',' + V[0].toFixed(4) + ',' + V[1].toFixed(4) + ',' + O[0].toFixed(1) + ',' + O[1].toFixed(1) + ')">';
         fa.lines.forEach(function(l){ t += '<text x="0" y="' + l.dy + '" text-anchor="middle" font-size="' + (l.fs||13) + '" fill="' + orbitFill(ch, Math.max(0.85, fa.br)) + '">' + l.t + '</text>'; });
         out.push(t + '</g>');
