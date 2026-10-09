@@ -211,7 +211,10 @@ DESTEP hoort bij het behoeften-hoofdstuk (#3), per jouw keuze. De kolom staat w�
 Link met locatie en context (eis uit de les) staat per trend in de bronkolom.
 
 ### 2.4 Trendwoorden & -beelden
-Aibaarheidsfactor en leefloon uit de woordopdracht. En woorden die ik zelf bedacht — die moeten er nog komen.
+Geen apart blok nodig — het lijstje is goed genoeg en veel trendwoorden uit Eva's lessen zijn al geïntegreerd. Aaibaarheidsfactor staat, Leefloon is nee.
+
+### 2.4b Horizon
+De deck is inconsistent (maxi 5-15 vs 5-10, mega 15-50 vs 10-15). **Richtlijn, geen regel** — mag genegeerd worden. Beter is om te kijken naar **hoe lokaal iets verandert**: AI is nieuw, maar is op deze manier al wereldwijd geadopteerd.
 
 ### 2.5 Waarom deze thema's (de A/B/C/D/E-filter uit de trechter)
 
@@ -227,7 +230,11 @@ Per trend staat mijn reden in de `Waarom doorgaan?`-kolom. De rode draad door di
 
 *Dit is ook de brug naar #6: A is de trechter zelf, B en C zijn mijn bedrijfsidee en ikigai, D is de bril van #0.2.*
 
-**Keuze nog van jou:** welke 4-6 thema's worden de uitgewerkte pyramides in #4.1? Ik stel voor: AI & data · Automatisering & robots · Vertrouwen & soevereiniteit · Geld & economie · Duurzaamheid & klimaat.
+**Keuze:** **4 thema's** voor de pyramides, en die pyramides als **3D-prisma** op de site.
+
+Mijn voorstel op basis van de letters en de signaalaantallen: **AI & data** (14) · **Automatisering & robots** (7) · **Vertrouwen & soevereiniteit** (9) · **Geld & economie** (10).
+
+Dit zijn precies de vier groepen die het meest B-letters hebben — dus de vier die het dichtst bij je bedrijfsidee liggen.
 
 ---
 
@@ -243,7 +250,7 @@ Per trend staat mijn reden in de `Waarom doorgaan?`-kolom. De rode draad door di
 
 ## #4 · Ordenen en analyseren *(L2)*
 
-- **4.1 Ordenen: pyramides** — A Gemak, B Slim/data, C Vertrouwen & soevereiniteit, D Duurzaam = efficiënt
+- **4.1 Ordenen: pyramides** — 4 thema's als 3D-prisma op de site. Uit de les: A Gemak, B Slim/data, C Vertrouwen & soevereiniteit, D Duurzaam = efficiënt
 - **4.2 Ordenen: trendkaart** — meerdere piramides × 4 niveaus tegelijk
 - **4.3 Ordenen: assenstelsel** — twee delen: (a) trendwoorden op narratief↔abstract / cliché↔out-of-the-box, (b) jouw eigen bipolar assen met je bedrijfsideeën
 - **4.4 Analyseren: DESTEP** *(verhuisd naar #3 per jouw keuze)*
