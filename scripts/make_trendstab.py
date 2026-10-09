@@ -344,6 +344,48 @@ TRENDS = [
      ["Treintrots"]),
 ]
 
+BEHOEFTE = {
+    "Automatisering van de keuze": ("ontlast worden van keuzes", "dat de machine de juiste keuze maakt en dat je ziet op basis waarvan"),
+    "Data als grondstof": ("controle over eigen data, via open source en lokaal", "dat gratis tools niet met zijn data worden betaald"),
+    "Informatie wordt bubbel": ("informatie buiten de eigen bubbel", "dat het algoritme hem niet alleen naar zijn eigen mening stuurt"),
+    "Te veel info": ("rust en een filter", "dat minder input een keuze is, geen tekort"),
+    "Zonder eigen denkvermogen": ("zelf kunnen nadenken en controleren", "dat een antwoord niet automatisch waar is"),
+    "Gegenereerd in plaats van gemaakt": ("snel en goedkoop beeld en materiaal", "dat genereren normaal wordt en makers duurder"),
+    "Digitalisering als koepel": ("toegang tot digitale systemen", "dat alles digitaal beschikbaar is"),
+    "Van bezit naar toegang": ("toegang zonder vastleggen", "dat abonnementen betaalbaar blijven"),
+    "Van meetbaar naar merkbaar": ("iets voelen, niet alleen cijfers", "dat beleving beloond wordt"),
+    "Klein wint van groot": ("dat een klein idee serieus genomen wordt", "dat klein beter kan zijn dan groot"),
+    "Nieuwe geldvormen": ("geld dat niet van een bank komt", "dat waarde anders vastgelegd kan worden"),
+    "Tekort als motor": ("zekerheid over grondstoffen en woning", "dat schaarsheid prijs en keuze bepaalt"),
+    "Globalisering en slobalisation": ("lokaal beschikbaar blijven", "dat wereldwijde toelevering afremt"),
+    "Van vertrouwen in het systeem naar wantrouwen": ("bewijs in plaats van claims", "dat claims niet kloppen tot ze bewezen zijn"),
+    "Van vertrouwen in big tech naar eigen controle": ("eigen, lokale systemen", "dat afhankelijkheid tijdelijk is, niet permanent"),
+    "Massacontrole via registratie": ("toegang behouden ondanks een fout", "dat registratie consequenties heeft"),
+    "Regel als barrière voor automatisering": ("regels die techniek niet onnodig blokkeren", "dat regelgeving meebeweegt met de tech"),
+    "Duurzaamheid wordt efficiëntie en instoot": ("duurzaam dat ook goedkoper is", "dat duurzaamheid een businesscase is, geen imago"),
+    "Klimaat als conditie": ("koel en leefbaar blijven", "dat warmte de standaard is"),
+    "Van menselijke bediening naar automatische uitvoering": ("dat dingen draaien zonder iemand", "dat automatisering de norm is"),
+    "Van kopen naar zelf maken": ("zelf kunnen bouwen", "dat zelf maken concurrerend is"),
+    "Slimme apparatuur wordt standaard in de openbare ruimte": ("registratie die niets onnodig vastlegt", "dat de straat slim blijft"),
+    "Kopen wordt spel": ("vermaak bij het kopen", "dat kopen een ervaring is, geen transactie"),
+    "Van behandelen naar optimaliseren": ("presteren en verbeteren", "dat het lichaam aanpasbaar is"),
+    "Van gezond naar obsessief": ("maat houden", "dat obsessie wordt gezien als ziekte"),
+    "Leven wordt ontworpen": ("kinderen kunnen krijgen ondanks een probleem", "dat leven aanpasbaar is"),
+    "Wonen wordt slim, klein en stedelijk": ("klein wonen dat toch werkt", "dat de stad compacter wordt"),
+    "Leefruimte wordt groter dan de aarde": ("grondstoffen en ruimte buiten de aarde", "dat ruimtevaart economisch normaal wordt"),
+    "Van menselijk contact naar machinecontact": ("gezelschap zonder verplichting", "dat een machine er mag zijn"),
+    "Van verbinding naar eenzaamheid": ("echt contact", "dat een scherm niet volstaat"),
+    "Software als relatie": ("relaties die software verdragen", "dat platforms de plek zijn waar je iemand tegenkomt"),
+    "Software wordt voor iedereen bouwbaar": ("zelf bouwen zonder kennis", "dat iedereen kan bouwen"),
+    "Van ik naar wij": ("erbij horen", "dat samen doen de norm is"),
+    "Levensloop wordt langer en in fases": ("fases die passen bij leeftijd", "dat werken tot 100 normaal wordt"),
+    "Gemak als norm": ("de kortste route", "dat gemak geen extra kosten mag hebben"),
+    "Polarisering": ("een midden", "dat het midden verdwijnt"),
+    "Stijl als statement": ("uitdrukking", "dat uiterlijk een standpunt is"),
+    "Technologie als machtsmiddel": ("eigen tech, niet afhankelijk", "dat tech macht bepaalt"),
+    "Treintrots": ("groen reizen zonder inleveren", "dat trein boven auto gaat"),
+}
+
 LEGEND = [
     "Signaal = een gebeurtenis ('dit bestaat'). Trend = een richting ('van A naar B').",
     "Definitie uit de deck: een trend is een richting waarin waarden en behoeften veranderen, opgestuwd door externe krachten, en manifesteert zich door gedrag, producten en diensten.",
@@ -351,7 +393,7 @@ LEGEND = [
     "Vier niveaus per trend: producttrend micro 0-1 (welke producten zijn populair) · markttrend midi 1-5 (wat gebeurt er in de markt) · consumententrend maxi 5-15 (hoe gedraagt de consument zich, wat wilt/verwacht deze) · maatschappelijke trend mega 15-50 (in wat voor wereld leven we).",
     "Voorbeeld 'van gemaakt naar gegenereerd': product = Claude · markt = genereren i.p.v. met de hand maken · consument = wil gemakkelijk visuelen maken · maatschappelijk = een wereld waarin AI groeit.",
     "A/B/C/D uit de trechter: A interesseveld · B doelgroep · C vakgebied · D toekomst.",
-    "Behoefte en Opkomende verwachting vul je zelf in — dat is hoofdstuk #3.",
+    "Behoefte en Opkomende verwachting zijn ingevuld als concept — dat is hoofdstuk #3 en moet je nog bevestigen. A/B/C/D, Doorgaan? en Waarom? vul jij in.",
     "Correcties: Wortelstoffen -> Grondstoffen (vertalingfout); Aibaarheidsfactor -> Aaibaarheidsfactor (hoe graag mensen iets willen aanraken, husky = hoog, naakte kat = laag); vleesproxy = persoon zonder kritisch denkvermogen die herhaalt wat AI zegt; kunsteileider = product dat vrouwen met een eileiderprobleem helpt; transhumanisatie = cybernetics; sustainable relations = software als LinkedIn/Instagram; slobalisation = vertraging van globalisering; Werk & leren is leeg en dus weg.",
     "Alles is in de bestaande groepen gezet; alleen 'Software als relatie' is een nieuwe groep omdat er geen bestaande groep paste.",
 ]
@@ -449,7 +491,7 @@ def main():
         print("DUBEL:", dup)
 
     out_rows = [[t[0], t[1], t[2], t[3], t[4], t[5], str(len(t[7])), "; ".join(t[7]),
-                 t[6], "", "", "", "", ""] for t in TRENDS]
+                 t[6], BEHOEFTE[t[0]][0], BEHOEFTE[t[0]][1], "", "", ""] for t in TRENDS]
     new2 = table_xml("Trends", HEAD, out_rows, WIDTHS)
     new3 = table_xml("Legend", ["Toelichting"], [[l] for l in LEGEND])
 
