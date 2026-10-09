@@ -1,19 +1,29 @@
 #!/usr/bin/env python3
-"""Voegt tabblad 'Trends' toe aan trendlijst.ods (vervangt het bestaande tabblad).
+"""Vernieuwt tabblad 'Trends' in trendlijst.ods + corrigeert tabblad 1.
 
-Signaal -> trend: een signaal is een gebeurtenis ('dit bestaat'). Een trend is een
-richting ('van A naar B'). Meerdere signalen in dezelfde richting vormen samen één trend.
+Correcties op basis van Marlo's readings (2026-10-09):
+  Wortelstoffen -> Grondstoffen (foutje in vertaling)
+  Aibaarheidsfactor -> Aaibaarheidsfactor (hoe graag mensen iets willen aanraken; husky = hoog, naakte kat = laag)
+  Transhumanisatie = cybernetics, robotonderdelen die mensen helpen
+  Digireligie = geloven in het algoritme + AI-verwarrendheid, mensen kunnen er niet mee omgaan
+  Globalisering = globalisering; slobalisation = het langzamer worden ervan
+  Infobubbel/infobesitas = mensen krijgen alleen info binnen hun bubbel, manipulatie door algoritmes
+  Cryptokoorts = overdreven neiging om in Bitcoin te investeren
+  Exclusief -> inclusief = software: iedereen kan apps/websites bouwen zonder programmeerkennis
+  Digital ID = digitaal bijhouden wie wat doet en waar iemand aanmeldt; kan toegang ontzeggen bij fouten
+  Cobot/hubot = robot naast mensen, mag niet meer door regelgeving
+  Agentic commerce = marketing, zoals betalen om bij Google bovenaan te komen
+  Platform switch = zelf bouwen, verschuiving van grote bedrijven naar eigen specifieke tools
 
-Per trend worden de 4 niveaus van de trendpiramide apart benoemd:
-  producttrend   micro 0-1 jaar   -> welke producten zijn populair
-  markttrend     midi  1-5 jaar   -> wat gebeurt er in de markt
-  consumententrend maxi 5-15 jaar -> hoe gedragen consumenten zich, wat verwacht de consument
-  maatschappelijk mega 15-50 jaar -> in wat voor wereld leven we
+Groepen: alles eerst in bestaande groepen, lege groepen weg (Werk & leren), nieuwe alleen waar nodig.
 """
 import re, html, zipfile, os
 
 BASE = "/home/marlo/Documents/School/minor/trendreis"
 ODS = os.path.join(BASE, "trendlijst.ods")
+
+HEAD1 = ["Trend", "Waar ik de trend vandaan heb", "Trend thema", "Trend DESTEP thema",
+         "Doorgaan? (ja/nee)", "Waarom doorgaan?"]
 
 HEAD = ["Trend", "Van -> naar",
         "Producttrend (micro 0-1)", "Markttrend (midi 1-5)",
@@ -23,6 +33,18 @@ HEAD = ["Trend", "Van -> naar",
 
 WIDTHS = ["40mm", "40mm", "34mm", "34mm", "34mm", "34mm", "12mm", "55mm", "20mm",
           "34mm", "34mm", "14mm", "16mm", "34mm"]
+
+# correcties op tabblad 1: naam -> (nieuwe naam, nieuw thema)
+FIX = {
+    "Wortelstoffen / vleesproxy": ("Grondstoffen", "Duurzaamheid & klimaat"),
+    "Aibaarheidsfactor": ("Aaibaarheidsfactor", "Consumptie & retail"),
+    "Sustainable relations": ("Sustainable relations", "Software & platforms"),
+    "Exclusief → inclusief": ("Exclusief → inclusief", "Software & platforms"),
+    "Body mining / brein download": ("Body mining / brein download", "Gezondheid & food"),
+}
+# extra rij: vleesproxy apart, omdat het geen food is
+EXTRA = [("Vleesproxy", "E(econ) + T", "AI & data", "Ja",
+          "persoon zonder kritisch denkvermogen die herhaalt wat AI zegt")]
 
 # (trend, van->naar, product, markt, consument, maatschappelijk, destep, [signalen])
 TRENDS = [
@@ -42,29 +64,35 @@ TRENDS = [
      "verwacht gratis tools in ruil voor zijn data",
      "een wereld waarin persoonlijke data het kapitaal is",
      "E(econ) + T",
-     ["Data = nieuw goed / nieuwe olie", "Chips = nieuwe olie", "Body mining / brein download"]),
-    ("Aanbod groter dan verwerkingscapaciteit", "van meer info naar minder info verwerken",
-     "kuraterings- en filtertools, contentdieet-apps",
-     "aanbod groeit sneller dan verwerking, dus filter wordt een product",
-     "verwacht minder input en kiest bewust minder",
+     ["Data = nieuw goed / nieuwe olie", "Chips = nieuwe olie"]),
+    ("Informatie wordt bubbel", "van open informatie naar bubbel",
+     "algoritmes die filteren wat je ziet",
+     "aanbod wordt gestuurd, niet gekozen",
+     "krijgt alleen info binnen zijn bubbel en ziet de rest niet",
+     "een wereld waarin manipulatie via algoritmes normaal is",
+     "T + S",
+     ["Infobubbel / infobesitas"]),
+    ("Te veel info", "van meer naar minder verwerken",
+     "filter- en contentdieet-tools",
+     "aanbod groeit sneller dan verwerking",
+     "kiest bewust minder input",
      "een wereld waarin aandacht de schaarse grondstof is",
      "T + S",
-     ["Infobubbel / infobesitas", "Datadieet"]),
+     ["Datadieet"]),
+    ("Zonder eigen denkvermogen", "van eigen oordeel naar herhalen wat AI zegt",
+     "AI-assistenten die antwoorden geven",
+     "mensen volgen het antwoord zonder te controleren",
+     "verwacht dat het algoritme gelijk heeft en kan er niet mee omgaan",
+     "een wereld met een nieuwe, niet-religieuze religie",
+     "S + T",
+     ["Digireligie", "Vleesproxy"]),
     ("Gegenereerd in plaats van gemaakt", "van maken naar genereren",
      "Claude, AI-posters, electrische reclameborden",
      "genereren vervangt met de hand maken",
      "wil gemakkelijk visuelen maken",
      "een wereld waarin AI flink aan het groeien is",
      "T",
-     ["AI-gegenereerde posters en plaatjes voor bedrijven",
-      "Iedereen wil een site en denkt dat het met Claude kan"]),
-    ("Geloven in het algoritme", "van eigen oordeel naar algoritme-oordeel",
-     "aanbevelings- en scoringsystemen",
-     "vertrouwen verplaatst van expert naar systeem",
-     "verwacht dat het algoritme gelijk heeft",
-     "een wereld met een nieuwe, niet-religieuze religie",
-     "S + T",
-     ["Digireligie"]),
+     ["AI-gegenereerde posters en plaatjes voor bedrijven"]),
     ("Digitalisering als koepel", "van analoog naar digitaal",
      "digitale producten en apparaten",
      "alles wordt digitaal en technologisch",
@@ -81,12 +109,12 @@ TRENDS = [
      ["Cloud living / cloud worker / cloud economie / buycloud",
       "1% bezit vs 50% — Oxfam Novib, 42 mensen = 3,7 miljard"]),
     ("Van meetbaar naar merkbaar", "van meten naar merken",
-     "belevingsproducten en merkbeleving",
+     "belevingsproducten en tastbare materialen",
      "waarde wordt bepaald door beleving, niet door cijfers",
      "verwacht dat iets voelbaar meer waard is",
      "een wereld waarin perceptie de maat is",
      "E(econ) + S",
-     ["Van meetbaar naar merkbaar", "Aibaarheidsfactor"]),
+     ["Van meetbaar naar merkbaar", "Aaibaarheidsfactor"]),
     ("Klein wint van groot", "van groot bedrijf naar kleine startup met een idee",
      "kleine tools van kleine startups",
      "kleine tech-startups met een goed idee worden populair",
@@ -103,15 +131,15 @@ TRENDS = [
      ["Cryptokoorts", "Donuteconomie / new economy / new money",
       "Investeren in bitcoin / superstar firms / marktplaatsen met datastromen"]),
     ("Tekort als motor", "van overvloed naar tekort",
-     "reststromen, tweedehands, verloren pakketjes",
+     "reststromen, grondstoffen, tweedehands",
      "tekort (woning, grondstof) bepaalt prijs en aanbod",
      "verwacht schaarsheid en past zijn gedrag aan",
      "een tekorteconomie",
      "E(econ) + E(ecol) + D",
-     ["Woningtekort", "Grondstoftekort / tekorteconomie"]),
-    ("Globalisering", "van lokaal naar wereldwijd",
+     ["Grondstoffen", "Grondstoftekort / tekorteconomie", "Woningtekort"]),
+    ("Globalisering en slobalisation", "van lokaal naar wereldwijd — en nu weer langzamer",
      "wereldwijd leverbare producten",
-     "markten zijn wereldwijd verbonden",
+     "markten zijn wereldwijd verbonden, maar vertragen",
      "verwacht wereldwijde beschikbaarheid",
      "een wereld die als één systeem functioneert",
      "E(econ) + S",
@@ -122,8 +150,7 @@ TRENDS = [
      "verwacht dat claims niet kloppen",
      "een samenleving met systeemmoe en angstgeneratie",
      "S + P",
-     ["Trust / angstgeneratie / systeemmoe", "Greenwashing",
-      "Controle door rijken, big tech die misbruik maakt"]),
+     ["Trust / angstgeneratie / systeemmoe", "Greenwashing"]),
     ("Van vertrouwen in big tech naar eigen controle", "van vertrouwen in een partij naar eigen controle",
      "lokale AI, self-hosted systemen, eigen servers",
      "bedrijven willen niet permanent afhankelijk zijn van AI-bedrijven",
@@ -131,14 +158,22 @@ TRENDS = [
      "een wereld waarin soevereiniteit een waarde is",
      "P + T",
      ["Bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen",
-      "Digital id", "Cyber / cybersecurity", "Zorgvelden die gehackt worden"]),
+      "Cyber / cybersecurity", "Zorgvelden die gehackt worden"]),
+    ("Massacontrole via registratie", "van vertrouwen naar registratie",
+     "digital ID-systemen",
+     "registratie bepaalt wie wat mag",
+     "verwacht dat toegang wordt ontzegd bij een fout",
+     "een wereld waarin wie waar aanmeldt wordt bijgehouden",
+     "P + T",
+     ["Digital id", "Controle door rijken, big tech die misbruik maakt"]),
     ("Regel als barrière voor automatisering", "van automatiseren naar niet-automatiseren door regels",
-     "sectoren die handmatig blijven",
+     "cobots en hubots die niet naast mensen mogen werken",
      "automatisering stopt bij de regels",
      "verwacht dat bepaalde sectoren handmatig blijven",
      "een wereld waarin regelgeving de tech remt",
      "P + T",
-     ["Regelfetjisisme", "Automatisering kan niet vanwege regels (sector die automatisering mist)"]),
+     ["Regelfetjisisme", "Automatisering kan niet vanwege regels (sector die automatisering mist)",
+      "Cobot / hubot"]),
     ("Duurzaamheid wordt efficiëntie en instoot", "van ideaal naar efficiëntie",
      "micro-fabrieken, solar democracy, CO2-zuigen",
      "duurzaamheid wordt een efficiëntieargument",
@@ -153,14 +188,14 @@ TRENDS = [
      "verwacht warmte en restricties",
      "een wereld met hitterecords en een transitie",
      "E(ecol) + S + P",
-     ["Opwarming / hitterecord / klimaattransition", "Hittestress", "Sustainable relations"]),
+     ["Opwarming / hitterecord / klimaattransition", "Hittestress"]),
     ("Van menselijke bediening naar automatische uitvoering", "van bedienden naar automatisch draaien",
-     "automaten, cobots, grasmaaiers, dark factories",
+     "automaten, grasmaaiers, dark factories",
      "uitvoering gebeurt zonder mens",
      "verwacht dat dingen automatisch draaien",
      "een wereld waarin werken wordt overgenomen",
      "T",
-     ["Automaten (suikerspinmachines, blikautomaten, snackmuren)", "Cobot / hubot",
+     ["Automaten (suikerspinmachines, blikautomaten, snackmuren)",
       "Dark factories / fabrieken op zee / indoor farming",
       "Op-afstand-bestuurde grasmaaier van de gemeente"]),
     ("Van kopen naar zelf maken", "van kopen naar lokaal zelf maken",
@@ -188,27 +223,29 @@ TRENDS = [
       "Gemaskert gokken met 'rare' producten (labubu, squishies), gericht op kinderen",
       "Verloren pakketjes kopen per gewicht"]),
     ("Van behandelen naar optimaliseren", "van genezen naar optimaliseren",
-     "DNA-assessment, health-tech, slaap-tools",
+     "DNA-assessment, health-tech, slaap-tools, robotonderdelen",
      "gezondheid wordt optimalisatie",
      "verwacht dat hij beter kan presteren",
      "een wereld van transhumanisatie",
      "T + E(econ)",
      ["Smartheal / elite health / health-tech / DNA assessment",
-      "Slaaplessen / slaaptekort / beter slapen", "Transhumanisatie"]),
-    ("Van dierlijk naar alternatief", "van dierlijk naar alternatief",
-     "vleesproxy, kunsteileider op een chip",
-     "alternatieven vervangen dierlijke producten",
-     "verwacht alternatieven",
-     "een wereld zonder traditionele veeteelt",
-     "T + E(ecol)",
-     ["Wortelstoffen / vleesproxy", "Kunsteileider op een chip / uitstervende dieren redden"]),
+      "Slaaplessen / slaaptekort / beter slapen", "Transhumanisatie",
+      "Body mining / brein download", "Ecologische eugenetica"]),
     ("Van gezond naar obsessief", "van gezond naar obsessief",
      "tracking-apps en dieet-cultuur",
      "gezondheid wordt obsessie",
      "verwacht controle over lichaam en voetafdruk",
-     "een wereld van ecorexia en eugenetica",
+     "een wereld van ecorexia",
      "S + E(ecol)",
-     ["Ecorexia / orthorexia / ecotexia", "Ecologische eugenetica"]),
+     ["Ecorexia / orthorexia / ecotexia"]),
+    ("Leven wordt ontworpen", "van gegeven naar ontworpen",
+     "kunsteileider op een chip, CRISPR, babyfabriek",
+     "biotech wordt een keuze",
+     "verwacht dat leven aanpasbaar is",
+     "een wereld van ontworpen levens",
+     "D + T",
+     ["CRISPR babies / geboren in babyfabriek",
+      "Kunsteileider op een chip / uitstervende dieren redden"]),
     ("Wonen wordt slim, klein en stedelijk", "van groot en vast naar slim, klein en stedelijk",
      "smart living-systemen, huizen verkopen met VR",
      "woning wordt slim en compact",
@@ -239,13 +276,29 @@ TRENDS = [
      "een eenzaamheidspandemie",
      "D + S",
      ["Eenzaamheidspandemie", "FOMO / JOMO"]),
-    ("Van ik naar wij, van exclusief naar inclusief", "van exclusief en ik naar inclusief en wij",
+    ("Software als relatie", "van product naar platform voor relaties",
+     "LinkedIn, Instagram",
+     "software bepaalt hoe mensen omgaan",
+     "verwacht relaties via software",
+     "een wereld waarin contact via platforms loopt",
+     "T + S",
+     ["Sustainable relations"]),
+    ("Software wordt voor iedereen bouwbaar", "van exclusief naar inclusief",
+     "Claude, site-builders, weekend-tools",
+     "van grote bedrijven die software leveren naar mensen die zelf bouwen",
+     "verwacht dat hij zonder programmeerkennis iets kan bouwen",
+     "een wereld waarin iedereen kan bouwen",
+     "T + S",
+     ["Exclusief → inclusief", "Iedereen wil een site en denkt dat het met Claude kan",
+      "Platform switch: Playstore & telefoons → nu AI",
+      "Disposable software: kleine tools in een weekend bouwen"]),
+    ("Van ik naar wij", "van ik naar wij",
      "gedeelde producten, do-it-together",
      "inclusie wordt verkoopargument",
      "verwacht erbij horen",
      "een wereld van wij",
      "S",
-     ["Exclusief → inclusief", "Wij = nieuwe ik / do-it-together"]),
+     ["Wij = nieuwe ik / do-it-together"]),
     ("Levensloop wordt langer en in fases", "van levensloop naar fases",
      "producten voor 100+",
      "multi stage life wordt een segment",
@@ -275,27 +328,6 @@ TRENDS = [
      "S + T",
      ["Fashion als statement / 'vreemde' fashion",
       "Autnostalgie — modellen worden teruggebracht (e-Mustang)"]),
-    ("Software wordt wegwerpmateriaal", "van product naar wegwerptool",
-     "weekend-tools, calculators, mini-apps",
-     "software wordt disposable",
-     "verwacht een tool voor één moment",
-     "een wereld waarin de lat omhoog gaat",
-     "T + E(econ)",
-     ["Disposable software: kleine tools in een weekend bouwen"]),
-    ("Platform switch", "van Playstore en telefoon naar AI",
-     "AI-assistenten als platform",
-     "Playstore en telefoon worden vervangen door AI",
-     "verwacht een chat als interface",
-     "een wereld na het smartphone-platform",
-     "T + P",
-     ["Platform switch: Playstore & telefoons → nu AI"]),
-    ("Treintrots", "van auto naar trein",
-     "treintickets en treinabonnementen",
-     "trein wint van auto",
-     "verwacht trein boven auto",
-     "een wereld die voor openbaar vervoer kiest",
-     "S + E(ecol)",
-     ["Treintrots"]),
     ("Technologie als machtsmiddel", "van commercieel naar geopolitiek machtsmiddel",
      "drones en defensie-tech",
      "kleine startups in defensie worden populair",
@@ -303,13 +335,13 @@ TRENDS = [
      "een wereld waarin tech macht is",
      "P + T",
      ["AI war / tech power"]),
-    ("Leven wordt ontworpen", "van gegeven naar ontworpen",
-     "CRISPR, babyfabriek",
-     "biotech wordt een keuze",
-     "verwacht dat leven aanpasbaar is",
-     "een wereld van ontworpen levens",
-     "D + T",
-     ["CRISPR babies / geboren in babyfabriek"]),
+    ("Treintrots", "van auto naar trein",
+     "treintickets en treinabonnementen",
+     "trein wint van auto",
+     "verwacht trein boven auto",
+     "een wereld die voor openbaar vervoer kiest",
+     "S + E(ecol)",
+     ["Treintrots"]),
 ]
 
 LEGEND = [
@@ -320,7 +352,8 @@ LEGEND = [
     "Voorbeeld 'van gemaakt naar gegenereerd': product = Claude · markt = genereren i.p.v. met de hand maken · consument = wil gemakkelijk visuelen maken · maatschappelijk = een wereld waarin AI groeit.",
     "A/B/C/D uit de trechter: A interesseveld · B doelgroep · C vakgebied · D toekomst.",
     "Behoefte en Opkomende verwachting vul je zelf in — dat is hoofdstuk #3.",
-    "83 ja-signalen uit tabblad 1 -> 38 trends. Elke signaal staat hier exact één keer.",
+    "Correcties: Wortelstoffen -> Grondstoffen (vertalingfout); Aibaarheidsfactor -> Aaibaarheidsfactor (hoe graag mensen iets willen aanraken, husky = hoog, naakte kat = laag); vleesproxy = persoon zonder kritisch denkvermogen die herhaalt wat AI zegt; kunsteileider = product dat vrouwen met een eileiderprobleem helpt; transhumanisatie = cybernetics; sustainable relations = software als LinkedIn/Instagram; slobalisation = vertraging van globalisering; Werk & leren is leeg en dus weg.",
+    "Alles is in de bestaande groepen gezet; alleen 'Software als relatie' is een nieuwe groep omdat er geen bestaande groep paste.",
 ]
 
 
@@ -341,9 +374,8 @@ def table_xml(name, header, rows, widths=None):
         for w in widths:
             out.append(f'<table:table-column fo:width="{w}" fo:width-guess="true"/>')
         out.append("</table:table-columns>")
-    out.append('<table:table-row><table:table-cell office:value-type="string">'
-               f"<text:p>{esc(header[0])}</text:p></table:table-cell>")
-    for h in header[1:]:
+    out.append("<table:table-row>")
+    for h in header:
         out.append(f'<table:table-cell office:value-type="string"><text:p>{esc(h)}</text:p></table:table-cell>')
     out.append("</table:table-row>")
     for r in rows:
@@ -362,23 +394,41 @@ def main():
     items = [(n, z.read(n)) for n in names]
     z.close()
 
-    # bestaande Trends/Legend-tabbladen verwijderen (idempotent)
     content = re.sub(r'<table:table table:name="Trends">.*?</table:table>', "", content)
     content = re.sub(r'<table:table table:name="Legend">.*?</table:table>', "", content)
 
-    rows = re.findall(r"<table:table-row[^>]*>.*?</table:table-row>", content)
-    data = [cells_in(r) for r in rows[1:]]
-    data = [c for c in data if len(c) >= 6 and c[0] and c[4].strip().lower() == "ja"]
+    # tabblad 1: correcties + vleesproxy als aparte rij
+    tabs = re.findall(r'(<table:table table:name="[^"]+"[^>]*>)(.*?)</table:table>', content)
+    first_open, first_body = tabs[0]
+    first_name = re.search(r'table:name="([^"]+)"', first_open).group(1)
+    rows = [cells_in(r) for r in re.findall(r"<table:table-row[^>]*>.*?</table:table-row>", first_body)]
+    header, data = rows[0], rows[1:]
+    data = [r for r in data if len(r) >= 6 and r[0]]
+    changed = []
+    for r in data:
+        if r[0] in FIX:
+            new_name, new_theme = FIX[r[0]]
+            changed.append(f"{r[0]}  ->  {new_name}  [{new_theme}]")
+            r[0], r[2] = new_name, new_theme
+    for name, destep, theme, ja, why in EXTRA:
+        data.append([name, "woordopdracht in de les", theme, destep, ja, why])
+        changed.append(f"+ {name}  [{theme}]")
+    print("correcties tabblad 1:")
+    for c in changed:
+        print("  " + c)
 
+    new1 = table_xml(first_name, HEAD1, data, ["50mm", "48mm", "32mm", "24mm", "20mm", "60mm"])
+
+    # controle dekking
     used = {}
     for t in TRENDS:
         for s in t[7]:
             used[s] = used.get(s, 0) + 1
-    have = {c[0] for c in data}
+    have = {r[0] for r in data if r[4].strip().lower() == "ja"}
     missing = have - set(used)
     extra = set(used) - have
     dup = {k: v for k, v in used.items() if v > 1}
-    print(f"trends: {len(TRENDS)} · signalen: {len(used)} van {len(have)}")
+    print(f"\ntrends: {len(TRENDS)} · signalen: {len(used)} van {len(have)}")
     if missing:
         print("NIET TOEGEWEZELD:", *sorted(missing), sep="\n  ")
     if extra:
@@ -388,8 +438,11 @@ def main():
 
     out_rows = [[t[0], t[1], t[2], t[3], t[4], t[5], str(len(t[7])), "; ".join(t[7]),
                  t[6], "", "", "", "", ""] for t in TRENDS]
-    new_tab = table_xml("Trends", HEAD, out_rows, WIDTHS) + table_xml("Legend", ["Toelichting"], [[l] for l in LEGEND])
-    content = content.replace("<table:named-expressions/>", new_tab + "<table:named-expressions/>")
+    new2 = table_xml("Trends", HEAD, out_rows, WIDTHS)
+    new3 = table_xml("Legend", ["Toelichting"], [[l] for l in LEGEND])
+
+    content = content.replace(first_open + first_body + "</table:table>", new1)
+    content = content.replace("<table:named-expressions/>", new2 + new3 + "<table:named-expressions/>")
 
     with zipfile.ZipFile(ODS, "w") as out:
         out.writestr(zipfile.ZipInfo("mimetype"), "application/vnd.oasis.opendocument.spreadsheet",
@@ -400,7 +453,7 @@ def main():
             if n == "content.xml":
                 b = content.encode("utf-8")
             out.writestr(n, b)
-    print("tabblad 'Trends' vernieuwd in", ODS)
+    print("\ntabbladen vernieuwd in", ODS)
 
 
 if __name__ == "__main__":
