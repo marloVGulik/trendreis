@@ -475,76 +475,85 @@ def fig_automaten():
     + '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>'
 
 
-def fig_prisma():
-    # ---- 3D-prisma: elk vlak = een thema. Je draait rond het prisma en leest de vier vlakken. ----
+def _stacked_prism(themas, aria):
+    """4 gestapelde lagen = de 4 niveaus; aan elke zijkant één thema."""
     import json
-    themes = [
-        {"n": [0, 0, -1], "u": [1, 0, 0], "v": [0, -1, 0], "pts": [[-1,0,-1],[1,0,-1],[1,1,-1],[-1,1,-1]],
-         "lines": [{"t": "AI &amp; data", "dy": -18, "fs": 16}, {"t": "T 14 · S 6", "dy": 4, "fs": 11},
-                   {"t": "14 signalen", "dy": 22, "fs": 12}]},
-        {"n": [1, 0, 0], "u": [0, 0, 1], "v": [0, -1, 0], "pts": [[1,0,-1],[1,0,1],[1,1,1],[1,1,-1]],
-         "lines": [{"t": "Automatisering", "dy": -16, "fs": 11}, {"t": "&amp; robots", "dy": 2, "fs": 11},
-                   {"t": "T 7 · P 2", "dy": 18, "fs": 10}]},
-        {"n": [0, 0, 1], "u": [-1, 0, 0], "v": [0, -1, 0], "pts": [[1,0,1],[-1,0,1],[-1,1,1],[1,1,1]],
-         "lines": [{"t": "Vertrouwen &amp;", "dy": -18, "fs": 16}, {"t": "soevereiniteit", "dy": 4, "fs": 16},
-                   {"t": "P 9 · S 4", "dy": 24, "fs": 12}]},
-        {"n": [-1, 0, 0], "u": [0, 0, -1], "v": [0, -1, 0], "pts": [[-1,0,1],[-1,0,-1],[-1,1,-1],[-1,1,1]],
-         "lines": [{"t": "Geld &amp;", "dy": -18, "fs": 16}, {"t": "economische", "dy": 4, "fs": 16},
-                   {"t": "E(econ) 10", "dy": 24, "fs": 12}]},
-        {"n": [0, 1, 0], "u": [1, 0, 0], "v": [0, 0, 1], "pts": [[-1,1,-1],[1,1,-1],[1,1,1],[-1,1,1]],
-         "lines": [{"t": "4 thema&#39;s", "dy": 0, "fs": 13}], "br": 0.85},
-    ]
-    scene = {
-        "center": [0, 0.4, 2.1],
-        "prism": {"c": [0, 0.0, 2.1], "hx": 0.55, "hz": 0.30, "height": 0.95, "faces": themes},
-        "params": {"F": 1.5, "S": 210, "CX": 300, "CY": 170,
-                   "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
-                   "viewBox": "0 0 600 300"}
+    SIDES = {
+        "voor":   {"n": [0, 0, -1], "u": [1, 0, 0],
+                   "q": lambda hx, y0, y1, hz: [(-hx, y0, -hz), (hx, y0, -hz), (hx, y1, -hz), (-hx, y1, -hz)]},
+        "rechts": {"n": [1, 0, 0], "u": [0, 0, 1],
+                   "q": lambda hx, y0, y1, hz: [(hx, y0, -hz), (hx, y0, hz), (hx, y1, hz), (hx, y1, -hz)]},
+        "achter": {"n": [0, 0, 1], "u": [-1, 0, 0],
+                   "q": lambda hx, y0, y1, hz: [(hx, y0, hz), (-hx, y0, hz), (-hx, y1, hz), (hx, y1, hz)]},
+        "links":  {"n": [-1, 0, 0], "u": [0, 0, -1],
+                   "q": lambda hx, y0, y1, hz: [(-hx, y0, hz), (-hx, y0, -hz), (-hx, y1, -hz), (-hx, y1, hz)]},
     }
-    aria = ("3D-prisma met vier vlakken, een vlak per gekozen thema: AI & data, Automatisering & robots, "
-            "Vertrouwen & soevereiniteit, Geld & economie. Sleep om rond het prisma te draaien.")
-    scene_json = json.dumps(scene, separators=(",", ":"))
-    return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
-            f'data-scene=\'{scene_json}\'>') + (
-            '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>')
-
-
-def fig_prisma2():
-    # ---- Tweede prisma: de verbredende blik. D-trends + de afvallers. ----
-    import json
-    hoeken = [270, 330, 30, 90, 150, 210]
-    teksten = [
-        [{"t": "Beleving &amp; spel", "dy": -16, "fs": 12}, {"t": "3 trends", "dy": 2, "fs": 11},
-         {"t": "beleven &gt; kopen", "dy": 18, "fs": 10}],
-        [{"t": "Klein &amp; zelf maken", "dy": -16, "fs": 12}, {"t": "3 trends", "dy": 2, "fs": 11},
-         {"t": "zelf produceren", "dy": 18, "fs": 10}],
-        [{"t": "Relatie &amp; machine", "dy": -16, "fs": 12}, {"t": "3 trends", "dy": 2, "fs": 11},
-         {"t": "eenzaamheid", "dy": 18, "fs": 10}],
-        [{"t": "Schaarste &amp; klimaat", "dy": -16, "fs": 12}, {"t": "2 trends", "dy": 2, "fs": 11},
-         {"t": "efficiëntie", "dy": 18, "fs": 10}],
-        [{"t": "Lichaam &amp; ruimte", "dy": -16, "fs": 12}, {"t": "2 trends", "dy": 2, "fs": 11},
-         {"t": "optimaliseren", "dy": 18, "fs": 10}],
-        [{"t": "Slechte ideeën", "dy": -16, "fs": 12}, {"t": "9 afvallers", "dy": 2, "fs": 11},
-         {"t": "wel leuk om mee te nemen", "dy": 18, "fs": 10}],
+    # van boven naar onder: maatschappelijk -> consument -> markt -> product
+    LAGEN = [
+        {"y0": 0.72, "y1": 1.06, "hx": 0.42, "hz": 0.36},
+        {"y0": 0.48, "y1": 0.72, "hx": 0.48, "hz": 0.41},
+        {"y0": 0.24, "y1": 0.48, "hx": 0.55, "hz": 0.47},
+        {"y0": 0.00, "y1": 0.24, "hx": 0.62, "hz": 0.53},
     ]
-    faces = [{"a0": m - 30, "a1": m + 30, "lines": t} for m, t in zip(hoeken, teksten)]
-    faces.append({"top": True, "ang": hoeken, "br": 0.85,
-                  "lines": [{"t": "verbredende blik", "dy": 0, "fs": 12}]})
+    faces = []
+    for side, naam, regels in themas:
+        s = SIDES[side]
+        for i, L in enumerate(LAGEN):
+            lines = []
+            if i == 0:
+                lines.append({"t": naam, "dy": -13, "fs": 11})
+            lines.append({"t": regels[i], "dy": 4, "fs": 10})
+            faces.append({"n": s["n"], "u": s["u"], "v": [0, -1, 0],
+                          "q": s["q"](L["hx"], L["y0"], L["y1"], L["hz"]),
+                          "lines": lines, "br": 0.66 - i * 0.04})
     scene = {
         "center": [0, 0.4, 2.4],
-        "prism": {"c": [0, 0.0, 2.4], "r": 0.85, "height": 0.95, "faces": faces},
+        "prism": {"c": [0, 0.0, 2.4], "height": 1.06, "faces": faces},
         "params": {"F": 1.5, "S": 210, "CX": 300, "CY": 180,
                    "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
                    "viewBox": "0 0 600 320"}
     }
-    aria = ("3D-prisma met zes vlakken voor de verbredende blik: Beleving & spel, Klein & zelf maken, "
-            "Relatie & machine, Schaarste & klimaat, Lichaam & ruimte en de 9 slechte bedrijfsideeën. "
-            "Dit zijn thema's die ik leuk vind maar die niet direct bij mijn bedrijfsidee passen. "
-            "Sleep om rond het prisma te draaien.")
     scene_json = json.dumps(scene, separators=(",", ":"))
     return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
             f'data-scene=\'{scene_json}\'>') + (
             '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>')
+
+
+def fig_prisma():
+    # ---- Prisma 1: de thema's die bij mijn bedrijfsidee passen. ----
+    themas = [
+        ("voor", "AI &amp; data",
+         ["beslissen uitbesteed", "wil niet kiezen", "agents adviseren &amp; verkopen", "agentic commerce"]),
+        ("rechts", "Automatisering",
+         ["werken zonder mens", "verwacht dat het draait", "uitvoering zonder mens", "automaten, dark factories"]),
+        ("achter", "Vertrouwen",
+         ["soevereiniteit", "wil data lokaal", "big tech-afhankelijk", "lokale AI, self-hosted"]),
+        ("links", "Geld &amp; economie",
+         ["bezit &rarr; toegang", "huurt, geen bezit", "toegang = product", "cloudabonnementen"]),
+    ]
+    aria = ("3D-prisma van vier gestapelde lagen. Aan elke zijkant één thema: AI & data, Automatisering, "
+            "Vertrouwen, Geld & economie. Van boven naar onder: maatschappelijke trend, consumententrend, "
+            "markttrend, producttrend. Sleep om te draaien.")
+    return _stacked_prism(themas, aria)
+
+
+def fig_prisma2():
+    # ---- Prisma 2: de verbredende blik — thema's waar ik weinig van weet, plus een slecht idee. ----
+    themas = [
+        ("voor", "Ruimte",
+         ["toekomst is gedeeld", "denkt buiten de aarde", "ruimte wordt economisch", "space farm, airfarm"]),
+        ("rechts", "Lichaam",
+         ["mens + machine smelten", "wil presteren", "gezondheid = optimalisatie", "DNA-assessment, health-tech"]),
+        ("achter", "Spel",
+         ["consumptie = gok", "koopt voor het spel", "gamification, gokken", "labubu, squishies"]),
+        ("links", "Slecht idee",
+         ["privacy = waarde", "verkoopt privacy", "data is het product", "data verkopen"]),
+    ]
+    aria = ("3D-prisma van vier gestapelde lagen voor de verbredende blik: vier thema's waar ik weinig van weet "
+            "en die niet direct bij mijn bedrijfsidee passen — Ruimte, Lichaam, Spel en een slecht idee "
+            "(data verzamelen en verkopen). Van boven naar onder: maatschappelijke trend, consumententrend, "
+            "markttrend, producttrend. Sleep om te draaien.")
+    return _stacked_prism(themas, aria)
 
 def fig_pyramide_c():
     # ---- 3D-piramide (via de Anaglyph-motor) ----
@@ -750,8 +759,8 @@ FIGURE_CAPTIONS = {
     "trendcanvas": "Trendcanvas — de 8 stappen van trend naar mijn innovatie.",
     "automaten": "Alles-automaten — een kaart met de status van automaten in de buurt.",
     "pyramide_c": "Waardepiramide C — leeg frame, nog te vullen.",
-    "prisma": "Prisma 1 — vier vlakken, een vlak per thema dat bij mijn bedrijfsidee past. Sleep om te draaien.",
-    "prisma2": "Prisma 2 — de verbredende blik: zes vlakken met thema's die ik leuk vind maar die niet direct bij mijn bedrijfsidee passen, plus de 9 afvallers.",
+    "prisma": "Prisma 1 — vier gestapelde lagen (boven = maatschappelijk, dan consument, markt, product). Aan elke zijkant één thema dat bij mijn bedrijfsidee past.",
+    "prisma2": "Prisma 2 — dezelfde stapeling voor de verbredende blik: vier thema's waar ik weinig van weet, waaronder één slecht idee.",
 }
 
 # =================================================================== shell

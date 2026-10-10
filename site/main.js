@@ -80,6 +80,9 @@
         if (f.top) {                                  // bovenvlak: polygon van hoeken
           n = [0, 1, 0]; u = [1, 0, 0]; v = [0, 0, 1];
           lp = f.ang.map(function(a){ a = a * Math.PI / 180; return [R * Math.cos(a), H, R * Math.sin(a)]; });
+        } else if (f.q) {                             // expliciete quad in world-units (gestapelde lagen)
+          n = f.n; u = f.u; v = f.v;
+          lp = f.q.map(function(p){ return [p[0], p[1], p[2]]; });
         } else if (f.a0 !== undefined) {              // prisma-vlak: twee hoeken (graden) in de doorsnede
           var a0 = f.a0 * Math.PI / 180, a1 = f.a1 * Math.PI / 180, mid = (a0 + a1) / 2;
           n = [Math.cos(mid), 0, Math.sin(mid)];
