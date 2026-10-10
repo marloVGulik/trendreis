@@ -65,6 +65,7 @@ FIGURES = {
         ("trendcanvas", "Trendcanvas — van trend naar innovatie"),
         ("automaten", "Trendcanvas — van trend naar innovatie"),
         ("prisma", "De trendpyramide"),
+        ("prisma2", "De trendpyramide"),
     ],
     "waardeverschuivingen": [
         ("pyramide_c", "intro"),
@@ -507,6 +508,44 @@ def fig_prisma():
             f'data-scene=\'{scene_json}\'>') + (
             '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>')
 
+
+def fig_prisma2():
+    # ---- Tweede prisma: de verbredende blik. D-trends + de afvallers. ----
+    import json
+    hoeken = [270, 330, 30, 90, 150, 210]
+    teksten = [
+        [{"t": "Beleving &amp; spel", "dy": -16, "fs": 12}, {"t": "3 trends", "dy": 2, "fs": 11},
+         {"t": "beleven &gt; kopen", "dy": 18, "fs": 10}],
+        [{"t": "Klein &amp; zelf maken", "dy": -16, "fs": 12}, {"t": "3 trends", "dy": 2, "fs": 11},
+         {"t": "zelf produceren", "dy": 18, "fs": 10}],
+        [{"t": "Relatie &amp; machine", "dy": -16, "fs": 12}, {"t": "3 trends", "dy": 2, "fs": 11},
+         {"t": "eenzaamheid", "dy": 18, "fs": 10}],
+        [{"t": "Schaarste &amp; klimaat", "dy": -16, "fs": 12}, {"t": "2 trends", "dy": 2, "fs": 11},
+         {"t": "efficiëntie", "dy": 18, "fs": 10}],
+        [{"t": "Lichaam &amp; ruimte", "dy": -16, "fs": 12}, {"t": "2 trends", "dy": 2, "fs": 11},
+         {"t": "optimaliseren", "dy": 18, "fs": 10}],
+        [{"t": "Slechte ideeën", "dy": -16, "fs": 12}, {"t": "9 afvallers", "dy": 2, "fs": 11},
+         {"t": "wel leuk om mee te nemen", "dy": 18, "fs": 10}],
+    ]
+    faces = [{"a0": m - 30, "a1": m + 30, "lines": t} for m, t in zip(hoeken, teksten)]
+    faces.append({"top": True, "ang": hoeken, "br": 0.85,
+                  "lines": [{"t": "verbredende blik", "dy": 0, "fs": 12}]})
+    scene = {
+        "center": [0, 0.4, 2.4],
+        "prism": {"c": [0, 0.0, 2.4], "r": 0.85, "height": 0.95, "faces": faces},
+        "params": {"F": 1.5, "S": 210, "CX": 300, "CY": 180,
+                   "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
+                   "viewBox": "0 0 600 320"}
+    }
+    aria = ("3D-prisma met zes vlakken voor de verbredende blik: Beleving & spel, Klein & zelf maken, "
+            "Relatie & machine, Schaarste & klimaat, Lichaam & ruimte en de 9 slechte bedrijfsideeën. "
+            "Dit zijn thema's die ik leuk vind maar die niet direct bij mijn bedrijfsidee passen. "
+            "Sleep om rond het prisma te draaien.")
+    scene_json = json.dumps(scene, separators=(",", ":"))
+    return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
+            f'data-scene=\'{scene_json}\'>') + (
+            '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>')
+
 def fig_pyramide_c():
     # ---- 3D-piramide (via de Anaglyph-motor) ----
     a = Anaglyph(viewBox="0 0 420 320", aria="Waardepiramide C: 3D-piramide, leeg frame nog te vullen (3 lagen)",
@@ -702,6 +741,7 @@ FIGURE_BUILDERS = {
     "automaten": fig_automaten,
     "pyramide_c": fig_pyramide_c,
     "prisma": fig_prisma,
+    "prisma2": fig_prisma2,
 }
 FIGURE_CAPTIONS = {
     "ikigai": "Ikigai — waar de vier kringjes overlappen, staat het werk dat ik wil.",
@@ -710,7 +750,8 @@ FIGURE_CAPTIONS = {
     "trendcanvas": "Trendcanvas — de 8 stappen van trend naar mijn innovatie.",
     "automaten": "Alles-automaten — een kaart met de status van automaten in de buurt.",
     "pyramide_c": "Waardepiramide C — leeg frame, nog te vullen.",
-    "prisma": "Vier prisma's — een per gekozen thema, met de vier niveaus als lagen. Sleep om te draaien.",
+    "prisma": "Prisma 1 — vier vlakken, een vlak per thema dat bij mijn bedrijfsidee past. Sleep om te draaien.",
+    "prisma2": "Prisma 2 — de verbredende blik: zes vlakken met thema's die ik leuk vind maar die niet direct bij mijn bedrijfsidee passen, plus de 9 afvallers.",
 }
 
 # =================================================================== shell

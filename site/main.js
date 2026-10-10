@@ -73,30 +73,44 @@
       return faces.map(function(fa){ var br=anaBright(fa.n)*base; return polyStr(fa.p2)+' fill="'+orbitFill(ch,br)+'" stroke="'+orbitFill(ch,br*0.35)+'" stroke-width="1.1"/>'; }).join('');
     }
     function prismSVG(pr, cam, ch) {
-      var hx = pr.hx, hz = pr.hz, H = pr.height, out = [];
+      var H = pr.height, R = pr.r, hx = pr.hx, hz = pr.hz, out = [];
       var faces = [];
       (pr.faces || []).forEach(function(f){
-        var lp = f.pts.map(function(p){ return [pr.c[0]+p[0]*hx, pr.c[1]+p[1]*H, pr.c[2]+p[2]*hz]; });
+        var n, u, v, lp;
+        if (f.top) {                                  // bovenvlak: polygon van hoeken
+          n = [0, 1, 0]; u = [1, 0, 0]; v = [0, 0, 1];
+          lp = f.ang.map(function(a){ a = a * Math.PI / 180; return [R * Math.cos(a), H, R * Math.sin(a)]; });
+        } else if (f.a0 !== undefined) {              // prisma-vlak: twee hoeken (graden) in de doorsnede
+          var a0 = f.a0 * Math.PI / 180, a1 = f.a1 * Math.PI / 180, mid = (a0 + a1) / 2;
+          n = [Math.cos(mid), 0, Math.sin(mid)];
+          u = [-Math.sin(mid), 0, Math.cos(mid)];     // lees-richting over het vlak
+          v = [0, -1, 0];                             // lees-omlaag op het vlak
+          lp = [[R*Math.cos(a0), 0, R*Math.sin(a0)], [R*Math.cos(a1), 0, R*Math.sin(a1)],
+                [R*Math.cos(a1), H, R*Math.sin(a1)], [R*Math.cos(a0), H, R*Math.sin(a0)]];
+        } else {                                      // rechthoekig prisma via hx/hz
+          n = f.n; u = f.u; v = f.v;
+          lp = f.pts.map(function(p){ return [p[0]*hx, p[1]*H, p[2]*hz]; });
+        }
+        lp = lp.map(function(p){ return [pr.c[0]+p[0], pr.c[1]+p[1], pr.c[2]+p[2]]; });
         var rp = lp.map(rot);
         var p2 = rp.map(function(p){ var rz=p[2]-cam[2]; if(rz<=0.02) return null; return [P.CX+P.F*(p[0]-cam[0])/rz*P.S, P.CY-P.F*(p[1]-cam[1])/rz*P.S]; });
         if (!p2.every(Boolean)) return;
         var fc = [0,0,0]; rp.forEach(function(p){ fc[0]+=p[0]; fc[1]+=p[1]; fc[2]+=p[2]; });
-        fc = [fc[0]/4, fc[1]/4, fc[2]/4];
-        var nr = [f.n[0]*cos+f.n[2]*sin, f.n[1], -f.n[0]*sin+f.n[2]*cos];
+        fc = [fc[0]/lp.length, fc[1]/lp.length, fc[2]/lp.length];
+        var nr = [n[0]*cos+n[2]*sin, n[1], -n[0]*sin+n[2]*cos];
         // zichtbaar als de camera aan de buitenkant van het vlak staat: dot(n, cam - fc) > 0
         if (nr[0]*(cam[0]-fc[0])+nr[1]*(cam[1]-fc[1])+nr[2]*(cam[2]-fc[2]) <= 0) return;
         var br = anaBright(nr) * (f.br !== undefined ? f.br : 0.62);
         faces.push({ depth: fc[2], poly: polyStr(p2), fill: orbitFill(ch, br),
-                     fc: fc, u: f.u, v: f.v, lines: f.lines || [], br: br });
+                     fc: fc, u: u, v: v, lines: f.lines || [], br: br });
       });
       faces.sort(function(a,b){ return b.depth - a.depth; });
       faces.forEach(function(fa){
         out.push(fa.poly + ' fill="' + fa.fill + '" stroke="' + orbitFill(ch, fa.br*0.35) + '" stroke-width="1.2"/>');
         var O = [P.CX + P.F*(fa.fc[0]-cam[0])/fa.fc[2]*P.S, P.CY - P.F*(fa.fc[1]-cam[1])/fa.fc[2]*P.S];
-        // basisvectoren in schermruimte: u = lees-richting (rechts), v = omlaag op het vlak
         // lineaire deel van de projectie: scherm-richting van een as in het vlak (zonder diepte-stap)
         function basis(ax){ var r=[ax[0]*cos+ax[2]*sin, ax[1], -ax[0]*sin+ax[2]*cos]; return [r[0], -r[1]]; }
-        var U = basis(fa.u), V = basis([0, -1, 0]);   // SVG-text loopt omlaag => face-up is negatief
+        var U = basis(fa.u), V = basis(fa.v);
         var t = '<g transform="matrix(' + U[0].toFixed(4) + ',' + U[1].toFixed(4) + ',' + V[0].toFixed(4) + ',' + V[1].toFixed(4) + ',' + O[0].toFixed(1) + ',' + O[1].toFixed(1) + ')">';
         fa.lines.forEach(function(l){ t += '<text x="0" y="' + l.dy + '" text-anchor="middle" font-size="' + (l.fs||13) + '" fill="' + orbitFill(ch, Math.max(0.85, fa.br)) + '">' + l.t + '</text>'; });
         out.push(t + '</g>');
