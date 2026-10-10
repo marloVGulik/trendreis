@@ -126,7 +126,7 @@
       (scene.lines || scene.axes || []).forEach(function(ax){ var a=proj(ax.a,cam), b=proj(ax.b,cam); if(a&&b) o.push('<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'" stroke="'+orbitFill(ch, ax.br!==undefined?ax.br:0.65)+'" stroke-width="'+(ax.w||1.5)+'"'+(ax.dash?' stroke-dasharray="'+ax.dash+'"':'')+'/>'); });
       (scene.blocks||[]).forEach(function(bl){ o.push(blockSVG(bl, cam, ch)); });
       if (scene.prism) o.push(prismSVG(scene.prism, cam, ch));
-      var EX = scene.pointScale || 1.6;   // hoe sterk het formaat met diepte meegaat (1 = puur perspectief)
+      var EX = scene.pointScale || 1;   // hoe sterk het formaat met diepte meegaat (1 = puur perspectief)
       (scene.points||[]).forEach(function(pt){ var r=rot(pt.p), rz=r[2]-cam[2]; if(rz<=0.02) return;
         var sc=Math.pow((C[2]-cam[2])/rz, EX), q=[P.CX+P.F*(r[0]-cam[0])/rz*P.S, P.CY-P.F*(r[1]-cam[1])/rz*P.S];
         var base=pt.mine?8:(pt.hot?7:4.5), rad=base*sc;
