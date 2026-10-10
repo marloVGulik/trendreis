@@ -88,15 +88,78 @@ HUNTER_PHOTOS = [
 
 # bron-quotes → rechthoek op de notebook-foto (x%, y%, w%, h%)
 HIGHLIGHTS = {
+    "eindbeeld": {"photo": "P00-01", "box": [52, 30, 43, 35],
+                  "label": "P00-01 · voorstellen van toekomst",
+                  "quote": "13 Januari 2027: … mijn bedrijf ingeschreven bij de K.v.K."},
+    "omdraai": {"photo": "P04-05", "box": [3, 48, 45, 6],
+                "label": "P04-05 · omdraaien",
+                "quote": "ipv groep zoeken eerst, doe ik eerst mijn idee uitbreiden en testen bij een klant"},
+    "ideeen-12": {"photo": "P04-05", "box": [3, 62, 45, 26],
+                  "label": "P04-05 · goede bedrijfsideeën",
+                  "quote": "12 ideeën — 11 Robot huisdier!"},
     "robot-huisdier": {"photo": "P04-05", "box": [3, 89, 20, 7],
                        "label": "P04-05 · 12 ideeën, nr. 11", "quote": "Robot huisdier!"},
-    "food-70-10": {"photo": "P18-19", "box": [55, 42.5, 31, 6],
-                   "label": "P18-19 · the future / food", "quote": "van 70% uitgaven aan voedsel naar 10%"},
-    "salatomaat": {"photo": "P12-13", "box": [5, 69.5, 26, 9],
-                   "label": "P12-13 · ideeën, nr. 2", "quote": "Saladomat — automatische salade"},
+    "boris": {"photo": "P06-07", "box": [3, 5, 45, 8],
+              "label": "P06-07 · presentatie Boris",
+              "quote": "bedrijven zijn angstig om grote AI bedrijven permanent te vertrouwen"},
+    "pyramide-niveaus": {"photo": "P08-09", "box": [52, 5, 43, 12],
+                         "label": "P08-09 · de vier niveaus",
+                         "quote": "1 product trend → welke producten zijn populair … 4 maatschappelijk trend → in wat voor wereld leven wij"},
+    "pyramides-ab": {"photo": "P08-09", "box": [52, 30, 45, 20],
+                     "label": "P08-09 · piramide A en B",
+                     "quote": "gemaksmaatschappij · 'slimme' maatschappij — niveau 1 van B staat leeg"},
+    "trendkaart-regel": {"photo": "P08-09", "box": [52, 52, 40, 9],
+                         "label": "P08-09 · trendkaart",
+                         "quote": "trendkaart: beeld van macro trend piramides — 1 actualiteiten en objecten foto maken, 2 hieruit trendwiel maken, 3 dataverwerken met AI"},
     "automatisering-regels": {"photo": "P10-11", "box": [5, 76.5, 46, 8],
                               "label": "P10-11 · Tegenlicht, game of drones",
                               "quote": "deze sector kan veel automatisering niet aan vanwege regels"},
+    "megatrends": {"photo": "P12-13", "box": [3, 5, 47, 11],
+                   "label": "P12-13 · Be part of the solution",
+                   "quote": "opwarming, hittestress, indoorgeneratie, rijke mensen vermogen verdubbeld, angstgeneratie, eenzaamheid, woningtekort, dementie, tekorteconomie, slaaptekort, grondstoftekort, trust, systeemmoe"},
+    "salatomaat": {"photo": "P12-13", "box": [5, 69.5, 26, 9],
+                   "label": "P12-13 · ideeën, nr. 2", "quote": "Saladomat — automatische salade"},
+    "scanplan": {"photo": "P12-13", "box": [52, 40, 43, 22],
+                 "label": "P12-13 · scanplan",
+                 "quote": "elke dag nieuws op nu.nl · maandag podcast · dinsdag Tegenlicht · donderdag Tweakers"},
+    "wafel": {"photo": "P14-15", "box": [3, 10, 47, 5],
+              "label": "P14-15 · tip van een klasgenoot",
+              "quote": "verkoop niet de wafel, maar het gevoel dat iemand je helpt"},
+    "wachten-duurt-lang": {"photo": "P14-15", "box": [3, 38, 47, 5],
+                           "label": "P14-15 · micro event",
+                           "quote": "niet wachten op eigen geld, eerst naar investeerders. Wachten duurt lang"},
+    "destep-def": {"photo": "P14-15", "box": [52, 5, 43, 12],
+                   "label": "P14-15 · DESTEP",
+                   "quote": "een trend is een richting waarin waarden en behoeften veranderen, opgestuwd door externe krachten"},
+    "thuis-ook": {"photo": "P16-17", "box": [3, 13, 22, 4],
+                  "label": "P16-17 · signaallijst",
+                  "quote": "dat kan ik thuis ook"},
+    "gastles-regels": {"photo": "P16-17", "box": [3, 55, 47, 17],
+                       "label": "P16-17 · gastles",
+                       "quote": "gebruik anderen als inspiratie · maak combinaties van trends · massa = kassa · branding en marketing is belangrijker dan smaak"},
+    "auto-lijn": {"photo": "P16-17", "box": [52, 30, 43, 6],
+                  "label": "P16-17 · de hoofdlijn",
+                  "quote": "auto → gedeelde auto → electrische fiets → intelligente outsourcing"},
+    "ai-lijn": {"photo": "P16-17", "box": [52, 48, 43, 14],
+                "label": "P16-17 · de AI-lijn",
+                "quote": "Movement → zonnepanelen → green → tech → AI → posters en reclameborden"},
+    "oude-fixatie": {"photo": "P18-19", "box": [3, 58, 32, 6],
+                     "label": "P18-19 · di 6 okt",
+                     "quote": "waardeverschuiving uitwerken — oude fixatie"},
+    "duurzaam-efficient": {"photo": "P18-19", "box": [52, 14, 43, 5],
+                           "label": "P18-19 · gastles Bart Krinner",
+                           "quote": "wat betekent duurzaam voor mij: duurzaam is efficiënt (andere mensen hebben andere ideeën)"},
+    "food-70-10": {"photo": "P18-19", "box": [55, 42.5, 31, 6],
+                   "label": "P18-19 · the future / food", "quote": "van 70% uitgaven aan voedsel naar 10%"},
+    "ingredienten": {"photo": "P18-19", "box": [52, 58, 43, 5],
+                     "label": "P18-19 · ingrediënten van mijn bedrijf",
+                     "quote": "welke ingrediënten heeft mijn bedrijf — tech, programmeren, hardware, AI, groei, snelheid"},
+    "mengpaneel": {"photo": "P20-21", "box": [52, 5, 43, 4],
+                   "label": "P20-21 · mengpaneel",
+                   "quote": "mengpaneel: welke richting wil ik op"},
+    "assenstelsel-regel": {"photo": "P20-21", "box": [3, 58, 42, 10],
+                           "label": "P20-21 · eigen regel",
+                           "quote": "van elke trend een assenstelsel maken → elk scenario maken → voor elk scenario oplossingen"},
     "ikigai-open-source": {"photo": "Opdr-ikigai-voorkant", "box": [59, 56, 38, 21],
                            "label": "Ikigai · open-source-annotatie",
                            "quote": "bedrijven begeleiden naar … open-source … automatisering software voor bedrijven"},
@@ -285,11 +348,12 @@ def split_sections(md: str):
         m = re.match(r"^##\s+(.*)$", ln.strip())
         if m:
             if cur_title is None:
-                intro.append(ln)
+                cur_title = m.group(1)
+                cur_body = []
             else:
                 sections.append((cur_title, "\n".join(cur_body)))
-            cur_title = m.group(1)
-            cur_body = []
+                cur_title = m.group(1)
+                cur_body = []
         elif cur_title is None:
             intro.append(ln)
         else:
@@ -934,7 +998,7 @@ def content_blocks(page_id, md):
                 items.append(("fig", f))
         items.append(("sec", title, body))
         # hunter-foto's na de Hunt-sectie (signalen)
-        if page_id == "actualiteiten" and title.startswith("Uit het gebouw kijken"):
+        if page_id == "actualiteiten" and title.startswith("Uitzoomen"):
             items.append(("photos", ""))
     blocks = []
     toc_items = []
@@ -1181,6 +1245,9 @@ def copy_media():
         shutil.copy2(src, MEDIA / src.name); n += 1
     for src in sorted(RAW.glob("*.jpg")):
         shutil.copy2(src, NB_DIR / src.name); n += 1
+    for src in (ROOT / "trendlijst.ods", ROOT / "trendlijst.csv"):
+        if src.exists():
+            shutil.copy2(src, SITE / src.name); n += 1
     return n
 
 

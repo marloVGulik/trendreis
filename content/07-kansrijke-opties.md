@@ -8,11 +8,11 @@ minor schreef. Dit hoofdstuk is L3b: één tot drie kansrijke ideeën, met die l
 ## De 1–3 opties
 
 Drie opties, en per optie de trend, de verschuiving en de behoefte die eronder ligt. Dit is de keuze
-uit de 39 trends in `trendlijst.ods` — de opties hieronder zijn precies de trends met een B-letter.
+uit de 39 trends in [trendlijst.ods](trendlijst.ods) — de opties hieronder zijn precies de trends met een B-letter.
 
 ### 1. Robot huisdier
 
-Mijn favoriet uit de lijst van 12 ideeën, nummer 11 `{#bron:robot-huisdier}`. Daarin combineer ik
+Mijn favoriet uit de lijst van 12 ideeën `{#bron:ideeen-12}`, nummer 11 `{#bron:robot-huisdier}`. Daarin combineer ik
 precies waar ik sterk in ben — motoren én AI — en het is gewoon leuk om te maken.
 
 | | |
@@ -59,7 +59,7 @@ maar eigen conclusies. Ze horen hier, niet in hoofdstuk 1.
 **Printplaten-bureau** — advies geven én bouwen. Embedded systems is precies mijn ESE-achtergrond, daar
 heb ik een voorsprong. **Memoires** — data over hoe mensen AI gebruiken en wat ze op willen slaan; dat
 wil ik uitbrengen. **"Verkoop niet de wafel"** — een quote van een klasgenoot: *"Het product is niet de
-wafel — je verkoopt het gevoel dat iemand jou uit de brand helpt."* **Meervoudige waardecreatie** —
+wafel — je verkoopt het gevoel dat iemand jou uit de brand helpt."* `{#bron:wafel}` **Meervoudige waardecreatie** —
 meerdere problemen in één oplossing, trends combineren. **Massa = kassa** — hoe meer mensen je bereikt,
 hoe meer er geïnteresseerd kan zijn, en branding en marketing zijn belangrijker dan smaak.
 
@@ -84,6 +84,13 @@ plaats van te vissen in de oude.
 Dit is de rode draad door mijn eigen opties: optie 3 is een platform switch die al bezig is, en optie 2
 is de brug die erbij hoort.
 
+## Waarom ik
+
+*"Welke ingrediënten heeft mijn bedrijf"* `{#bron:ingredienten}` — tech, programmeren, hardware, AI,
+groei, snelheid, tools, kwaliteit, smart living. En de achtergrond: Embedded Systems Engineering. Ik ken
+hardware én software en de ruimte ertussen. Die combinatie is zeldzaam, en precies waar optie 1 en 3 op
+draaien.
+
 ## Wat er tegenwerkt
 
 De beren op de weg, zoals ik ze zelf noteerde:
@@ -96,7 +103,7 @@ De beren op de weg, zoals ik ze zelf noteerde:
   klanten op. Het aanbod groeit sneller dan ik kan bouwen.
 - **Geld vragen.** Ik krijg schrik als ik geld vraag voor mijn diensten — dat is het ongemakkelijke
   deel wat ik moet doorwerken.
-- **Wachten op eigen geld.** *"Wachten duurt lang."*
+- **Wachten op eigen geld.** *"Wachten duurt lang."* `{#bron:wachten-duurt-lang}`
 
 ## De noorderster
 

@@ -19,7 +19,7 @@
 > inkomen kunnen genereren met mijn idee tijdens de tests. Er zijn nog een paar dingen die moeten
 > gebeuren. Mijn product heeft nog enkele verbeteringen nodig in de UI, en ook wil ik enkele processen
 > automatiseren om het minder handwerk te maken. Afgelopen week ben ik ook goed bezig geweest met
-> klanten zoeken, en heb met 4 klanten een traject gestart."
+> klanten zoeken, en heb met 4 klanten een traject gestart." `{#bron:eindbeeld}`
 > — *eindbeeld, als doel geschreven vóór de start van de minor*
 
 **Deze site is de reis ernaartoe** — de trechter, in acht stappen:

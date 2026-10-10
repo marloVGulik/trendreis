@@ -23,7 +23,7 @@ zomaar — dat laatste zijn de krachten uit DESTEP *(hoofdstuk 3)*.
 | **1 · Product** | welke producten zijn populair? |
 | **2 · Markt** | wat gebeurt er in de markt? |
 | **3 · Consumenten** | hoe gedragen consumenten zich? |
-| **4 · Maatschappelijk** | in wat voor wereld leven wij? |
+| **4 · Maatschappelijk** | in wat voor wereld leven wij? | `{#bron:pyramide-niveaus}`
 
 Hoe dieper ik graaf, hoe stabieler het wordt, en hoe dichter ik bij een waardeverschuiving zit
 *(hoofdstuk 5)*.
@@ -35,7 +35,7 @@ ideeën, mijn 12 ideeën van 9/11 plus nieuwe.
 
 ### Mijn pyramides
 
-In het notebook staan er twee, letterlijk, van boven naar onder gelezen.
+In het notebook staan er twee, letterlijk, van boven naar onder gelezen `{#bron:pyramides-ab}`.
 
 **A · Gemak** — Lamborghini Urus, slimme thermostaat/oven/wasmachine, fatbike, Tinder → grote luxe
 auto's, IoT, elektrische fietsen, dating apps → weinig moeite, toegankelijkheid, de korte weg nemen,
@@ -47,7 +47,7 @@ meten, algoritmes, dataverzameling, geïnformeerde keuzes → **"slimme" maatsch
 B is dus niet af: niveau 1, product, staat leeg. Dat gat laten staan is bewuster dan het vullen met
 een suggestie.
 
-Daarna clusterde ik al mijn signalen in `trendlijst.ods`. Daar kwamen vier thema's uit die
+Daarna clusterde ik al mijn signalen in [trendlijst.ods](trendlijst.ods). Daar kwamen vier thema's uit die
 overleefden — de vier met de meeste B-letters, dus de vier die het dichtst bij mijn bedrijfsidee
 liggen. Die staan als het grote prisma hieronder. Ze zijn niet identiek aan mijn twee tekeningen:
 
@@ -75,7 +75,7 @@ democracy, CO2 zuigen, micro-fabriek, tekorteconomie, grondstoftekort, hittereco
 Uit de les: met één piramide laat je één thema zien. In een trendkaart komen meerdere piramides of
 bomen samen, met de vier niveaus tegelijk.
 
-Mijn eigen regel in het notebook was: *"trendkaart: beeld van macro trend piramides"*, met het pad
+Mijn eigen regel in het notebook was: *"trendkaart: beeld van macro trend piramides"* `{#bron:trendkaart-regel}`, met het pad
 daarnaartoe — 1 actualiteiten en objecten fotograferen, 2 hieruit een trendwiel maken, 3 dataverwerken
 met AI. In de les werkte ik twee piramides uit, A en B, en samen waren dat mijn eerste trendkaart.
 
@@ -131,7 +131,7 @@ vielen naar 0. Pas cloud en digital ID liggen echt extern: daar beheert een derd
 mal, dus hij staat aan de handgemaakte kant ook al is het een machine.
 
 Het cluster rechts-boven, intern beheer + geautomatiseerd + toekomst, is precies waar mijn
-bedrijfsidee landt. En ik breidde het zelf uit, zo staat het in m'n notebook: *van elke trend een
+bedrijfsidee landt. En ik breidde het zelf uit, zo staat het in m'n notebook `{#bron:assenstelsel-regel}`: *van elke trend een
 assenstelsel maken → voor elk scenario's maken → voor elk scenario oplossingen*.
 
 ## Scenariotechniek

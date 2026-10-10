@@ -9,16 +9,20 @@ Dit hoofdstuk is L1: signaleren. Niet oordelen, niet verkopen. Gewoon kijken, en
 ## Waar ik keek
 
 Mijn bril is techniek die een ander probleem oplost. Niet de suikerspin zelf, maar dat een machine
-hem maakt. Niet de Salatomaat als gerecht, maar dat een kas een bord oplost. Niet het parkeerterrein,
+hem maakt. Niet de Salatomaat als salade, maar dat het een automaat is — een automaat waar je salades
+bestelt in plaats van blikjes drinken, precies zoals de suikerspinmachine. Niet het parkeerterrein,
 maar dat een camera het kenteken leest. Daardoor zie ik niet het onderwerp, ik zie de machine
 erachter.
 
-De locaties staan per signaal in de bronkolom van `trendlijst.ods`, en die houd ik aan.
+De locaties staan per signaal in de bronkolom van [trendlijst.ods](trendlijst.ods), en die houd ik aan.
 
 **Feeltrip heb ik niet gedaan.** De opdracht was er wél: locatie op kaartje, trends, behoeften,
-waardeverschuiving, voor wie, en wat je eraan had. Ik heb die locatie niet bezocht. De rubric vraagt
-expliciet om mislukkingen en persoonlijke positionering, dus ik noem het zoals het is: dit is een gat
-in mijn proces, geen uitvoering.
+waardeverschuiving, voor wie, en wat je eraan had. De reden is simpel: de ruwe stoepwatch-opdracht
+leverde voor mij niet veel op. Tijdens die opdracht ben ik een ronde door de stad gaan lopen, en op die
+manier zag ik veel meer dan op één vaste plek. Daarom heb ik andere onderzoeken gedaan en constant
+rondgekeken voor nieuwe signaleringen in het dagelijks leven. De rubric vraagt expliciet om
+mislukkingen en persoonlijke positionering, dus ik noem het zoals het is: dit is een gat in mijn
+proces, geen uitvoering.
 
 ## Stoepwatch — zoals ik het echt deed
 
@@ -36,9 +40,9 @@ ik denk. Dat is precies waar ik als engineer de neiging heb om te snel te denken
 | **Dagboek** | eigen emoties, oordelen over de ander en over mezelf |
 | **Technisch** | methoden, eerste analyse, patronen, verdiepende vragen |
 
-De opbrengst is 129 signalen in `trendlijst.ods`.
+De opbrengst is 129 signalen in [trendlijst.ods](trendlijst.ods).
 
-## Uit het gebouw kijken
+## Uitzoomen
 
 Ik zag meer dan ik dacht. De lijst groeide harder dan ik verwachtte, en er gebeurt veel interessants
 juist in het gewone straatbeeld. De jacht — 30 minuten, foto's, out of the box presenteren — was voor
@@ -59,7 +63,7 @@ dat ik dat cool vind `{#bron:automatisering-regels}`. Wat ik leerde is dat er oo
 deze sector zitten, en dat kleine techbedrijven met een goed idee populair zijn. Het was uitzoomen,
 omdat ik normaal op de tech focus en niet op het plaatje.
 
-**De podcast (scanplan, maandag)** bracht disposable software binnen: kleine tools die in een weekend
+**De podcast (scanplan, maandag)** `{#bron:scanplan}` bracht disposable software binnen: kleine tools die in een weekend
 gebouwd worden, 1% omzet van 50.000 klanten, volgende weekend iets nieuws. Freeware en shareware,
 converter-tools en calculators, mini-reclame apps voor politieke partijen, virale apps. De verwachting
 die ik eruit haalde: de lat gaat omhoog omdat het aanbod groter wordt. En het mooiste voor mij was:
@@ -70,9 +74,13 @@ handen. Spacemakers (geo-engineering, space factories, dark factories, cloud-eco
 schoonmakers (climate, food, de Salatomaat `{#bron:salatomaat}`, biobased bouwen) en gelijkmakers
 (onderwijs en gelijkheid, aandachtseconomie, moreel kompas).
 
+En de lijst megatrends die ik eruit overnam `{#bron:megatrends}`: opwarming, hittestress,
+indoorgeneratie, rijke mensen vermogen verdubbeld, angstgeneratie, eenzaamheid, woningtekort, dementie,
+tekorteconomie, slaaptekort, grondstoftekort, trust, systeemmoe.
+
 En **Boris**, een oud-reiziger, gaf mij de ene zin die bleef hangen:
 
-> **"Bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen."**
+> **"Bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen."** `{#bron:boris}`
 
 Dat is precies de plek waar ik later wil bouwen *(hoofdstuk 6)*. Maar hier is het nog gewoon een
 signaal: het vertrouwen in de grote platforms wankelt.

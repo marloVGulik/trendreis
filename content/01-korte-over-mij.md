@@ -66,4 +66,4 @@ Zeven leefgebieden, scores 0–10: werk en school · ontspanning en plezier · v
 financiën · liefde en romantiek · gezondheid (mentaal en fysiek) · ontwikkeling en groei.
 
 **Werk en school** is de hot sector — daar ligt de richting. Mijn vraag aan mezelf was: **"Mengpaneel:
-welke richting wil ik op?"**
+welke richting wil ik op?"** `{#bron:mengpaneel}`

@@ -68,7 +68,7 @@ oordeel per signaal.
 | Werk & leren | 0 | 3 → leeg, dus weg |
 
 Uit die 84 ja-signalen werden 39 trends. Elke signaal staat exact één keer in het `Trends`-tabblad van
-`trendlijst.ods`. 28 trends hebben twee of meer signalen, 11 hebben er nog maar één.
+[trendlijst.ods](trendlijst.ods). 28 trends hebben twee of meer signalen, 11 hebben er nog maar één.
 
 ## Trendwoorden
 

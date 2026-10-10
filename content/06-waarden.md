@@ -8,7 +8,7 @@ je op het goede niveau van analyseren."*
 
 Uit m'n notebook, als kompas voor dit hoofdstuk:
 
-> *"di 6 okt: waardeverschuiving uitwerken — oude fixatie. Waar is mijn bedrijf een antwoord op? Wat
+> *"di 6 okt: waardeverschuiving uitwerken — oude fixatie `{#bron:oude-fixatie}`. Waar is mijn bedrijf een antwoord op? Wat
 > draagt het bij?"*
 
 ## De methode — de 7 vragen
@@ -23,7 +23,7 @@ boven de product- en markttrend kan plaatsen.
 
 ## De verschuivingen
 
-### Auto → gedeelde auto → e-bike → intelligente outsourcing
+### Auto → gedeelde auto → e-bike → intelligente outsourcing `{#bron:auto-lijn}`
 
 Was het: een auto bezitten was vrijheid en status. Je kocht, je parkeerde, je onderhield. Is het nu:
 delen, huren, de e-bike — en steeds vaker de verplaatsing zelf uitbesteden aan een slim systeem, een
@@ -44,7 +44,7 @@ de lijn, intelligente outsourcing, is software. En software bouw ik.
 ### Consumer → prosumer
 
 Was het: je kocht een product en deed er je voordeel mee. Is het nu: je bouwt, codeert en past zelf
-aan. *"Dat kan ik thuis ook"* was een van de eerste signalen die ik opschreef.
+aan. *"Dat kan ik thuis ook"* `{#bron:thuis-ook}` was een van de eerste signalen die ik opschreef.
 
 Wat ik zie: iedereen wil een site en denkt dat het met Claude kan, de 3D-printer op de markt, en de
 disposable-softwaregolf uit de podcast. Ik noem dit *van gebruiker naar maker*. De klant van morgen is
@@ -62,7 +62,7 @@ verkopen.
 
 Mijn interpretatie, letterlijk uit m'n notebook:
 
-> *"Wat betekent duurzaam voor mij: duurzaam = efficiënt (andere mensen hebben andere ideeën)."*
+> *"Wat betekent duurzaam voor mij: duurzaam = efficiënt (andere mensen hebben andere ideeën)."* `{#bron:duurzaam-efficient}`
 
 Was het: duurzaam als apart, duur, apart-label. Is het nu: efficiency als basiswaarde — minder
 verbruiken, minder verspillen, sneller. Zelfs AI verkoopt zich als efficiëntiebron. Drivers die ik
@@ -88,7 +88,7 @@ toelevering wordt infrastructuur, en infrastructuur is software.
 
 Zoals ik hem opschreef:
 
-> Movement → zonnepanelen → green → tech → AI → posters en reclame → elektro-reclameborden
+> Movement → zonnepanelen → green → tech → AI → posters en reclame → elektro-reclameborden `{#bron:ai-lijn}`
 
 En korter: AI → kunst en tools = efficiëntiebron. Dit is voor mij de snelste verschuiving die ik zie:
 van mensen die AI gebruiken naar systemen die voor mensen werken. En daar tussenin zit een hele laag

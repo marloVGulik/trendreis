@@ -32,7 +32,7 @@ Mijn methode in drie stappen: één foto werd een signaal *(hoofdstuk 1)*, een s
 de vijf testen *(hoofdstuk 2)*, en een trend werd een behoefte, een verschuiving en een idee
 *(hoofdstuk 3 tot 6)*.
 
-Methoden uit de gastles *(Bart & Isa, "Wat kan een product nog meer zijn?")* die ik echt gebruikte:
+Methoden uit de gastles *(Bart & Isa, "Wat kan een product nog meer zijn?")* `{#bron:gastles-regels}` die ik echt gebruikte:
 meervoudige waardecreatie — meerdere problemen in één oplossing, trends combineren — en massa = kassa:
 branding en marketing zijn belangrijker dan smaak.
 

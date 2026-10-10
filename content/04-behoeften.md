@@ -9,7 +9,7 @@ mijn keuze: ik begreep de behoefte eerder dan het ordening, en die volgorde lees
 ## DESTEP — de krachten erachter
 
 > *"Maak inzichtelijk welke drivers van toepassing zijn op de trends die je in de gaten houdt. Maak
-> een link met locatie en context."*
+> een link met locatie en context."* `{#bron:destep-def}`
 
 | | driver | wat ik erbij noteerde |
 |---|---|---|
@@ -20,7 +20,7 @@ mijn keuze: ik begreep de behoefte eerder dan het ordening, en die volgorde lees
 | **E** | ecologie | hitterecord, grondstoftekort, woningtekort |
 | **P** | politiek | controle door rijken, wapens |
 
-Per trend staat de DESTEP-kracht in het `Trends`-tabblad van `trendlijst.ods`, samen met de locatie en
+Per trend staat de DESTEP-kracht in het `Trends`-tabblad van [trendlijst.ods](trendlijst.ods), samen met de locatie en
 context waar ik het signaal vandaan heb.
 
 ## Behoefte en opkomende verwachting per trend
@@ -83,8 +83,8 @@ de behoefte is al bezet.
 
 ## Voor wie
 
-Ik valideer niet door eerst een doelgroep te zoeken. Ik breid het idee uit en test het bij een klant.
-Daardoor is de doelgroep nu: **bedrijven die afhankelijk zijn van een partij die ze niet vertrouwen**,
+Ik valideer niet door eerst een doelgroep te zoeken. Ik breid het idee uit en test het bij een klant
+`{#bron:omdraai}`. Daardoor is de doelgroep nu: **bedrijven die afhankelijk zijn van een partij die ze niet vertrouwen**,
 en **particulieren met hardware die ze zelf kunnen beheren**. Maar beide groepen noemen dat nog geen
 probleem — en dat is de omdraai: mensen weten niet dat ze tegenaan lopen.
 
