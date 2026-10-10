@@ -1,13 +1,15 @@
 # 3 · Behoeften
 
-Dit is de laag tussen de trend en de waardeverschuiving: wat mensen nodig hebben, en waarom de
-trend bestaat. In de trechter is dit de stap waar ik van *wat er gebeurt* naar *wat iemand nodig
-heeft* ging.
+Dit is de laag tussen de trend en de waardeverschuiving: wat mensen nodig hebben, en waarom de trend
+bestaat. In de trechter is dit de stap waar ik van "wat er gebeurt" naar "wat iemand nodig heeft" ging.
+
+Ik heb dit vóór het ordenen gezet, terwijl de les behoeften als resultaat van ordenen noemt. Dat is
+mijn keuze: ik begreep de behoefte eerder dan het ordening, en die volgorde leest beter.
 
 ## DESTEP — de krachten erachter
 
-> *"Maak inzichtelijk welke drivers van toepassing zijn op de trends die je in de gaten houdt.
-> Maak een link met locatie en context."*
+> *"Maak inzichtelijk welke drivers van toepassing zijn op de trends die je in de gaten houdt. Maak
+> een link met locatie en context."*
 
 | | driver | wat ik erbij noteerde |
 |---|---|---|
@@ -18,13 +20,13 @@ heeft* ging.
 | **E** | ecologie | hitterecord, grondstoftekort, woningtekort |
 | **P** | politiek | controle door rijken, wapens |
 
-Per trend staat de DESTEP-kracht in het `Trends`-tabblad van `trendlijst.ods`, samen met de
-locatie en context waar ik het signaal vandaan heb.
+Per trend staat de DESTEP-kracht in het `Trends`-tabblad van `trendlijst.ods`, samen met de locatie en
+context waar ik het signaal vandaan heb.
 
 ## Behoefte en opkomende verwachting per trend
 
-De **behoefte** is wat iemand nodig heeft. De **opkomende verwachting** is wat die persoon
-langzaam als normaal gaat zien — dat is de brug naar waardeverschuivingen in hoofdstuk 5.
+De behoefte is wat iemand nodig heeft. De opkomende verwachting is wat die persoon langzaam als
+normaal gaat zien — en dat is de brug naar waardeverschuivingen in hoofdstuk 5.
 
 ### AI & data
 
@@ -70,28 +72,23 @@ langzaam als normaal gaat zien — dat is de brug naar waardeverschuivingen in h
 
 ## Basisbehoeften vs opkomende verwachtingen
 
-De behoeften vallen in een handful terug op dezelfde dingen:
+De behoeften vallen in een handful terug op dezelfde dingen: **controle** — over eigen data, eigen
+systemen, eigen keuzes. **Ontlasting** — niet zelf hoeven kiezen, niet zelf hoeven nadenken. **Bewijs** —
+claims geloven tot ze kloppen. **Toegang** — zonder vastleggen. **Ruimte** — fysiek (woning, leefruimte)
+en digitaal (filter, rust).
 
-- **controle** — over eigen data, eigen systemen, eigen keuzes
-- **ontlasting** — niet zelf hoeven kiezen, niet zelf hoeven nadenken
-- **bewijs** — claims geloven tot ze kloppen
-- **toegang** — zonder vastleggen
-- **ruimte** — fysiek (woning, leefruimte) en digitaal (filter, rust)
-
-De opkomende verwachtingen zijn dezelfde behoefte, maar dan verschoven van *hopen* naar *normaal
-vinden*. En een bedrijfsidee is pas kansrijk als het op de verwachting anticipeert, niet op de
-behoefte — want de behoefte is al bezet.
+De opkomende verwachtingen zijn dezelfde behoefte, maar dan verschoven van hopen naar normaal vinden.
+En een bedrijfsidee is pas kansrijk als het op de verwachting anticipeert, niet op de behoefte — want
+de behoefte is al bezet.
 
 ## Voor wie
 
-*(omdraaien: mensen weten niet dat ze tegenaan lopen)*
-
-Ik valideer niet door eerst een doelgroep te zoeken. Ik breid het idee uit en test het bij een
-klant. Daardoor is de doelgroep nu: **bedrijven die afhankelijk zijn van een partij die ze niet
-vertrouwen**, en **particulieren met hardware die ze zelf kunnen beheren** — maar beide groepen
-noemen dat nog geen probleem.
+Ik valideer niet door eerst een doelgroep te zoeken. Ik breid het idee uit en test het bij een klant.
+Daardoor is de doelgroep nu: **bedrijven die afhankelijk zijn van een partij die ze niet vertrouwen**,
+en **particulieren met hardware die ze zelf kunnen beheren**. Maar beide groepen noemen dat nog geen
+probleem — en dat is de omdraai: mensen weten niet dat ze tegenaan lopen.
 
 ## Wat dit hoofdstuk toont *(L2 → L3a)*
 
-Per trend: de DESTEP-kracht eronder, de behoefte erboven, en de opkomende verwachting als de
-brug naar waardeverschuivingen.
+Per trend: de DESTEP-kracht eronder, de behoefte erboven, en de opkomende verwachting als de brug naar
+waardeverschuivingen.

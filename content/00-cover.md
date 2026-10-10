@@ -26,7 +26,7 @@
 
 | | |
 |---|---|
-| **#0** | korte over mij |
+| **#0** | voorwoord |
 | **#1** | actualiteiten en objecten — wat ik zag |
 | **#2** | trends — wat het betekent |
 | **#3** | behoeften — wat mensen nodig hebben |

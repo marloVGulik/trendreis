@@ -32,7 +32,7 @@ PAGES = [
     {"file": "00-cover", "page": "index.html", "id": "home", "num": "00",
      "title": "Cover", "short": "van signaal tot stip op de horizon"},
     {"file": "01-korte-over-mij", "page": "korte-over-mij.html", "id": "korte-over-mij", "num": "0",
-     "title": "Korte over mij", "short": "ikigai, levenswiel, gewoonten, doelen en overtuigingen"},
+     "title": "Voorwoord", "short": "wie ik ben, mijn bril en mijn ikigai"},
     {"file": "02-actualiteiten", "page": "actualiteiten.html", "id": "actualiteiten", "num": "1",
      "title": "Actualiteiten en objecten", "short": "stoepwatch, podcast, Tegenlicht en wat ik zag"},
     {"file": "03-trends", "page": "trends.html", "id": "trends", "num": "2",
