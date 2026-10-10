@@ -769,7 +769,7 @@ FIGURE_CAPTIONS = {
     "trendcanvas": "Trendcanvas — de 8 stappen van trend naar mijn innovatie.",
     "automaten": "Alles-automaten — een kaart met de status van automaten in de buurt.",
     "pyramide_c": "Waardepiramide C — leeg frame, nog te vullen.",
-    "prisma": "Prisma 1 — vier gestapelde lagen (boven = maatschappelijk, dan consument, markt, product). Aan elke zijkant één thema dat bij mijn bedrijfsidee past.",
+    "prisma": "Trendkaart als prisma — vier gestapelde lagen (boven = maatschappelijk, dan consument, markt, product), aan elke zijkant één thema.",
     "prisma2": "Prisma 2 — dezelfde stapeling voor de verbredende blik: vier thema's waar ik weinig van weet, waaronder één slecht idee.",
 }
 

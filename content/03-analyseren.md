@@ -66,8 +66,30 @@ notities; cursief = suggestie die ik nog even wil checken.)*
    *"AI → tools = efficiëntiebron"*
 4. **tekorteconomie** · grondstoftekort · hitterecord · woningtekort
 
-Mijn eigen methode erachter *(uit m'n notebook)*: **1** actualiteiten en objecten
-fotograferen → **2** hieruit een trendwiel maken → **3** *(ontwikkelen:)* dataverwerken met AI.
+### De trendkaart
+Uit de les: met één piramide laat je **één** thema zien — in een **trendkaart** komen
+meerdere piramides of bomen samen, met de vier niveaus tegelijk.
+
+Mijn eigen regel in het notebook: *"trendkaart: beeld van macro trend piramides"*, met het
+pad daarnaartoe: **1** actualiteiten en objecten fotograferen → **2** hieruit een trendwiel
+maken → **3** *(ontwikkelen)* dataverwerken met AI.
+
+In de les werkte ik twee piramides uit — **A · Gemak** en **B · Slim / data** — en samen zijn
+dat mijn eerste trendkaart. B is nog niet af: niveau 1 (product) staat in mijn notebook leeg.
+
+Mijn definitieve trendkaart is het prisma hierboven: vier piramides in één object, één zijkant
+per thema, van boven naar onder de vier niveaus. In platte leesvorm:
+
+| thema | 4 · maatschappelijk | 3 · consument | 2 · markt | 1 · product |
+|---|---|---|---|---|
+| **AI & data** | beslissen uitbesteed | wil niet kiezen | agents adviseren & verkopen | agentic commerce |
+| **Automatisering & robots** | werken zonder mens | verwacht dat het draait | uitvoering zonder mens | automaten, dark factories |
+| **Vertrouwen & soevereiniteit** | soevereiniteit is een waarde | wil data lokaal en zelf | big tech-afhankelijkheid | lokale AI, self-hosted |
+| **Geld & economie** | bezit → toegang | huurt, bezit onnodig | toegang wordt het product | cloudabonnementen |
+
+Dit zijn de vier thema's met de meeste B-letters — dus de vier die het dichtst bij mijn
+bedrijfsidee liggen (zie hoofdstuk 2). De thema's die ik wél leuk vind maar die er niet bij
+passen, staan apart in het tweede prisma.
 
 ## Trendwoorden & het assenstelsel
 Uit de **word-of-the-year**-opdracht pikte ik twee woorden die bij mij bleven hangen:
