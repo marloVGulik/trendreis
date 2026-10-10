@@ -274,6 +274,7 @@ body[data-3d="off"] .anaglyph .chR { color: #c9c9c2; }
 .anaglyph-labels text { fill: var(--fg); }
 .anaglyph-labels .lbl-dim { fill: var(--fg-dim); }
 .anaglyph-labels .lbl-accent { fill: var(--accent); }
+.anaglyph-labels .lbl-mine { fill: var(--accent); font-weight: 700; }
 /* interactieve orbit-anaglyph (camera draait bij muis-sleep) */
 .anaglyph-orbit { position: relative; cursor: grab; background: #050505; border: 1px solid var(--border); border-radius: var(--r); touch-action: none; }
 .anaglyph-orbit:active { cursor: grabbing; }

@@ -126,7 +126,7 @@
       (scene.lines || scene.axes || []).forEach(function(ax){ var a=proj(ax.a,cam), b=proj(ax.b,cam); if(a&&b) o.push('<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'" stroke="'+orbitFill(ch, ax.br!==undefined?ax.br:0.65)+'" stroke-width="'+(ax.w||1.5)+'"'+(ax.dash?' stroke-dasharray="'+ax.dash+'"':'')+'/>'); });
       (scene.blocks||[]).forEach(function(bl){ o.push(blockSVG(bl, cam, ch)); });
       if (scene.prism) o.push(prismSVG(scene.prism, cam, ch));
-      (scene.points||[]).forEach(function(pt){ var q=proj(pt.p,cam); if(q) o.push('<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(pt.hot?7:4.5)+'" fill="'+orbitFill(ch, pt.hot?1:0.72)+'"/>'); });
+      (scene.points||[]).forEach(function(pt){ var q=proj(pt.p,cam); if(q) o.push('<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(pt.mine?8:(pt.hot?7:4.5))+'" fill="'+orbitFill(ch, pt.mine?1:(pt.hot?0.9:0.72))+'"'+(pt.mine?' stroke="'+orbitFill(ch,0.35)+'" stroke-width="1.6"':'')+'/>'); });
       if (scene.origin) { var op=proj(scene.origin,cam); if(op) o.push('<circle cx="'+op[0].toFixed(1)+'" cy="'+op[1].toFixed(1)+'" r="3" fill="'+orbitFill(ch,1)+'"/>'); }
       return o.join('');
     }
@@ -134,9 +134,10 @@
     function projC(p) { var r=rot(p), rz=r[2]; if (rz<=0.02) return null; return [P.CX + P.F*(r[0])/rz*P.S, P.CY - P.F*(r[1]-P.camL[1])/rz*P.S]; }
     var labels='';
     function addLbl(p, t, dx, dy, anchor, cls, fs) { if (!t) return; var q=projC(p); if(!q) return; labels += '<text x="'+(q[0]+(dx||0)).toFixed(1)+'" y="'+(q[1]+(dy!==undefined?dy:-12)).toFixed(1)+'" class="'+(cls||'lbl-dim')+'" font-size="'+(fs||11)+'" text-anchor="'+(anchor||'middle')+'">'+t+'</text>'; }
-    (scene.points||[]).forEach(function(lp){ addLbl(lp.p, lp.label, lp.ldx, lp.ldy, lp.anchor, lp.hot?'lbl-accent':'lbl-dim'); });
+    (scene.points||[]).forEach(function(lp){ addLbl(lp.p, lp.label, lp.ldx, lp.ldy, lp.anchor, lp.mine?'lbl-mine':(lp.hot?'lbl-accent':'lbl-dim')); });
     (scene.blocks||[]).forEach(function(bl){ if (bl.label) addLbl([bl.c[0], bl.c[1]+(bl.h||1)/2+0.16, bl.c[2]], bl.label, bl.ldx||0, bl.ldy!==undefined?bl.ldy:4, 'middle', bl.hot?'lbl-accent':'lbl-dim'); });
     (scene.endLabels||[]).forEach(function(el){ addLbl(el.p, el.t, el.dx, el.dy, el.anchor, 'lbl-dim', 12); });
+    if (scene.originLabel) addLbl(scene.origin, scene.originLabel, 0, -16, 'middle', 'lbl-accent', 12);
     (scene.labels||[]).forEach(function(l){ addLbl(l.p, l.t, l.dx, l.dy, l.anchor, l.cls, l.fs); });
     var red = renderCam(P.camL, 'red'), cyan = renderCam(P.camR, 'cyan');
     return '<svg class="anaglyph" viewBox="'+P.viewBox+'" preserveAspectRatio="xMidYMid meet" role="img">\n'

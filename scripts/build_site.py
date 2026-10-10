@@ -390,25 +390,35 @@ def fig_assenstelsel():
             {"a": [0, 0, 1], "b": [0, 0, 3], "w": 1.3, "dash": "4 4"}
         ],
         "points": [
-            {"p": [-0.3, 0.2, 2.2], "label": "open source", "hot": True, "ldx": -8, "ldy": -3, "anchor": "end"},
-            {"p": [0.2, 0.3, 2.4], "label": "lokale AI", "hot": False, "ldx": 2, "ldy": -15, "anchor": "middle"},
-            {"p": [0.3, -0.2, 2.6], "label": "automatisering", "hot": False, "ldx": 9, "ldy": 4, "anchor": "start"},
-            {"p": [-0.2, -0.3, 2.8], "label": "robot huisdier", "hot": True, "ldx": -4, "ldy": 22, "anchor": "middle"}
+            {"p": [-0.8, 0.6, 2.2], "label": "Cloud / big tech", "ldx": -10, "ldy": -14, "anchor": "end"},
+            {"p": [-0.8, 0.4, 2.5], "label": "Digital ID", "ldx": -10, "ldy": 16, "anchor": "end"},
+            {"p": [-0.1, 0.8, 2.0], "label": "Kentekenherkenning", "ldx": -12, "ldy": -14, "anchor": "end"},
+            {"p": [0.1, 0.9, 2.2], "label": "Alles-automaten", "ldx": 14, "ldy": -14, "anchor": "start"},
+            {"p": [0.0, 0.9, 2.5], "label": "Dark factories", "ldx": 0, "ldy": 18, "anchor": "middle"},
+            {"p": [-0.2, 0.5, 2.6], "label": "Robot huisdier", "ldx": -12, "ldy": -12, "anchor": "end"},
+            {"p": [0.6, -0.4, 2.3], "label": "3D-printer", "ldx": 12, "ldy": -12, "anchor": "start"},
+            {"p": [0.7, -0.7, 2.4], "label": "DIY / zelf maken", "ldx": 0, "ldy": 18, "anchor": "middle"},
+            {"p": [0.5, -0.5, 2.2], "label": "Oldtimer ombouwen", "ldx": -12, "ldy": 16, "anchor": "end"},
+            {"p": [0.6, 0.4, 2.4], "label": "Cryptokoorts", "ldx": -12, "ldy": -14, "anchor": "end"},
+            {"p": [0.8, 0.5, 2.5], "label": "Mijn idee", "mine": True, "ldx": 12, "ldy": -12, "anchor": "start"}
         ],
         "origin": [0, 0, 2],
+        "originLabel": "het bedrijf",
         "endLabels": [
-            {"p": [1, 0, 2], "t": "+", "dx": 8, "dy": 4, "anchor": "start"},
-            {"p": [-1, 0, 2], "t": "−", "dx": -8, "dy": 4, "anchor": "end"},
-            {"p": [0, 1, 2], "t": "+", "dx": 8, "dy": -6, "anchor": "start"},
-            {"p": [0, -1, 2], "t": "−", "dx": 8, "dy": 14, "anchor": "start"},
-            {"p": [0, 0, 3], "t": "+", "dx": 8, "dy": 4, "anchor": "start"},
-            {"p": [0, 0, 1], "t": "−", "dx": 8, "dy": 14, "anchor": "start"}
+            {"p": [-1, 0, 2], "t": "extern", "dx": -8, "dy": 4, "anchor": "end"},
+            {"p": [1, 0, 2], "t": "lokaal bij de klant", "dx": 8, "dy": 4, "anchor": "start"},
+            {"p": [0, -1, 2], "t": "handgemaakt", "dx": 8, "dy": 14, "anchor": "start"},
+            {"p": [0, 1, 2], "t": "geautomatiseerd", "dx": 8, "dy": -6, "anchor": "start"},
+            {"p": [0, 0, 1], "t": "verleden", "dx": -12, "dy": 14, "anchor": "end"},
+            {"p": [0, 0, 3], "t": "toekomst", "dx": 8, "dy": -8, "anchor": "start"}
         ],
-        "params": {"F": 1.5, "S": 180, "CX": 300, "CY": 150,
+        "params": {"F": 1.5, "S": 180, "CX": 300, "CY": 165,
                     "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
-                    "viewBox": "0 0 600 300"}
+                    "viewBox": "0 0 600 340"}
     }
-    aria = "Assenstelsel in 3D: drie bipolaire assen (−1 tot +1), signalen in verschillende kwadranten (concept). Sleep met de muis om te draaien."
+    aria = ("3D-assenstelsel met drie bipolaire assen: extern beheer - het bedrijf - lokaal bij de klant; "
+            "handgemaakt - geautomatiseerd; verleden - toekomst. Bestaande producten en trendwoorden staan "
+            "als stippen, met mijn bedrijfsidee in een andere kleur. Sleep om te draaien.")
     scene_json = json.dumps(scene, separators=(",", ":"))
     return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
             f'data-scene=\'{scene_json}\'>'
@@ -755,7 +765,7 @@ FIGURE_BUILDERS = {
 FIGURE_CAPTIONS = {
     "ikigai": "Ikigai — waar de vier kringjes overlappen, staat het werk dat ik wil.",
     "levenswiel": "Levenswiel (2026-09-04) — eigenaarschap in het midden, acht leefgebieden eromheen.",
-    "assenstelsel": "Assenstelsel — mijn signalen op twee assen (concept; assen nog te bevestigen).",
+    "assenstelsel": "Assenstelsel — extern beheer ↔ het bedrijf ↔ lokaal bij de klant; handgemaakt ↔ geautomatiseerd; verleden ↔ toekomst. Mijn bedrijfsidee in een andere kleur.",
     "trendcanvas": "Trendcanvas — de 8 stappen van trend naar mijn innovatie.",
     "automaten": "Alles-automaten — een kaart met de status van automaten in de buurt.",
     "pyramide_c": "Waardepiramide C — leeg frame, nog te vullen.",
@@ -912,7 +922,7 @@ def page_foot():
   <div class="lb-stage"><div class="lb-imgwrap"></div></div>
   <div class="lb-foot">klik buiten de foto, of druk ESC, om te sluiten</div>
 </div>
-<script src="main.js?v=8"></script>
+<script src="main.js?v=9"></script>
 </body>
 </html>'''
 
