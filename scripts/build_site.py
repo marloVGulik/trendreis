@@ -66,6 +66,7 @@ FIGURES = {
         ("automaten", "Trendcanvas — van trend naar innovatie"),
         ("prisma", "De trendpyramide"),
         ("prisma2", "De trendpyramide"),
+        ("scenario", "Scenariotechniek"),
     ],
     "waardeverschuivingen": [
         ("pyramide_c", "intro"),
@@ -565,6 +566,44 @@ def fig_prisma2():
             "markttrend, producttrend. Sleep om te draaien.")
     return _stacked_prism(themas, aria)
 
+def fig_scenario():
+    # ---- Assenstelsel van mijn drie trendkeuzes: 3 assen x 2 extremen = 8 scenario-hoeken ----
+    import json, itertools
+    E, CZ = 0.60, 2.6
+    letters = "ABCDEFGH"
+    points = []
+    for n, (x, y, z) in zip(letters, itertools.product([-1, 1], repeat=3)):
+        points.append({"p": [E*x, E*y, CZ + E*z], "label": n, "ldx": 0, "ldy": 12, "anchor": "middle"})
+    scene = {
+        "center": [0, 0, CZ],
+        "axes": [
+            {"a": [-1, 0, CZ], "b": [1, 0, CZ], "w": 1.6},
+            {"a": [0, -1, CZ], "b": [0, 1, CZ], "w": 1.6},
+            {"a": [0, 0, CZ - 1], "b": [0, 0, CZ + 1], "w": 1.3, "dash": "4 4"}
+        ],
+        "points": points,
+        "origin": [0, 0, CZ],
+        "endLabels": [
+            {"p": [-1, 0, CZ], "t": "mens denkt na", "dx": -10, "dy": 4, "anchor": "end"},
+            {"p": [1, 0, CZ], "t": "niemand denkt na", "dx": 10, "dy": 4, "anchor": "start"},
+            {"p": [0, -1, CZ], "t": "overvloed materiaal", "dx": 10, "dy": 14, "anchor": "start"},
+            {"p": [0, 1, CZ], "t": "geen materiaal", "dx": 10, "dy": -8, "anchor": "start"},
+            {"p": [0, 0, CZ - 1], "t": "iedereen op land", "dx": -14, "dy": 14, "anchor": "end"},
+            {"p": [0, 0, CZ + 1], "t": "verspreid: land/zee/lucht/ruimte", "dx": 14, "dy": -10, "anchor": "start"}
+        ],
+        "params": {"F": 1.5, "S": 180, "CX": 300, "CY": 165,
+                   "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
+                   "viewBox": "0 0 600 300"}
+    }
+    aria = ("3D-assenstelsel van mijn drie trendkeuzes: denken (mens denkt na - niemand denkt na), "
+            "materiaal (overvloed - geen materiaal) en leefruimte (iedereen op land - verspreid over "
+            "land, zee, lucht en ruimte). De acht hoeken zijn de acht scenario's. Sleep om te draaien.")
+    scene_json = json.dumps(scene, separators=(",", ":"))
+    return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
+            f'data-scene=\'{scene_json}\'>') + (
+            '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>')
+
+
 def fig_pyramide_c():
     # ---- 3D-piramide (via de Anaglyph-motor) ----
     a = Anaglyph(viewBox="0 0 420 320", aria="Waardepiramide C: 3D-piramide, leeg frame nog te vullen (3 lagen)",
@@ -761,6 +800,7 @@ FIGURE_BUILDERS = {
     "pyramide_c": fig_pyramide_c,
     "prisma": fig_prisma,
     "prisma2": fig_prisma2,
+    "scenario": fig_scenario,
 }
 FIGURE_CAPTIONS = {
     "ikigai": "Ikigai — waar de vier kringjes overlappen, staat het werk dat ik wil.",
@@ -771,6 +811,7 @@ FIGURE_CAPTIONS = {
     "pyramide_c": "Waardepiramide C — leeg frame, nog te vullen.",
     "prisma": "Trendkaart als prisma — vier gestapelde lagen (boven = maatschappelijk, dan consument, markt, product), aan elke zijkant één thema.",
     "prisma2": "Prisma 2 — dezelfde stapeling voor de verbredende blik: vier thema's waar ik weinig van weet, waaronder één slecht idee.",
+    "scenario": "Scenario-assenstelsel — mijn drie trendkeuzes met hun extremen; de acht hoeken zijn de acht scenario's.",
 }
 
 # =================================================================== shell

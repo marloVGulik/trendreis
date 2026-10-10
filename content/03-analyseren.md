@@ -126,6 +126,28 @@ prompt chaining, en het feit dat het *zijn* beelden van de wereld hergebruikt).
 En de gastles *(Bart & Isa)* gaf de rest van de analyse-regels: **gebruik anderen als
 inspiratie · maak combinaties van trends · verkoop niet het product, maar de ervaring.**
 
+### Mijn trendkeuzes en hun extremen
+Ik koos drie trends — twee die dicht bij mijn bedrijfsidee liggen en één out of the box — en
+duwde elk naar twee extremen. Daarmee werd het geen lijstje assen maar een **assenstelsel**:
+drie assen × twee extremen = **acht hoeken**, en elke hoek is een scenario.
+
+| trend | as | het ene extreme | het andere extreme |
+|---|---|---|---|
+| **Automatisering van de keuze / geen eigen denkvermogen** | x | mensen denken altijd na | niemand denkt na |
+| **Tekort als motor** | y | er is een overvloed aan materiaal | er is geen materiaal |
+| **Leefruimte wordt groter dan de aarde** | z | iedereen leeft op land | iedereen is verspreid over land, zee, lucht en ruimte |
+
+De acht hoeken:
+
+| | overvloed · land | overvloed · ruimte | schaars · land | schaars · ruimte |
+|---|---|---|---|---|
+| **mens denkt na** | A | B | C | D |
+| **niemand denkt na** | E | F | G | H |
+
+*(3D-scene: het assenstelsel met de acht hoeken — sleep om te draaien)*
+
+Nog open per hoek: kansen en risico's bekijken, en daarna een propositie kiezen.
+
 ## Trendcanvas — van trend naar innovatie
 *(de tool uit week 4 — het pad van een signaal naar "mijn innovatie")*
 
