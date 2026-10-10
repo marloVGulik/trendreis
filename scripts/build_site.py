@@ -922,7 +922,7 @@ def page_foot():
   <div class="lb-stage"><div class="lb-imgwrap"></div></div>
   <div class="lb-foot">klik buiten de foto, of druk ESC, om te sluiten</div>
 </div>
-<script src="main.js?v=9"></script>
+<script src="main.js?v=10"></script>
 </body>
 </html>'''
 

@@ -126,8 +126,12 @@
       (scene.lines || scene.axes || []).forEach(function(ax){ var a=proj(ax.a,cam), b=proj(ax.b,cam); if(a&&b) o.push('<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'" stroke="'+orbitFill(ch, ax.br!==undefined?ax.br:0.65)+'" stroke-width="'+(ax.w||1.5)+'"'+(ax.dash?' stroke-dasharray="'+ax.dash+'"':'')+'/>'); });
       (scene.blocks||[]).forEach(function(bl){ o.push(blockSVG(bl, cam, ch)); });
       if (scene.prism) o.push(prismSVG(scene.prism, cam, ch));
-      (scene.points||[]).forEach(function(pt){ var q=proj(pt.p,cam); if(q) o.push('<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(pt.mine?8:(pt.hot?7:4.5))+'" fill="'+orbitFill(ch, pt.mine?1:(pt.hot?0.9:0.72))+'"'+(pt.mine?' stroke="'+orbitFill(ch,0.35)+'" stroke-width="1.6"':'')+'/>'); });
-      if (scene.origin) { var op=proj(scene.origin,cam); if(op) o.push('<circle cx="'+op[0].toFixed(1)+'" cy="'+op[1].toFixed(1)+'" r="3" fill="'+orbitFill(ch,1)+'"/>'); }
+      var EX = scene.pointScale || 1.6;   // hoe sterk het formaat met diepte meegaat (1 = puur perspectief)
+      (scene.points||[]).forEach(function(pt){ var r=rot(pt.p), rz=r[2]-cam[2]; if(rz<=0.02) return;
+        var sc=Math.pow((C[2]-cam[2])/rz, EX), q=[P.CX+P.F*(r[0]-cam[0])/rz*P.S, P.CY-P.F*(r[1]-cam[1])/rz*P.S];
+        var base=pt.mine?8:(pt.hot?7:4.5), rad=base*sc;
+        o.push('<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+rad.toFixed(2)+'" fill="'+orbitFill(ch, pt.mine?1:(pt.hot?0.9:0.72))+'"'+(pt.mine?' stroke="'+orbitFill(ch,0.35)+'" stroke-width="'+(1.6*sc).toFixed(2)+'"':'')+'/>'); });
+      if (scene.origin) { var or=rot(scene.origin), orz=or[2]-cam[2]; if(orz>0.02) { var osc=Math.pow((C[2]-cam[2])/orz, EX); var op=[P.CX+P.F*(or[0]-cam[0])/orz*P.S, P.CY-P.F*(or[1]-cam[1])/orz*P.S]; o.push('<circle cx="'+op[0].toFixed(1)+'" cy="'+op[1].toFixed(1)+'" r="'+(3*osc).toFixed(2)+'" fill="'+orbitFill(ch,1)+'"/>'); } }
       return o.join('');
     }
     // vlakke 2D-labels: draait MEE met de scène, maar zonder rood/cyaan-offset (blijft leesbaar)
