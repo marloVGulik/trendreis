@@ -94,7 +94,8 @@
         out.push(fa.poly + ' fill="' + fa.fill + '" stroke="' + orbitFill(ch, fa.br*0.35) + '" stroke-width="1.2"/>');
         var O = [P.CX + P.F*(fa.fc[0]-cam[0])/fa.fc[2]*P.S, P.CY - P.F*(fa.fc[1]-cam[1])/fa.fc[2]*P.S];
         // basisvectoren in schermruimte: u = lees-richting (rechts), v = omlaag op het vlak
-        function basis(ax){ var r=[ax[0]*cos+ax[2]*sin, ax[1], -ax[0]*sin+ax[2]*cos]; var p=[fa.fc[0]+r[0], fa.fc[1]+r[1], fa.fc[2]+r[2]]; var q=[P.CX+P.F*(p[0]-cam[0])/p[2]*P.S, P.CY-P.F*(p[1]-cam[1])/p[2]*P.S]; var dx=q[0]-O[0], dy=q[1]-O[1]; var m=Math.sqrt(dx*dx+dy*dy)||1; return [dx/m, dy/m]; }
+        // lineaire deel van de projectie: scherm-richting van een as in het vlak (zonder diepte-stap)
+        function basis(ax){ var r=[ax[0]*cos+ax[2]*sin, ax[1], -ax[0]*sin+ax[2]*cos]; return [r[0], -r[1]]; }
         var U = basis(fa.u), V = basis([0, -1, 0]);   // SVG-text loopt omlaag => face-up is negatief
         var t = '<g transform="matrix(' + U[0].toFixed(4) + ',' + U[1].toFixed(4) + ',' + V[0].toFixed(4) + ',' + V[1].toFixed(4) + ',' + O[0].toFixed(1) + ',' + O[1].toFixed(1) + ')">';
         fa.lines.forEach(function(l){ t += '<text x="0" y="' + l.dy + '" text-anchor="middle" font-size="' + (l.fs||13) + '" fill="' + orbitFill(ch, Math.max(0.85, fa.br)) + '">' + l.t + '</text>'; });

@@ -482,8 +482,8 @@ def fig_prisma():
          "lines": [{"t": "AI &amp; data", "dy": -18, "fs": 16}, {"t": "T 14 · S 6", "dy": 4, "fs": 11},
                    {"t": "14 signalen", "dy": 22, "fs": 12}]},
         {"n": [1, 0, 0], "u": [0, 0, 1], "v": [0, -1, 0], "pts": [[1,0,-1],[1,0,1],[1,1,1],[1,1,-1]],
-         "lines": [{"t": "Automatisering", "dy": -18, "fs": 16}, {"t": "&amp; robots", "dy": 4, "fs": 16},
-                   {"t": "T 7 · P 2", "dy": 24, "fs": 12}]},
+         "lines": [{"t": "Automatisering", "dy": -16, "fs": 11}, {"t": "&amp; robots", "dy": 2, "fs": 11},
+                   {"t": "T 7 · P 2", "dy": 18, "fs": 10}]},
         {"n": [0, 0, 1], "u": [-1, 0, 0], "v": [0, -1, 0], "pts": [[1,0,1],[-1,0,1],[-1,1,1],[1,1,1]],
          "lines": [{"t": "Vertrouwen &amp;", "dy": -18, "fs": 16}, {"t": "soevereiniteit", "dy": 4, "fs": 16},
                    {"t": "P 9 · S 4", "dy": 24, "fs": 12}]},
@@ -495,7 +495,7 @@ def fig_prisma():
     ]
     scene = {
         "center": [0, 0.4, 2.1],
-        "prism": {"c": [0, 0.0, 2.1], "hx": 0.50, "hz": 0.38, "height": 0.85, "faces": themes},
+        "prism": {"c": [0, 0.0, 2.1], "hx": 0.55, "hz": 0.30, "height": 0.95, "faces": themes},
         "params": {"F": 1.5, "S": 210, "CX": 300, "CY": 170,
                    "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
                    "viewBox": "0 0 600 300"}
