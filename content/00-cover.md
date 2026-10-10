@@ -1,4 +1,4 @@
-# 0 · Cover
+# Cover
 
 > # TRENDREIS
 > ### van signaal tot stip op de horizon
@@ -22,9 +22,19 @@
 > klanten zoeken, en heb met 4 klanten een traject gestart."
 > — *eindbeeld, als doel geschreven vóór de start van de minor*
 
-**Deze site is de reis ernaartoe:** wie ik ben, wat ik zag, wat ik leerde, wat verschuift —
-en waar ik alles mee ga bouwen.
+**Deze site is de reis ernaartoe** — de trechter, in acht stappen:
+
+| | |
+|---|---|
+| **#0** | korte over mij |
+| **#1** | actualiteiten en objecten — wat ik zag |
+| **#2** | trends — wat het betekent |
+| **#3** | behoeften — wat mensen nodig hebben |
+| **#4** | ordenen en analyseren |
+| **#5** | waarden en verschuivingen |
+| **#6** | kansrijke opties |
+| **#7** | proces en delen |
 
 ---
 **3D**: deze site is ontworpen voor **rood-cyan 3D-brillen**.
-[bril op] · [diepte aan/uit] · [diepte-schuif]
+[bril op] · [3D aan/uit]

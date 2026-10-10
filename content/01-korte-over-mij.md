@@ -1,4 +1,4 @@
-# 1 · Wie ben ik?
+# 0 · Korte over mij
 
 *Voordat ik de wereld bekijk, kijk ik eerst naar mezelf.
 Dat was het startpunt van de minor: "Wie ben ik — en hoe kijk ik naar de wereld?"*

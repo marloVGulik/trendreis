@@ -1,4 +1,4 @@
-# 7 · Colofon
+# C · Colofon & bronnen
 
 **Trendreis** — Marlo van Gulik · ONDEON18 · *Onderneem! De Ontdekkingsreis*
 HAN University of Applied Sciences · oktober 2026
@@ -34,7 +34,7 @@ prompts zien, en laat zien dat je het snapt.)*
 - **Prompts**: de volledige AI-chat (prompts én output) staat in de bijlage in de map
   `AI-chat/` *(per de HAN-regel: volledige chat als bijlage)*.
 - **Verbinding**: de lijn signaal → trend → waardeverschuiving → idee is zichtbaar door
-  de hele site — dat is precies het doel (hoofdstuk 3 en 5).
+  de hele site — dat is precies het doel (hoofdstuk 4 en 6).
 - **Begrip**: dit is mijn eigen werk. Ik sta achter elke regel en kan het toelichten.
 
 *(Bijlage: foto's van mijn schrift + volledige AI-chat (prompts én output). Gebruikte

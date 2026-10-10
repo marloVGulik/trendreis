@@ -1,6 +1,6 @@
 import json, re, math
 
-h = open("site/analyseren.html", encoding="utf-8").read()
+h = open("site/ordenen.html", encoding="utf-8").read()
 sc = [json.loads(s) for s in re.findall(r"data-scene='(\{.*?)'>", h) if '"prism"' in s][0]
 P, pr = sc["params"], sc["prism"]
 C = sc["center"]

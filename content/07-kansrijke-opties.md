@@ -1,4 +1,4 @@
-# 5 · De stip op de horizon — Het bedrijf dat ik wil bouwen
+# 6 · Kansrijke opties
 
 > *"Dit hoofdstuk is geen statusrapport. Het is een richting."*
 
@@ -81,17 +81,17 @@ op draaien.
 - en het ongemakkelijke stuk: **minder schrik krijgen als ik geld vraag** voor wat ik doe
 
 ## Hoe ik valideer
-Mijn methode is de **trendcanvas** *(uitgezet in hoofdstuk 3)*. Ik kom niet bij een
+Mijn methode is de **trendcanvas** *(uitgezet in hoofdstuk 4)*. Ik kom niet bij een
 idee door te raden, maar door het **af te leiden uit de trend**:
 
 > **trend → basic needs → inspiration → drivers of change → emerging expectations →
 > innovation type → voor wie → mijn innovatie**
 
-Concreet: het signaal *automaten* uit hoofdstuk 2 heb ik zo uitgewerkt tot
+Concreet: het signaal *automaten* uit hoofdstuk 1 heb ik zo uitgewerkt tot
 *een kaart met de status, de inhoud én de locatie van alle automaten in de buurt* —
 handig voor zowel de beheerders als de klanten.
 
-Pas daarna test ik het idee af bij een echte klant *(mijn omdraai, zie hoofdstuk 1)*:
+Pas daarna test ik het idee af bij een echte klant *(mijn omdraai, zie hoofdstuk 0)*:
 o.a. bedrijven helpen met Linux.
 
 ## De lens van de gastles

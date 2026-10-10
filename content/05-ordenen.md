@@ -1,8 +1,8 @@
-# 3 · Zin erin brengen — Analyseren
+# 4 · Ordenen en analyseren
 
 *"Een lijst met signalen is nog geen trend. Nu begint het ordenen."*
 
-Dit hoofdstuk is L2: **analyseren**. Ik neem de signalen uit hoofdstuk 2 en geef ze
+Dit hoofdstuk is L2: **analyseren**. Ik neem de signalen uit hoofdstuk 1 en geef ze
 structuur: met pyramides, woorden, assen, krachten en scenario's. En met één rode draad
 die ik zelf heb ontdekt: **platform switches**.
 
@@ -12,7 +12,7 @@ Uit m'n notities (letterlijk):
 > externe krachten, waardoor we andere diensten en producten kopen."*
 
 Twee dingen die erin zitten: een trend is een **richting** (geen moment) en hij wordt
-**opgestuwd** (niet zomaar). Dat laatste zijn de krachten uit DESTEP (hieronder).
+**opgestuwd** (niet zomaar). Dat laatste zijn de krachten uit DESTEP (hoofdstuk 3).
 
 ## De trendpyramide
 *(3D-scene: pyramide met 4 lagen die uit elkaar kan vallen)*
@@ -25,7 +25,7 @@ Twee dingen die erin zitten: een trend is een **richting** (geen moment) en hij 
 | **4 · Maatschappelijk** | in wat voor wereld leven wij? |
 
 Hoe dieper ik graaf, hoe stabieler het wordt — en hoe dichter ik bij een
-waardeverschuiving zit (hoofdstuk 4).
+waardeverschuiving zit (hoofdstuk 5).
 
 ### De pyramide werkt twee kanten op
 - **Van boven naar beneden**: ik begin bij *mijn bedrijfsidee* en vraag: welke trends en
@@ -156,19 +156,6 @@ En ik breidde het zelf uit *(zo staat het in m'n notebook)*:
 
 *(3D-scene: twee assen als vloer, woorden als stippen die in de diepte zweven)*
 
-## DESTEP — de krachten erachter
-> *"Maak inzichtelijk welke drivers van toepassing zijn op de trends die je in de gaten houdt.
-> Maak een link met locatie en context."*
-
-| | driver | wat ik erbij noteerde |
-|---|---|---|
-| **D** | demografie | eenpersoonshuishoudens, ouderen die alleen eten |
-| **E** | economie | tekorteconomie, veel marge, goedkoop én relatief mooi |
-| **S** | sociologie | eenzaamheid, angst, erbij horen, gemak & luiheid |
-| **T** | techniek | AI, IoT, chips = nieuwe olie |
-| **E** | ecologie | hitterecord, grondstoftekort, woningtekort |
-| **P** | politiek | controle door rijken, wapens |
-
 ## Scenariotechniek
 De les-methode: **2 trends nemen → ze naar de extremen duwen → 4 scenario's → kansen
 ernaar kijken → een propositie kiezen → volgen of sturen.**
@@ -210,7 +197,7 @@ De canvas loopt in 8 stappen, van het waargenomen signaal tot mijn eigen idee:
 > **→ 5. Emerging expectations → 6. Innovation type → 7. Voor wie → 8. Mijn innovatie**
 
 ### Een canvas die ik heb ingevuld: *Alles-automaten*
-*(van het signaal "automaten" in hoofdstuk 2, naar een concreet idee —
+*(van het signaal "automaten" in hoofdstuk 1, naar een concreet idee —
 precies die "techniek + ander probleem"-bril)*
 
 | stap | wat ik erin zette |
@@ -232,9 +219,9 @@ precies die "techniek + ander probleem"-bril)*
 
 Een platform switch is het moment dat **de plek waar waarde ontstaat van hand verandert**.
 Elke keer verschijnt even een wild west van tools, en wie dan de juiste tools bouwt
-*(hoofdstuk 5)*, rijdt mee met de golf in plaats van te vissen in de oude.
+*(hoofdstuk 6)*, rijdt mee met de golf in plaats van te vissen in de oude.
 
 ## Wat dit hoofdstuk toont *(L2)*
 Ik heb signalen **geordend** (pyramides), **vertaald** (woorden, assenstelsel),
-**verklaard** (DESTEP) en **uitgewerkt** (scenario's) — en ik zie de rode draad
+**verklaard** (DESTEP, hoofdstuk 3) en **uitgewerkt** (scenario's) — en ik zie de rode draad
 (platform switches) door het hele veld lopen.

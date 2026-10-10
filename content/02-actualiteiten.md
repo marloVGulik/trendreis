@@ -1,4 +1,4 @@
-# 2 · Vensters open — Signalen
+# 1 · Actualiteiten en objecten
 
 *"De eerste stap van een trend is niet begrijpen. Het is zien."*
 
@@ -48,7 +48,7 @@ Uit de klas, in m'n eigen woorden: **"gemak is fijn en belangrijk — doe maar m
 > **"Bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen."**
 
 Die zin is meteen blijven hangen. Want dat is precies de plek waar ik later wil bouwen
-*(hoofdstuk 5)*. Maar hier is het nog gewoon een signaal: het vertrouwen in de grote
+*(hoofdstuk 6)*. Maar hier is het nog gewoon een signaal: het vertrouwen in de grote
 platforms wankelt.
 
 ## Venster 4 — Floris & Isa (oud-reizigers)
@@ -132,4 +132,4 @@ wandeling met camera, dagelijkse scan, eigen radar. En de belangrijkste regel ha
 **signaal eerst, interpretatie later** — wat ik zag, staat naast wat erachter schuilt,
 niet erin gemengd.
 
-> *Een lijst met signalen is nog geen trend. Dat komt in hoofdstuk 3: ordenen.*
+> *Een lijst met signalen is nog geen trend. Dat komt in hoofdstuk 4: ordenen.*

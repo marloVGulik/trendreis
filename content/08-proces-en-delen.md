@@ -1,7 +1,7 @@
-# 6 · De reis — en de volgende stappen
+# 7 · Proces en delen
 
 *(3D-scene: de stippen-constellatie — elke mijlpaal is een stip, de lijnen ertussen
-zijn wat ik daarvan leerde; de centrale ster is het bedrijf uit hoofdstuk 5)*
+zijn wat ik daarvan leerde; de centrale ster is het bedrijf uit hoofdstuk 6)*
 
 ## Het pad dat ik liep
 
@@ -14,7 +14,7 @@ zijn wat ik daarvan leerde; de centrale ster is het bedrijf uit hoofdstuk 5)*
 | **di 15 sep** | de Hunt, trendbrillen, trendpyramide |
 | **ma 21 sep** | Tegenlicht ingeleverd (*Game of drones*) |
 | **di 22 sep** | scanplan & nieuwsgierigheid |
-| **vr 25 sep** | stoepwatch — de foto's uit hoofdstuk 2 |
+| **vr 25 sep** | stoepwatch — de foto's uit hoofdstuk 1 |
 | **ma–di 28/29 sep** | assenstelsel, scenario's, DESTEP, gastles Bart & Isa, Floris & Isa |
 | **di 6 okt** | **waardeverschuiving** uitgewerkt *(cesuur)* |
 | **zo 11 okt** | **TK1** — deze site |

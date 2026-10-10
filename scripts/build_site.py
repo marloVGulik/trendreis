@@ -31,36 +31,40 @@ RAW_JSONL = ROOT / "AI-chat" / "sessie-01a10830.jsonl"
 PAGES = [
     {"file": "00-cover", "page": "index.html", "id": "home", "num": "00",
      "title": "Cover", "short": "van signaal tot stip op de horizon"},
-    {"file": "01-wie-ben-ik", "page": "wie-ben-ik.html", "id": "wie-ben-ik", "num": "01",
-     "title": "Wie ben ik?", "short": "ikigai, levenswiel, gewoonten, doelen en mijn eerste €5"},
-    {"file": "02-signalen", "page": "signalen.html", "id": "signalen", "num": "02",
-     "title": "Signalen", "short": "zes vensters: Tegenlicht, FutureFit, de Hunt en mijn eigen radar"},
-    {"file": "03-analyseren", "page": "analyseren.html", "id": "analyseren", "num": "03",
-     "title": "Analyseren", "short": "trends, de trendpyramide, DESTEP, scenario’s en de trendcanvas"},
-    {"file": "04-waardeverschuivingen", "page": "waardeverschuivingen.html", "id": "waardeverschuivingen", "num": "04",
-     "title": "Waardeverschuivingen", "short": "van bezit naar bereik, consumer naar prosumer, en de food future"},
-    {"file": "05-bedrijf", "page": "bedrijf.html", "id": "bedrijf", "num": "05",
-     "title": "Het bedrijf", "short": "de kern: 5 ideeën, de noorderster en hoe ik valideer"},
-    {"file": "06-reis", "page": "reis.html", "id": "reis", "num": "06",
-     "title": "De reis", "short": "het pad dat ik liep, wat er nu komt, en de volgende stappen"},
-    {"file": "07-colofon", "page": "colofon.html", "id": "colofon", "num": "07",
-     "title": "Bronnen & colofon", "short": "methode, proces, AI-gebruik en APA-bronnen"},
+    {"file": "01-korte-over-mij", "page": "korte-over-mij.html", "id": "korte-over-mij", "num": "0",
+     "title": "Korte over mij", "short": "ikigai, levenswiel, gewoonten, doelen en overtuigingen"},
+    {"file": "02-actualiteiten", "page": "actualiteiten.html", "id": "actualiteiten", "num": "1",
+     "title": "Actualiteiten en objecten", "short": "stoepwatch, podcast, Tegenlicht en wat ik zag"},
+    {"file": "03-trends", "page": "trends.html", "id": "trends", "num": "2",
+     "title": "Trends", "short": "signaal → trend, de vier niveaus en de vier thema's"},
+    {"file": "04-behoeften", "page": "behoeften.html", "id": "behoeften", "num": "3",
+     "title": "Behoeften", "short": "DESTEP, wat mensen nodig hebben en waarom een trend bestaat"},
+    {"file": "05-ordenen", "page": "ordenen.html", "id": "ordenen", "num": "4",
+     "title": "Ordenen en analyseren", "short": "pyramides, trendkaart, assenstelsel en scenario's"},
+    {"file": "06-waarden", "page": "waarden.html", "id": "waarden", "num": "5",
+     "title": "Waarden en verschuivingen", "short": "was het → is het nu, en wat er daardoor verandert"},
+    {"file": "07-kansrijke-opties", "page": "kansrijke-opties.html", "id": "kansrijke-opties", "num": "6",
+     "title": "Kansrijke opties", "short": "de 1–3 ideeën en hoe ik ze valideer"},
+    {"file": "08-proces-en-delen", "page": "proces-en-delen.html", "id": "proces", "num": "7",
+     "title": "Proces en delen", "short": "de reis, de volgende stappen en hoe ik dit deel"},
 ]
 EXTRA_PAGES = [
+    {"file": "09-colofon", "page": "colofon.html", "id": "colofon", "num": "C",
+     "title": "Colofon & bronnen", "short": "methode, AI-gebruik en APA-bronnen"},
     {"page": "ai-chat.html", "id": "ai-chat", "num": "AI", "title": "AI-chat",
      "short": "de volledige chat (prompt → reactie) in een console-venster"},
     {"page": "materiaal.html", "id": "materiaal", "num": "M", "title": "Materiaal",
-     "short": "mijn notebook: de originele foto’s met de bron-quotes gemarkeerd"},
+     "short": "mijn notebook: de originele foto's met de bron-quotes gemarkeerd"},
 ]
 ALL_PAGES = PAGES + EXTRA_PAGES
 
 # figuren: (naam, insert_voor_section_title | "intro")
 FIGURES = {
-    "wie-ben-ik": [
+    "korte-over-mij": [
         ("ikigai", "Ikigai"),
         ("levenswiel", "Levenswiel (2026-09-04)"),
     ],
-    "analyseren": [
+    "ordenen": [
         ("assenstelsel", "Trendwoorden & het assenstelsel"),
         ("prisma_klaswerk", "De trendpyramide"),
         ("trendcanvas", "Trendcanvas — van trend naar innovatie"),
@@ -69,7 +73,7 @@ FIGURES = {
         ("prisma2", "De trendpyramide"),
         ("scenario", "Scenariotechniek"),
     ],
-    "waardeverschuivingen": [
+    "waarden": [
         ("pyramide_c", "intro"),
     ],
 }
@@ -856,7 +860,7 @@ def sidebar(active_id):
   <nav class="snavs" aria-label="Hoofdnavigatie">{''.join(items)}</nav>
   <div class="sfoot">
     <div class="sfoot-row">
-      <button class="btn" id="d3Btn" aria-pressed="true" title="Rood-cyan 3D (alleen de home-scène)"><span class="dot"></span>3D</button>
+      <button class="btn" id="d3Btn" aria-pressed="true" title="Rood-cyan 3D (scènes en figuren)"><span class="dot"></span>3D</button>
       <button class="btn" id="themeBtn" title="Thema wisselen">LIGHT</button>
     </div>
     <p class="sfoot-note">rood-cyan brilletjes voor de 3D · zonder bril ook leesbaar</p>
@@ -930,7 +934,7 @@ def content_blocks(page_id, md):
                 items.append(("fig", f))
         items.append(("sec", title, body))
         # hunter-foto's na de Hunt-sectie (signalen)
-        if page_id == "signalen" and title.startswith("Venster 5"):
+        if page_id == "actualiteiten" and title.startswith("Venster 5"):
             items.append(("photos", ""))
     blocks = []
     toc_items = []
@@ -1011,7 +1015,7 @@ def build_home():
   <div class="hero-controls">
     <span class="hint">rood-cyan brilletjes voor de 3D · zonder bril ook leesbaar</span>
     <span class="spacer"></span>
-    <a class="btn primary" href="wie-ben-ik.html">START →</a>
+    <a class="btn primary" href="korte-over-mij.html">START →</a>
   </div>
 </section>
 <section class="home-intro">

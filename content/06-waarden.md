@@ -1,4 +1,4 @@
-# 4 · Wat verschuift — Waardeverschuivingen
+# 5 · Waarden en verschuivingen
 
 *"De diepste vraag is niet wat er nieuw is, maar wat er niet meer telt."*
 
@@ -80,7 +80,7 @@ Uit m'n notebook, als kompas voor dit hoofdstuk:
 En korter: **AI → "kunst" / tools = efficiëntiebron.**
 De AI-lijn is voor mij de snelste verschuiving die ik zie: van *mensen die AI gebruiken*
 naar *systemen die voor mensen werken* — en daar tussenin zit een hele laag van
-klussen, vertrouwen en lokale controle. *(→ hoofdstuk 5.)*
+klussen, vertrouwen en lokale controle. *(→ hoofdstuk 6.)*
 
 ## Wat dit hoofdstuk toont *(L3a)*
 Ik heb niet alleen trends benoemd, maar de **waardeverschuivingen erachter**
