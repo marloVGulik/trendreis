@@ -2,134 +2,125 @@
 
 *"De eerste stap van een trend is niet begrijpen. Het is zien."*
 
-Dit hoofdstuk is L1: **signaleren**. Niet oordelen, niet verkopen — gewoon kijken,
-luisteren, ruiken, lezen. Ik heb een paar vensters opengezet: een documentaire, een klas
-vol woorden, een oude reiziger, een wandeling met camera, een dagelijkse scan.
-Alles wat ik zag, heb ik neergezet **vóórdat** ik er iets van dacht.
+Dit hoofdstuk is L1: **signaleren**. Niet oordelen, niet verkopen — gewoon kijken. Ik heb
+meerdere manieren van kijken gebruikt, en ze leveren verschillende dingen op.
 
-## Venster 1 — Tegenlicht: *Game of drones*
+## Waar ik keek
 
-> Waarom deze aflevering? *De tech achter oorlog — omdat ik het kan zien gebeuren.*
+Mijn **bril** is: techniek die een ander probleem oplost *(hoofdstuk 0)*. Daardoor zie ik niet het
+onderwerp, maar de machine erachter.
 
-- De aflevering legde dezelfde tech uit vanuit verschillende kanten:
-  **vanaf een soldaat, vanaf de techsector, vanaf politiek en vanaf startups**.
-- Wat mij verwonderde: *deze sector kan veel automatisering niet aan vanwege regels —
-  en dat is cool zo.* `{#bron:automatisering-regels}`
-- Ik heb geleerd dat er ook **kleine startups** in deze sector zitten — inzicht:
-  *kleine techbedrijven met een goed idee zijn populair.*
-- Het was **uitzoemen**, omdat ik vaak focus op de tech en niet op het plaatje.
+De locaties staan per signaal in de bronkolom van `trendlijst.ods` — die houd ik aan.
 
-## Venster 2 — Eva's wereld (FutureFit)
+**Feeltrip heb ik niet gedaan.** De opdracht was er wél: locatie op kaartje, trends + behoeften +
+waardeverschuiving + voor wie + wat je eraan had. Ik heb die locatie niet bezocht. De rubric vraagt
+expliciet om mislukkingen en persoonlijke positionering, dus ik noem het zoals het is: dit is een
+gap in mijn proces, niet een uitvoering.
 
-Eva (trendwatcher) bracht haar wereld binnen: **"Ruimtemakers voor hoofd, hart en handen"** —
-een slimme, schone, sociale wereld:
+## Stoepwatch — zoals ik het echt deed
 
-- **Spacemakers**: geo-engineering, space factories, dark factories, wonen op water,
-  cloud-economie, AI, health-tech, cybernetics
-- **Schoonmakers**: climate, food, de Salatomaat (automatische salade / mini-kas) `{#bron:salatomaat}`,
-  biobased bouwen, solar democracy, CO2 zuigen, micro-fabriek
-- **Gelijkmakers**: onderwijs & gelijkheid, elite health, aandachtseconomie, moreel kompas
+De opdracht was: één bewuste locatie, 30 minuten, meerdere zintuigen. **Ik heb het anders gedaan:**
+een ronde door de stad, en daarna doorlopend observaties tijdens het dagelijkse leven. Daardoor is
+de stoepwatch geen moment op de parkbank maar een lopende lijst.
 
-En haar lijst met **maatschappelijke (mega)trends** die ik overnam:
-opwarming · hittestress · indoorgeneratie · rijken vermogen verdubbeld · angstgeneratie ·
-**eenzaamheid** · woningtekort · dementie · **tekorteconomie** · slaaptekort ·
-grondstoftekort · trust · systeemmoe
+Ik houd de vier vakken uit de les aan, want ze dwingen de scheiding tussen signaal en oordeel:
 
-Uit de klasbrainstorm (Planet / People / Prof) kwamen thema's die bleven hangen:
-*controle door rijken · big tech die misbruik maakt · eenzaamheid (parasociale relaties,
-ouderen op datingsites, relaties met robots) · gemak & efficiëntie overal*
-— woorden als AI war, tech power, new money, robot love, digital id, greenwashing,
-AI eats doctor, cobot, hubot, cloud worker, robot supermarkt, smart living. `[?]`
+| vak | wat erin gaat |
+|---|---|
+| **Observaties** | wat ik zie, proef, ruik — puur signaal |
+| **Interpretaties** | wat ik denk dat het is of betekent |
+| **Dagboek** | eigen emoties, oordelen over de ander en over mezelf |
+| **Technisch** | methoden, eerste analyse, patronen, verdiepende vragen |
 
-Uit de klas, in m'n eigen woorden: **"gemak is fijn en belangrijk — doe maar makkelijk."**
+Opbrengst: **129 signalen** in `trendlijst.ods`.
 
-## Venster 3 — Boris (oud-reiziger)
+## Uit het gebouw kijken
 
-> **"Bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen."**
+Ik zag **meer dan ik dacht** — de lijst groeide harder dan verwacht. Er gebeurt veel interessants,
+juist in het gewone straatbeeld. De jacht (30 min, foto's, out of the box presenteren) was de
+trigger om überhaupt naar buiten te gaan.
 
-Die zin is meteen blijven hangen. Want dat is precies de plek waar ik later wil bouwen
-*(hoofdstuk 6)*. Maar hier is het nog gewoon een signaal: het vertrouwen in de grote
-platforms wankelt.
-
-## Venster 4 — Floris & Isa (oud-reizigers)
-
-Floris & Isa deelden hun eigen reis toen we onze stoepwatch presenteerden.
-*[? — ik heb hun verhaal niet opgeschreven: wil je er een zin over in de site?]*
-
-## Venster 5 — Hunt, stoepwatch & scan
-
-De Hunt (30 min rondlopen, foto's van opvallende zaken, daarna "out of the box" denken)
-en de stoepwatch (bewust observeren: signalen én wat erachter schuilt) leverden deze lijst op:
-
-**Mijn bril als eerste** — wat mij opvalt is niet het onderwerp, maar de techniek erachter:
-dingen die **techniek combineren met een ander probleem**. Niet de suikerspin zelf, maar
-dat een *machine* hem maakt; niet de Salatomaat als gerecht, maar dat een *kas* een bord
-oplost. Dat is wat mij als ESE-student aanvalt.
-
-**Wat ik zag** *(uit m'n notebook, scan en les — ik verzint er niets bij)*:
-- **automaten & machines**: suikerspin-machines · blikautomaten · snackmuren · 3D-printer op de
-  markt · op-afstand-bestuurde grasmaaier van de gemeente · kleine electrische cellen/borden
-- **AI overal**: AI-gegenereerde posters & "kunst" voor bedrijven · electrische reclameborden ·
-  "iedereen wil een site en denkt dat het met Claude kan" · "dat kan ik thuis ook"
-- **ouderen & eenzaamheid**: ouderen die alleen eten · toegankelijke fietsen & driewielers voor
-  ouderen · dure lunchtent in de natuur waar geen jongeren zitten · eenzaamheid
-- **kind & aandacht**: kleurloze kinderspeelhoek (zonder kinderen) · gemaskerd gokken met
-  "rare" producten (labubu, squishies) — gefocust op kinderen
-- **consumptie & afval**: plastic rietjes (mensen willen geen vieze papieren rietjes) ·
-  zonnepaneel-schoonmaakborstels · verloren pakketjes kopen per gewicht
-- **gedrag**: oortjes in tijdens gesprekken · asociaal fatbike-rijden (mensen natspuiten) ·
-  een enkeling die een mondkapje draagt
-- **data & toekomst**: data = nieuw goed / nieuwe olie · zorgvelden die gehackt worden ·
-  CRISPR-baby · angst voor de toekomst · "waarom wordt mijn klant blij?"
-- **overig**: popup stores · "vreemde" fashion / fashion als statement · pakketjes door het
-  winkelcentrum · stoomster `[?]`
-
-**Wat erachter schuilt (mijn eerste gedachtes, nog geen conclusies):**
-toegankelijk & makkelijk · geen werknemer nodig, goedkoop · laagdrempelig voor een marktondernemer ·
-**eenzaamheid** · erbij willen horen / bij een groep · gemak én ongemakkelijke toegankelijkheid ·
-makkelijk kinderen meenemen · categoriseren naar soort bezoeker · goedkoop én relatief mooi ·
-veel marge · gemak en luiheid · angst · op maat gemaakte spullen
-
-### Mijn foto's
-*(artifacts uit de hunt/stoepwatch — `hunter-pics/`)*
+Vier foto's die bleven hangen:
 
 | foto | wat ik er zag |
 |---|---|
-| **electrische-bakfietsen** | bakfietsen worden populairder: makkelijk meerdere kinderen naar school + boodschappen |
-| **grote-suv-autos** | ik ben gewend aan kleine auto's — een oude Volvo 240 was toen "groot", nu is dat gemiddeld-klein in vergelijking |
-| **nostalgie-voor-automodellen** | bedrijven brengen modellen terug (o.a. e-Mustang — dat model zelf vind ik niet leuk) |
-| **slimme-parkeerplaats-kentekenherkenning** | slimme apparatuur wordt standaard: kentekenherkenning in parkeergarages |
+| **electrische bakfietsen** | bakfietsen worden populairder: makkelijk meerdere kinderen naar school + boodschappen |
+| **grote SUV-auto's** | ik ben gewend aan kleine auto's — een oude Volvo 240 was toen "groot", nu is dat gemiddeld-klein |
+| **nostalgie voor automodellen** | bedrijven brengen modellen terug (o.a. e-Mustang — dat model zelf vind ik niet leuk) |
+| **slimme parkeerplaatsen** | slimme apparatuur wordt standaard: kentekenherkenning in parkeergarages |
 
-### Mijn scanplan
-- **Elke dag**: nu.nl voorpagina + één interessant artikel uitdiepen
-- **ma**: podcast over ondernemen · **di**: aflevering Tegenlicht · **wo**: Tegenlicht of artikel
-  over een onbekend onderwerp · **do**: trendplatform (Tweakers) · **vr**: trend/entertainment/tech
+## Podcast en Tegenlicht — de informatiefste bronnen
 
-Uit de maandag-podcast, de **disposable software**:
-- software-bedrijven schrijven kleine tools waar je in 30 seconden iets mee kunt doen —
-  een deel van software die wordt verkocht
-- in een weekend software bouwen, 1% omzet van 50.000 klanten, volgende weekend iets nieuws
-- freeware/shareware · converter-tools en calculators · mini-reclame apps voor politieke partijen ·
-  virale apps (screen time battle)
-- verwachting: *de lat gaat omhoog, omdat het aanbod groter wordt*
-- en het mooiste voor mij: **tools die mensen helpen — denk aan leraren met veel administratie**
+**Tegenlicht — *Game of drones*.** Waarom deze: de tech achter oorlog, omdat ik het kan zien
+gebeuren. De aflevering legde dezelfde tech uit vanuit vier kanten: **soldaat, techsector,
+politiek, startups**.
 
-## Venster 6 — mijn eigen radar
-*(dingen die ik zelf op de radar had, los van de klas)*
+- Wat mij verwonderde: dat deze sector veel automatisering *niet* aan kan vanwege regels —
+  en dat ik dat cool vind `{#bron:automatisering-regels}`
+- Wat ik leerde: er zijn kleine startups in deze sector, en kleine techbedrijven met een goed
+  idee zijn populair
+- Het was **uitzoemen** — ik focus normaal op de tech, niet op het plaatje
 
-- **Platform switch**: "let op: Playstore en telefoons — nu AI. Slaat op **agentic commerce**."
-- Waarom wilde OpenAI Medal kopen? Mijn gok: **trainingsdata** → real-world keuzes →
-  AI getraind voor automatisering
-- **memoires**: data over hoe mensen AI gebruiken en wat ze op willen slaan — *dat wil ik uitbrengen*
-- 14 okt: **Ondernemersmarkt Nijmegen** — daar ben ik
+**Podcast (scanplan, maandag): disposable software.** Kleine tools die in een weekend gebouwd
+worden, 1% omzet van 50.000 klanten, volgende weekend iets nieuws. Freeware/shareware,
+converter-tools en calculators, mini-reclame apps voor politieke partijen, virale apps.
+Verwachting: *de lat gaat omhoog omdat het aanbod groter wordt*. En het mooiste voor mij:
+**tools die mensen helpen — denk aan leraren met veel administratie**.
 
-*(Een grappig concept dat ik tegenkwam, maar dat níet op m'n radar staat: een club waar
-telefoons worden ingenomen. Leuk idee, maar niet waar ik op bouw.)*
+**Eva's wereld (FutureFit)** bracht de maatschappelijke laag binnen: *Ruimtemakers voor hoofd,
+hart en handen* — spacemakers (geo-engineering, space factories, dark factories, cloud-economie,
+cybernetics), schoonmakers (climate, food, de Salatomaat `{#bron:salatomaat}`, biobased bouwen) en
+gelijkmakers (onderwijs & gelijkheid, aandachtseconomie, moreel kompas).
+
+**Boris (oud-reiziger)** — één zin die bleef hangen:
+
+> **"Bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen."**
+
+Dat is precies de plek waar ik later wil bouwen *(hoofdstuk 6)*. Maar hier is het nog gewoon een
+signaal: het vertrouwen in de grote platforms wankelt.
+
+## Online en gesprekken — waar het beter lukte dan op straat
+
+Mijn interessevelden waren **lastig te vinden in het echt**. Op straat zie ik automaten en
+reclameborden, maar niet de dingen waar ik zelf op bouw. Online en in gesprekken lukte dat beter:
+de podcast, Tegenlicht, de dagelijkse scan (nu.nl + één artikel uitdiepen), Tweakers, en wat
+klasgenoten en oud-reizigers deelden.
+
+Dus: **twee manieren van kijken**, en ze leveren verschillende dingen op — straat = losse objecten,
+online en gesprekken = trends die dicht bij mij staan.
+
+Op m'n eigen radar stond daarnaast: platform switch (Playstore → telefoons → nu AI, slaat op
+agentic commerce), en de vraag waarom OpenAI Medal wilde kopen (mijn gok: trainingsdata →
+real-world keuzes → AI getraind voor automatisering).
+
+## De signaallijst
+
+129 signalen, geclusterd in 13 thema's. Stand: **83 ja / 46 nee** — en de `Waarom doorgaan?`-kolom
+is per signaal mijn eigen oordeel, niet de trend zelf.
+
+Wat er veel van was: **automaten en machines**, AI-gegenereerde content, slimme apparatuur.
+Wat er weinig van was: mijn eigen interessevelden in het straatbeeld.
+
+## Wat het opleverde en wat ik ervan vond
+
+- **Comfortabel**, omdat dit *alleen observeren* was — er werd niets van me verwacht behalve kijken.
+- **En toch:** ik ben actief op zoek gegaan naar dingen waar ik nog niet eerder over nagedacht had.
+  Dat was leuk, en het leverde meer op dan ik verwachtte.
+- **Signaal eerst, interpretatie later** — de vier vakken houden die scheiding in stand, en de
+  `Waarom doorgaan?`-kolom is precies waar het oordeel zichtbaar wordt.
+- **Mijn conclusie over de opdracht zelf:** ik heb er veel uit kunnen halen, ook al heb ik de
+  stoepwatch niet zoals voorgeschreven gedaan en de Feeltrip helemaal niet.
+
+## Wat hier *buiten* hoort
+
+Vijf dingen die ik uit de trendlijst heb gehaald, omdat het **geen signaleringen van de
+maatschappij** zijn maar eigen conclusies: printplaten-bureau, memoires, "verkoop niet de wafel",
+meervoudige waardecreatie, massa = kassa. Die staan apart in *(hoofdstuk 6)* en *(hoofdstuk 7)*.
+
+> *Een lijst met signalen is nog geen trend. Dat komt in hoofdstuk 2.*
 
 ## Wat dit hoofdstuk toont *(L1)*
-Ik heb **meerdere zintuigen en vensters** gebruikt: documentaire, klas, oud-reizigers,
-wandeling met camera, dagelijkse scan, eigen radar. En de belangrijkste regel hanteer ik:
-**signaal eerst, interpretatie later** — wat ik zag, staat naast wat erachter schuilt,
-niet erin gemengd.
 
-> *Een lijst met signalen is nog geen trend. Dat komt in hoofdstuk 4: ordenen.*
+Ik heb meerdere manieren van kijken gebruikt — straat, podcast, documentaire, gesprekken, scan —
+en de belangrijkste regel hanteer ik: **signaal eerst, interpretatie later**. Wat ik zag, staat
+naast wat erachter schuilt, niet erin gemengd.

@@ -14,31 +14,15 @@ wil bouwen**.
 3. **Waardeverschuiving** (L3a) — wat verschuift, en waarom
 4. **Ideeën + delen** (L3b + L4) — het bedrijf dat ik wil bouwen, en deze site als bewijs dat ik het kan vertellen
 
-## Proces — hoe ik werkte
-*(per de HAN-regels voor verantwoord AI-gebruik én het verzoek van Yvette: laat zien
-hoe je AI hebt gebruikt, deel je schrift, laat zien hoe je het hebt verbonden, laat je
-prompts zien, en laat zien dat je het snapt.)*
+## Proces
 
-- **Mijn eigen materiaal**: deze site staat op **mijn eigen notebook, eigen foto's en
-  eigen signalen** (hoofdstukken 2–4). De foto's van mijn schrift staan in de bijlage.
-- **Hoe ik AI gebruikte**: als hulpmiddel voor brainstormen, structureren en de teksten
-  opzetten — **niet** als primaire bron. Alles wat er staat kan ik zelf uitleggen en
-  verdedigen.
-  - **Welke AI:** **Qwen 3.8 (27B)**, uitgevoerd **lokaal op mijn eigen computer** via
-    Ollama — geen cloud, geen externe server.
-  - **Precies waarvoor:** mijn handschrift-notities structureren, de koppeling tussen
-    notities en vakken opzetten, de website-teksten opstellen en herzien, en het geheel
-    in een logische opbouw zetten.
-  - **Niet door de AI gedaan:** het oorspronkelijk verwerken van mijn notebook-foto's
-    naar tekst (dat is een aparte stap), en alle oordeelvellingen en eigen ideeën.
-- **Prompts**: de volledige AI-chat (prompts én output) staat in de bijlage in de map
-  `AI-chat/` *(per de HAN-regel: volledige chat als bijlage)*.
-- **Verbinding**: de lijn signaal → trend → waardeverschuiving → idee is zichtbaar door
-  de hele site — dat is precies het doel (hoofdstuk 4 en 6).
-- **Begrip**: dit is mijn eigen werk. Ik sta achter elke regel en kan het toelichten.
+Hoe ik werkte staat in [hoofdstuk 7](proces-en-delen.html) — inclusief het AI-gebruik en de
+prompts. De vier leerdoelen:
 
-*(Bijlage: foto's van mijn schrift + volledige AI-chat (prompts én output). Gebruikte
-AI-tools worden volgens de APA-richtlijnen als bron vermeld.)*
+1. **Signaleren** (L1) — waar ik keek: Tegenlicht, podcast, klas, oud-reizigers, hunt, scan
+2. **Analyseren** (L2) — signaal → trend, pyramides, assenstelsel, scenario's, trendcanvas
+3. **Waardeverschuiving** (L3a) — wat verschuift, en waarom
+4. **Ideeën + delen** (L3b + L4) — de 1–3 opties, en deze site als bewijs dat ik het kan vertellen
 
 ## Met dank aan
 - **Simone** — wie-ben-ik (ikigai, levenswiel, eigenaarschap)
@@ -58,7 +42,7 @@ __BRONNEN__
 
 ## 3D
 Deze site is ontworpen voor **rood-cyan 3D-brillen**: de teksten blijven plat leesbaar,
-de scenes komen naar je toe. Schuif de diepte maar op.
+de scenes en figuren komen naar je toe en zijn draaibaar.
 *(zonder bril: alles is ook in 2D te lezen)*
 
 ## Techniek

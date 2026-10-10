@@ -2,117 +2,122 @@
 
 > *"Dit hoofdstuk is geen statusrapport. Het is een richting."*
 
-Het bedrijf bestaat nog niet — de letter van 13 januari 2027 (zie de cover) is het
-**doel dat ik vóór de minor schreef**. Dit hoofdstuk is L3b: **1–3 kansrijke ideeën**,
-met die letter als noorderster.
+Het bedrijf bestaat nog niet — de letter van 13 januari 2027 (zie de cover) is het **doel dat ik
+vóór de minor schreef**. Dit hoofdstuk is L3b: **1–3 kansrijke ideeën**, met die letter als
+noorderster.
 
-## De zin
-> *"Ik help bedrijven en particulieren met open source, lokale AI en automatisering,
-> zodat zij de controle over hun eigen data en systemen terugkrijgen."*
+## De 1–3 opties
 
-*(de ikigai-zin — de rode draad van de hele site)*
+Drie opties, en per optie de trend, de verschuiving en de behoefte die eronder ligt. Dit is de
+keuze uit de 39 trends in `trendlijst.ods` — de opties hieronder zijn precies de trends met een
+**B**-letter.
 
-## De kern — 5 ideeën
-1. **Open source / soevereiniteit** — laptops met Linux verkopen aan particulieren,
-   óf bedrijven helpen productieomgevingen op te zetten met open-source software.
-   *(is a lot of fun — letterlijk uit m'n notities)*
-2. **Tools bouwen voor bedrijven die automatiseren** — freelance. Vooral nu AI groter
-   wordt: wie automatiseert, heeft iemand nodig die de brug legt.
-3. **AI lokaal draaien** — voor bedrijven met kritieke data. Wordt interessant zodra
-   de regels meelopen *(denk: data protection)*.
-4. **Advies én maakbureau voor printplaten** — advies geven én bouwen. Embedded
-   systems is precies mijn ESE-achtergrond; daar heb ik een voorsprong.
-5. **Agentic commerce** — LLM's die producten aan mensen verkopen. De platform switch
-   Playstore → AI, gepakt voor de kleinhandelaar.
+### 1. Robot huisdier
 
-> **Mijn favoriet uit de lijst: het robot-huisdier** `{#bron:robot-huisdier}`. Daarin combineer ik precies
-> waar ik sterk in ben — **motoren én AI** — en het is ook gewoon leuk om te maken.
-> *(uit m'n lijst van 12 ideeën, nr. 11)*
+Mijn favoriet uit de lijst van 12 ideeën *(nr. 11)* `{#bron:robot-huisdier}`. Daarin combineer ik
+precies waar ik sterk in ben — **motoren én AI** — en het is gewoon leuk om te maken.
 
-**Zijideeën die ik al noteerde**: *memoires* — data over hoe mensen AI gebruiken en
-wat ze op willen slaan *(dat wil ik uitbrengen)* · tools die mensen helpen —
-denk aan **leraren met veel administratie** *(uit de podcast)*.
+| | |
+|---|---|
+| **trend** | Van menselijk contact naar machinecontact *(D)* |
+| **behoefte** | gezelschap zonder verplichting |
+| **opkomende verwachting** | dat een machine er is zonder dat je iets hoeft te doen |
+| **verschuiving** | van verbinding naar eenzaamheid *(hoofdstuk 5)* |
+| **waarom kansrijk** | de behoefte is emotioneel, de techniek is hardware + AI — en dat is mijn
+  combinatie |
 
-## Waar vandaan
-Op 9/11 schreef ik **12 goede ideeën** op — dit zijn de wortels van de kern:
-1. ondernemers helpen overschakelen naar open-source alternatieven
-2. particulieren met oudere/trage hardware schakelen naar Linux
-3. advies leveren aan startende ondernemers over embedded en IT
-4. embedded oplossingen bouwen voor bedrijven met een idee of probleem
-5. softwareoplossingen en web development voor startende ondernemers
-6. automatisering voor bedrijven (software, *(nog)* niet robot)
-7. AI en LLM voor bedrijven met kritieke informatie/dataverwerking
-8. data inzage en verwerking met lokale LLM
-9. oldtimers ombouwen naar elektrisch
-10. boten ombouwen naar elektrisch
-11. robot huisdier
-12. software voor solopreneurs *(ondernemers maar dan in hun eentje)*
+### 2. Automatisering voor bedrijven
+
+Tools bouwen voor bedrijven die automatiseren. Vooral nu AI groter wordt: wie automatiseert, heeft
+iemand nodig die de brug legt.
+
+| | |
+|---|---|
+| **trend** | Van menselijke bediening naar automatische uitvoering · Automatisering van de keuze |
+| **behoefte** | dat dingen draaien zonder iemand · ontlast worden van keuzes |
+| **opkomende verwachting** | dat automatisering de norm is |
+| **verschuiving** | van product naar efficiëntie, en van inspanning naar gemak |
+| **waarom kansrijk** | kleine bedrijven kunnen niet automatiseren door de regels — dus wie de
+  brug legt, wint *(B: "Interessant om mee te nemen in mijn bedrijf als ik de scale-up strategie
+  pak")* |
+
+### 3. Lokale AI en open source
+
+Bedrijven helpen met Linux, en AI lokaal draaien voor bedrijven met kritieke data.
+
+| | |
+|---|---|
+| **trend** | Van vertrouwen in big tech naar eigen controle · Data als grondstof |
+| **behoefte** | eigen, lokale systemen · controle over eigen data |
+| **opkomende verwachting** | dat afhankelijkheid tijdelijk is, niet permanent |
+| **verschuiving** | van vertrouwen naar wantrouwen *(hoofdstuk 5)* |
+| **waarom kansrijk** | *"Bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen"* —
+  er is een gat van vertrouwen, en ik kan er een antwoord in bouwen |
+
+> **Mijn eigen regel hier:** ik wil mijn bedrijf niet laten draaien op systemen die niet
+> open source zijn, en het liefst bouw ik alle software zelf.
+
+## Eigen conclusies die geen signaal zijn
+
+Vijf dingen die ik uit de trendlijst heb gehaald, omdat het **geen signaleringen van de
+maatschappij** zijn maar eigen conclusies. Ze horen hier, niet in hoofdstuk 1:
+
+- **printplaten-bureau** — advies geven én bouwen. Embedded systems is precies mijn ESE-achtergrond;
+  daar heb ik een voorsprong.
+- **memoires** — data over hoe mensen AI gebruiken en wat ze op willen slaan. *Dat wil ik uitbrengen.*
+- **"verkoop niet de wafel"** — een quote van een klasgenoot: *"Het product is niet de wafel — je
+  verkoopt het gevoel dat iemand jou uit de brand helpt."*
+- **meervoudige waardecreatie** — meerdere problemen in één oplossing, trends combineren.
+- **massa = kassa** — hoe meer mensen je bereikt, hoe meer er geïnteresseerd kan zijn; branding en
+  marketing zijn belangrijker dan smaak.
 
 En de **slechte-ideeën-piramide** *(ook uit m'n notebook — "maak slechte ideeën piramide")*:
-alcohol met nicotine verkopen · nieuwe OS maken en verkopen · elektrische auto's
-ombouwen naar benzine · nieuw schaapskuddenbedrijf beginnen · studentenkamer verkopen ·
-vieze stadslucht in potjes verkopen · slechte boten verkopen met een lening ·
-gestolen auto's verkopen · **data verzamelen en verkopen**.
-De laatste is het grappigste: precies het tegenovergestelde van wat ik wil bouwen.
+alcohol met nicotine verkopen · nieuwe OS maken en verkopen · elektrische auto's ombouwen naar
+benzine · nieuw schaapskuddenbedrijf beginnen · studentenkamer verkopen · vieze stadslucht in potjes
+verkopen · slechte boten verkopen met een lening · gestolen auto's verkopen · **data verzamelen en
+verkopen**. De laatste is het grappigste: precies het tegenovergestelde van wat ik wil bouwen.
 
-## Waarom nu
-- **Boris**: *"bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen"* —
-  er is een gat van vertrouwen, en ik kan er een antwoord in bouwen.
-- **Disposable software** (podcast): de lat gaat omhoog, het aanbod groeit — wie
-  dan goede, kleine tools bouwt, wint.
-- **Prosumer**: *"dat kan ik thuis ook"* — de klant wil kunnen, en heeft iemand nodig
-  die het recht doet.
-- **Soevereiniteit**: data = nieuwe olie, zorgvelden die gehackt worden, chips = nieuwe
-  olie — wie de controle teruggeeft, verkoopt iets waar mensen écht om vragen.
+## Rode draad: platform switches
 
-## Waarom ik
-*(letterlijk uit m'n notebook — "Welke ingrediënten heeft mijn bedrijf?")*
-> tech · programmeren · hardware · AI · groei · snelheid · tools · kwaliteit ·
-> smart living · *"waar ga ik mee bouwen: kennis, AI"*
+Een platform switch is het moment dat **de plek waar waarde ontstaat van hand verandert**. Elke keer
+verschijnt even een wild west van tools, en wie dan de juiste tools bouwt, rijdt mee met de golf in
+plaats van te vissen in de oude.
 
-Plus de achtergrond: **Embedded Systems Engineering** — ik ken hardware én software
-en de ruimte ertussen. Die combinatie is zeldzaam, en precies waar ideeën 3, 4 en 5
-op draaien.
+| switch | toen | nu |
+|---|---|---|
+| Playstore → telefoons | apps waren een kans | nu: AI |
+| big tech levert software | je kocht een tool | nu: mensen bouwen specifieke tools zelf |
+| gratis tools | je betaalt niet | nu: jij bent het product |
 
-## Mijn houding
-*(van Marco Brieissen — BASE Lifestyle — heb ik het andere deel meegekregen)*
-- **hard zijn, maar wel aanvoelen** — niet werknemer, maar baas
-- **niet wachten op eigen geld** — *"wachten duurt lang"*
-- en het ongemakkelijke stuk: **minder schrik krijgen als ik geld vraag** voor wat ik doe
+Dit is de rode draad door mijn eigen opties: **optie 3 is een platform switch die al bezig is, en
+optie 2 is de brug die erbij hoort.**
 
-## Hoe ik valideer
-Mijn methode is de **trendcanvas** *(uitgezet in hoofdstuk 4)*. Ik kom niet bij een
-idee door te raden, maar door het **af te leiden uit de trend**:
+## Wat er tegenwerkt
 
-> **trend → basic needs → inspiration → drivers of change → emerging expectations →
-> innovation type → voor wie → mijn innovatie**
+De beren op de weg, zoals ik ze zelf noteerde:
 
-Concreet: het signaal *automaten* uit hoofdstuk 1 heb ik zo uitgewerkt tot
-*een kaart met de status, de inhoud én de locatie van alle automaten in de buurt* —
-handig voor zowel de beheerders als de klanten.
-
-Pas daarna test ik het idee af bij een echte klant *(mijn omdraai, zie hoofdstuk 0)*:
-o.a. bedrijven helpen met Linux.
-
-## De lens van de gastles
-**"Wat kan een product nog meer zijn?"** *(Bart & Isa)*
-- **meervoudige waardecreatie**: meerdere problemen in één oplossen
-- **trends combineren** in plaats van één trend te volgen
-- **2/3/x ideeën** houden — de eerste is zelden het eindbedrijf
-- **massa = kassa**: hoe meer mensen je bereikt, hoe meer er geïnteresseerd kan zijn
-- **branding & marketing belangrijker dan smaak** — denk aan **ervaring** *(maxxing)*
-- en de quote die bij alles past:
-  > *"Het product is niet de wafel — je verkoopt het gevoel dat iemand jou uit de brand helpt."*
+- **Regels.** In Nederland en de EU is het voor kleine ondernemers lastig om doorbraken te maken,
+  terwijl dat in Amerika en China wel kan. Automatisering die niet mag naast mensen.
+- **"Iedereen maakt software."** Een softwarebedrijf starten is nu misschien geen goed idee — dus
+  moet ik iets anders doen dan alleen software.
+- **De lat gaat omhoog.** Disposable software: in een weekend iets bouwen levert 1% omzet van 50.000
+  klanten op. Het aanbod groeit sneller dan ik kan bouwen.
+- **Geld vragen.** Ik krijg schrik als ik geld vraag voor mijn diensten — dat is het ongemakkelijke
+  deel wat ik moet doorwerken.
+- **Wachten op eigen geld.** *"Wachten duurt lang."*
 
 ## De noorderster
+
 *(letter, 13 januari 2027 — geschreven vóór de minor)*
-> "…mijn bedrijf ingeschreven bij de K.v.K. … een eerste set inkomen kunnen genereren
-> met mijn idee tijdens de tests … mijn product heeft nog enkele verbeteringen nodig in
-> de UI, en ook wil ik enkele processen automatiseren … met 4 klanten een traject gestart."
+
+> "…mijn bedrijf ingeschreven bij de K.v.K. … een eerste set inkomen kunnen genereren met mijn idee
+> tijdens de tests … mijn product heeft nog enkele verbeteringen nodig in de UI, en ook wil ik enkele
+> processen automatiseren … met 4 klanten een traject gestart."
 
 Daar wil ik zijn. Dit bedrijf is het pad ernaartoe.
 
 ## Wat dit hoofdstuk toont *(L3b)*
-Ik heb **kansrijke, haalbare opties** — ingeworteld in waargenomen trends,
-waardeverschuivingen én mijn eigen vaardigheden — en ik weet **hoe ik ze ga testen**
-in plaats van er alleen maar over te denken. Dat is de tweede cesuur.
+
+Ik heb **kansrijke, haalbare opties** — ingeworteld in waargenomen trends, waardeverschuivingen én
+mijn eigen vaardigheden — en ik weet **hoe ik ze ga testen** in plaats van er alleen maar over te
+denken. Dat is de tweede cesuur.

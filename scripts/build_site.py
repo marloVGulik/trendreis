@@ -934,7 +934,7 @@ def content_blocks(page_id, md):
                 items.append(("fig", f))
         items.append(("sec", title, body))
         # hunter-foto's na de Hunt-sectie (signalen)
-        if page_id == "actualiteiten" and title.startswith("Venster 5"):
+        if page_id == "actualiteiten" and title.startswith("Uit het gebouw kijken"):
             items.append(("photos", ""))
     blocks = []
     toc_items = []
@@ -1186,19 +1186,18 @@ def copy_media():
 
 def build():
     nmedia = copy_media()
-    for p in PAGES:
+    for p in ALL_PAGES:
         if p["id"] == "home":
             html_out = build_home()
+        elif p["id"] == "ai-chat":
+            html_out = build_ai_chat()
+        elif p["id"] == "materiaal":
+            html_out = build_materiaal()
         else:
             html_out = build_content_page(p)
         (SITE / p["page"]).write_text(html_out, encoding="utf-8")
         print(f"  {p['page']:28} {len(html_out):>7} bytes")
-    html_out = build_ai_chat(); (SITE / "ai-chat.html").write_text(html_out, encoding="utf-8")
-    print(f"  {'ai-chat.html':28} {len(html_out):>7} bytes")
-    html_out = build_materiaal(); (SITE / "materiaal.html").write_text(html_out, encoding="utf-8")
-    print(f"  {'materiaal.html':28} {len(html_out):>7} bytes")
-    print(f"OK: {len(PAGES)+2} pagina's + {nmedia} foto's → {SITE}")
-
+    print(f"OK: {len(ALL_PAGES)} pagina's + {nmedia} foto's \u2192 {SITE}")
 
 if __name__ == "__main__":
     build()
