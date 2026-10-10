@@ -62,6 +62,7 @@ FIGURES = {
     ],
     "analyseren": [
         ("assenstelsel", "Trendwoorden & het assenstelsel"),
+        ("prisma_klaswerk", "De trendpyramide"),
         ("trendcanvas", "Trendcanvas — van trend naar innovatie"),
         ("automaten", "Trendcanvas — van trend naar innovatie"),
         ("prisma", "De trendpyramide"),
@@ -486,7 +487,7 @@ def fig_automaten():
     + '<div class="orbit-hint">&#8596; sleep om te draaien</div></div>'
 
 
-def _stacked_prism(themas, aria):
+def _stacked_prism(themas, aria, lagen=None, params=None, cz=2.4, fs_name=11, fs_level=10, wrap=""):
     """4 gestapelde lagen = de 4 niveaus; aan elke zijkant één thema."""
     import json
     SIDES = {
@@ -500,7 +501,7 @@ def _stacked_prism(themas, aria):
                    "q": lambda hx, y0, y1, hz: [(-hx, y0, hz), (-hx, y0, -hz), (-hx, y1, -hz), (-hx, y1, hz)]},
     }
     # van boven naar onder: maatschappelijk -> consument -> markt -> product
-    LAGEN = [
+    LAGEN = lagen or [
         {"y0": 0.72, "y1": 1.06, "hx": 0.42, "hz": 0.36},
         {"y0": 0.48, "y1": 0.72, "hx": 0.48, "hz": 0.41},
         {"y0": 0.24, "y1": 0.48, "hx": 0.55, "hz": 0.47},
@@ -512,17 +513,17 @@ def _stacked_prism(themas, aria):
         for i, L in enumerate(LAGEN):
             lines = []
             if i == 0:
-                lines.append({"t": naam, "dy": -13, "fs": 11})
-            lines.append({"t": regels[i], "dy": 4, "fs": 10})
+                lines.append({"t": naam, "dy": -13, "fs": fs_name})
+            lines.append({"t": regels[i], "dy": 4, "fs": fs_level})
             faces.append({"n": s["n"], "u": s["u"], "v": [0, -1, 0],
                           "q": s["q"](L["hx"], L["y0"], L["y1"], L["hz"]),
                           "lines": lines, "br": 0.66 - i * 0.04})
     scene = {
-        "center": [0, 0.4, 2.4],
-        "prism": {"c": [0, 0.0, 2.4], "height": 1.06, "faces": faces},
-        "params": {"F": 1.5, "S": 210, "CX": 300, "CY": 180,
-                   "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
-                   "viewBox": "0 0 600 320"}
+        "center": [0, 0.4, cz],
+        "prism": {"c": [0, 0.0, cz], "height": max(L["y1"] for L in LAGEN), "faces": faces},
+        "params": params or {"F": 1.5, "S": 210, "CX": 300, "CY": 180,
+                             "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
+                             "viewBox": "0 0 600 320"}
     }
     scene_json = json.dumps(scene, separators=(",", ":"))
     return (f'<div class="anaglyph-orbit" role="img" aria-label="{aria}" '
@@ -565,6 +566,29 @@ def fig_prisma2():
             "(data verzamelen en verkopen). Van boven naar onder: maatschappelijke trend, consumententrend, "
             "markttrend, producttrend. Sleep om te draaien.")
     return _stacked_prism(themas, aria)
+
+def fig_prisma_klaswerk():
+    """Twee kleine prisma's naast elkaar: de twee piramides letterlijk uit het notebook."""
+    SIDES = ["voor", "rechts", "achter", "links"]
+    A = ["gemaksmaatschappij", "weinig moeite, comfort", "IoT, e-fietsen, apps", "Urus, thermostaat, Tinder"]
+    B = ["&#39;slimme&#39; maatschappij", "alles meten, algoritmes", "infobubbel + consumenten", "? — leeg in notebook"]
+    klein = {"F": 1.5, "S": 210, "CX": 150, "CY": 150, "camL": [-0.02, 0.1, 0], "camR": [0.02, 0.1, 0],
+             "viewBox": "0 0 300 300"}
+    lagen = [
+        {"y0": 0.62, "y1": 0.84, "hx": 0.30, "hz": 0.24},
+        {"y0": 0.42, "y1": 0.62, "hx": 0.33, "hz": 0.27},
+        {"y0": 0.22, "y1": 0.42, "hx": 0.36, "hz": 0.30},
+        {"y0": 0.00, "y1": 0.22, "hx": 0.39, "hz": 0.33},
+    ]
+    vensters = []
+    for naam, regels, aria in [
+        ("Gemak", A, "Prisma van piramide A uit mijn notebook: Gemak — vier lagen van maatschappelijk naar product. Sleep om te draaien."),
+        ("Slim / data", B, "Prisma van piramide B uit mijn notebook: slimme maatschappij — vier lagen, maar niveau 1 (product) staat leeg in het notebook. Sleep om te draaien."),
+    ]:
+        themas = [(s, naam, regels) for s in SIDES]
+        vensters.append(_stacked_prism(themas, aria, lagen, klein, 2.0, fs_name=8, fs_level=7))
+    return '<div class="fig-duo">' + "".join(vensters) + '</div>'
+
 
 def fig_scenario():
     # ---- Assenstelsel van mijn drie trendkeuzes: 3 assen x 2 extremen = 8 scenario-hoeken ----
@@ -801,6 +825,7 @@ FIGURE_BUILDERS = {
     "prisma": fig_prisma,
     "prisma2": fig_prisma2,
     "scenario": fig_scenario,
+    "prisma_klaswerk": fig_prisma_klaswerk,
 }
 FIGURE_CAPTIONS = {
     "ikigai": "Ikigai — waar de vier kringjes overlappen, staat het werk dat ik wil.",
@@ -812,6 +837,7 @@ FIGURE_CAPTIONS = {
     "prisma": "Trendkaart als prisma — vier gestapelde lagen (boven = maatschappelijk, dan consument, markt, product), aan elke zijkant één thema.",
     "prisma2": "Prisma 2 — dezelfde stapeling voor de verbredende blik: vier thema's waar ik weinig van weet, waaronder één slecht idee.",
     "scenario": "Scenario-assenstelsel — mijn drie trendkeuzes met hun extremen; de acht hoeken zijn de acht scenario's.",
+    "prisma_klaswerk": "De twee piramides uit mijn notebook, elk als prisma: A · Gemak (compleet) en B · Slim / data (niveau 1 staat leeg). Sleep om te draaien.",
 }
 
 # =================================================================== shell

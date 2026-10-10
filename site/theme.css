@@ -277,6 +277,8 @@ body[data-3d="off"] .anaglyph .chR { color: #c9c9c2; }
 .anaglyph-labels .lbl-mine { fill: var(--accent); font-weight: 700; }
 /* interactieve orbit-anaglyph (camera draait bij muis-sleep) */
 .anaglyph-orbit { position: relative; cursor: grab; background: #050505; border: 1px solid var(--border); border-radius: var(--r); touch-action: none; }
+.fig-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 760px) { .fig-duo { grid-template-columns: 1fr; } }
 .anaglyph-orbit:active { cursor: grabbing; }
 .anaglyph-orbit .orbit-svg .anaglyph { display: block; width: 100%; height: auto; }
 .orbit-hint { position: absolute; bottom: 8px; left: 12px; font: 11px 'IBM Plex Mono', ui-monospace, monospace; color: var(--fg-dim); letter-spacing: .05em; transition: opacity .4s; pointer-events: none; }

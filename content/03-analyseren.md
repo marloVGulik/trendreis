@@ -34,8 +34,7 @@ waardeverschuiving zit (hoofdstuk 4).
   bestaande bedrijfsideeën* (mijn 12 ideeën uit 9/11, plus nieuwe).
 
 ### Mijn pyramides
-Ik heb ze getekend rond onderwerpen die bij wat ik wil bouwen horen. *(Vet = uit mijn
-notities; cursief = suggestie die ik nog even wil checken.)*
+In het notebook staan er **twee** — letterlijk, van boven naar onder gelezen:
 
 **A · Gemak** *(uit mijn notebook)*
 1. Lamborghini Urus · slimme thermostaat / oven / wasmachine · fatbike · Tinder
@@ -44,27 +43,45 @@ notities; cursief = suggestie die ik nog even wil checken.)*
 4. **gemaksmaatschappij**
 
 **B · Slim / data** *(uit mijn notebook)*
-1. *[? — invullen? denk aan: slimme thermostaat, kentekenherkenning, AI-reclameborden]*
+1. *[leeg in het notebook]*
 2. infobubbel · onderzoek wat consumenten kopen
 3. alles meten · algoritmes · dataverzameling · geïnformeerde keuzes
 4. **"slimme" maatschappij**
 
-**C · Vertrouwen & soevereiniteit** *(uit mijn notities, samengesteld)*
-1. **DAWO met NixOS** — een Linux-distributie, samen ontwikkeld met DAWO *(Digitaal
-   Autonome Werkomgeving Overheid)*; DAWO helpt de overheid over te schakelen naar open source
-2. bedrijven die om lokale AI en open source vragen — *"AI en LLM voor bedrijven met kritieke
-   informatie"* · *"data inzage en verwerking met lokale LLM"* *(mijn ideeën 7 & 8)*
-3. *"bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen"* (Boris) ·
-   *"let op platform switch: Playstore en telefoons, nu AI"*
-4. **data = nieuw goed / nieuwe olie** · controle door rijken, big tech die misbruik maakt ·
-   *"zorgvelden die gehackt worden"* · trust · angstgeneratie
+B is dus niet af: niveau 1 (product) staat leeg. Dat gat laten staan is bewuster dan het vullen
+met een suggestie.
 
-**D · Duurzaam = efficiënt** *(uit mijn notities, samengesteld)*
-1. zonnepaneel-schoonmaakborstels · *[? — bijv. e-bike / bakfiets?]*
-2. 2e-handswagens · meer zonnepanelen · biobased bouwen · solar democracy
-3. **"wat betekent duurzaam voor mij: duurzaam = efficiënt (andere mensen hebben andere ideeën)"** ·
-   *"AI → tools = efficiëntiebron"*
-4. **tekorteconomie** · grondstoftekort · hitterecord · woningtekort
+*(3D: de twee notebook-piramides elk als prisma — sleep om te draaien)*
+
+Daarna clusterde ik al mijn signalen in `trendlijst.ods`. Daar kwamen **vier thema's** uit die
+overleefden — de vier met de meeste B-letters, dus de vier die het dichtst bij mijn
+bedrijfsidee liggen. Die staan als het grote prisma hieronder. De vier zijn niet identiek aan
+mijn twee tekeningen:
+
+| piramide in het notebook | geworden in de cluster |
+|---|---|
+| A · Gemak | niet opgepakt — te breed, en ik wist niet wat ik ermee moest |
+| B · Slim / data | **AI & data** |
+| C · Vertrouwen & soevereiniteit | **Vertrouwen & soevereiniteit** *(samengesteld uit notities, niet getekend)* |
+| D · Duurzaam = efficiënt | niet opgepakt als thema — de signalen gingen naar **Geld & economie** en **Automatisering & robots** |
+
+Wat ik wél apart in mijn notities had staan, en wat de basis werd voor C:
+
+- **DAWO met NixOS** — een Linux-distributie, samen ontwikkeld met DAWO *(Digitaal Autonome
+  Werkomgeving Overheid)*; DAWO helpt de overheid over te schakelen naar open source
+- bedrijven die om lokale AI en open source vragen — *"AI en LLM voor bedrijven met kritieke
+  informatie"* · *"data inzage en verwerking met lokale LLM"* *(mijn ideeën 7 & 8)*
+- *"bedrijven zijn angstig om grote AI-bedrijven permanent te vertrouwen"* (Boris)
+- *"let op platform switch: Playstore en telefoons, nu AI"*
+- **data = nieuw goed / nieuwe olie** · controle door rijken, big tech die misbruik maakt ·
+  *"zorgvelden die gehackt worden"* · trust · angstgeneratie
+
+En voor D:
+
+- **"wat betekent duurzaam voor mij: duurzaam = efficiënt (andere mensen hebben andere ideeën)"**
+- *"AI → tools = efficiëntiebron"*
+- 2e-handswagens · meer zonnepanelen · biobased bouwen · solar democracy · CO2 zuigen · micro-fabriek
+- **tekorteconomie** · grondstoftekort · hitterecord · woningtekort
 
 ### De trendkaart
 Uit de les: met één piramide laat je **één** thema zien — in een **trendkaart** komen
