@@ -95,9 +95,44 @@ passen, staan apart in het tweede prisma.
 Uit de **word-of-the-year**-opdracht pikte ik twee woorden die bij mij bleven hangen:
 **aibaarheidsfactor** en **leefloon**.
 
-Daarna plaatste ik woorden in het assenstelsel van de les:
-- **narratief-duidelijk ↔ abstract-verdieping**
-- **cliché-niet vernieuwend ↔ out of the box**
+De voorbeeldopdracht in de les was: plaats trendwoorden en -beelden op twee assen
+(*narratief ↔ abstract*, *cliché ↔ out of the box*) en verklaar waarom ze daar staan. Dat was
+een voorbeeld om te laten zien **hoe je te werk gaat** — ik heb dat niet als apart blok
+uitgewerkt. Wat ik wél deed is het stelsel gebruiken voor mijn eigen thema's, met drie
+bipolaire assen:
+
+| as | het ene eind | het andere eind |
+|---|---|---|
+| **beheer** | extern | lokaal bij de klant *(het bedrijf zit in het midden, op 0)* |
+| **product** | alles volledig handgemaakt | alles hetzelfde en geautomatiseerd |
+| **tijd** | verleden | toekomst |
+
+Daarop zette ik bestaande producten en trendwoorden:
+
+| punt | beheer | product | tijd |
+|---|---|---|---|
+| Cloud / big tech | −0,8 | +0,6 | +0,2 |
+| Digital ID | −0,8 | +0,4 | +0,5 |
+| Kentekenherkenning | −0,1 | +0,8 | 0,0 |
+| Alles-automaten | +0,1 | +0,9 | +0,2 |
+| Dark factories | 0,0 | +0,9 | +0,5 |
+| Robot huisdier | −0,2 | +0,5 | +0,6 |
+| 3D-printer | +0,6 | −0,4 | +0,3 |
+| DIY / zelf maken | +0,7 | −0,7 | +0,4 |
+| Oldtimer ombouwen | +0,5 | −0,5 | +0,2 |
+| Cryptokoorts | +0,6 | +0,4 | +0,4 |
+| **Mijn idee** | **+0,8** | **+0,5** | **+0,5** |
+
+Tweedingen vielen me op toen ik de assen zo definieerde:
+
+- **Beheer is niet hetzelfde als "extern".** Een automaat of kentekenherkenning is niet extern
+  — het beheer zit bij het bedrijf zelf, dus die punten vielen naar 0. Pas *cloud* en *digital ID*
+  liggen echt extern: daar beheert een derde partij alles.
+- **De 3D-printer hoort niet bij "alles hetzelfde".** Een printer maakt unieke vormen, anders dan
+  een plastic mal. Hij staat daarom aan de handgemaakte kant, ook al is het een machine.
+
+En het cluster rechts-boven — **intern beheer + geautomatiseerd + toekomst** — is precies waar
+mijn bedrijfsidee landt.
 
 En ik breidde het zelf uit *(zo staat het in m'n notebook)*:
 > **van elke trend een assenstelsel maken → voor elk scenario's maken → voor elk scenario oplossingen**
